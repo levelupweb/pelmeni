@@ -30,21 +30,27 @@ $(document).ready(function() {
       })
     })
 
+
     sr.reveal('.jumbotron h1', { duration: 500, delay: 0 });
     sr.reveal('.jumbotron h2', { duration: 500, delay: 500 });
     sr.reveal('.jumbotron .button', { duration: 500, delay: 1000 });
 
-    sr.reveal('.section-2 h3', { duration: 500, delay: 200, origin: "left" });
+    sr.reveal('.section-2 h1', { duration: 500, delay: 200, origin: "left" }, 200);
     sr.reveal('.section-2 p', { duration: 500, delay: 300, origin: "left" });
-    sr.reveal('.section-2 .image', { duration: 500, delay: 1000, origin: "right" });
+    sr.reveal('.section-2 .image-1', { duration: 500, delay: 1000, origin: "right" });
+    sr.reveal('.section-2 .image-2', { duration: 500, delay: 1200, origin: "bottom" });
+    sr.reveal('.section-2 .description', { duration: 500, delay: 1300, origin: "bottom" });
     sr.reveal('.section-2 .button', { duration: 500, delay: 1300, origin: "bottom" });
 
-    sr.reveal('.section-3 h3', { duration: 500, delay: 500, origin: "top" });
+    sr.reveal('.section-3 h1', { duration: 500, delay: 500, origin: "top" }, 200);
     sr.reveal('.section-3 p', { duration: 500, delay: 500, origin: "top" });
     sr.reveal('.section-3 .image', { duration: 500, delay: 200, origin: "top" });
 
-    sr.reveal('.section-4 h3', { duration: 500, delay: 200, origin: "right" });
-    sr.reveal('.section-4 p', { duration: 500, delay: 500, origin: "bottom" });
-    sr.reveal('.section-4 .image', { duration: 500, delay: 1000, origin: "left" });
+    sr.reveal('.section-4 h1', { duration: 500, delay: 200, origin: "right" }, 200);
+    sr.reveal('.section-4 p', { duration: 500, delay: 500, origin: "bottom" }, 200);
+    sr.reveal('.section-4 .image-1', { duration: 500, delay: 800, origin: "left" });
+    sr.reveal('.section-4 .image-2', { duration: 500, delay: 1000, origin: "bottom" });
+
+    sr.reveal('.section-5 img', { duration: 500, delay: 300, origin: "bottom" }, 100);
   })
 ;
