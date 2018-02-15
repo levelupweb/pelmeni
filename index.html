@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./semantic/dist/semantic.min.css" />
+  <link rel="stylesheet" href="./src/styles.css"/>
+  <title>Пельмени</title>
+</head>
+<body>
+
+  <div class="ui basic modal small" id="buy-modal" style="text-align:center;">
+    <h1 class="ui header inverted">
+      Оформление
+      <div class="sub header">Закажите товар прямо на сайте, заполнив форму ниже</div>
+    </h1>
+    <div class="content" style="padding-top:0">
+      <form style="text-align:left" class="ui form big inverted">
+          <div class="field">
+            <label>Ваше имя</label>
+            <input type="text" name="first-name" placeholder="Как к вам обратиться?">
+          </div>
+          <div class="field">
+            <label>Контактные данные</label>
+            <input type="text" name="last-name" placeholder="Ваш e-mail или телефон">
+          </div>
+          <div class="field">
+            <label>Дополнительное сообщение</label>
+            <textarea rows="2"></textarea>
+          </div>
+          <div class="field" style="text-align:center;margin-top:40px">
+            <button style="margin:auto;" class="ui button big default" type="submit">Отправить заказ на обработку</button>
+          </div>
+        </form>
+    </div>
+  </div>
+
+  <div class="ui large top fixed secondary hidden menu inverted" style="padding:10px 0;background:#111;">
+    <div class="ui container">
+      <a class="active item">Старт</a>
+      <a class="item">О продукции</a>
+      <a class="item">Контакты</a>
+      <div class="right item">
+          <h3 style="margin:0;margin-right:20px;font-weight:100" class="ui header inverted">8 800 2000 600</h3>
+        <a class="ui inverted button buy-button">Купить</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="ui vertical inverted sidebar menu">
+      <a class="active item">Старт</a>
+      <a class="item">О продукции</a>
+      <a class="item">Контакты</a>
+      <a class="item" class="buy-button">Купить</a>
+  </div>
+  
+  <div class="pusher">
+    <div class="ui inverted vertical masthead center aligned segment section-1">
+      <div class="ui container">
+        <div class="ui large secondary inverted pointing menu ">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+          <a class="active item">Старт</a>
+          <a class="item">О продукции</a>
+          <a class="item">Контакты</a>
+          <div class="right item">
+            <h2 style="margin:0;margin-right:20px;font-weight:100;font-size: 18px;" class="ui header inverted">8 800 2000 600</h2>
+            <a class="ui inverted button buy-button">Купить</a>
+          </div>
+        </div>
+      </div>
+      <div data-relative-input="true" id="scene">
+        <div data-depth="0.2">
+          2
+        </div>
+        <div data-depth="0.6">
+          1
+        </div>
+      </div>
+      <div class="ui container jumbotron">
+        <h1 class="ui inverted header primary-header">
+          Традиционные пельмени
+        </h1>
+        <h2 class="secondary-header">Продукт, который мы делаем с любовью</h2>
+        <div class="ui huge inverted dark button big action-button">Подробнее <i class="right arrow icon"></i></div>
+      </div>
+    </div>
+  
+    <div class="ui inverted vertical stripe segment with-rotated-head section-2">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="eight wide column">
+            <h1 class="ui header inverted">Качество</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
+            <h1 class="ui header inverted">Вкус</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
+          </div>
+          <div class="six wide right floated column">
+            <div class="image">
+              Изображение
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="center aligned column">
+            <a class="ui huge button inverted default buy-button">Купить</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+    <div class="ui inverted vertical stripe segment with-rotated-head section-3">
+      <div class="ui text container">
+        <div class="image">
+          Здесь картинка
+        </div>
+        <h1 style="margin-top:100px" class="ui header inverted">Здесь заголовок</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
+      </div>
+    </div>
+
+    <div class="ui  vertical stripe segment with-rotated-head section-4">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="six wide right floated column">
+            <div class="image">
+              Изображение здесь
+            </div>
+          </div>
+          <div class="eight wide column">
+            <h1 class="ui header ">Преимущество 1</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
+            <h1 class="ui header ">Преимущество 2</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="ui vertical stripe segment inverted with-rotated-head section-5">
+      <div class="ui container fluid">
+        <h1 class="ui header inverted" style="text-align: center;margin:auto;">
+          Галерея
+          <div class="sub header">Убедитесь в нашем качестве сами</div>
+        </h1>
+        <p style="margin:20px auto;max-width:800px;">Наши пельмени делаются профессионалами с использование только лучших ингридиентов, выращенных наших фермах</p>
+        <div class="ui grid" style="margin-top:30px">
+          <div class="four wide column">1</div>
+          <div class="four wide column">2</div>
+          <div class="four wide column">3</div>
+          <div class="four wide column">4</div>
+          <div class="four wide column">5</div>
+          <div class="four wide column">6</div>
+          <div class="four wide column">7</div>
+          <div class="four wide column">8</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui vertical stripe segment with-rotated-head section-contact">
+      <div class="ui container text">
+        <h1 class="ui header">
+          Обратная связь
+          <div class="sub header">У вас есть вопрос? Задайте его нам!</div>
+        </h1>
+        <p>Отправьте нам свое сообщение или вопрос, на который хотите получить ответ при помощи данной формы</p>
+        <form class="ui form big" style="margin-top:40px">
+          <div class="field">
+            <label>Ваше имя</label>
+            <input type="text" name="first-name" placeholder="Как к вам обратиться?">
+          </div>
+          <div class="field">
+            <label>Контактные данные</label>
+            <input type="text" name="last-name" placeholder="Ваш e-mail или телефон">
+          </div>
+          <div class="field">
+            <label>Ваше сообщение или вопрос</label>
+            <textarea placeholder="Здравствуйте, я бы хотел.." rows="2"></textarea>
+          </div>
+          <button class="ui button big primary" type="submit">Отправить</button>
+        </form>
+      </div>
+    </div>
+  
+    <div class="ui inverted vertical footer segment section-footer">
+      <div class="ui container">
+        <div class="ui stackable inverted equal height stackable grid">
+          <div class="four wide column">
+            <h3 class="ui inverted header">Традиционные пельмени
+              <div class="sub header">Copyright, 2018</div>
+            </h3>
+            <p>Все права защищены, все материалы, размещенные на сайте принадлежат ООО "Пельмени"</p>
+          </div>
+          <div class="eight wide column">
+            <h3 class="ui inverted header">
+              Контакты
+              <div class="sub header">С нами легко связаться!</div>
+            </h3>
+            <div class="ui list text">
+              <div class="item">г. Москва, ул. Строителей, д. 8.</div>
+              <div class="item"><i class="icon ui phone"></i> 8 800 2000 600</div>
+            </div>
+          </div>
+          <div class="four wide column">
+            <h3 class="ui inverted header">
+              Разработка
+              <div class="sub header">Разработано в <a style="color:#c0c0c0;text-decoration:underline" href="#">Levelup Worlds</a></div>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+  <script src="./src/jquery-3.3.1.min.js"></script>
+  <script src="./semantic/dist/semantic.min.js"></script>
+  <script src="./src/parallax/parallax.min.js"></script>
+  <script src="./src/scrollreveal/dist/scrollreveal.min.js"></script>
+  <script src="./src/script.js"></script>
+</body>
+</html>
