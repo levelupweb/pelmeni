@@ -2,9 +2,36 @@
   display: none;
 }
 
+.visuals,
+.visuals-head {
+  height:100%;
+  width:100%;
+  position: absolute;
+  z-index:5;
+  left:0;
+  top:0;
+}
+
+.visuals-head .visual {
+  position: absolute;
+}
+
+.stripe .section-content {
+  position: absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  z-index:100;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
+
 .stripe h1.header {
   font-size:60px;
 }
+
 @media screen and (max-width: 900px) {
   .stripe h1.header {
     font-size:30px;
@@ -43,7 +70,15 @@
 }
 
 .ui.vertical.stripe {
-  padding: 10em 0em;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  height: 100vh;
+  max-height: 1000px;
+  flex-direction: column;
+}
+.ui.vertical.stripe.section-1 {
+  justify-content: flex-start;
 }
 .ui.vertical.stripe h3 {
   font-size: 2em;
@@ -108,7 +143,7 @@
   position: absolute;
   left:0;
   top:0;
-  height:800px;
+  height:100%;
 }
 
 #scene .layer {
@@ -148,49 +183,51 @@
 
 .chapter-1 {
   position: absolute;
-  left:10%;
-  bottom:10%;
-  z-index:25;
+  left: 20%;
+  bottom: 17%;
+  z-index: 25;
 }
 
 .chapter-2 {
   position: absolute;
-  left:25%;
-  top:10%;
-  z-index:35;
+  left: 36%;
+  top: 10%;
+  z-index: 35;
 }
 
 .chapter-3 {
   position: absolute;
-  left:0%;
-  top:20%;
+  right: 21%;
+  top: 40%;
+  transform: rotate(36deg);
 }
 
 .chapter-4 {
   position: absolute;
-  right:0%;
-  top:-10%;
-  z-index:25;
+  left: -5%;
+  top: 17%;
+  z-index: 25;
 }
 
 .chapter-5 {
   position: absolute;
-  left:45%;
-  bottom:10%;
-  z-index:30;
+  left: 37%;
+  bottom: 10%;
+  z-index: 30;
 }
 
 .chapter-6 {
   position: absolute;
-  left:25%;
-  bottom:0;
+  right: -15%;
+  bottom: 38%;
+  transform:rotate(-90deg)!important;
 }
 
 .chapter-7 {
   position: absolute;
-  right:10%;
-  bottom:10%;
-  z-index:40;
+  right: 26%;
+  top: -1%;
+  z-index: 40;
 }
 
 
@@ -246,7 +283,7 @@
 
 .section-2 {
   padding: 17em 0!important;
-  background:url('/static/img/background-3.jpg')!important;
+  background:url('/static/img/background-section-2.jpg')!important;
   background-size:cover!important;
   position: relative;
   padding-top: 17em!important;
@@ -262,22 +299,25 @@
   position: absolute;
   left: 0;
   top:0;
-  width:150%;
+  width:140%;
 }
 
 .section-2 .image-2 {
   position: absolute;
   left: -10%;
-  bottom:0;
-  width:80%;
+  top: -10%;
+  width: 80%;
 }
-
 
 .section-2 .images .description {
   position: absolute;
-  right:-35%;
-  bottom:-15%;
+  right: -10%;
+  bottom: 8%;
   text-align: right;
+}
+
+.section-2 .images .description .header {
+  font-size: 45px;
 }
 
 .section-2:before {
@@ -349,4 +389,15 @@
   .section-footer:before {
     top:-20px;
   }
+}
+
+.geometry {
+  
+}
+
+.geometry.square {
+  border:3px solid #fff;
+  transform: rotate(0deg) scale(0.3);
+  width:200px;
+  height:200px;
 }

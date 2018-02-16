@@ -30,6 +30,8 @@ $(document).ready(function() {
       })
     })
 
+    sr.reveal('#scene .layer img', { duration: 500, delay: 100 }, 250);
+    sr.reveal('.section-1 .menu', { duration: 500, delay: 2000, origin: "top" });
 
     sr.reveal('.jumbotron h1', { duration: 500, delay: 0 });
     sr.reveal('.jumbotron h2', { duration: 500, delay: 500 });
@@ -52,5 +54,37 @@ $(document).ready(function() {
     sr.reveal('.section-4 .image-2', { duration: 500, delay: 1000, origin: "bottom" });
 
     sr.reveal('.section-5 img', { duration: 500, delay: 300, origin: "bottom" }, 100);
+
+    $('.section-1').visibility({
+      once       : false,
+      continuous : true,
+      onPassing  : function(calculations) {
+        const offset = calculations.percentagePassed * 400;
+        $('.section-2 .visuals-head .visual-default').css('margin-top', offset);
+        $('.section-2 .visuals-head .visual-rotation').css('transform', 'rotate(' + offset/4 + 'deg) scale('+ offset/200 +')');
+        $('.section-2 .visuals-head .visual-custom-1').css({'margin-left': offset, 'opacity': calculations.percentagePassed, 'transform': 'rotate(' + offset/4 + 'deg) scale('+ offset/380 +')'});
+      }
+    });
+
+    $('.section-2').visibility({
+      once       : false,
+      continuous : true,
+      onPassing  : function(calculations) {
+        const offset = calculations.percentagePassed * 400;
+        $('.section-2 .images .image-2').css('margin-top', offset*1.5);
+        $('.section-2 .images .image-2').css('margin-right', offset*0.6);
+        $('.section-3 .visuals-head .visual-custom-1').css('margin-left', calculations.percentagePassed*50 + "%");
+      }
+    })
+
+      $('.section-3').visibility({
+        once       : false,
+        continuous : true,
+        onPassing  : function(calculations) {
+          //const offset = calculations.percentagePassed * 400;
+          $('.section-3 .visuals-head .visual-custom-1').css('left', calculations.percentagePassed*100 + "%");
+          // $('.section-2 .images .image-2').css('margin-right', offset*0.6);
+        }
+    })
   })
 ;
