@@ -341,14 +341,14 @@ p.lead.small {
 .section-2 .image-1 {
   position: absolute;
   left: 0;
-  top:0;
+  top:20%;
   width:140%;
 }
 
 .section-2 .image-2 {
   position: absolute;
   left: -10%;
-  top: -10%;
+  top: 50%;
   width: 80%;
 }
 
@@ -425,6 +425,7 @@ p.lead.small {
 .section-6 {
   text-align:center!important;
   background:transparent!important;
+  overflow:hidden;
 }
 
 .section-6 .image-with-description {

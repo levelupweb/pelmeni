@@ -123,6 +123,7 @@ $(document).ready(function() {
         $('.section-5 .visuals-head .visual-custom-2 img').css({'transform': 'scale('+ (calculations.percentagePassed+0.5) +')'});
         $('.section-4 .images .image-1').css('margin-top', offset*0.5);
         $('.section-4 .section-content').css('bottom', offset);
+       
       },
       onBottomVisible: function() {
         $('.section-4 .images .image-1-1').addClass('hidden');
@@ -144,19 +145,17 @@ $(document).ready(function() {
       continuous : true,
       onPassing  : function(calculations) {
         const offset = calculations.percentagePassed * 400;
-        $('.section-5 .images .image-1 > *').css({'margin-top': offset*0.5});
         $('.section-5 .section-content, .section-5 .visuals-head').css('bottom', offset);
-        if (calculations.percentagePassed > 0.3 && calculations.percentagePassed < 0.6) {
-          $('.section-5 .images .image-1 > *').removeClass('visible');
-          $('.section-5 .images .image-1 .image-1-2').addClass('visible');
-        } else if (calculations.percentagePassed > 0.6) {
-          $('.section-5 .images .image-1 > *').removeClass('visible');
-          $('.section-5 .images .image-1 .image-1-3').addClass('visible');
-        } else {
-          $('.section-5 .images .image-1 > *').removeClass('visible');
-          $('.section-5 .images .image-1 .image-1-1').addClass('visible');
-        }
+       
       },
+      onBottomVisible: function() {
+        $('.section-5 .images .image-1 > *').removeClass('visible');
+        $('.section-5 .images .image-1 .image-1-3').addClass('visible');
+      },
+      onTopVisible: function() {
+        $('.section-5 .images .image-1 > *').removeClass('visible');
+        $('.section-5 .images .image-1 .image-1-2').addClass('visible');
+      }
     })
 
     var scene5 = document.getElementById('scene-5');
