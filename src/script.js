@@ -1,7 +1,7 @@
 $(document).ready(function() {
     window.sr = ScrollReveal();
 
-    $('.masthead')
+    $('.secition-1')
       .visibility({
         once: false,
         onBottomPassed: function() {
@@ -31,6 +31,7 @@ $(document).ready(function() {
     })
 
     sr.reveal('#scene .layer img', { duration: 500, delay: 100 }, 250);
+    sr.reveal('#scene .layer .chapter-2', { duration: 500, delay: 2500, origin: "bottom" });
     sr.reveal('.section-1 .menu', { duration: 500, delay: 2000, origin: "top" });
 
     sr.reveal('.jumbotron h1', { duration: 500, delay: 0 });
@@ -60,9 +61,13 @@ $(document).ready(function() {
       continuous : true,
       onPassing  : function(calculations) {
         const offset = calculations.percentagePassed * 400;
-        $('.section-2 .visuals-head .visual-default').css('margin-top', offset);
-        $('.section-2 .visuals-head .visual-rotation').css('transform', 'rotate(' + offset/4 + 'deg) scale('+ offset/200 +')');
-        $('.section-2 .visuals-head .visual-custom-1').css({'margin-left': offset, 'opacity': calculations.percentagePassed, 'transform': 'rotate(' + offset/4 + 'deg) scale('+ offset/380 +')'});
+        $('.section-1 .visuals-head .layer .chapter-9').css('transform', 'scale('+ (calculations.percentagePassed+0.8) +')');
+        $('.section-2 .visuals-head .visual-default img').css('margin-top', offset);
+        $('.section-2 .visuals-head .visual-rotation .geometry').css('transform', 'rotate(' + offset/4 + 'deg) scale('+ offset/400 +')');
+        $('.section-2 .visuals-head .visual-custom-1 img').css({'top': 400-offset, 'opacity': calculations.percentagePassed});
+        $('.section-2 .visuals-head .visual-custom-2 img').css({'transform': 'scale('+ (calculations.percentagePassed+0.5) +')',  'opacity': calculations.percentagePassed});
+
+        $('.section-1 .section-content, .section-1 .visuals-head').css('bottom', offset);
       }
     });
 
@@ -72,19 +77,92 @@ $(document).ready(function() {
       onPassing  : function(calculations) {
         const offset = calculations.percentagePassed * 400;
         $('.section-2 .images .image-2').css('margin-top', offset*1.5);
-        $('.section-2 .images .image-2').css('margin-right', offset*0.6);
-        $('.section-3 .visuals-head .visual-custom-1').css('margin-left', calculations.percentagePassed*50 + "%");
+        $('.section-2 .images .image-2 img').css({'margin-right': offset*0.6, 'opacity': 1-calculations.percentagePassed});
+        $('.section-3 .visuals-head .visual-custom-1 img, .section-3 .visuals-head .visual-custom-2 img').css('left', calculations.percentagePassed*40 + "%");
+        $('.section-3 .visuals-head .visual-custom-5 img').css({'transform': 'scale('+ (calculations.percentagePassed+0.5) +')'});
+        $('.section-2 .visuals-head .visual-custom-6 img').css({'transform': 'scale('+ (calculations.percentagePassed+0.5) +')'});
+        $('.section-2 .section-content').css('bottom', offset);
       }
     })
 
-      $('.section-3').visibility({
-        once       : false,
-        continuous : true,
-        onPassing  : function(calculations) {
-          //const offset = calculations.percentagePassed * 400;
-          $('.section-3 .visuals-head .visual-custom-1').css('left', calculations.percentagePassed*100 + "%");
-          // $('.section-2 .images .image-2').css('margin-right', offset*0.6);
-        }
+    var scene2 = document.getElementById('scene-2');
+    var parallaxInstance = new Parallax(scene2, {
+      relativeInput: true
+    });
+
+    $('.section-3').visibility({
+      once       : false,
+      continuous : true,
+      onPassing  : function(calculations) {
+        const offset = calculations.percentagePassed * 400;
+        $('.section-4 .visuals-head .visual-default img').css('left', calculations.percentagePassed*40 + "%");
+        $('.section-4 .visuals-head .visual-custom-4 img').css({'transform': 'scale('+ (calculations.percentagePassed+0.5) +')'});
+        $('.section-4 .images .image-2').css('margin-top', offset*0.3);
+        $('.section-3 .section-content').css('bottom', offset);
+      },
+      onBottomVisible: function() {
+        $('.section-3 .visuals-head .visual-custom-1 img').addClass('hidden');
+        $('.section-3 .visuals-head .visual-custom-2 img').removeClass('hidden');
+      },
+      onTopVisible: function() {
+        $('.section-3 .visuals-head .visual-custom-1 img').removeClass('hidden');
+        $('.section-3 .visuals-head .visual-custom-2 img').addClass('hidden');
+      }
     })
+
+    var scene3 = document.getElementById('scene-3');
+    var parallaxInstance = new Parallax(scene3, {
+      relativeInput: true
+    });
+
+    $('.section-4').visibility({
+      once       : false,
+      continuous : true,
+      onPassing  : function(calculations) {
+        const offset = calculations.percentagePassed * 400;
+        $('.section-5 .visuals-head .visual-custom-2 img').css({'transform': 'scale('+ (calculations.percentagePassed+0.5) +')'});
+        $('.section-4 .images .image-1').css('margin-top', offset*0.5);
+        $('.section-4 .section-content').css('bottom', offset);
+      },
+      onBottomVisible: function() {
+        $('.section-4 .images .image-1-1').addClass('hidden');
+        $('.section-4 .images .image-1-2').removeClass('hidden');
+      },
+      onTopVisible: function() {
+        $('.section-4 .images .image-1-1').removeClass('hidden');
+        $('.section-4 .images .image-1-2').addClass('hidden');
+      }
+    })
+
+    var scene4 = document.getElementById('scene-4');
+    var parallaxInstance = new Parallax(scene4, {
+      relativeInput: true
+    });
+
+    $('.section-5').visibility({
+      once       : false,
+      continuous : true,
+      onPassing  : function(calculations) {
+        const offset = calculations.percentagePassed * 400;
+        $('.section-5 .images .image-1 > *').css({'margin-top': offset*0.5});
+        $('.section-5 .section-content, .section-5 .visuals-head').css('bottom', offset);
+        if (calculations.percentagePassed > 0.3 && calculations.percentagePassed < 0.6) {
+          $('.section-5 .images .image-1 > *').removeClass('visible');
+          $('.section-5 .images .image-1 .image-1-2').addClass('visible');
+        } else if (calculations.percentagePassed > 0.6) {
+          $('.section-5 .images .image-1 > *').removeClass('visible');
+          $('.section-5 .images .image-1 .image-1-3').addClass('visible');
+        } else {
+          $('.section-5 .images .image-1 > *').removeClass('visible');
+          $('.section-5 .images .image-1 .image-1-1').addClass('visible');
+        }
+      },
+    })
+
+    var scene5 = document.getElementById('scene-5');
+    var parallaxInstance = new Parallax(scene5, {
+      relativeInput: true
+    });
+
   })
 ;

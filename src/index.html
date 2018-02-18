@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/static/semantic/dist/semantic.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
   <link rel="stylesheet" href="/static/styles.css"/>
   <title>Пельмени</title>
 </head>
@@ -57,66 +58,70 @@
   
   <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment section-1 stripe">
-      <div data-relative-input="true" id="scene">
-        <div class="layer" data-depth="0.1">
-          <picture class="main-background">
-              <source srcset="/static/img/background-main-large.jpg" media="(max-width: 768px)">
-              <source srcset="/static/img/background-main-large.jpg">
-              <img srcset="/static/img/background-main-large.jpg" alt="My default image">
-          </picture>
-        </div>
-        <div class="layer" data-depth="0.9">
-          <img class="chapter-1" src="/static/img/background-main-chapter-1.png" width="100px" />
-        </div>
-        <div class="layer" data-depth="0.7">
-          <img class="chapter-2" src="/static/img/background-main-chapter-2.png" width="50px" />
-        </div>
-        <div class="layer" data-depth="0.4">
-          <img class="chapter-4" src="/static/img/background-main-chapter-4.png" width="300px" />
-        </div>
-        <div class="layer" data-depth="0.6">
-          <img class="chapter-5" src="/static/img/background-main-chapter-5.png" width="300px" />
-        </div>
-        <div class="layer" data-depth="0.3">
-          <img class="chapter-6" src="/static/img/background-main-chapter-6.png" width="400px" />
-        </div>
-        <div class="layer" data-depth="0.9">
-          <img class="chapter-7" src="/static/img/background-main-chapter-7.png" width="200px" />
-        </div>
-      </div>
-      <div class="ui container">
-        <div class="ui large secondary inverted pointing menu big">
-          <a class="toc item">
-            <i class="sidebar icon"></i>
-          </a>
-          <a class="active item">Старт</a>
-          <a class="item">О продукции</a>
-          <a class="item">Контакты</a>
-          <div class="right item">
-            <h2 style="margin:0;margin-right:20px;font-weight:100;font-size: 18px;" class="ui header inverted">8 800 2000 600</h2>
-            <a class="ui inverted button buy-button">Купить</a>
+      <div class="visuals-head">
+        <picture class="main-background">
+            <source srcset="/static/img/background-main-large.jpg" media="(max-width: 768px)">
+            <source srcset="/static/img/background-main-large.jpg">
+            <img srcset="/static/img/background-main-large.jpg" alt="My default image">
+        </picture>
+        <div data-relative-input="true" id="scene">
+          <div class="layer" data-depth="0.1">
+            <img class="chapter-2" class="animated" src="/static/img/background-main-chapter-2.png" width="1100px" />
+          </div>
+          <div class="layer" data-depth="0.3">
+            <img class="chapter-8" class="animated" src="/static/img/background-main-chapter-8.png" width="700px" />
+          </div>
+          <div class="layer" data-depth="0.4">
+            <img class="chapter-9" class="animated" src="/static/img/background-main-chapter-8.png" width="700px" />
+          </div>
+          <div class="layer" data-depth="0.2">
+            <img class="chapter-10" class="animated" src="/static/img/background-main-chapter-8.png" width="600px" />
+          </div>
+          <div class="layer" data-depth="0.4">
+            <img class="chapter-11" class="animated" src="/static/img/background-main-chapter-8.png" width="700px" />
+          </div>
+          <div class="layer" data-depth="0.1">
+            <img class="chapter-6" class="animated" src="/static/img/background-main-chapter-6.png" width="400px" />
+          </div>
+          <div class="layer" data-depth="0.4">
+            <img class="chapter-4" class="animated" src="/static/img/background-main-chapter-4.png" width="700px" />
           </div>
         </div>
       </div>
-      <div class="ui container jumbotron">
-        <h1 class="ui inverted header primary-header">
-          Традиционные пельмени
-        </h1>
-        <h2 class="secondary-header">Продукт, который мы делаем с любовью</h2>
-        <div class="ui huge inverted dark button big action-button">Подробнее <i class="right arrow icon"></i></div>
+      <div class="section-content" style="flex-direction:column;justify-content:flex-start">
+        <div class="ui container">
+          <div class="ui large secondary inverted pointing menu big" style="box-shadow:none;border:0">
+            <a class="toc item">
+              <i class="sidebar icon"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ui container jumbotron">
+          <h1 class="ui inverted header primary-header">
+            Классные
+          </h1>
+          <p class="secondary-header lead">Натуральные продукты, которые мы создаем с любовью</p>
+          <div style="display:none" class="ui huge white button big action-button">Купить <i class="right arrow icon"></i></div>
+        </div>
       </div>
     </div>
   
     <div class="ui inverted vertical stripe segment section-2">
-      <div class="visuals-head">
-        <div class="visual visual-default">
-          <img src="/static/img/geometry-1.png" alt="">
+      <div class="visuals-head" id="scene-2">
+        <div class="visual visual-default layer" data-depth="0.1">
+          <img src="/static/img/geometry-1.png" class="animated" alt="">
         </div>
-        <div class="visual visual-rotation" style="right:0;top:0">
-          <div class="geometry square"></div>
+        <div class="visual visual-rotation layer" data-depth="0.4">
+          <div class="geometry square animated" style="right:0;bottom:0;position:absolute;"></div>
         </div>
-        <div class="visual visual-custom-1" style="top:0;left:0%">
-          <img src="/static/img/background-main-chapter-7.png" width="200px" alt="">
+        <div class="visual visual-custom-1 layer" data-depth="0">
+            <img src="/static/img/section-2-chapter-2.png" class="animated" style="top:0;left:0%;position:absolute;" width="200px" alt="">
+          </div>
+        <div class="visual visual-custom-2 layer" data-depth="0.2">
+          <img src="/static/img/section-2-chapter-1.png" class="animated" style="bottom:-4%;left:0;position:absolute;" width="700px" alt="">
+        </div>
+        <div class="visual visual-custom-2 layer" data-depth="0.2">
+          <img src="/static/img/section-2-chapter-1.png" class="animated" style="top:-25%;right:0;position:absolute;" width="500px" alt="">
         </div>
       </div>
       <div class="section-content">
@@ -124,114 +129,148 @@
           <div class="row">
             <div class="eight wide column">
               <h1 class="ui header inverted">Качество</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
+              <p  class="lead small">Мы производим полуфабрикаты исключительно из натуральных ингридиентов. Наша компания никогда не использовала в производстве добавки и консерванты!</p>
               <h1 class="ui header inverted">Вкус</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
+              <p  class="lead small">Попробуйте нашу продукцию и вы поймете что такое настоящий вкус. При производстве мы используем ингридиенты высочайшего качества. Мы работаем только с проверенными поставщиками свежих и натуральных продуктов.</p>
             </div>
             <div class="six wide right floated column">
               <div class="images">
                 <div class="image-1">
-                  <img src="/static/img/section-2.png" alt="" width="100%">
-                </div>
-                <div class="image-2">
                   <img src="/static/img/section-2-1.png" alt="" width="100%">
                 </div>
-                <div class="description">
-                  <h1 class="header ui inverted">Ручная лепка высокого качества</h1>
+                <div class="image-2">
+                  <img src="/static/img/section-2.png" alt="" width="100%">
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="center aligned column">
-              <a class="ui huge button inverted default buy-button">Купить</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-  
     <div class="ui inverted vertical stripe segment section-3">
-      <div class="visuals-head">
-          <div class="visual visual-custom-1" style="top:0;left:0;transform:rotate(180deg);">
-            <img src="/static/img/section-3-slice-1.png" width="700px" alt="">
+      <div class="visuals-head" id="scene-3">
+          <div class="visual visual-custom-1 layer" data-depth="0">
+            <img src="/static/img/section-3-chapter-1.jpg" class="animated" style="top:0;left:0;position:absolute;" height="600px" alt="">
+          </div>
+          <div class="visual visual-custom-2 layer" data-depth="0">
+            <img src="/static/img/section-3-chapter-2.jpg" class="hidden animated" style="top:0;left:0;position:absolute;" height="600px" alt="">
+          </div>
+          <div class="visual visual-custom-5 layer" data-depth="0.5">
+            <img src="/static/img/background-main-chapter-8.png" class="animated" style="bottom:0;left:0;position:absolute;" width="500px" alt="">
+          </div>
+          <div class="visual visual-custom-3 layer" data-depth="0.1">
+            <img src="/static/img/section-3-chapter-3.png" class="animated" style="bottom:-15%;left:5%;position:absolute;transform:rotate(-5deg);" width="500px" alt="">
+          </div>
+          <div class="visual visual-custom-6 layer" data-depth="0.1">
+            <img src="/static/img/background-main-chapter-8.png" class="animated" style="top:10%;right:0;position:absolute;;" width="500px" alt="">
+          </div>
+          <div class="visual visual-custom-4 layer" data-depth="0.2">
+            <img src="/static/img/background-main-chapter-6.png" class="animated" style="top:10%;right:0;position:absolute;transform:rotate(-20deg);" width="400px" alt="">
           </div>
         </div>
       <div class="section-content">
         <div class="ui text container">
-          <h1 style="margin-top:100px" class="ui header inverted">Здесь заголовок</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
+          <h1 style="margin-top:100px" class="ui header inverted">Свежесть</h1>
+          <p class="lead">Мы производим только продукцию, которую любим кушать сами. Мы гордимся своей продукцией и с радостью угощаем своих гостей</p>
         </div>
       </div>
     </div>
 
-    <div class="ui  vertical stripe segment inverted section-4">
-      <div class="ui middle aligned stackable grid container">
-        <div class="row">
-          <div class="six wide right floated column">
-            <div class="images">
-              <div class="image-1">
-                <img src="/static/img/section-2.png" alt="" width="100%">
-              </div>
-              <div class="image-2">
-                <img src="/static/img/section-2-1.png" alt="" width="100%">
+    <div class="ui inverted vertical stripe segment section-4">
+        <div class="visuals-head" id="scene-4">
+          <div class="visual visual-default layer" data-depth="0">
+            <img src="/static/img/geometry-1.png" class="animated" style="position: absolute;left:10%;top:10%;transform:rotate(-90deg);" alt="">
+          </div>
+          <div class="visual visual-custom-2 layer" data-depth="0">
+            <img src="/static/img/section-2-chapter-1.png" class="animated" style="bottom:-4%;left:0;position:absolute;" width="700px" alt="">
+          </div>
+          <div class="visual visual-custom-3 layer" data-depth="0">
+            <img src="/static/img/section-2-chapter-1.png" class="animated" style="top:-25%;right:0;position:absolute;" width="500px" alt="">
+          </div>
+          <div class="visual visual-custom-1 layer" data-depth="0.2">
+            <img src="/static/img/section-4-chapter-4.png" class="animated" style="bottom:-20%;left:-10%;position:absolute;" width="600px" alt="">
+          </div>
+          <div class="visual visual-custom-4 layer" data-depth="0.2">
+            <img src="/static/img/background-main-chapter-8.png" class="animated" style="bottom: -44%;right: -4%;position: absolute;transform: rotate(-90deg);" width="600px" alt="">
+          </div>
+        </div>
+        <div class="section-content">
+          <div class="ui middle aligned stackable grid container">
+            <div class="row">
+              <div class="eight wide column">
+                <h1 class="ui header inverted">Натуральность продуктов</h1>
+                <p  class="lead small">Мука высочайшего сорта и все тепло, которое мы вкладываем во время готовки наших продуктов, не оставят вас равнодушными</p>
+                </div>
+              <div class="six wide right floated column">
+                <div class="images">
+                  <div class="image-1">
+                    <img class="image-1-1 animated" src="/static/img/section-4-chapter-1.jpg" alt="" width="60%">
+                    <img class="image-1-2 animated hidden" src="/static/img/section-4-chapter-2.jpg"  alt="" width="60%">
+                  </div>
+                  <div class="image-2">
+                    <img class="animated" src="/static/img/section-4-chapter-3.png" alt="" width="100%">
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="eight wide column">
-            <h1 class="ui header inverted">Преимущество 1</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
-            <h1 class="ui header inverted">Преимущество 2</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
+        </div>
+      </div>
+
+    <div class="ui inverted vertical stripe segment section-5">
+        <div class="visuals-head" id="scene-5">
+          <div class="visual visual-custom-1 layer" data-depth="0.2">
+            <img src="/static/img/section-5-chapter-1.png" class="animated" style="bottom:-4%;right:-5%;position:absolute;" width="500px" alt="">
+          </div>
+          <div class="visual visual-custom-2 layer" data-depth="0.1">
+            <img src="/static/img/background-main-chapter-8.png" class="animated" style="bottom: -10%;left: 10%;position: absolute;" width="600px" alt="">
+          </div>
+        </div>
+        <div class="section-content">
+          <div class="ui middle aligned stackable grid container">
+            <div class="row">
+                <div class="six wide right floated column">
+                  <div class="images">
+                    <div class="image-1">
+                      <img class="image-1-1 animated hidden visible" src="/static/img/section-5-chapter-3.png" alt="" width="100%">
+                      <img class="image-1-2 animated hidden" src="/static/img/section-5-chapter-4.png"  alt="" width="100%">
+                      <img class="image-1-3 animated hidden" src="/static/img/section-5-chapter-5.png" alt="" width="100%">
+                    </div>
+                    <div class="image-2">
+                      <img class="animated" src="/static/img/section-5-chapter-2.png" alt="" width="100%">
+                    </div>
+                  </div>
+                </div>
+              <div class="eight wide column">
+                <h1 class="ui header inverted">Гарантия</h1>
+                <p  class="lead small">На всех этапах производства мы отслеживаем качество нашей продукции. Для этого мы разработали собственную 7-уровневую систему контроля качества</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="ui vertical stripe segment inverted with-rotated-head section-5">
+
+    <div class="ui inverted vertical stripe segment section-6">
       <div class="ui container fluid">
-        <div class="ui grid stackable equal width" style="margin-top:30px;margin:0!important">
-          <div class="row">
-            <div class="column">
-              <img src="/static/img/gallery-1.jpg" width="100%" alt="">
-            </div>
-            <div class="column">
-              <img src="/static/img/gallery-2.jpg" width="100%" alt="">
-            </div>
-            <div class="column">
-              <img src="/static/img/gallery-3.jpg" width="100%" alt="">
-            </div>
+        <div class="image-with-description">
+          <img src="/static/img/section-6-chapter-1.jpg" class="image-1" width="100%" alt="">
+          <div class="description">
+              <h1 class="ui header inverted">Попробуйте сами!</h1>
+              <a href="" class="ui button default big">Купить продукцию</a>
           </div>
-          <div class="row">
-              <div class="column">
-                <img src="/static/img/gallery-4.jpg" width="100%" alt="">
-              </div>
-              <div class="column">
-                <img src="/static/img/gallery-5.jpg" width="100%" alt="">
-              </div>
-              <div class="column">
-                <img src="/static/img/gallery-6.jpg" width="100%" alt="">
-              </div>
-            </div>
+          
         </div>
       </div>
     </div>
-
-    <div class="ui inverted vertical stripe segment section-3">
-        <div class="ui text container">
-          <h1 style="margin-top:100px" class="ui header inverted">Здесь заголовок</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi ducimus officia distinctio quaerat eum assumenda! Dignissimos molestiae corporis numquam quia nesciunt quo, corrupti dicta harum officia, repellendus obcaecati quasi.</p>
-        </div>
-      </div>
 
     <div class="ui vertical stripe segment with-rotated-head section-contact">
       <div class="ui container text">
-        <h1 class="ui header">
+        <h1 class="ui header inverted">
           Обратная связь
-          <div class="sub header">У вас есть вопрос? Задайте его нам!</div>
         </h1>
-        <p>Отправьте нам свое сообщение или вопрос, на который хотите получить ответ при помощи данной формы</p>
-        <form class="ui form big" style="margin-top:40px">
+        <p style="color:#fff">Отправьте нам свое сообщение или вопрос, на который хотите получить ответ при помощи данной формы</p>
+        <form class="ui form big inverted" style="margin-top:40px">
           <div class="field">
             <label>Ваше имя</label>
             <input type="text" name="first-name" placeholder="Как к вам обратиться?">
@@ -249,29 +288,29 @@
       </div>
     </div>
   
-    <div class="ui vertical footer segment">
+    <div class="ui vertical section-footer footer segment inverted">
       <div class="ui container">
         <div class="ui stackable equal height stackable grid">
           <div class="four wide column">
-            <h3 class="ui header">Традиционные пельмени
+            <h3 class="ui header inverted">Традиционные пельмени
               <div class="sub header">Copyright, 2018</div>
             </h3>
             <p>Все права защищены, все материалы, размещенные на сайте принадлежат ООО "Пельмени"</p>
           </div>
           <div class="eight wide column">
-            <h3 class="ui header">
+            <h3 class="ui header inverted">
               Контакты
               <div class="sub header">С нами легко связаться!</div>
             </h3>
-            <div class="ui list text">
+            <div class="ui list text inverted">
               <div class="item">г. Москва, ул. Строителей, д. 8.</div>
               <div class="item"><i class="icon ui phone"></i> 8 800 2000 600</div>
             </div>
           </div>
           <div class="four wide column">
-            <h3 class="ui header">
+            <h3 class="ui header inverted">
               Разработка
-              <div class="sub header">Разработано в <a style="text-decoration:underline" href="#">Levelup Worlds</a></div>
+              <div class="sub header">Разработано в <a style="text-decoration:underline;color:#c0c0c0" href="#">Levelup Worlds</a></div>
             </h3>
           </div>
         </div>
