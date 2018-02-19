@@ -1,34 +1,14 @@
-$(document).ready(function() {
+import ScrollReveal from "scrollreveal";
+import Parallax from "parallax-js";
+import "../semantic/dist/components/visibility";
+
+$(document).ready(() => {
     window.sr = ScrollReveal();
 
-    $('.secition-1')
-      .visibility({
-        once: false,
-        onBottomPassed: function() {
-          $('.fixed.menu').transition('fade in');
-        },
-        onBottomPassedReverse: function() {
-          $('.fixed.menu').transition('fade out');
-        }
-      })
-    ;
+    const sceneOptions = { relativeInput: true };
 
-    $('.ui.sidebar')
-      .sidebar('attach events', '.toc.item')
-    ;
-
-    var scene = document.getElementById('scene');
-    var parallaxInstance = new Parallax(scene, {
-      relativeInput: true
-    });
-
-    $('#buy-modal').modal();
-
-    $(".buy-button").each(function() {
-      $(this).on("click", function() {
-        $('#buy-modal').modal('show');
-      })
-    })
+    const scene = document.getElementById('scene');
+    const parallaxInstance1 = new Parallax(scene, sceneOptions);
 
     sr.reveal('#scene .layer img', { duration: 500, delay: 100 }, 250);
     sr.reveal('#scene .layer .chapter-2', { duration: 500, delay: 2500, origin: "bottom" });
@@ -66,7 +46,6 @@ $(document).ready(function() {
         $('.section-2 .visuals-head .visual-rotation .geometry').css('transform', 'rotate(' + offset/4 + 'deg) scale('+ offset/400 +')');
         $('.section-2 .visuals-head .visual-custom-1 img').css({'top': 400-offset, 'opacity': calculations.percentagePassed});
         $('.section-2 .visuals-head .visual-custom-2 img').css({'transform': 'scale('+ (calculations.percentagePassed+0.5) +')',  'opacity': calculations.percentagePassed});
-
         $('.section-1 .section-content, .section-1 .visuals-head').css('bottom', offset);
       }
     });
@@ -86,9 +65,7 @@ $(document).ready(function() {
     })
 
     var scene2 = document.getElementById('scene-2');
-    var parallaxInstance = new Parallax(scene2, {
-      relativeInput: true
-    });
+    var parallaxInstance2 = new Parallax(scene2, sceneOptions);
 
     $('.section-3').visibility({
       once       : false,
@@ -111,9 +88,7 @@ $(document).ready(function() {
     })
 
     var scene3 = document.getElementById('scene-3');
-    var parallaxInstance = new Parallax(scene3, {
-      relativeInput: true
-    });
+    var parallaxInstance3 = new Parallax(scene3, sceneOptions);
 
     $('.section-4').visibility({
       once       : false,
@@ -123,7 +98,6 @@ $(document).ready(function() {
         $('.section-5 .visuals-head .visual-custom-2 img').css({'transform': 'scale('+ (calculations.percentagePassed+0.5) +')'});
         $('.section-4 .images .image-1').css('margin-top', offset*0.5);
         $('.section-4 .section-content').css('bottom', offset);
-       
       },
       onBottomVisible: function() {
         $('.section-4 .images .image-1-1').addClass('hidden');
@@ -136,9 +110,7 @@ $(document).ready(function() {
     })
 
     var scene4 = document.getElementById('scene-4');
-    var parallaxInstance = new Parallax(scene4, {
-      relativeInput: true
-    });
+    var parallaxInstance4 = new Parallax(scene4, sceneOptions);
 
     $('.section-5').visibility({
       once       : false,
@@ -146,7 +118,6 @@ $(document).ready(function() {
       onPassing  : function(calculations) {
         const offset = calculations.percentagePassed * 400;
         $('.section-5 .section-content, .section-5 .visuals-head').css('bottom', offset);
-       
       },
       onBottomVisible: function() {
         $('.section-5 .images .image-1 > *').removeClass('visible');
@@ -159,9 +130,7 @@ $(document).ready(function() {
     })
 
     var scene5 = document.getElementById('scene-5');
-    var parallaxInstance = new Parallax(scene5, {
-      relativeInput: true
-    });
+    var parallaxInstance5 = new Parallax(scene5, sceneOptions);
 
   })
 ;

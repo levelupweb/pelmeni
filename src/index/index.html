@@ -6,96 +6,39 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/static/semantic/dist/semantic.min.css" />
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
-  <link rel="stylesheet" href="/static/styles.css"/>
+  <link rel="stylesheet" href="/static/index/styles.css"/>
   <title>Пельмени</title>
 </head>
 <body>
 
-  <div class="ui basic modal small" id="buy-modal" style="text-align:center;">
-    <h1 class="ui header inverted">
-      Оформление
-      <div class="sub header">Закажите товар прямо на сайте, заполнив форму ниже</div>
-    </h1>
-    <div class="content" style="padding-top:0">
-      <form style="text-align:left" class="ui form big inverted">
-          <div class="field">
-            <label>Ваше имя</label>
-            <input type="text" name="first-name" placeholder="Как к вам обратиться?">
-          </div>
-          <div class="field">
-            <label>Контактные данные</label>
-            <input type="text" name="last-name" placeholder="Ваш e-mail или телефон">
-          </div>
-          <div class="field">
-            <label>Дополнительное сообщение</label>
-            <textarea rows="2"></textarea>
-          </div>
-          <div class="field" style="text-align:center;margin-top:40px">
-            <button style="margin:auto;" class="ui button big default" type="submit">Отправить заказ на обработку</button>
-          </div>
-        </form>
-    </div>
-  </div>
-
-  <div class="ui large top fixed secondary hidden menu inverted big" style="padding:10px 0;background:#111;">
-    <div class="ui container">
-      <a class="active item">Старт</a>
-      <a class="item">О продукции</a>
-      <a class="item">Контакты</a>
-      <div class="right item">
-          <h3 style="margin:0;margin-right:20px;font-weight:100" class="ui header inverted">8 800 2000 600</h3>
-        <a class="ui inverted button buy-button">Купить</a>
-      </div>
-    </div>
-  </div>
-  
-  <div class="ui vertical inverted sidebar menu">
-      <a class="active item">Старт</a>
-      <a class="item">О продукции</a>
-      <a class="item">Контакты</a>
-      <a class="item" class="buy-button">Купить</a>
-  </div>
-  
   <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment section-1 stripe">
       <div class="visuals-head">
-        <picture class="main-background">
-            <source srcset="/static/img/background-main-large.jpg" media="(max-width: 768px)">
-            <source srcset="/static/img/background-main-large.jpg">
-            <img srcset="/static/img/background-main-large.jpg" alt="My default image">
-        </picture>
         <div data-relative-input="true" id="scene">
           <div class="layer" data-depth="0.1">
-            <img class="chapter-2" class="animated" src="/static/img/background-main-chapter-2.png" width="1100px" />
+            <img class="chapter-2" class="animated" src="/static/index/img/background-main-chapter-2.png" width="1100px" />
           </div>
           <div class="layer" data-depth="0.3">
-            <img class="chapter-8" class="animated" src="/static/img/background-main-chapter-8.png" width="700px" />
+            <img class="chapter-8" class="animated" src="/static/index/img/background-main-chapter-8.png" width="700px" />
           </div>
           <div class="layer" data-depth="0.4">
-            <img class="chapter-9" class="animated" src="/static/img/background-main-chapter-8.png" width="700px" />
+            <img class="chapter-9" class="animated" src="/static/index/img/background-main-chapter-8.png" width="700px" />
           </div>
           <div class="layer" data-depth="0.2">
-            <img class="chapter-10" class="animated" src="/static/img/background-main-chapter-8.png" width="600px" />
+            <img class="chapter-10" class="animated" src="/static/index/img/background-main-chapter-8.png" width="600px" />
           </div>
           <div class="layer" data-depth="0.4">
-            <img class="chapter-11" class="animated" src="/static/img/background-main-chapter-8.png" width="700px" />
+            <img class="chapter-11" class="animated" src="/static/index/img/background-main-chapter-8.png" width="700px" />
           </div>
           <div class="layer" data-depth="0.1">
-            <img class="chapter-6" class="animated" src="/static/img/background-main-chapter-6.png" width="400px" />
+            <img class="chapter-6" class="animated" src="/static/index/img/background-main-chapter-6.png" width="400px" />
           </div>
           <div class="layer" data-depth="0.4">
-            <img class="chapter-4" class="animated" src="/static/img/background-main-chapter-4.png" width="700px" />
+            <img class="chapter-4" class="animated" src="/static/index/img/background-main-chapter-4.png" width="700px" />
           </div>
         </div>
       </div>
       <div class="section-content" style="flex-direction:column;justify-content:flex-start">
-        <div class="ui container">
-          <div class="ui large secondary inverted pointing menu big" style="box-shadow:none;border:0">
-            <a class="toc item">
-              <i class="sidebar icon"></i>
-            </a>
-          </div>
-        </div>
         <div class="ui container jumbotron">
           <h1 class="ui inverted header primary-header">
             Классные
@@ -109,19 +52,19 @@
     <div class="ui inverted vertical stripe segment section-2">
       <div class="visuals-head" id="scene-2">
         <div class="visual visual-default layer" data-depth="0.1">
-          <img src="/static/img/geometry-1.png" class="animated" alt="">
+          <img src="/static/index/img/geometry-1.png" class="animated" alt="">
         </div>
         <div class="visual visual-rotation layer" data-depth="0.4">
           <div class="geometry square animated" style="right:0;bottom:0;position:absolute;"></div>
         </div>
         <div class="visual visual-custom-1 layer" data-depth="0">
-            <img src="/static/img/section-2-chapter-2.png" class="animated" style="top:0;left:0%;position:absolute;" width="200px" alt="">
+            <img src="/static/index/img/section-2-chapter-2.png" class="animated" style="top:0;left:0%;position:absolute;" width="200px" alt="">
           </div>
         <div class="visual visual-custom-2 layer" data-depth="0.2">
-          <img src="/static/img/section-2-chapter-1.png" class="animated" style="bottom:-4%;left:0;position:absolute;" width="700px" alt="">
+          <img src="/static/index/img/section-2-chapter-1.png" class="animated" style="bottom:-4%;left:0;position:absolute;" width="700px" alt="">
         </div>
         <div class="visual visual-custom-2 layer" data-depth="0.2">
-          <img src="/static/img/section-2-chapter-1.png" class="animated" style="top:-25%;right:0;position:absolute;" width="500px" alt="">
+          <img src="/static/index/img/section-2-chapter-1.png" class="animated" style="top:-25%;right:0;position:absolute;" width="500px" alt="">
         </div>
       </div>
       <div class="section-content">
@@ -136,10 +79,10 @@
             <div class="six wide right floated column">
               <div class="images">
                 <div class="image-1">
-                  <img src="/static/img/section-2-1.png" alt="" width="100%">
+                  <img src="/static/index/img/section-2-1.png" alt="" width="100%">
                 </div>
                 <div class="image-2">
-                  <img src="/static/img/section-2.png" alt="" width="100%">
+                  <img src="/static/index/img/section-2.png" alt="" width="100%">
                 </div>
               </div>
             </div>
@@ -151,22 +94,22 @@
     <div class="ui inverted vertical stripe segment section-3">
       <div class="visuals-head" id="scene-3">
           <div class="visual visual-custom-1 layer" data-depth="0">
-            <img src="/static/img/section-3-chapter-1.jpg" class="animated" style="top:0;left:0;position:absolute;" height="600px" alt="">
+            <img src="/static/index/img/section-3-chapter-1.jpg" class="animated" style="top:0;left:0;position:absolute;" height="600px" alt="">
           </div>
           <div class="visual visual-custom-2 layer" data-depth="0">
-            <img src="/static/img/section-3-chapter-2.jpg" class="hidden animated" style="top:0;left:0;position:absolute;" height="600px" alt="">
+            <img src="/static/index/img/section-3-chapter-2.jpg" class="hidden animated" style="top:0;left:0;position:absolute;" height="600px" alt="">
           </div>
           <div class="visual visual-custom-5 layer" data-depth="0.5">
-            <img src="/static/img/background-main-chapter-8.png" class="animated" style="bottom:0;left:0;position:absolute;" width="500px" alt="">
+            <img src="/static/index/img/background-main-chapter-8.png" class="animated" style="bottom:0;left:0;position:absolute;" width="500px" alt="">
           </div>
           <div class="visual visual-custom-3 layer" data-depth="0.1">
-            <img src="/static/img/section-3-chapter-3.png" class="animated" style="bottom:-15%;left:5%;position:absolute;transform:rotate(-5deg);" width="500px" alt="">
+            <img src="/static/index/img/section-3-chapter-3.png" class="animated" style="bottom:-15%;left:5%;position:absolute;transform:rotate(-5deg);" width="500px" alt="">
           </div>
           <div class="visual visual-custom-6 layer" data-depth="0.1">
-            <img src="/static/img/background-main-chapter-8.png" class="animated" style="top:10%;right:0;position:absolute;;" width="500px" alt="">
+            <img src="/static/index/img/background-main-chapter-8.png" class="animated" style="top:10%;right:0;position:absolute;;" width="500px" alt="">
           </div>
           <div class="visual visual-custom-4 layer" data-depth="0.2">
-            <img src="/static/img/background-main-chapter-6.png" class="animated" style="top:10%;right:0;position:absolute;transform:rotate(-20deg);" width="400px" alt="">
+            <img src="/static/index/img/background-main-chapter-6.png" class="animated" style="top:10%;right:0;position:absolute;transform:rotate(-20deg);" width="400px" alt="">
           </div>
         </div>
       <div class="section-content">
@@ -180,19 +123,19 @@
     <div class="ui inverted vertical stripe segment section-4">
         <div class="visuals-head" id="scene-4">
           <div class="visual visual-default layer" data-depth="0">
-            <img src="/static/img/geometry-1.png" class="animated" style="position: absolute;left:10%;top:10%;transform:rotate(-90deg);" alt="">
+            <img src="/static/index/img/geometry-1.png" class="animated" style="position: absolute;left:10%;top:10%;transform:rotate(-90deg);" alt="">
           </div>
           <div class="visual visual-custom-2 layer" data-depth="0">
-            <img src="/static/img/section-2-chapter-1.png" class="animated" style="bottom:-4%;left:0;position:absolute;" width="700px" alt="">
+            <img src="/static/index/img/section-2-chapter-1.png" class="animated" style="bottom:-4%;left:0;position:absolute;" width="700px" alt="">
           </div>
           <div class="visual visual-custom-3 layer" data-depth="0">
-            <img src="/static/img/section-2-chapter-1.png" class="animated" style="top:-25%;right:0;position:absolute;" width="500px" alt="">
+            <img src="/static/index/img/section-2-chapter-1.png" class="animated" style="top:-25%;right:0;position:absolute;" width="500px" alt="">
           </div>
           <div class="visual visual-custom-1 layer" data-depth="0.2">
-            <img src="/static/img/section-4-chapter-4.png" class="animated" style="bottom:-20%;left:-10%;position:absolute;" width="600px" alt="">
+            <img src="/static/index/img/section-4-chapter-4.png" class="animated" style="bottom:-20%;left:-10%;position:absolute;" width="600px" alt="">
           </div>
           <div class="visual visual-custom-4 layer" data-depth="0.2">
-            <img src="/static/img/background-main-chapter-8.png" class="animated" style="bottom: -44%;right: -4%;position: absolute;transform: rotate(-90deg);" width="600px" alt="">
+            <img src="/static/index/img/background-main-chapter-8.png" class="animated" style="bottom: -44%;right: -4%;position: absolute;transform: rotate(-90deg);" width="600px" alt="">
           </div>
         </div>
         <div class="section-content">
@@ -205,11 +148,11 @@
               <div class="six wide right floated column">
                 <div class="images">
                   <div class="image-1">
-                    <img class="image-1-1 animated" src="/static/img/section-4-chapter-1.jpg" alt="" width="60%">
-                    <img class="image-1-2 animated hidden" src="/static/img/section-4-chapter-2.jpg"  alt="" width="60%">
+                    <img class="image-1-1 animated" src="/static/index/img/section-4-chapter-1.jpg" alt="" width="60%">
+                    <img class="image-1-2 animated hidden" src="/static/index/img/section-4-chapter-2.jpg"  alt="" width="60%">
                   </div>
                   <div class="image-2">
-                    <img class="animated" src="/static/img/section-4-chapter-3.png" alt="" width="100%">
+                    <img class="animated" src="/static/index/img/section-4-chapter-3.png" alt="" width="100%">
                   </div>
                 </div>
               </div>
@@ -221,10 +164,10 @@
     <div class="ui inverted vertical stripe segment section-5">
         <div class="visuals-head" id="scene-5">
           <div class="visual visual-custom-1 layer" data-depth="0.2">
-            <img src="/static/img/section-5-chapter-1.png" class="animated" style="bottom:20%;right:-5%;position:absolute;" width="500px" alt="">
+            <img src="/static/index/img/section-5-chapter-1.png" class="animated" style="bottom:20%;right:-5%;position:absolute;" width="500px" alt="">
           </div>
           <div class="visual visual-custom-2 layer" data-depth="0.1">
-            <img src="/static/img/background-main-chapter-8.png" class="animated" style="bottom: -10%;left: 10%;position: absolute;" width="600px" alt="">
+            <img src="/static/index/img/background-main-chapter-8.png" class="animated" style="bottom: -10%;left: 10%;position: absolute;" width="600px" alt="">
           </div>
         </div>
         <div class="section-content">
@@ -233,12 +176,12 @@
                 <div class="six wide right floated column">
                   <div class="images">
                     <div class="image-1">
-                      <img class="image-1-1 animated hidden visible" src="/static/img/section-5-chapter-3.png" alt="" width="100%">
-                      <img class="image-1-2 animated hidden" src="/static/img/section-5-chapter-4.png"  alt="" width="100%">
-                      <img class="image-1-3 animated hidden" src="/static/img/section-5-chapter-5.png" alt="" width="100%">
+                      <img class="image-1-1 animated hidden visible" src="/static/index/img/section-5-chapter-3.png" alt="" width="100%">
+                      <img class="image-1-2 animated hidden" src="/static/index/img/section-5-chapter-4.png"  alt="" width="100%">
+                      <img class="image-1-3 animated hidden" src="/static/index/img/section-5-chapter-5.png" alt="" width="100%">
                     </div>
                     <div class="image-2">
-                      <img class="animated" src="/static/img/section-5-chapter-2.png" alt="" width="100%">
+                      <img class="animated" src="/static/index/img/section-5-chapter-2.png" alt="" width="100%">
                     </div>
                   </div>
                 </div>
@@ -254,12 +197,11 @@
     <div class="ui inverted vertical stripe segment section-6">
       <div class="ui container fluid">
         <div class="image-with-description">
-          <img src="/static/img/section-6-chapter-1.jpg" class="image-1" width="100%" alt="">
+          <img src="/static/index/img/section-6-chapter-1.jpg" class="image-1" width="100%" alt="">
           <div class="description">
               <h1 class="ui header inverted">Попробуйте сами!</h1>
-              <a href="" class="ui button default big">Купить продукцию</a>
+              <a href="/shop" class="ui button default big">Купить продукцию</a>
           </div>
-          
         </div>
       </div>
     </div>
@@ -317,10 +259,6 @@
       </div>
     </div>
   </div>
-  <script src="/static/jquery-3.3.1.min.js"></script>
-  <script src="/static/semantic/dist/semantic.min.js"></script>
-  <script src="/static/parallax/parallax.min.js"></script>
-  <script src="/static/scrollreveal/dist/scrollreveal.min.js"></script>
-  <script src="/static/script.js"></script>
+  <script src="/static/dist/app.index.js"></script>
 </body>
 </html>

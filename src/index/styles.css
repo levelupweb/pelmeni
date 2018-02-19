@@ -1,5 +1,5 @@
 .pusher {
-  background:url('/static/img/background-section-2.jpg') repeat-y!important;
+  background:url('/static/index/img/background-section-2.jpg') repeat-y!important;
 }
 
 p.lead {
@@ -176,35 +176,6 @@ p.lead.small {
 .layer {
   width:100%;
   height:100%;
-}
-
-.main-background > * {
-  width:100%;
-  display:none;
-}
-
-@media screen and (max-width:1200px) {
-  .main-background > * {
-    width:140%;
-    margin-left:-10%;
-    margin-top:-10%;
-  }
-}
-
-@media screen and (max-width:835px) {
-  .main-background > * {
-    width:170%;
-    margin-left:-20%;
-    margin-top:-10%;
-  }
-}
-
-@media screen and (max-width:472px) {
-  .main-background > * {
-    width:250%;
-    margin-left:-30%;
-    margin-top:-10%;
-  }
 }
 
 .chapter-1 {
