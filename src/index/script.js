@@ -1,6 +1,7 @@
 import ScrollReveal from "scrollreveal";
 import Parallax from "parallax-js";
-import "../semantic/dist/components/visibility";
+import "../dist/semantic/dist/components/visibility";
+import renderForm from "./components/index";
 
 $(document).ready(() => {
     window.sr = ScrollReveal();
@@ -131,6 +132,8 @@ $(document).ready(() => {
 
     var scene5 = document.getElementById('scene-5');
     var parallaxInstance5 = new Parallax(scene5, sceneOptions);
+
+    renderForm();
 
   })
 ;

@@ -39,8 +39,6 @@ p.lead.small {
   position: absolute;
 }
 
-.stripe {
-}
 
 .stripe .section-content {
   position: absolute;
@@ -99,9 +97,10 @@ p.lead.small {
 .ui.vertical.stripe {
   display: flex;
   justify-content: center;
-  align-items:center;
-  height: 100vh;
-  max-height: 1000px;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 0em;
+  padding-bottom: 4em;
   flex-direction: column;
 }
 .ui.vertical.stripe.section-1 {

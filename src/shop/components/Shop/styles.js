@@ -12,5 +12,9 @@ export default {
     width: "100%",
     textAlign: "center",
     padding:"8px 0"
+  },
+  content: {
+    margin: "25px 0",
+    textAlign: "left"
   }
 }

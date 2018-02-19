@@ -95,7 +95,7 @@ export default class Form extends React.Component {
             <label>Контактный телефон</label>
             <input value={phone} onChange={this.handleForm} type="tel" name="phone" placeholder="+7" />
           </div>
-          <button className="ui button" type="submit">Отправить</button>
+          <button className="ui button big" type="submit">Отправить</button>
         </form>
       </div>
     )

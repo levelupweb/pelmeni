@@ -76,10 +76,52 @@ app.post("/send", (req, res) => {
     }]
   };
 
-  console.log(message);
+  return emailserver.send(message, (err, message) => {
+    if (err) return res.status(500).send(err);
+    return res.status(200).json({ isSended: true });
+  });
+})
+
+const getErrorsFeedback = data => Object.keys(data).reduce((prev, curr) => {
+  console.log(prev);
+  if (curr === "email" && !validateEmail(data[curr])) return [...prev, "Неверный формат e-mail адреса"];
+  if (curr === "message" && (data[curr].length < 10 && data[curr].length > 1000)) return [...prev, "Сообщение не может быть меньше 10 и больше 1000 символов"];
+  if (curr === "name" && (data[curr].length < 2 && data[curr].length > 50)) return [...prev, "Имя не может быть меньше 2 и больше 50 символов"]
+  return prev;
+}, []);
+
+const generateHtmlFeedback = data => `
+  <html><body>
+    <h1>Обратная связь с сайта Klassnye.com</h1>
+    <p>С сайта Klassnye.com поступило новое сообщение</p>
+    <p>Клиент оставил следующую информацию о себе:</p>
+    <ul>
+      <li>Имя клиента: ${data.name}</li>
+      <li>E-mail или телефон: ${data.contact}</li>
+    </ul>
+    <p>Сообщение:</p>
+    <p>${data.message}</p>
+  </body></html>
+`;
+
+app.post("/feedback", (req, res) => {
+  const data = req.body; 
+  const errors = getErrorsFeedback(data);
+
+  if (errors.length > 0) return res.status(422).json(errors);
+
+  const message	= {
+    text: "Обратная связь",
+    from: process.env.SMTP_USER,
+    to: "<" + process.env.SMTP_USER + ">",
+    subject: "Обратная связь с сайта Klassnye.com",
+    attachment: [ {
+      data: generateHtmlFeedback(req.body),
+      alternative: true
+    }]
+  };
 
   return emailserver.send(message, (err, message) => {
-    console.log(err);
     if (err) return res.status(500).send(err);
     return res.status(200).json({ isSended: true });
   });

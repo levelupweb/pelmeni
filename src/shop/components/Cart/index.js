@@ -13,7 +13,7 @@ export default class Cart extends React.Component {
           </h3>
         </td>
         <td>{item.amount} шт.</td>
-        <td>{item.weight * item.amount} гр. </td>
+        <td>{item.weight}</td>
         <td>{item.total} руб.</td>
       </tr>
     ))
