@@ -59,7 +59,7 @@ p.lead.small {
 
 @media screen and (max-width: 900px) {
   .stripe h1.header {
-    font-size:30px;
+    font-size:40px;
   }
 }
 
@@ -84,11 +84,7 @@ p.lead.small {
   font-size: 4em;
   font-weight: normal;
 }
-@media screen and (max-width: 900px) {
-  .masthead h1.ui.header {
-    margin-top:8em;
-  }
-}
+
 .masthead h2 {
   font-size: 1.7em;
   font-weight: normal;
@@ -137,30 +133,6 @@ p.lead.small {
 
 .secondary.pointing.menu .toc.item {
   display: none;
-}
-
-@media only screen and (max-width: 700px) {
-  .ui.fixed.menu {
-    display: none !important;
-  }
-  .secondary.pointing.menu .item,
-  .secondary.pointing.menu .menu {
-    display: none;
-  }
-  .secondary.pointing.menu .toc.item {
-    display: block;
-  }
-  .masthead.segment {
-    min-height: 400px;
-  }
-  .masthead h1.ui.header {
-    font-size: 2em;
-    margin-top: 3.5em;
-  }
-  .masthead h2 {
-    margin-top: 0.5em;
-    font-size: 1.5em;
-  }
 }
 
 #scene {
@@ -268,7 +240,7 @@ p.lead.small {
 
 @media screen and (max-width: 900px) {
   .jumbotron .primary-header {
-    font-size:30px!important;
+    font-size:50px!important;
   }
 }
 
@@ -437,4 +409,48 @@ p.lead.small {
   transform: rotate(0deg) scale(0.3);
   width:200px;
   height:200px;
+}
+
+@media screen and (max-width:900px) {
+  .section-4 .visual-custom-1,
+  .section-1 .chapter-2,
+  .section-1 .chapter-10,
+  .section-1 .chapter-11 {
+    display:none!important;
+  }
+}
+
+@media screen and (max-width:800px) {
+  .section-1 .chapter-4,
+  .section-1 .chapter-6 {
+    display:none!important;
+  }
+}
+
+@media screen and (max-width:700px) {
+  .section-content {
+    position: relative!important;
+  }
+
+  .ui.vertical.stripe.section-1 {
+    padding-top: 8em!important;
+  }
+  .ui.vertical.stripe {
+    min-height:auto!important;
+    padding-top:3em!important;
+    padding-bottom:3em!important;
+  }
+
+  .section-2 .visual-custom-1,
+  .geometry {
+    display:none!important;
+  }
+
+  .section-2 .images > * {
+    width:100%!important;
+    position: relative!important;
+  }
+  .section-2 .images > .image-2 {
+    display:none!important;
+  }
 }

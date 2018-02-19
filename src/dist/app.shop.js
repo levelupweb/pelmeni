@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 62);
+/******/ 	return __webpack_require__(__webpack_require__.s = 64);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -23207,7 +23207,9 @@ module.exports = function spread(callback) {
 /* 59 */,
 /* 60 */,
 /* 61 */,
-/* 62 */
+/* 62 */,
+/* 63 */,
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23217,7 +23219,7 @@ var _parallaxJs = __webpack_require__(24);
 
 var _parallaxJs2 = _interopRequireDefault(_parallaxJs);
 
-var _index = __webpack_require__(63);
+var _index = __webpack_require__(65);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -23233,7 +23235,7 @@ $(document).ready(function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
 
 /***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23251,7 +23253,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Shop = __webpack_require__(64);
+var _Shop = __webpack_require__(66);
 
 var _Shop2 = _interopRequireDefault(_Shop);
 
@@ -23260,7 +23262,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _reactDom2.default.render(_react2.default.createElement(_Shop2.default, null), document.getElementById('shop'));
 
 /***/ }),
-/* 64 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23276,47 +23278,47 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Header = __webpack_require__(65);
+var _Header = __webpack_require__(67);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Jumbotron = __webpack_require__(66);
+var _Jumbotron = __webpack_require__(68);
 
 var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
 
-var _Divider = __webpack_require__(67);
+var _Divider = __webpack_require__(69);
 
 var _Divider2 = _interopRequireDefault(_Divider);
 
-var _CardList = __webpack_require__(68);
+var _CardList = __webpack_require__(70);
 
 var _CardList2 = _interopRequireDefault(_CardList);
 
-var _Checkout = __webpack_require__(72);
+var _Checkout = __webpack_require__(74);
 
 var _Checkout2 = _interopRequireDefault(_Checkout);
 
-var _Navigation = __webpack_require__(75);
+var _Navigation = __webpack_require__(77);
 
 var _Navigation2 = _interopRequireDefault(_Navigation);
 
-var _Success = __webpack_require__(76);
+var _Success = __webpack_require__(78);
 
 var _Success2 = _interopRequireDefault(_Success);
 
-var _Form = __webpack_require__(78);
+var _Form = __webpack_require__(80);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _Steps = __webpack_require__(79);
+var _Steps = __webpack_require__(81);
 
 var _Steps2 = _interopRequireDefault(_Steps);
 
-var _styles = __webpack_require__(80);
+var _styles = __webpack_require__(82);
 
 var _styles2 = _interopRequireDefault(_styles);
 
-var _data = __webpack_require__(81);
+var _data = __webpack_require__(83);
 
 var _data2 = _interopRequireDefault(_data);
 
@@ -23480,7 +23482,7 @@ var Shop = function (_Component) {
 exports.default = Shop;
 
 /***/ }),
-/* 65 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23518,7 +23520,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23554,7 +23556,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23582,7 +23584,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23598,11 +23600,11 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styles = __webpack_require__(69);
+var _styles = __webpack_require__(71);
 
 var _styles2 = _interopRequireDefault(_styles);
 
-var _Card = __webpack_require__(70);
+var _Card = __webpack_require__(72);
 
 var _Card2 = _interopRequireDefault(_Card);
 
@@ -23671,7 +23673,7 @@ var CardList = function (_React$Component) {
 exports.default = CardList;
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23687,7 +23689,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23703,7 +23705,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styles = __webpack_require__(71);
+var _styles = __webpack_require__(73);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -23931,7 +23933,7 @@ var Card = function (_React$Component) {
 exports.default = Card;
 
 /***/ }),
-/* 71 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23961,7 +23963,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 72 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23977,7 +23979,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Cart = __webpack_require__(73);
+var _Cart = __webpack_require__(75);
 
 var _Cart2 = _interopRequireDefault(_Cart);
 
@@ -24032,7 +24034,7 @@ var Checkout = function (_React$Component) {
 exports.default = Checkout;
 
 /***/ }),
-/* 73 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24048,7 +24050,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styles = __webpack_require__(74);
+var _styles = __webpack_require__(76);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -24202,7 +24204,7 @@ var Cart = function (_React$Component) {
 exports.default = Cart;
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24231,7 +24233,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 75 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24314,7 +24316,7 @@ var Navigation = function (_React$Component) {
 exports.default = Navigation;
 
 /***/ }),
-/* 76 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24328,7 +24330,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styles = __webpack_require__(77);
+var _styles = __webpack_require__(79);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -24359,7 +24361,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 77 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24376,7 +24378,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 78 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24579,7 +24581,7 @@ var Form = function (_React$Component) {
 exports.default = Form;
 
 /***/ }),
-/* 79 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24689,7 +24691,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 80 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24720,7 +24722,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 81 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

@@ -23216,16 +23216,24 @@ var _parallaxJs = __webpack_require__(24);
 
 var _parallaxJs2 = _interopRequireDefault(_parallaxJs);
 
-__webpack_require__(59);
+var _imagesloaded = __webpack_require__(59);
 
-var _index = __webpack_require__(60);
+var _imagesloaded2 = _interopRequireDefault(_imagesloaded);
+
+__webpack_require__(61);
+
+var _index = __webpack_require__(62);
 
 var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 $(document).ready(function () {
-    window.sr = (0, _scrollreveal2.default)();
+  window.sr = (0, _scrollreveal2.default)();
+
+  (0, _imagesloaded2.default)('.section-1', function () {
+    $('#main').fadeIn(500);
+    $('#preview').fadeOut(500);
 
     var sceneOptions = { relativeInput: true };
 
@@ -23257,104 +23265,119 @@ $(document).ready(function () {
     sr.reveal('.section-4 .image-2', { duration: 500, delay: 1000, origin: "bottom" });
 
     sr.reveal('.section-5 img', { duration: 500, delay: 300, origin: "bottom" }, 100);
+    sr.reveal('.section-6 img', { duration: 500, delay: 300, origin: "bottom" });
+    sr.reveal('.section-6 .description > *', { duration: 500, delay: 700, origin: "bottom" }, 200);
 
     $('.section-1').visibility({
-        once: false,
-        continuous: true,
-        onPassing: function onPassing(calculations) {
-            var offset = calculations.percentagePassed * 400;
-            $('.section-1 .visuals-head .layer .chapter-9').css('transform', 'scale(' + (calculations.percentagePassed + 0.8) + ')');
-            $('.section-2 .visuals-head .visual-default img').css('margin-top', offset);
-            $('.section-2 .visuals-head .visual-rotation .geometry').css('transform', 'rotate(' + offset / 4 + 'deg) scale(' + offset / 400 + ')');
-            $('.section-2 .visuals-head .visual-custom-1 img').css({ 'top': 400 - offset, 'opacity': calculations.percentagePassed });
-            $('.section-2 .visuals-head .visual-custom-2 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')', 'opacity': calculations.percentagePassed });
-            $('.section-1 .section-content, .section-1 .visuals-head').css('bottom', offset);
-        }
+      once: false,
+      continuous: true,
+      onPassing: function onPassing(calculations) {
+        var offset = calculations.percentagePassed * 400;
+        $('.section-1 .visuals-head .layer .chapter-9').css('transform', 'scale(' + (calculations.percentagePassed + 0.8) + ')');
+        $('.section-2 .visuals-head .visual-default img').css('margin-top', offset);
+        $('.section-2 .visuals-head .visual-rotation .geometry').css('transform', 'rotate(' + offset / 4 + 'deg) scale(' + offset / 400 + ')');
+        $('.section-2 .visuals-head .visual-custom-1 img').css({ 'top': 400 - offset, 'opacity': calculations.percentagePassed });
+        $('.section-2 .visuals-head .visual-custom-2 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')', 'opacity': calculations.percentagePassed });
+        $('.section-1 .section-content, .section-1 .visuals-head').css('bottom', offset);
+      }
     });
 
     $('.section-2').visibility({
-        once: false,
-        continuous: true,
-        onPassing: function onPassing(calculations) {
-            var offset = calculations.percentagePassed * 400;
-            $('.section-2 .images .image-2').css('margin-top', offset * 1.5);
-            $('.section-2 .images .image-2 img').css({ 'margin-right': offset * 0.6, 'opacity': 1 - calculations.percentagePassed });
-            $('.section-3 .visuals-head .visual-custom-1 img, .section-3 .visuals-head .visual-custom-2 img').css('left', calculations.percentagePassed * 40 + "%");
-            $('.section-3 .visuals-head .visual-custom-5 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')' });
-            $('.section-2 .visuals-head .visual-custom-6 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')' });
-            $('.section-2 .section-content').css('bottom', offset);
-        }
+      once: false,
+      continuous: true,
+      onPassing: function onPassing(calculations) {
+        var offset = calculations.percentagePassed * 400;
+        $('.section-2 .images .image-2').css('margin-top', offset * 1.5);
+        $('.section-2 .images .image-2 img').css({ 'margin-right': offset * 0.6, 'opacity': 1 - calculations.percentagePassed });
+        $('.section-3 .visuals-head .visual-custom-1 img, .section-3 .visuals-head .visual-custom-2 img').css('left', calculations.percentagePassed * 40 + "%");
+        $('.section-3 .visuals-head .visual-custom-5 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')' });
+        $('.section-2 .visuals-head .visual-custom-6 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')' });
+        $('.section-2 .section-content').css('bottom', offset);
+      }
     });
 
     var scene2 = document.getElementById('scene-2');
     var parallaxInstance2 = new _parallaxJs2.default(scene2, sceneOptions);
 
     $('.section-3').visibility({
-        once: false,
-        continuous: true,
-        onPassing: function onPassing(calculations) {
-            var offset = calculations.percentagePassed * 400;
-            $('.section-4 .visuals-head .visual-default img').css('left', calculations.percentagePassed * 40 + "%");
-            $('.section-4 .visuals-head .visual-custom-4 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')' });
-            $('.section-4 .images .image-2').css('margin-top', offset * 0.3);
-            $('.section-3 .section-content').css('bottom', offset);
-        },
-        onBottomVisible: function onBottomVisible() {
-            $('.section-3 .visuals-head .visual-custom-1 img').addClass('hidden');
-            $('.section-3 .visuals-head .visual-custom-2 img').removeClass('hidden');
-        },
-        onTopVisible: function onTopVisible() {
-            $('.section-3 .visuals-head .visual-custom-1 img').removeClass('hidden');
-            $('.section-3 .visuals-head .visual-custom-2 img').addClass('hidden');
-        }
+      once: false,
+      continuous: true,
+      onPassing: function onPassing(calculations) {
+        var offset = calculations.percentagePassed * 400;
+        $('.section-4 .visuals-head .visual-default img').css('left', calculations.percentagePassed * 40 + "%");
+        $('.section-4 .visuals-head .visual-custom-4 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')' });
+        $('.section-4 .images .image-2').css('margin-top', offset * 0.3);
+        $('.section-3 .section-content').css('bottom', offset);
+      },
+      onBottomVisible: function onBottomVisible() {
+        $('.section-3 .visuals-head .visual-custom-1 img').addClass('hidden');
+        $('.section-3 .visuals-head .visual-custom-2 img').removeClass('hidden');
+      },
+      onTopVisible: function onTopVisible() {
+        $('.section-3 .visuals-head .visual-custom-1 img').removeClass('hidden');
+        $('.section-3 .visuals-head .visual-custom-2 img').addClass('hidden');
+      }
     });
 
     var scene3 = document.getElementById('scene-3');
     var parallaxInstance3 = new _parallaxJs2.default(scene3, sceneOptions);
 
     $('.section-4').visibility({
-        once: false,
-        continuous: true,
-        onPassing: function onPassing(calculations) {
-            var offset = calculations.percentagePassed * 400;
-            $('.section-5 .visuals-head .visual-custom-2 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')' });
-            $('.section-4 .images .image-1').css('margin-top', offset * 0.5);
-            $('.section-4 .section-content').css('bottom', offset);
-        },
-        onBottomVisible: function onBottomVisible() {
-            $('.section-4 .images .image-1-1').addClass('hidden');
-            $('.section-4 .images .image-1-2').removeClass('hidden');
-        },
-        onTopVisible: function onTopVisible() {
-            $('.section-4 .images .image-1-1').removeClass('hidden');
-            $('.section-4 .images .image-1-2').addClass('hidden');
-        }
+      once: false,
+      continuous: true,
+      onPassing: function onPassing(calculations) {
+        var offset = calculations.percentagePassed * 400;
+        $('.section-5 .visuals-head .visual-custom-2 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')' });
+        $('.section-4 .images .image-1').css('margin-top', offset * 0.5);
+        $('.section-4 .section-content').css('bottom', offset);
+      },
+      onBottomVisible: function onBottomVisible() {
+        $('.section-4 .images .image-1-1').addClass('hidden');
+        $('.section-4 .images .image-1-2').removeClass('hidden');
+      },
+      onTopVisible: function onTopVisible() {
+        $('.section-4 .images .image-1-1').removeClass('hidden');
+        $('.section-4 .images .image-1-2').addClass('hidden');
+      }
     });
 
     var scene4 = document.getElementById('scene-4');
     var parallaxInstance4 = new _parallaxJs2.default(scene4, sceneOptions);
 
     $('.section-5').visibility({
-        once: false,
-        continuous: true,
-        onPassing: function onPassing(calculations) {
-            var offset = calculations.percentagePassed * 400;
-            $('.section-5 .section-content, .section-5 .visuals-head').css('bottom', offset);
-        },
-        onBottomVisible: function onBottomVisible() {
-            $('.section-5 .images .image-1 > *').removeClass('visible');
-            $('.section-5 .images .image-1 .image-1-3').addClass('visible');
-        },
-        onTopVisible: function onTopVisible() {
-            $('.section-5 .images .image-1 > *').removeClass('visible');
-            $('.section-5 .images .image-1 .image-1-2').addClass('visible');
-        }
+      once: false,
+      continuous: true,
+      onPassing: function onPassing(calculations) {
+        var offset = calculations.percentagePassed * 400;
+        $('.section-5 .section-content, .section-5 .visuals-head').css('bottom', offset);
+      },
+      onBottomVisible: function onBottomVisible() {
+        $('.section-5 .images .image-1 > *').removeClass('visible');
+        $('.section-5 .images .image-1 .image-1-3').addClass('visible');
+      },
+      onTopVisible: function onTopVisible() {
+        $('.section-5 .images .image-1 > *').removeClass('visible');
+        $('.section-5 .images .image-1 .image-1-2').addClass('visible');
+      }
+    });
+
+    $('.section-6').visibility({
+      once: false,
+      continuous: true,
+      onPassing: function onPassing(calculations) {
+        var offset = calculations.percentagePassed * 400;
+        $('.section-contact .visuals-head .visual-custom-2 img').css({ 'transform': 'scale(' + (calculations.percentagePassed + 0.5) + ')' });
+      }
     });
 
     var scene5 = document.getElementById('scene-5');
     var parallaxInstance5 = new _parallaxJs2.default(scene5, sceneOptions);
 
+    var scene6 = document.getElementById('scene-6');
+    var parallaxInstance6 = new _parallaxJs2.default(scene6, sceneOptions);
+
     (0, _index2.default)();
+  });
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
 
@@ -24227,6 +24250,512 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/////    /////    /////    /////
 
 /***/ }),
 /* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * imagesLoaded v4.1.4
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+( function( window, factory ) { 'use strict';
+  // universal module definition
+
+  /*global define: false, module: false, require: false */
+
+  if ( true ) {
+    // AMD
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+      __webpack_require__(60)
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( EvEmitter ) {
+      return factory( window, EvEmitter );
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('ev-emitter')
+    );
+  } else {
+    // browser global
+    window.imagesLoaded = factory(
+      window,
+      window.EvEmitter
+    );
+  }
+
+})( typeof window !== 'undefined' ? window : this,
+
+// --------------------------  factory -------------------------- //
+
+function factory( window, EvEmitter ) {
+
+'use strict';
+
+var $ = window.jQuery;
+var console = window.console;
+
+// -------------------------- helpers -------------------------- //
+
+// extend objects
+function extend( a, b ) {
+  for ( var prop in b ) {
+    a[ prop ] = b[ prop ];
+  }
+  return a;
+}
+
+var arraySlice = Array.prototype.slice;
+
+// turn element or nodeList into an array
+function makeArray( obj ) {
+  if ( Array.isArray( obj ) ) {
+    // use object if already an array
+    return obj;
+  }
+
+  var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
+  if ( isArrayLike ) {
+    // convert nodeList to array
+    return arraySlice.call( obj );
+  }
+
+  // array of single index
+  return [ obj ];
+}
+
+// -------------------------- imagesLoaded -------------------------- //
+
+/**
+ * @param {Array, Element, NodeList, String} elem
+ * @param {Object or Function} options - if function, use as callback
+ * @param {Function} onAlways - callback function
+ */
+function ImagesLoaded( elem, options, onAlways ) {
+  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
+  if ( !( this instanceof ImagesLoaded ) ) {
+    return new ImagesLoaded( elem, options, onAlways );
+  }
+  // use elem as selector string
+  var queryElem = elem;
+  if ( typeof elem == 'string' ) {
+    queryElem = document.querySelectorAll( elem );
+  }
+  // bail if bad element
+  if ( !queryElem ) {
+    console.error( 'Bad element for imagesLoaded ' + ( queryElem || elem ) );
+    return;
+  }
+
+  this.elements = makeArray( queryElem );
+  this.options = extend( {}, this.options );
+  // shift arguments if no options set
+  if ( typeof options == 'function' ) {
+    onAlways = options;
+  } else {
+    extend( this.options, options );
+  }
+
+  if ( onAlways ) {
+    this.on( 'always', onAlways );
+  }
+
+  this.getImages();
+
+  if ( $ ) {
+    // add jQuery Deferred object
+    this.jqDeferred = new $.Deferred();
+  }
+
+  // HACK check async to allow time to bind listeners
+  setTimeout( this.check.bind( this ) );
+}
+
+ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
+
+ImagesLoaded.prototype.options = {};
+
+ImagesLoaded.prototype.getImages = function() {
+  this.images = [];
+
+  // filter & find items if we have an item selector
+  this.elements.forEach( this.addElementImages, this );
+};
+
+/**
+ * @param {Node} element
+ */
+ImagesLoaded.prototype.addElementImages = function( elem ) {
+  // filter siblings
+  if ( elem.nodeName == 'IMG' ) {
+    this.addImage( elem );
+  }
+  // get background image on element
+  if ( this.options.background === true ) {
+    this.addElementBackgroundImages( elem );
+  }
+
+  // find children
+  // no non-element nodes, #143
+  var nodeType = elem.nodeType;
+  if ( !nodeType || !elementNodeTypes[ nodeType ] ) {
+    return;
+  }
+  var childImgs = elem.querySelectorAll('img');
+  // concat childElems to filterFound array
+  for ( var i=0; i < childImgs.length; i++ ) {
+    var img = childImgs[i];
+    this.addImage( img );
+  }
+
+  // get child background images
+  if ( typeof this.options.background == 'string' ) {
+    var children = elem.querySelectorAll( this.options.background );
+    for ( i=0; i < children.length; i++ ) {
+      var child = children[i];
+      this.addElementBackgroundImages( child );
+    }
+  }
+};
+
+var elementNodeTypes = {
+  1: true,
+  9: true,
+  11: true
+};
+
+ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
+  var style = getComputedStyle( elem );
+  if ( !style ) {
+    // Firefox returns null if in a hidden iframe https://bugzil.la/548397
+    return;
+  }
+  // get url inside url("...")
+  var reURL = /url\((['"])?(.*?)\1\)/gi;
+  var matches = reURL.exec( style.backgroundImage );
+  while ( matches !== null ) {
+    var url = matches && matches[2];
+    if ( url ) {
+      this.addBackground( url, elem );
+    }
+    matches = reURL.exec( style.backgroundImage );
+  }
+};
+
+/**
+ * @param {Image} img
+ */
+ImagesLoaded.prototype.addImage = function( img ) {
+  var loadingImage = new LoadingImage( img );
+  this.images.push( loadingImage );
+};
+
+ImagesLoaded.prototype.addBackground = function( url, elem ) {
+  var background = new Background( url, elem );
+  this.images.push( background );
+};
+
+ImagesLoaded.prototype.check = function() {
+  var _this = this;
+  this.progressedCount = 0;
+  this.hasAnyBroken = false;
+  // complete if no images
+  if ( !this.images.length ) {
+    this.complete();
+    return;
+  }
+
+  function onProgress( image, elem, message ) {
+    // HACK - Chrome triggers event before object properties have changed. #83
+    setTimeout( function() {
+      _this.progress( image, elem, message );
+    });
+  }
+
+  this.images.forEach( function( loadingImage ) {
+    loadingImage.once( 'progress', onProgress );
+    loadingImage.check();
+  });
+};
+
+ImagesLoaded.prototype.progress = function( image, elem, message ) {
+  this.progressedCount++;
+  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
+  // progress event
+  this.emitEvent( 'progress', [ this, image, elem ] );
+  if ( this.jqDeferred && this.jqDeferred.notify ) {
+    this.jqDeferred.notify( this, image );
+  }
+  // check if completed
+  if ( this.progressedCount == this.images.length ) {
+    this.complete();
+  }
+
+  if ( this.options.debug && console ) {
+    console.log( 'progress: ' + message, image, elem );
+  }
+};
+
+ImagesLoaded.prototype.complete = function() {
+  var eventName = this.hasAnyBroken ? 'fail' : 'done';
+  this.isComplete = true;
+  this.emitEvent( eventName, [ this ] );
+  this.emitEvent( 'always', [ this ] );
+  if ( this.jqDeferred ) {
+    var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
+    this.jqDeferred[ jqMethod ]( this );
+  }
+};
+
+// --------------------------  -------------------------- //
+
+function LoadingImage( img ) {
+  this.img = img;
+}
+
+LoadingImage.prototype = Object.create( EvEmitter.prototype );
+
+LoadingImage.prototype.check = function() {
+  // If complete is true and browser supports natural sizes,
+  // try to check for image status manually.
+  var isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    // report based on naturalWidth
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    return;
+  }
+
+  // If none of the checks above matched, simulate loading on detached element.
+  this.proxyImage = new Image();
+  this.proxyImage.addEventListener( 'load', this );
+  this.proxyImage.addEventListener( 'error', this );
+  // bind to image as well for Firefox. #191
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.proxyImage.src = this.img.src;
+};
+
+LoadingImage.prototype.getIsImageComplete = function() {
+  // check for non-zero, non-undefined naturalWidth
+  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
+  return this.img.complete && this.img.naturalWidth;
+};
+
+LoadingImage.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.img, message ] );
+};
+
+// ----- events ----- //
+
+// trigger specified handler for event type
+LoadingImage.prototype.handleEvent = function( event ) {
+  var method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+LoadingImage.prototype.onload = function() {
+  this.confirm( true, 'onload' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.onerror = function() {
+  this.confirm( false, 'onerror' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.unbindEvents = function() {
+  this.proxyImage.removeEventListener( 'load', this );
+  this.proxyImage.removeEventListener( 'error', this );
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+// -------------------------- Background -------------------------- //
+
+function Background( url, element ) {
+  this.url = url;
+  this.element = element;
+  this.img = new Image();
+}
+
+// inherit LoadingImage prototype
+Background.prototype = Object.create( LoadingImage.prototype );
+
+Background.prototype.check = function() {
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.img.src = this.url;
+  // check if image is already complete
+  var isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    this.unbindEvents();
+  }
+};
+
+Background.prototype.unbindEvents = function() {
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+Background.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.element, message ] );
+};
+
+// -------------------------- jQuery -------------------------- //
+
+ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
+  jQuery = jQuery || window.jQuery;
+  if ( !jQuery ) {
+    return;
+  }
+  // set local variable
+  $ = jQuery;
+  // $().imagesLoaded()
+  $.fn.imagesLoaded = function( options, callback ) {
+    var instance = new ImagesLoaded( this, options, callback );
+    return instance.jqDeferred.promise( $(this) );
+  };
+};
+// try making plugin
+ImagesLoaded.makeJQueryPlugin();
+
+// --------------------------  -------------------------- //
+
+return ImagesLoaded;
+
+});
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+ * EvEmitter v1.1.0
+ * Lil' event emitter
+ * MIT License
+ */
+
+/* jshint unused: true, undef: true, strict: true */
+
+( function( global, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, window */
+  if ( true ) {
+    // AMD - RequireJS
+    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory();
+  } else {
+    // Browser globals
+    global.EvEmitter = factory();
+  }
+
+}( typeof window != 'undefined' ? window : this, function() {
+
+"use strict";
+
+function EvEmitter() {}
+
+var proto = EvEmitter.prototype;
+
+proto.on = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // set events hash
+  var events = this._events = this._events || {};
+  // set listeners array
+  var listeners = events[ eventName ] = events[ eventName ] || [];
+  // only add once
+  if ( listeners.indexOf( listener ) == -1 ) {
+    listeners.push( listener );
+  }
+
+  return this;
+};
+
+proto.once = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // add event
+  this.on( eventName, listener );
+  // set once flag
+  // set onceEvents hash
+  var onceEvents = this._onceEvents = this._onceEvents || {};
+  // set onceListeners object
+  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+  // set flag
+  onceListeners[ listener ] = true;
+
+  return this;
+};
+
+proto.off = function( eventName, listener ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  var index = listeners.indexOf( listener );
+  if ( index != -1 ) {
+    listeners.splice( index, 1 );
+  }
+
+  return this;
+};
+
+proto.emitEvent = function( eventName, args ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice(0);
+  args = args || [];
+  // once stuff
+  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+  for ( var i=0; i < listeners.length; i++ ) {
+    var listener = listeners[i]
+    var isOnce = onceListeners && onceListeners[ listener ];
+    if ( isOnce ) {
+      // remove listener
+      // remove before trigger to prevent recursion
+      this.off( eventName, listener );
+      // unset once flag
+      delete onceListeners[ listener ];
+    }
+    // trigger listener
+    listener.apply( this, args );
+  }
+
+  return this;
+};
+
+proto.allOff = function() {
+  delete this._events;
+  delete this._onceEvents;
+};
+
+return EvEmitter;
+
+}));
+
+
+/***/ }),
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25367,7 +25896,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/////    /////    /////    /////
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25385,7 +25914,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Form = __webpack_require__(61);
+var _Form = __webpack_require__(63);
 
 var _Form2 = _interopRequireDefault(_Form);
 
@@ -25396,7 +25925,7 @@ var node = document.getElementById('contact');
 exports.default = _reactDom2.default.render(_react2.default.createElement(_Form2.default, null), node);
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
