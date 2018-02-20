@@ -1,5 +1,9 @@
-.visuals-head {
+.pusher {
   background:url('/static/index/img/background-section-2.jpg') repeat-y!important;
+  background-size: 100% auto!important;
+  width: 100%;
+  background-color: #111;
+  overflow-x: hidden;
 }
 
 p.lead {
@@ -60,7 +64,7 @@ p.lead.small {
   justify-content: center;
   align-items:center;
   padding-top: 8em;
-    padding-bottom: 8em;
+  padding-bottom: 2em;
 }
 
 .stripe h1.header {
@@ -224,4 +228,15 @@ p.lead.small {
 .grid .card .amount {
   margin-left:15px;
   font-size:18px;
+}
+
+@media screen and (max-width:700px) {
+  .visuals-head,
+  .ui.steps {
+    display:none!important;
+  }
+  p.lead.small,
+  p.lead {
+    font-size:18px!important;
+  }
 }

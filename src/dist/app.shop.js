@@ -23228,8 +23228,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var options = { relativeInput: true };
 
 $(document).ready(function () {
-  var scene = document.getElementById('scene');
-  var parallaxInstance = new _parallaxJs2.default(scene, options);
+  if (window.innerWidth > 700) {
+    var scene = document.getElementById('scene');
+    var parallaxInstance = new _parallaxJs2.default(scene, options);
+  }
   (0, _index2.default)();
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))

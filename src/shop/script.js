@@ -4,7 +4,9 @@ import renderApp from "./components/index";
 const options = { relativeInput: true };
 
 $(document).ready(() => {
-  const scene = document.getElementById('scene');
-  const parallaxInstance = new Parallax(scene, options);
+  if (window.innerWidth > 700) {
+    const scene = document.getElementById('scene');
+    const parallaxInstance = new Parallax(scene, options);
+  }
   renderApp();
 });
