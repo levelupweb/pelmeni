@@ -1,3 +1,8 @@
+html, body {
+  background-color: #111!important;
+  background:#111!important;
+}
+
 .pusher {
   background:url('/static/index/img/background-section-2.jpg') repeat-y!important;
   background-size: 100% auto!important;
