@@ -257,3 +257,32 @@ p.lead.small {
   align-items: center!important;
   height:100%;
 }
+
+.catalog-list .photos {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top:30px;
+}
+
+.catalog-list .photos .photos-item {
+  border-radius:100%;
+  background:#fff;
+  padding:20px;
+  width:100px;
+  height:100px;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
+  color:#000;
+  overflow:hidden;
+  text-align:center;
+  margin-bottom:20px;
+  margin-right:20px;
+}
+
+.catalog-list .photos .photos-item img {
+}

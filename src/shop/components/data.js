@@ -67,5 +67,5 @@ export default [{
   weight: "430 гр.",
   price: 150,
   description: "Категория А. В состав входят: охлажденная говядина, свинина, яйцо, хлеб, жир, лук, соль, перец, специи, чеснок",
-  image: "/static/shop/img/koteleti-s-chesnokom.jpg",
+  image: "/static/shop/img/kotleti-s-chesnokom.jpg",
 }]
