@@ -25,46 +25,37 @@
   </div>
   <div class="pusher" id="main" style="display:none">
     <div class="ui inverted vertical masthead center aligned segment section-1 stripe">
-      <div class="visuals-head">
-        <div data-relative-input="true" id="scene">
-          <div class="layer" data-depth="0.3">
-            <img class="chapter-8" src="/static/index/img/background-main-chapter-8.png" width="40%" />
+      <div class="main-menu">
+        <div class="ui container">
+          <div class="ui fluid secondary pointing inverted menu big">
+            <a class="active item">
+              Главная
+            </a>
+            <a class="item" href="/catalog">
+              Каталог продукции
+            </a>
+            <a class="item" class="smooth-scroll" href="#contact">
+              Связаться с нами
+            </a>
+            <div class="right menu">
+              <a class="ui item" href="/shop">
+                Купить продукцию
+              </a>
+            </div>
           </div>
-          <div class="layer" data-depth="0.4">
-            <img class="chapter-9" src="/static/index/img/background-main-chapter-8.png" width="45%" />
-          </div>
-          <div class="layer" data-depth="0.2">
-            <img style="position: absolute;right: -20%;top: -20%;" src="/static/index/img/background-main-chapter-8.png" width="45%" />
-          </div>
-          <div class="layer" data-depth="0.4">
-            <img class="chapter-11" src="/static/index/img/background-main-chapter-8.png" width="45%" />
-          </div>
-          <div class="layer" data-depth="0.1">
-            <img class="chapter-6" src="/static/index/img/background-main-chapter-6.png" width="35%" />
-          </div>
-          <div class="layer" data-depth="0.2">
-            <img src="/static/index/img/pelmeni-all.png" style="position: absolute;right: -15%;top: -15%;" width="36%" />
-          </div>
-          <!-- <div class="layer" data-depth="0.4">
-            <img class="chapter-4" src="/static/index/img/background-main-chapter-4.png" width="50%" />
-          </div> -->
         </div>
       </div>
       <div class="section-content" style="flex-direction:column;justify-content:flex-start">
         <div class="ui container jumbotron">
-          <img src="/static/index/img/logo.png" width="350px" />
-          <div style="display:none" class="ui huge white button big action-button">Купить <i class="right arrow icon"></i></div>
+          <img src="/static/index/img/logo.png" />
         </div>
       </div>
     </div>
   
     <div class="ui inverted vertical stripe segment section-2">
       <div class="visuals-head" id="scene-2">
-        <div class="visual visual-default layer" data-depth="0.1">
-          <img src="/static/index/img/geometry-1.png" alt="">
-        </div>
         <div class="visual visual-rotation layer" data-depth="0.4">
-          <div class="geometry square" style="right:0;bottom:0;position:absolute;"></div>
+          <img src="/static/index/img/pelmeni-2-shadow.png" style="right:0;bottom:-15%;position:absolute;" alt="">
         </div>
         <div class="visual visual-custom-1 layer" data-depth="0">
             <img src="/static/index/img/section-2-chapter-2.png" style="top:0;left:0%;position:absolute;" width="12%" alt="">
@@ -224,7 +215,7 @@
           <img src="/static/index/img/geometry-1.png" alt="">
         </div>
         <div class="visual visual-rotation layer" data-depth="0.4">
-          <div class="geometry square" style="right:0;bottom:0;position:absolute;"></div>
+            <img src="/static/index/img/pelmeni-4.png" style="right:0;bottom:-15%;position:absolute;" alt="">
         </div>
         <div class="visual visual-custom-1 layer" data-depth="0">
             <img src="/static/index/img/section-2-chapter-2.png" style="top:0;left:0%;position:absolute;" width="200px" alt="">
@@ -261,7 +252,8 @@
           <div class="four wide column">
             <h3 class="ui header inverted">
               Разработка
-              <div class="sub header">Разработано в <a style="text-decoration:underline;color:#c0c0c0" href="#">Levelup Worlds</a></div>
+              <div class="sub header">Разработано в <a style="text-decoration:underline;color:#c0c0c0" href="http://levelupworlds.com" target="_blank">Levelup Worlds</a></div>
+              <div class="sub header"><a href="mailto:levelupworlds@gmail.com" style="color:#c0c0c0;">levelupworlds@gmail.com</a></div>
             </h3>
           </div>
         </div>
@@ -269,6 +261,11 @@
     </div>
     <div id="map" class="segment ui vertical" style="padding:0;">
       <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A1006c9c5290236c5f664126172dd6b545207001312caab4ee0a09f499ed2e765&amp;width=100%25&amp;height=623&amp;lang=ru_RU&amp;scroll=true"></script>
+      <div class="action-close">
+        <button class="button ui big">
+          Закрыть карту
+        </button>
+      </div>  
     </div>
   </div>
   <script src="/static/dist/app.index.js"></script>

@@ -14,9 +14,6 @@ $(document).ready(() => {
       const sceneOptions = { relativeInput: true };
 
       if (window.innerWidth > 700) {
-
-        const scene = document.getElementById('scene');
-        const parallaxInstance1 = new Parallax(scene, sceneOptions);
     
         sr.reveal('#scene .layer img', { duration: 500, delay: 100 }, 250);
         sr.reveal('#scene .layer .chapter-2', { duration: 500, delay: 2500, origin: "bottom" });
@@ -53,7 +50,7 @@ $(document).ready(() => {
             $('.section-1 .visuals-head .layer .chapter-11').css('transform', 'scale('+ ((calculations.percentagePassed/3)+1.0)  +')');
             $('.section-1 .visuals-head .layer .chapter-8').css('transform', 'scale('+ ((calculations.percentagePassed/1)+1.0)  +')');
             $('.section-2 .visuals-head .visual-default img').css('margin-top', offset);
-            $('.section-2 .visuals-head .visual-rotation .geometry').css('transform', 'rotate(' + offset/4 + 'deg) scale('+ offset/400 +')');
+            $('.section-2 .visuals-head .visual-rotation img').css('transform', 'rotate(' + offset/2 + 'deg) scale('+ offset/400 +')');
             $('.section-2 .visuals-head .visual-custom-1 img').css({'top': 400-offset});
             $('.section-2 .visuals-head .visual-custom-2 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
             $('.section-1 .section-content').css('top', -offset);
@@ -210,6 +207,34 @@ $(document).ready(() => {
           scrollTop: map.offset().top
         }, 2000);
       })
+
+      $("#map .action-close button").on("click", () => {
+        map.hide();
+        map.fadeOut(500);
+      })
+
+      $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function(event) {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+        && location.hostname == this.hostname) {
+          let target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+          if (target.length) {
+            event.preventDefault();
+            $('html, body').animate({
+              scrollTop: target.offset().top
+            }, 1000, function() {
+              let $target = $(target);
+              $target.focus();
+              if ($target.is(":focus")) { 
+                return false;
+              } else {
+                $target.attr('tabindex','-1'); 
+                $target.focus(); 
+              };
+            });
+          }
+        }
+      });
   
       renderForm();
     })

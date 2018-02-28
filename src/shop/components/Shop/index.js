@@ -29,7 +29,7 @@ export default class Shop extends Component {
     this.removeItem = this.removeItem.bind(this);
     this.setStep = this.setStep.bind(this);
     this.handleSuccess = this.handleSuccess.bind(this);
-    this.state = { cart: configureCart(), step: 1, }
+    this.state = { cart: configureCart(), step: 2, }
   }
 
   addToCart(item, next) {
@@ -67,7 +67,9 @@ export default class Shop extends Component {
   removeItem(id) {
     this.setState({
       cart: [ ...this.state.cart.filter(item => item.id !== id) ]
-    })
+    });
+
+    this.setLocalStorage(this.state.cart);
   }
 
   render() {

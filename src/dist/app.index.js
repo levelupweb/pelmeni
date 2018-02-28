@@ -23239,9 +23239,6 @@ $(document).ready(function () {
 
     if (window.innerWidth > 700) {
 
-      var scene = document.getElementById('scene');
-      var parallaxInstance1 = new _parallaxJs2.default(scene, sceneOptions);
-
       sr.reveal('#scene .layer img', { duration: 500, delay: 100 }, 250);
       sr.reveal('#scene .layer .chapter-2', { duration: 500, delay: 2500, origin: "bottom" });
 
@@ -23277,7 +23274,7 @@ $(document).ready(function () {
           $('.section-1 .visuals-head .layer .chapter-11').css('transform', 'scale(' + (calculations.percentagePassed / 3 + 1.0) + ')');
           $('.section-1 .visuals-head .layer .chapter-8').css('transform', 'scale(' + (calculations.percentagePassed / 1 + 1.0) + ')');
           $('.section-2 .visuals-head .visual-default img').css('margin-top', offset);
-          $('.section-2 .visuals-head .visual-rotation .geometry').css('transform', 'rotate(' + offset / 4 + 'deg) scale(' + offset / 400 + ')');
+          $('.section-2 .visuals-head .visual-rotation img').css('transform', 'rotate(' + offset / 2 + 'deg) scale(' + offset / 400 + ')');
           $('.section-2 .visuals-head .visual-custom-1 img').css({ 'top': 400 - offset });
           $('.section-2 .visuals-head .visual-custom-2 img').css({ 'transform': 'scale(' + (calculations.percentagePassed / 2 + 1.0) + ')' });
           $('.section-1 .section-content').css('top', -offset);
@@ -23432,6 +23429,33 @@ $(document).ready(function () {
       $('html, body').animate({
         scrollTop: map.offset().top
       }, 2000);
+    });
+
+    $("#map .action-close button").on("click", function () {
+      map.hide();
+      map.fadeOut(500);
+    });
+
+    $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function (event) {
+      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        if (target.length) {
+          event.preventDefault();
+          $('html, body').animate({
+            scrollTop: target.offset().top
+          }, 1000, function () {
+            var $target = $(target);
+            $target.focus();
+            if ($target.is(":focus")) {
+              return false;
+            } else {
+              $target.attr('tabindex', '-1');
+              $target.focus();
+            };
+          });
+        }
+      }
     });
 
     (0, _index2.default)();

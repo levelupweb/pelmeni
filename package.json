@@ -28,6 +28,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "dotenv": "^5.0.0",
+    "randomstring": "^1.1.5",
     "webpack": "^3.11.0"
   }
 }

@@ -16,7 +16,7 @@ export default class Checkout extends React.Component {
     }
 
     return (
-      <div className="ui container text" style={{paddingTop:"25px"}}>
+      <div className="ui container" style={{paddingTop:"25px"}}>
         <Cart onRemove={onRemove} cart={cart} />
       </div>
     )

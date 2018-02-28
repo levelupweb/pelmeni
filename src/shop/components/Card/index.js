@@ -1,16 +1,18 @@
 import React from "react";
 import styles from "./styles";
+import randomstring from "randomstring";
 
 const isArray = array => Array.isArray(array);
 
 export default class Card extends React.Component {
   constructor(props) {
     super(props);
-    const { weight } = props.data;
+    const { weight, price } = props.data;
     this.handleAmount = this.handleAmount.bind(this);
     this.handleWeight = this.handleWeight.bind(this);
     this.state = {
       amount: 1,
+      price: isArray(price) ? price[0] : price,
       weight: isArray(weight) ? weight[0] : weight,
     }
   }
@@ -26,22 +28,23 @@ export default class Card extends React.Component {
     const newValue = e.target.value;
     this.setState({
       weight: newValue,
+      price: this.props.data.price[this.props.data.weight.indexOf(newValue)],
     })
   } 
 
   addToCart() {
     const { data, onAdd } = this.props;
-    const { amount, weight } = this.state;
+    const { amount, weight, price } = this.state;
 
     onAdd({
-      id: data.id,
+      id: randomstring.generate(),
       title: data.title,
       description: data.description,
       image: data.image,
       weight: weight,
-      price: data.price,
+      price: price,
       amount: amount,
-      total: amount * data.price,
+      total: amount * price,
     }, () => {
       this.setState({
         amount: 1,
@@ -62,6 +65,12 @@ export default class Card extends React.Component {
     return weight.map((item) => <option value={item}>{item}</option>)
   }
 
+  renderPrice() {
+    const { weight, price } = this.props.data;
+
+    return price.length ? price[weight.indexOf(this.state.weight)] : price;
+  }
+
   render() {
     const { data, onAdd, isAdded } = this.props;
     const { amount } = this.state;
@@ -80,7 +89,7 @@ export default class Card extends React.Component {
           </div>
           <div className="extra content">
             <span className="right floated price">
-              {data.price} руб.
+              {this.renderPrice()} руб.
             </span>
             <span>
               <div style={styles.left}>
