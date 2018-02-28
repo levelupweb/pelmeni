@@ -23228,10 +23228,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var options = { relativeInput: true };
 
 $(document).ready(function () {
-  if (window.innerWidth > 700) {
-    var scene = document.getElementById('scene');
-    var parallaxInstance = new _parallaxJs2.default(scene, options);
-  }
   (0, _index2.default)();
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
@@ -23357,7 +23353,7 @@ var Shop = function (_Component) {
     _this.removeItem = _this.removeItem.bind(_this);
     _this.setStep = _this.setStep.bind(_this);
     _this.handleSuccess = _this.handleSuccess.bind(_this);
-    _this.state = { cart: configureCart(), step: 2 };
+    _this.state = { cart: configureCart(), step: 1 };
     return _this;
   }
 

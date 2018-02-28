@@ -23239,6 +23239,9 @@ $(document).ready(function () {
 
     if (window.innerWidth > 700) {
 
+      var scene1 = document.getElementById('scene-1');
+      var parallaxInstance1 = new _parallaxJs2.default(scene1, sceneOptions);
+
       sr.reveal('#scene .layer img', { duration: 500, delay: 100 }, 250);
       sr.reveal('#scene .layer .chapter-2', { duration: 500, delay: 2500, origin: "bottom" });
 

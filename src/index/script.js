@@ -14,6 +14,9 @@ $(document).ready(() => {
       const sceneOptions = { relativeInput: true };
 
       if (window.innerWidth > 700) {
+
+        const scene1 = document.getElementById('scene-1');
+        const parallaxInstance1 = new Parallax(scene1, sceneOptions);
     
         sr.reveal('#scene .layer img', { duration: 500, delay: 100 }, 250);
         sr.reveal('#scene .layer .chapter-2', { duration: 500, delay: 2500, origin: "bottom" });

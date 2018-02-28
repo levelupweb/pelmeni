@@ -16,6 +16,8 @@ app.get("/", (req, res) => res.sendFile(__dirname + "/src/index/index.html"));
 
 app.get("/shop", (req, res) => res.sendFile(__dirname + "/src/shop/shop.html"));
 
+app.get("/catalog", (req, res) => res.sendFile(__dirname + "/src/catalog/index.html"));
+
 const emailserver = emailjs.server.connect({
   user:	process.env.SMTP_USER, 
   password: process.env.SMTP_PASSWORD, 
