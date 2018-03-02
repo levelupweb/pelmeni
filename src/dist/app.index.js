@@ -23302,6 +23302,10 @@ $(document).ready(function () {
     $('#main').fadeIn(500);
     $('#preview').fadeOut(500);
 
+    $('#open_sidebar').click(function () {
+      $('#sidebar').toggleClass('visible');
+    });
+
     var sceneOptions = { relativeInput: true };
 
     if (window.innerWidth > 700) {

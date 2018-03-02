@@ -8,6 +8,15 @@ html, body {
   width: 100%;
   background-color: #111;
   overflow-x: hidden;
+  transition:.2s all ease;
+}
+
+.sidebar {
+  transition:.2s all ease;
+}
+
+.ui.visible.left.sidebar~.fixed, .ui.visible.left.sidebar~.pusher {
+  opacity:.5;
 }
 
 p.lead {
@@ -31,7 +40,18 @@ p.lead.small {
 .hidden.visible {
   opacity:1!important;
 }
+.main-menu {
+  width:100%;
+}
 
+@media screen and (max-width: 700px) {
+  .main-menu .menu .item {
+    display: none!important;
+  }
+  .main-menu .menu .item.toc {
+    display: block!important;
+  }
+}
 @keyframes chief-animation {
   0% { transform: translate(-20px) rotate(-5deg); }
   25% { transform: translate(0px) rotate(0deg); }

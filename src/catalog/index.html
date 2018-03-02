@@ -14,13 +14,31 @@
     <link rel="mask-icon" href="/static/dist/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="shortcut icon" href="/static/favicon/dist/favicon.ico">
     <title>Каталог продукции. Полуфабрикаты "Классные"</title>
+    
   </head>
   <body>
+    <div class="ui vertical inverted sidebar menu left uncover" id="sidebar">
+      <a class="item" href="/">
+        Главная
+      </a>
+      <a class="item" href="/catalog">
+        Каталог продукции
+      </a>
+      <a class="item" class="smooth-scroll" href="#contact">
+        Связаться с нами
+      </a>
+      <a class="ui item" href="/shop">
+        Купить продукцию
+      </a>
+    </div>
     <div class="pusher">
       <div class="ui inverted vertical masthead center aligned segment section-1 stripe">
         <div class="main-menu">
           <div class="ui container">
-            <div class="ui fluid secondary pointing inverted menu big">
+            <div class="ui fluid secondary pointing inverted menu big" style="text-align:left">
+              <a class="toc item" id="open_sidebar">
+                <i class="sidebar icon"></i>
+              </a>
               <a href="/" class="item">
                 Главная
               </a>
@@ -304,5 +322,10 @@
         </div>
       </div>
     </div>
+    <script>
+      document.getElementById('open_sidebar').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('visible');
+      })
+    </script>
   </body>
 </html>

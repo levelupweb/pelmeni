@@ -11,6 +11,10 @@ $(document).ready(() => {
       $('#main').fadeIn(500);
       $('#preview').fadeOut(500);
 
+      $('#open_sidebar').click(() => {
+        $('#sidebar').toggleClass('visible');
+      })
+
       const sceneOptions = { relativeInput: true };
 
       if (window.innerWidth > 700) {

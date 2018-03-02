@@ -47009,6 +47009,7 @@ var Cart = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var summ = this.getSumm();
       return _react2.default.createElement(
         "div",
         { className: "ui grid" },
@@ -47074,8 +47075,18 @@ var Cart = function (_React$Component) {
             _react2.default.createElement(
               "h2",
               { className: "ui header inverted", style: _styles2.default.summ },
-              this.getSumm(),
+              summ,
               " \u0440\u0443\u0431."
+            )
+          ),
+          summ > 1000 && _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement("div", { className: "ui divider" }),
+            _react2.default.createElement(
+              "p",
+              { className: "lead small" },
+              "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0431\u0435\u0441\u043F\u043B\u0430\u0442\u043D\u043E (\u0437\u0430\u043A\u0430\u0437 \u043D\u0430 \u0441\u0443\u043C\u043C\u0443 \u0431\u043E\u043B\u0435\u0435 1000 \u0440\u0443\u0431.)"
             )
           )
         ),
@@ -47154,6 +47165,17 @@ var Cart = function (_React$Component) {
             "p",
             null,
             "\u041F\u0440\u0438 \u0437\u0430\u043A\u0430\u0437\u0435 \u043D\u0430 \u0441\u0430\u0439\u0442\u0435 \u0438\u043B\u0438 \u043F\u043E \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0443 \u043F\u043E\u0441\u043B\u0435 14-00 - \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u043D\u0430 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439 \u0434\u0435\u043D\u044C \u0441 10-00 \u0434\u043E 20-00."
+          ),
+          _react2.default.createElement("div", { className: "ui divider" }),
+          _react2.default.createElement(
+            "h2",
+            { className: "ui header inverted" },
+            "\u041D\u0430\u0448\u0438 \u043F\u0430\u0440\u0442\u043D\u0435\u0440\u044B"
+          ),
+          _react2.default.createElement(
+            "p",
+            null,
+            "\u041C\u0430\u0433\u043D\u0438\u0442, \u041B\u0435\u043D\u0442\u0430, \u041F\u044F\u0442\u0435\u0440\u043E\u0447\u043A\u0430, \u0413\u043B\u043E\u0431\u0443\u0441, \u0414\u0435\u0441\u044F\u0442\u043E\u0447\u043A\u0430, \u0412\u044B\u0441\u0448\u0430\u044F \u041B\u0438\u0433\u0430, \u0413\u0443\u043B\u043B\u0438\u0432\u0435\u0440, \u041B\u0438\u0434\u0435\u0440, \u0421\u0442\u043E\u043B\u0431\u044B, \u041B\u043E\u0442\u043E\u0441, \u0420\u0438\u0430\u0442."
           )
         )
       );

@@ -25,6 +25,7 @@ export default class Cart extends React.Component {
   }
 
   render() {
+    const summ = this.getSumm();
     return (
       <div className="ui grid">
         <div className="ten wide column">
@@ -46,8 +47,14 @@ export default class Cart extends React.Component {
           <div className="ui divider" />
           <div style={styles.info}>
             <h2 className="ui header inverted" style={styles.finals}>Итого</h2>
-            <h2 className="ui header inverted" style={styles.summ}>{this.getSumm()} руб.</h2>
+            <h2 className="ui header inverted" style={styles.summ}>{summ} руб.</h2>
           </div>
+          {summ > 1000 &&
+            <div>
+              <div className="ui divider" />
+              <p className="lead small">Доставка бесплатно (заказ на сумму более 1000 руб.)</p>
+            </div>
+          } 
         </div>
         <div className="six wide column">
           <h2 className="ui header inverted">Условия доставки</h2>
@@ -63,6 +70,9 @@ export default class Cart extends React.Component {
           <p>Доставка осуществляется в рабочие дни с 10-00 до 20-00. В субботу с 10-00 до 14-00.</p>
           <p>Условия поставки: При заказе на сайте или по телефону до 14-00 – доставка с 16-00 до 20-00, либо на следующий день в удобное время для покупателя с 10-00 до 20-00.</p>
           <p>При заказе на сайте или по телефону после 14-00 - доставка на следующий день с 10-00 до 20-00.</p>
+          <div className="ui divider" />
+          <h2 className="ui header inverted">Наши партнеры</h2>
+          <p>Магнит, Лента, Пятерочка, Глобус, Десяточка, Высшая Лига, Гулливер, Лидер, Столбы, Лотос, Риат.</p>
         </div>
       </div>
     )

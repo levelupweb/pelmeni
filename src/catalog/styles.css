@@ -5,10 +5,18 @@ html, body {
 
 .pusher {
   background:url('/static/index/img/background-section-2.jpg') repeat-y!important;
-  background-size: 100% auto!important;
   width: 100%;
   background-color: #111;
   overflow-x: hidden;
+  transition:.2s all ease;
+}
+
+.sidebar {
+  transition:.2s all ease;
+}
+
+.ui.visible.left.sidebar~.fixed, .ui.visible.left.sidebar~.pusher {
+  opacity:.5;
 }
 
 p.lead {
@@ -32,6 +40,19 @@ p.lead.small {
 }
 .hidden.visible {
   opacity:1!important;
+}
+
+.main-menu {
+  width:100%;
+}
+
+@media screen and (max-width: 700px) {
+  .main-menu .menu .item {
+    display: none!important;
+  }
+  .main-menu .menu .item.toc {
+    display: block!important;
+  }
 }
 
 .navbar-wrapper {
@@ -70,6 +91,12 @@ p.lead.small {
   align-items:center;
   padding-top: 8em;
   padding-bottom: 2em;
+}
+
+@media screen and (max-width:700px) {
+  .stripe .section-content {
+    padding-top:2em;
+  }
 }
 
 .stripe h1.header {
