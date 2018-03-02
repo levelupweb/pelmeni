@@ -51,11 +51,6 @@ p.lead.small {
   100% { transform: translate(-20px) rotate(-5deg); }
 }
 
-.chief-animated {
-  animation: chief-animation 2s infinite linear;
-
-}
-
 .main-menu {
   position: fixed;
   top:0;
@@ -220,15 +215,18 @@ p.lead.small {
 .logo-slice-1 {
   top: 23%;
   right: 50%;
-  margin-right: -212px;
+  margin-right: -225px;
+  width: 450px;
   position: absolute;
 }
 
 .logo-slice-2 {
   top: 22%;
   right: 50%;
-  margin-right: -212px;
+  width:450px;
+  margin-right: -225px;
   position: absolute;
+  animation: chief-animation 2s infinite linear;
 }
 
 @media screen and (max-width:700px) {
