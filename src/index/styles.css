@@ -8,15 +8,6 @@ html, body {
   width: 100%;
   background-color: #111;
   overflow-x: hidden;
-  transition:.2s all ease;
-}
-
-.sidebar {
-  transition:.2s all ease;
-}
-
-.ui.visible.left.sidebar~.fixed, .ui.visible.left.sidebar~.pusher {
-  opacity:.5;
 }
 
 p.lead {
@@ -224,6 +215,28 @@ p.lead.small {
 
 .section-1 {
   background:transparent!important;
+}
+
+.logo-slice-1 {
+  top: 23%;
+  right: 50%;
+  margin-right: -212px;
+  position: absolute;
+}
+
+.logo-slice-2 {
+  top: 22%;
+  right: 50%;
+  margin-right: -212px;
+  position: absolute;
+}
+
+@media screen and (max-width:700px) {
+  .logo-slice-1,
+  .logo-slice-2 {
+    width:70%;
+    margin-right: -35%;
+  }
 }
 
 .section-2 {

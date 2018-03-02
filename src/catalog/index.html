@@ -322,10 +322,11 @@
         </div>
       </div>
     </div>
+    <script src="/static/jquery-3.3.1.min.js"></script>
+    <script src="/static/dist/semantic/dist/semantic.min.js"></script>
+    <script src="/static/dist/semantic/dist/components/sidebar.js"></script>
     <script>
-      document.getElementById('open_sidebar').addEventListener('click', function() {
-        document.getElementById('sidebar').classList.toggle('visible');
-      })
+      $('.ui.sidebar').sidebar('attach events', '.toc.item');
     </script>
   </body>
 </html>
