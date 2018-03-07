@@ -43,6 +43,16 @@ p.lead.small {
     display: block!important;
   }
 }
+
+.main-menu .menu .item {
+  font-size: 22px!important;
+}
+
+@media screen and (max-width: 1000px) {
+  .main-menu .menu .item {
+    font-size: 16px!important;
+  }
+}
 @keyframes chief-animation {
   0% { transform: translate(-20px) rotate(-5deg); }
   25% { transform: translate(0px) rotate(0deg); }
@@ -215,16 +225,16 @@ p.lead.small {
 .logo-slice-1 {
   top: 23%;
   right: 50%;
-  margin-right: -225px;
-  width: 450px;
+  margin-right: -240px;
+  width: 480px;
   position: absolute;
 }
 
 .logo-slice-2 {
   top: 22%;
   right: 50%;
-  width:450px;
-  margin-right: -225px;
+  width:480px;
+  margin-right: -240px;
   position: absolute;
   animation: chief-animation 2s infinite linear;
 }
@@ -261,6 +271,12 @@ p.lead.small {
   top: -20%;
   width: 50%;
   z-index: -1;
+}
+
+@media screen and (max-height: 850px) {
+  .section-2 .image-2 {
+    top: 59%;
+  }
 }
 
 .section-3 {
@@ -419,6 +435,7 @@ p.lead.small {
 
   .ui.vertical.stripe.section-1 {
     padding-top: 8em!important;
+    height:600px!important;
   }
   .ui.vertical.stripe {
     min-height:auto!important;

@@ -17,6 +17,11 @@
     
   </head>
   <body>
+    <div class="ui basic modal small" id="image">
+      <div class="content">
+        <img src width="100%" />
+      </div>
+    </div>
     <div class="ui vertical inverted sidebar menu left uncover" id="sidebar">
       <a class="item" href="/">
         Главная
@@ -24,11 +29,14 @@
       <a class="item" href="/catalog">
         Каталог продукции
       </a>
-      <a class="item" class="smooth-scroll" href="#contact">
+      <a class="item" class="smooth-scroll" href="/#contact">
         Связаться с нами
       </a>
       <a class="ui item" href="/shop">
         Купить продукцию
+      </a>
+      <a class="item" href="/dostavka">
+        Условия доставки
       </a>
     </div>
     <div class="pusher">
@@ -45,8 +53,11 @@
               <a class="item active" href="/catalog">
                 Каталог продукции
               </a>
-              <a class="item" class="smooth-scroll" href="#contact">
+              <a class="item" class="smooth-scroll" href="/#contact">
                 Связаться с нами
+              </a>
+              <a class="item" href="/dostavka">
+                Условия доставки
               </a>
               <div class="right menu">
                 <a class="ui item" href="/shop">
@@ -72,51 +83,51 @@
                   <img src="/static/catalog/img/pelmeni-a.jpg" width="100%" />
                 </div>
                 <div style="text-align:left;margin:20px 0;">
-                  <h1 class="ui header inverted">Пельмени (Категория А)
+                  <h1 class="ui header inverted">Пельмени "Классные" (Категория А)
                     <div class="sub header">400, 500, 950, 1000 гр</div>
                   </h1>
-                  <p>
-                    Категория A, без ГМО. В составе: охлажденная говядина, свинина, мука в/с, яйцо, лук, соль, перец, вода питьевая
+                  <p class="lead small">
+                    Категория A. В составе: охлажденная говядина, свинина, мука в/с, яйцо, лук, соль, перец, вода питьевая
                   </p>
                   <div class="photos">
                     <div class="photos-item">
-                      <img src="/static/catalog/img/pelmeni-a-400.jpg" width="100%" alt="">
+                      <img data-src="/static/catalog/img/pelmeni-a-400.jpg" src="/static/catalog/img/pelmeni-a-400.jpg" width="100%" alt="">
                       <p>400 гр.</p>
                     </div>
                     <div class="photos-item">
-                      <img src="/static/catalog/img/dlya-vas-pelmeni-a-400.jpg" width="100%" alt="">
+                      <img data-src="/static/catalog/img/dlya-vas-pelmeni-a-400.jpg" src="/static/catalog/img/dlya-vas-pelmeni-a-400.jpg" width="100%" alt="">
                       <p>400 гр.</p>
                     </div>
                     <div class="photos-item">
-                      <img src="/static/catalog/img/pelmeni-a-500.jpg" height="80%" alt="">
+                      <img data-src="/static/catalog/img/pelmeni-a-500.jpg" src="/static/catalog/img/pelmeni-a-500.jpg" height="80%" alt="">
                       <p>500 гр.</p>
                     </div>
                     <div class="photos-item">
-                      <img src="/static/catalog/img/dlya-vas-pelmeni-a-1000.jpg" height="80%" alt="">
+                      <img data-src="/static/catalog/img/dlya-vas-pelmeni-a-1000.jpg" src="/static/catalog/img/dlya-vas-pelmeni-a-1000.jpg" height="80%" alt="">
                       <p>1000 гр.</p>
                     </div>
                     <div class="photos-item">
-                      <img src="/static/catalog/img/pelmeni-a-500.jpg" height="80%" alt="">
+                      <img data-src="/static/catalog/img/pelmeni-a-500.jpg" src="/static/catalog/img/pelmeni-a-500.jpg" height="80%" alt="">
                       <p>950 гр.</p>
                     </div>
                     <div class="photos-item">
-                      <img src="/static/catalog/img/pelmeni-a-1000.jpg" height="80%" alt="">
+                      <img data-src="/static/catalog/img/pelmeni-a-1000.jpg" src="/static/catalog/img/pelmeni-a-1000.jpg" height="80%" alt="">
                       <p>1000 гр.</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- Категория B пельмени -->
+              <!-- Категория Б пельмени -->
               <div class="eight wide column">
                 <div class="image">
                   <img src="/static/catalog/img/pelmeni-b.jpg" width="100%" />
                 </div>
                 <div style="text-align:left;margin:20px 0;">
-                  <h1 class="ui header inverted">Пельмени (Категория B)
+                  <h1 class="ui header inverted">Пельмени "Для Вас" (Категория Б)
                     <div class="sub header">400, 1000 гр</div>
                   </h1>
-                  <p>
-                    Категория B, без ГМО. В составе: охлажденная говядина, свинина, мука в/с, яйцо, лук, соль, перец, вода питьевая
+                  <p class="lead small">
+                    Категория Б. В составе: охлажденная говядина, свинина, мука в/с, яйцо, лук, соль, перец, вода питьевая
                   </p>
                   <div class="photos">
                     <div class="photos-item">
@@ -124,11 +135,27 @@
                       <p>400 гр.</p>
                     </div>
                     <div class="photos-item">
-                      <img src="/static/catalog/img/dlya-vas-pelmeni-govyadina-b-1000.jpg" height="80%" alt="">
+                      <img src="/static/catalog/img/dlya-vas-pelmeni-b-1000.jpg" height="80%" alt="">
                       <p>1000 гр.</p>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Категория Б пельмени для Вас с говядиной -->
+              <div class="eight wide column">
+                <div class="image">
+                  <img src="/static/catalog/img/dlya-vas-pelmeni-b-govyadina.jpg" width="100%" />
+                </div>
+                <div style="text-align:left;margin:20px 0;">
+                  <h1 class="ui header inverted">Пельмени "Для Вас" с говядиной (Категория Б)
+                    <div class="sub header">400, 1000 гр</div>
+                  </h1>
+                  <p class="lead small">
+                    Категория Б. В составе: охлажденная говядина, свинина, мука в/с, яйцо, лук, соль, перец, вода питьевая
+                  </p>
+                  <div class="photos">
                     <div class="photos-item">
-                      <img src="/static/catalog/img/dlya-vas-pelmeni-b-1000.jpg" height="80%" alt="">
+                      <img src="/static/catalog/img/dlya-vas-pelmeni-govyadina-b-1000.jpg" height="80%" alt="">
                       <p>1000 гр.</p>
                     </div>
                     <div class="photos-item">
@@ -147,8 +174,8 @@
                   <h1 class="ui header inverted">Вареники с картофелем
                     <div class="sub header">400, 1000 гр</div>
                   </h1>
-                  <p>
-                    Категория А. В состав входят: картофель, мука в/с, яйцо, соль, вода питьевая
+                  <p class="lead small">
+                    В состав входят: картофель, мука в/с, яйцо, соль, вода питьевая
                   </p>
                   <div class="photos">
                     <div class="photos-item">
@@ -171,8 +198,8 @@
                   <h1 class="ui header inverted">Вареники с картофелем и грибами
                     <div class="sub header">400, 1000 гр</div>
                   </h1>
-                  <p>
-                    Категория А. В состав входят: картофель, мука в/с, яйцо, соль, вода питьевая, грибы
+                  <p class="lead small">
+                    В состав входят: картофель, мука в/с, яйцо, соль, вода питьевая, грибы
                   </p>
                   <div class="photos">
                     <div class="photos-item">
@@ -195,8 +222,8 @@
                   <h1 class="ui header inverted">Вареники с творогом
                     <div class="sub header">400, 1000 гр</div>
                   </h1>
-                  <p>
-                    Категория А. В состав входят: творог, сахар, мука в/с, яйцо, соль, вода питьевая
+                  <p class="lead small">
+                    В состав входят: творог, сахар, мука в/с, яйцо, соль, вода питьевая
                   </p>
                   <div class="photos">
                     <div class="photos-item">
@@ -219,7 +246,7 @@
                   <h1 class="ui header inverted">Котлеты
                     <div class="sub header">430 гр</div>
                   </h1>
-                  <p>
+                  <p class="lead small">
                     Категория А. В состав входят: охлажденная говядина, свинина, яйцо, хлеб, жир, лук, соль, перец, специи
                   </p>
                   <div class="photos">
@@ -239,7 +266,7 @@
                   <h1 class="ui header inverted">Котлеты с чесноком
                     <div class="sub header">430 гр</div>
                   </h1>
-                  <p>
+                  <p class="lead small">
                     Категория А. В состав входят: охлажденная говядина, свинина, яйцо, хлеб, жир, лук, соль, перец, специи, чеснок
                   </p>
                   <div class="photos">
@@ -259,8 +286,8 @@
                   <h1 class="ui header inverted">Чебуреки
                     <div class="sub header">300 гр</div>
                   </h1>
-                  <p>
-                    В состав входят: говядина, свинина, мука в/с, яйцо, лук, перец, специи, чеснок, вода питьевая
+                  <p class="lead small">
+                    Категория А. В состав входят: говядина, свинина, мука в/с, яйцо, лук, перец, специи, чеснок, вода питьевая
                   </p>
                   <div class="photos">
                     <div class="photos-item">
@@ -280,8 +307,8 @@
                   <h1 class="ui header inverted">Манты
                     <div class="sub header">530 гр</div>
                   </h1>
-                  <p>
-                    В состав входят: говядина, свинина, мука в/с, яйцо, лук, перец, специи, вода питьевая
+                  <p class="lead small">
+                    Категория А. В состав входят: говядина, свинина, мука в/с, яйцо, лук, перец, специи, вода питьевая
                   </p>
                   <div class="photos">
                     <div class="photos-item">
@@ -324,9 +351,6 @@
     </div>
     <script src="/static/jquery-3.3.1.min.js"></script>
     <script src="/static/dist/semantic/dist/semantic.min.js"></script>
-    <script src="/static/dist/semantic/dist/components/sidebar.js"></script>
-    <script>
-      $('.ui.sidebar').sidebar('attach events', '.toc.item');
-    </script>
+    <script src="/static/dist/app.catalog.js"></script>
   </body>
 </html>

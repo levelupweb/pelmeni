@@ -77,12 +77,12 @@ $(document).ready(() => {
             $('.section-2 .visuals-head').css('top', -offset*1.5);
             
             if (calculations.percentagePassed > 0.7 && !isVisible) {
-              $('.section-3 .visuals-head .visual-custom-1').css('opacity', 0);
-              $('.section-3 .visuals-head .visual-custom-2').css('opacity', 1);
+              $('.section-3 .visuals-head .visual-custom-1').fadeOut(500);
+              $('.section-3 .visuals-head .visual-custom-2').fadeIn(500).css({opacity: 1});
               isVisible = true;
             } else if (calculations.percentagePassed < 0.7 && isVisible) {
-              $('.section-3 .visuals-head .visual-custom-1').css('opacity', 1);
-              $('.section-3 .visuals-head .visual-custom-2').css('opacity', 0);
+              $('.section-3 .visuals-head .visual-custom-1').fadeIn(500);
+              $('.section-3 .visuals-head .visual-custom-2').fadeOut(500);
               isVisible = false;
             }
           }

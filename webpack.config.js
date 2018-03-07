@@ -13,6 +13,7 @@ module.exports = {
   entry: {
     index: path.resolve(__dirname, 'src/index/script.js'),
     shop: path.resolve(__dirname, 'src/shop/script.js'),
+    catalog: path.resolve(__dirname, 'src/catalog/script.js'),
   },
   output: {
     path: path.resolve(__dirname, 'src/dist'),
