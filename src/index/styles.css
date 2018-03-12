@@ -3,6 +3,26 @@ html, body {
   background:#111!important;
 }
 
+#main {
+  opacity:0;
+  transition:.2s all ease;
+}
+
+#main.visible {
+  opacity:1;
+}
+
+#preview {
+  opacity:1;
+  transition:.2s all ease;
+}
+
+#preview.hidden {
+  opacity:0;
+  top:-100%;
+  visibility: hidden;
+}
+
 .pusher {
   background:url('/static/index/img/background-section-2.jpg') repeat-y!important;
   width: 100%;
