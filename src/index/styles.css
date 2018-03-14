@@ -265,6 +265,10 @@ p.lead.small {
     width:70%;
     margin-right: -35%;
   }
+
+  .section-2 .visual-rotation {
+    display:none!important;
+  }
 }
 
 .section-2 {
@@ -491,7 +495,7 @@ p.lead.small {
   .section-2 .images > .image-1 img,
   .section-4 .images > .image-2 img,
   .section-5 .images > .image-2 img {
-    margin: -20px!important;
+    margin: -12px!important;
     width: 104%;
   }
 
