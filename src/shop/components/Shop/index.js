@@ -69,7 +69,7 @@ export default class Shop extends Component {
       cart: [ ...this.state.cart.filter(item => item.id !== id) ]
     });
 
-    this.setLocalStorage(this.state.cart);
+    this.setLocalStorage([ ...this.state.cart.filter(item => item.id !== id) ]);
   }
 
   render() {

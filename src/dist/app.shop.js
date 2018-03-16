@@ -36099,7 +36099,9 @@ var Shop = function (_Component) {
         })))
       });
 
-      this.setLocalStorage(this.state.cart);
+      this.setLocalStorage([].concat(_toConsumableArray(this.state.cart.filter(function (item) {
+        return item.id !== id;
+      }))));
     }
   }, {
     key: "render",
