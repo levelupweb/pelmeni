@@ -21,7 +21,7 @@ export default class Cart extends React.Component {
 
   getSumm() {
     const { cart } = this.props;
-    return cart.reduce((prev, curr) => prev + curr.total * curr.amount, 0);
+    return cart.reduce((prev, curr) => prev + curr.total, 0);
   }
 
   render() {

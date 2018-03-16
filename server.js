@@ -87,7 +87,6 @@ app.post("/send", (req, res) => {
 })
 
 const getErrorsFeedback = data => Object.keys(data).reduce((prev, curr) => {
-  console.log(prev);
   if (curr === "email" && !validateEmail(data[curr])) return [...prev, "Неверный формат e-mail адреса"];
   if (curr === "message" && (data[curr].length < 10 && data[curr].length > 1000)) return [...prev, "Сообщение не может быть меньше 10 и больше 1000 символов"];
   if (curr === "name" && (data[curr].length < 2 && data[curr].length > 50)) return [...prev, "Имя не может быть меньше 2 и больше 50 символов"]
@@ -117,7 +116,7 @@ app.post("/feedback", (req, res) => {
   const message	= {
     text: "Обратная связь",
     from: process.env.SMTP_USER,
-    to: "<" + process.env.SMTP_USER + ">",
+    to: "<pfklassnye@rambler.ru>",
     subject: "Обратная связь с сайта Klassnye.com",
     attachment: [ {
       data: generateHtmlFeedback(req.body),

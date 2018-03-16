@@ -47015,7 +47015,7 @@ var Cart = function (_React$Component) {
       var cart = this.props.cart;
 
       return cart.reduce(function (prev, curr) {
-        return prev + curr.total * curr.amount;
+        return prev + curr.total;
       }, 0);
     }
   }, {
