@@ -32,7 +32,7 @@ export default class Form extends React.Component {
 
   checkForm() {
     const { name, phone, email } = this.state.form;
-    return (name.length > 1 && phone.length > 1 && email.length > 1);
+    return (phone.length > 1);
   }
 
   sendForm(e) {
@@ -50,7 +50,7 @@ export default class Form extends React.Component {
         .then(() => this.setState({ isHydrating: false }))
         .catch((err) => this.handleServerErrors(err));
     } else {
-      return this.handleErrors(["Пожалуйста, заполните все поля правильно"]);
+      return this.handleErrors(["Пожалуйста, заполните обязательное поле - номер телефона"]);
     }
   }
 

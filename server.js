@@ -56,10 +56,10 @@ const validatePhone = number => {
 }
 
 const getErrors = data => Object.keys(data).reduce((prev, curr) => {
-  if (curr === "email" && !validateEmail(data[curr])) return [...prev, "Неверный формат e-mail адреса"];
-  if (curr === "phone" && !validatePhone(data[curr])) return [...prev, "Неверный формат контактного телефона"];
+  //if (curr === "email" && !validateEmail(data[curr])) return [...prev, "Неверный формат e-mail адреса"];
+  if (curr === "phone" && (!data[curr] || data[curr].length === 0)) return [...prev, "Пожалуйста, заполните обязательное поле - номер телефона"];
   if (curr === "items" && data[curr].length === 0) return [...prev, "Ваша корзина пуста"];
-  if (curr === "name" && (data[curr].length < 2 && data[curr].length > 50)) return [...prev, "Имя не может быть меньше 2 и больше 50 символов"]
+  //if (curr === "name" && (data[curr].length < 2 && data[curr].length > 50)) return [...prev, "Имя не может быть меньше 2 и больше 50 символов"]
   return prev;
 }, [])
 

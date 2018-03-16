@@ -47444,7 +47444,7 @@ var Form = function (_React$Component) {
           phone = _state$form.phone,
           email = _state$form.email;
 
-      return name.length > 1 && phone.length > 1 && email.length > 1;
+      return phone.length > 1;
     }
   }, {
     key: "sendForm",
@@ -47470,7 +47470,7 @@ var Form = function (_React$Component) {
           return _this2.handleServerErrors(err);
         });
       } else {
-        return this.handleErrors(["Пожалуйста, заполните все поля правильно"]);
+        return this.handleErrors(["Пожалуйста, заполните обязательное поле - номер телефона"]);
       }
     }
   }, {
