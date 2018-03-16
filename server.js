@@ -100,7 +100,7 @@ const generateHtmlFeedback = data => `
     <p>Клиент оставил следующую информацию о себе:</p>
     <ul>
       <li>Имя клиента: ${data.name}</li>
-      <li>E-mail или телефон: ${data.contact}</li>
+      <li>E-mail или телефон: ${data.email || data.phone}</li>
     </ul>
     <p>Сообщение:</p>
     <p>${data.message}</p>
@@ -116,7 +116,7 @@ app.post("/feedback", (req, res) => {
   const message	= {
     text: "Обратная связь",
     from: process.env.SMTP_USER,
-    to: "<pfklassnye@rambler.ru>",
+    to: "<beatzhitta@gmail.com>",
     subject: "Обратная связь с сайта Klassnye.com",
     attachment: [ {
       data: generateHtmlFeedback(req.body),

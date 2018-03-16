@@ -101,7 +101,7 @@ export default class Form extends React.Component {
           </div>
           <div className="field">
             <label>E-mail адрес для ответа</label>
-            <input value={email} onChange={this.handleForm} type="email" name="email" placeholder="inbox@mail.ru" />
+            <input value={email} onChange={this.handleForm} type="text" name="email" placeholder="inbox@mail.ru" />
           </div>
           <div className="field">
             <label>Ваше сообщение или вопрос</label>

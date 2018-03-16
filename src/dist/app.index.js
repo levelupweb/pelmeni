@@ -27148,7 +27148,7 @@ var Form = function (_React$Component) {
               null,
               "E-mail \u0430\u0434\u0440\u0435\u0441 \u0434\u043B\u044F \u043E\u0442\u0432\u0435\u0442\u0430"
             ),
-            _react2.default.createElement("input", { value: email, onChange: this.handleForm, type: "email", name: "email", placeholder: "inbox@mail.ru" })
+            _react2.default.createElement("input", { value: email, onChange: this.handleForm, type: "text", name: "email", placeholder: "inbox@mail.ru" })
           ),
           _react2.default.createElement(
             "div",
