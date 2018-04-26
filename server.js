@@ -1,16 +1,22 @@
+require("dotenv").load();
 const express = require('express');
+const fs = require("fs");
 const emailjs = require("emailjs");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
-
-dotenv.load();
+const https = require('https');
+const emailServer = require("./emailServer");
+const http = require('http');
 
 const app = express();
 
+const key = fs.readFileSync('ssl/key.key', 'utf8');
+const cert = fs.readFileSync('ssl/cert.crt', 'utf8');
+
 app.use(bodyParser());
+
 app.use('/static', express.static(__dirname + '/src'));
 
-app.set('port', 3000);
+app.set('port', process.env.PORT);
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/src/index/index.html"));
 
@@ -19,13 +25,6 @@ app.get("/shop", (req, res) => res.sendFile(__dirname + "/src/shop/shop.html"));
 app.get("/catalog", (req, res) => res.sendFile(__dirname + "/src/catalog/index.html"));
 
 app.get("/dostavka", (req, res) => res.sendFile(__dirname + "/src/dostavka/index.html"));
-
-const emailserver = emailjs.server.connect({
-  user:	process.env.SMTP_USER, 
-  password: process.env.SMTP_PASSWORD, 
-  host:	process.env.SMTP_HOST, 
-  ssl: true
-});
 
 const generateHtml = data => `
   <html><body>
@@ -56,10 +55,8 @@ const validatePhone = number => {
 }
 
 const getErrors = data => Object.keys(data).reduce((prev, curr) => {
-  //if (curr === "email" && !validateEmail(data[curr])) return [...prev, "Неверный формат e-mail адреса"];
   if (curr === "phone" && (!data[curr] || data[curr].length === 0)) return [...prev, "Пожалуйста, заполните обязательное поле - номер телефона"];
   if (curr === "items" && data[curr].length === 0) return [...prev, "Ваша корзина пуста"];
-  //if (curr === "name" && (data[curr].length < 2 && data[curr].length > 50)) return [...prev, "Имя не может быть меньше 2 и больше 50 символов"]
   return prev;
 }, [])
 
@@ -130,7 +127,15 @@ app.post("/feedback", (req, res) => {
   });
 })
 
-const server = app.listen(app.get('port'), function() {
+let server;
+
+if (process.env.SSL === 'true') {
+  server = https.createServer({ key, cert }, app);
+} else {
+  server = http.createServer(app);
+}
+
+server.listen(app.get('port'), function() {
   const port = server.address().port;
   console.log('Server runs on ' + port);
 });
