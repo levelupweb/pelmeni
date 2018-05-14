@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
     <link rel="stylesheet" href="/static/dist/semantic/dist/semantic.min.css" />
-    <link rel="stylesheet" href="/static/catalog/styles.css"/>
+    <link rel="stylesheet" href="/static/catalog/src/styles.css"/>
     <link rel="apple-touch-icon" sizes="180x180" href="/static/dist/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/dist/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/dist/favicon/favicon-16x16.png">
@@ -26,52 +26,12 @@
       </div>
     </div>
 
-    <div class="ui vertical inverted sidebar menu left uncover" id="sidebar">
-      <a class="item" href="/">
-        Главная
-      </a>
-      <a class="item" href="/catalog">
-        Каталог продукции
-      </a>
-      <a class="item" class="smooth-scroll" href="/#contact">
-        Связаться с нами
-      </a>
-      <a class="ui item" href="/shop">
-        Купить продукцию
-      </a>
-      <a class="item" href="/dostavka">
-        Условия доставки
-      </a>
-    </div>
+    <div id="sidebarMenu"></div>
     <div class="pusher">
       <div class="ui inverted vertical masthead center aligned segment section-1 stripe" style="padding-top:0">
         <div class="main-menu">
           <div class="ui container">
-            <div class="ui fluid secondary pointing inverted menu big" style="text-align:left">
-              <a class="toc item" id="open_sidebar">
-                <i class="sidebar icon"></i>
-              </a>
-              <a href="/" class="item">
-                Главная
-              </a>
-              <a class="item active" href="/catalog">
-                Каталог продукции
-              </a>
-              <a class="item" class="smooth-scroll" href="/#contact">
-                Связаться с нами
-              </a>
-              <a class="item" href="/dostavka">
-                Условия доставки
-              </a>
-              <div class="right menu">
-                <a style="display: flex;
-                flex-direction: column;
-                justify-content: flex-start;" class="ui item" href="/shop">
-                  Купить продукцию
-                  <span style="font-size:14px;">+7 (4942) 51-53-07</span>
-                </a>
-              </div>
-            </div>
+            <div id="menu"></div>
           </div>
         </div>
         <div class="section-content">

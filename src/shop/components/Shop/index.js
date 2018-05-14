@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import Header from "../Header";
-import Jumbotron from "../Jumbotron";
 import Divider from "../Divider";
 import CardList from "../CardList";
-import Checkout from "../Checkout";
+import Cart from "../Cart";
 import Navigation from "../Navigation";
-import Success from "../Success";
 import Form from "../Form";
 import Steps from "../Steps";
 import styles from "./styles";
 import data from "../data";
+import Menu from "../../../commons/components/Menu";
 
 const emptyArray = [];
 const CART = "cart";
@@ -28,8 +26,18 @@ export default class Shop extends Component {
     this.addToCart = this.addToCart.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.setStep = this.setStep.bind(this);
+    this.changeItem = this.changeItem.bind(this);
     this.handleSuccess = this.handleSuccess.bind(this);
-    this.state = { cart: configureCart(), step: 1, }
+
+    this.state = { 
+      cart: configureCart(), 
+      step: 1, 
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { cart } = this.state;
+    this.setLocalStorage(cart);
   }
 
   addToCart(item, next) {
@@ -37,10 +45,22 @@ export default class Shop extends Component {
 
     this.setState(state => ({ 
       cart: [ ...state.cart, item ] 
-    }), () => {
-      this.setLocalStorage(this.state.cart);
-      return next();
-    })
+    }), () => next());
+  }
+
+  changeItem(id, item) {
+    if (window.localStorage) {
+      const cart = [
+        ...JSON.parse(localStorage.getItem(CART)).map(i => {
+          if (i.id === id) {
+            return Object.assign({}, i, item);
+          }
+          return i;
+        })
+      ];
+
+      this.setState({ cart });
+    }
   }
 
   setLocalStorage(cart) {
@@ -60,16 +80,16 @@ export default class Shop extends Component {
   }
 
   handleSuccess() {
-    this.resetLocalStorage();
-    this.setState({ cart: emptyArray, step: 4, })
+    this.setState({ 
+      cart: emptyArray, 
+      step: 4, 
+    }, () => this.resetLocalStorage());
   }
 
   removeItem(id) {
-    this.setState({
-      cart: [ ...this.state.cart.filter(item => item.id !== id) ]
+    this.setState({ 
+      cart: [ ...this.state.cart.filter(item => item.id !== id) ] 
     });
-
-    this.setLocalStorage([ ...this.state.cart.filter(item => item.id !== id) ]);
   }
 
   render() {
@@ -80,10 +100,11 @@ export default class Shop extends Component {
       className="section-content" 
       style={styles.section}
     >
-      <div className="navbar-wrapper">
-        <Header />
+      <div className="main-menu">
+        <div className="ui container">
+          <Menu />
+        </div>
       </div>
-      <Jumbotron />
       <div style={styles.navigation}>
         {cartLength > 0 &&
           <Navigation 
@@ -94,36 +115,42 @@ export default class Shop extends Component {
           />
         }
       </div>
-      <Divider step={step} />
-      <Steps 
-        step={step} 
-        onSetStep={this.setStep} 
-        cartLength={cartLength}
-      />
-      <div style={styles.content}>
-        {step === 1 &&
-          <CardList 
-            cart={cart} 
-            onAdd={this.addToCart} 
-            data={data} 
-            columns="two" 
-          />
-        }
-        {step === 2 &&
-          <Checkout 
-            cart={cart} 
-            onRemove={this.removeItem} 
-          />
-        }
-        {step === 3 &&
-          <Form 
-            cart={cart} 
-            onSuccess={this.handleSuccess}
-          />
-        }
-        {step === 4 &&
-          <Success />
-        }
+      <div className="ui container">
+        <Steps 
+          step={step} 
+          onSetStep={this.setStep} 
+          cartLength={cartLength}
+        />
+        <div style={styles.content}>
+          {step === 1 &&
+            <CardList 
+              cart={cart} 
+              onAdd={this.addToCart} 
+              data={data} 
+              columns="two" 
+            />
+          }
+          {step === 2 &&
+            <Cart
+              cart={cart} 
+              onRemove={this.removeItem} 
+              onChange={this.changeItem}
+            />
+          }
+          {step === 3 &&
+            <Form 
+              cart={cart} 
+              onSuccess={this.handleSuccess}
+            />
+          }
+          {step === 4 &&
+            <div className="ui text container" style={{textAlign: "center"}}>
+              <a href="/" className="ui button inverted big">
+                Вернуться на главную
+              </a>
+            </div>
+          }
+        </div>
       </div>
     </div>
   }

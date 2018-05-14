@@ -11,9 +11,10 @@ const jqueryPlugin = new webpack.ProvidePlugin({
 
 module.exports = {
   entry: {
-    index: path.resolve(__dirname, 'src/index/script.js'),
-    shop: path.resolve(__dirname, 'src/shop/script.js'),
-    catalog: path.resolve(__dirname, 'src/catalog/script.js'),
+    index: path.resolve(__dirname, 'src/index/src/script.js'),
+    shop: path.resolve(__dirname, 'src/shop/src/script.js'),
+    catalog: path.resolve(__dirname, 'src/catalog/src/script.js'),
+    dostavka: path.resolve(__dirname, 'src/dostavka/src/script.js'),
   },
   output: {
     path: path.resolve(__dirname, 'src/dist'),
@@ -23,7 +24,11 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.css$/, loader: ["style-loader", "css-loader"], exclude: /node_modules/ }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
   }
 };

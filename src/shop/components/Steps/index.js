@@ -1,35 +1,59 @@
 import React from "react";
+import styles from "./styles";
+
+const renderTitle = step => {
+  switch (step) {
+    case 1:
+      return "Выберите товар";
+    case 2:
+      return "Подтвердите заказ";
+    case 3:
+      return "Оформите заказ";
+    case 4:
+      return "Готово!";
+    default:
+    return null;
+  }
+}
+
+const renderDescription = step => {
+  switch (step) {
+    case 1:
+      return "На этой странице вы с легкостью можете заказать нашу продукцию онлайн";
+    case 2:
+      return "Подтвердите правильно ли составлен ваш заказ";
+    case 3:
+      return "Введите ваш номер телефона и мы свяжемся с вами в течение 15 минут. Для ускорения процесса заказа рекомендуем заполнить адрес доставки";
+    case 4:
+      return "Ваш заказ успешно подтвержден! Мы свяжемся с вами в течение 15 минут! Оплата производится при получении заказа наличными деньгами или банковской картой. Спасибо, что выбираете нашу продукцию!";
+    default:
+    return null;
+  }
+}
 
 export default ({ step, onSetStep, cartLength }) => (
   <div className="ui container">
-    <div className="ui steps" style={{width:"100%"}}>
-      <div onClick={() => onSetStep(1)} style={{width:"25%"}} className={`${step === 1 && "active"} step`}>
-        <i className="truck icon"></i>
-        <div className="content">
-          <div className="title">Выбор</div>
-          <div className="description">Выберите продукцию</div>
-        </div>
-      </div>
-      <div onClick={() => onSetStep(2)} style={{width:"25%"}} className={`${step === 2 && "active"} step ${cartLength === 0 && "disabled"}`}>
-        <i className="pointing right icon"></i>
-        <div className="content">
-          <div className="title">Подтверждение</div>
-          <div className="description">Подтвердите информацию</div>
-        </div>
-      </div>
-      <div onClick={() => onSetStep(3)} style={{width:"25%"}} className={`${step === 3 && "active"} step ${cartLength === 0 && "disabled"}`}>
-        <i className="paragraph icon"></i>
-        <div className="content">
-          <div className="title">Форма</div>
-          <div className="description">Заполните форму</div>
-        </div>
-      </div>
-      <div onClick={() => onSetStep(4)} style={{width:"25%"}} className={`${step === 4 && "active"} step disabled`}>
-        <i className="info icon"></i>
-        <div className="content">
-          <div className="title">Заказ принят</div>
-        </div>
-      </div>
-    </div>
+    <h1 className="ui inverted header primary-header">
+      {renderTitle(step)}
+    </h1>
+    <p className="secondary-header">
+      {renderDescription(step)}
+    </p>
+    {step < 4 &&
+    <ol className="ordered ui list inverted big horizontal">
+      <li style={styles.active(step === 1)} className="ui item">
+        Корзина
+      </li>
+      <li style={styles.active(step === 2)} className="ui item">
+        Подтверждение
+      </li>
+      <li style={styles.active(step === 3)} className="ui item">
+        Адрес доставки
+      </li>
+      <li className="ui item">
+        Получение и оплата
+      </li>
+    </ol>
+    }
   </div>
 )

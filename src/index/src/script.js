@@ -1,9 +1,8 @@
 import ScrollReveal from "scrollreveal";
 import Parallax from "parallax-js";
 import imagesLoaded from "imagesloaded";
-import "../dist/semantic/dist/components/visibility";
-import "../dist/semantic/dist/components/sidebar";
-import renderForm from "./components/index";
+import "../../dist/semantic/dist/components/visibility";
+import renderForm from "../components/index";
 
 $(document).ready(() => {
     window.sr = ScrollReveal();
@@ -14,11 +13,6 @@ $(document).ready(() => {
         $('#main').addClass("visible");
         $('#preview').addClass("hidden");
 
-        $('.ui.sidebar')
-          .sidebar('attach events', '.toc.item')
-        ;
-
-
         const sceneOptions = { relativeInput: true };
 
         if (window.innerWidth > 700) {
@@ -26,8 +20,6 @@ $(document).ready(() => {
           const scene1 = document.getElementById('scene-1');
           const parallaxInstance1 = new Parallax(scene1, sceneOptions);
       
-          sr.reveal('#scene .layer img', { duration: 300, delay: 0 }, 120);
-          sr.reveal('#scene .layer .chapter-2', { duration: 500, delay: 2500, origin: "bottom" });
           sr.reveal('.visuals-head .visual > img', { duration: 500, delay: 100 }, 250);
           sr.reveal('.jumbotron > *', { duration: 500, delay: 0 }, 300);
           sr.reveal('.section-2 h1', { duration: 500, delay: 200, origin: "left" }, 200);
@@ -41,7 +33,6 @@ $(document).ready(() => {
           sr.reveal('.section-4 .image-1', { duration: 500, delay: 800, origin: "left" });
           sr.reveal('.section-4 .image-2', { duration: 500, delay: 500, origin: "bottom" });
           sr.reveal('.section-5 img', { duration: 500, delay: 300, origin: "bottom" }, 100);
-          sr.reveal('.section-6 img', { duration: 500, delay: 300, origin: "bottom" });
           sr.reveal('.section-6 .description > *', { duration: 500, delay: 700, origin: "bottom" }, 200);
       
           $('.section-1').visibility({
@@ -58,8 +49,6 @@ $(document).ready(() => {
               $('.section-2 .visuals-head .visual-rotation img').css('transform', 'rotate(' + offset/2 + 'deg) scale('+ offset/400 +')');
               $('.section-2 .visuals-head .visual-custom-1 img').css({'top': 400-offset});
               $('.section-2 .visuals-head .visual-custom-2 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
-              $('.section-1 .section-content').css('top', -offset);
-              $('.section-1 .visuals-head').css('top', -offset*1.5);
             }
           });
 
@@ -76,8 +65,6 @@ $(document).ready(() => {
               $('.section-3 .visuals-head .visual-custom-5 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
               $('.section-2 .visuals-head .visual-custom-6 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
               $('.section-1 .visuals-head .visual-custom-4 img').css('transform', 'scale('+ ((calculations.percentagePassed/1)+1.0)  +')');
-              $('.section-2 .section-content').css('top', -offset);
-              $('.section-2 .visuals-head').css('top', -offset*1.5);
               
               if (calculations.percentagePassed > 0.7 && !isVisible) {
                 $('.section-3 .visuals-head .visual-custom-1').fadeOut(500);
@@ -102,8 +89,6 @@ $(document).ready(() => {
               $('.section-4 .visuals-head .visual-default img').css('left', calculations.percentagePassed*40 + "%");
               $('.section-4 .visuals-head .visual-custom-4 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
               $('.section-4 .images .image-2').css('margin-top', offset*0.3);
-              $('.section-3 .section-content').css('top', -offset);
-              $('.section-3 .visuals-head').css('top', -offset*1.5);
             },
           })
       
@@ -143,8 +128,6 @@ $(document).ready(() => {
               const offset = calculations.percentagePassed * 400;
               $('.section-5 .section-content, .section-5 .visuals-head').css('bottom', offset);
               $('.section-5 .visuals-head .visual-custom-1 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0) +')'});
-              $('.section-5 .section-content').css('top', -offset);
-              $('.section-5 .visuals-head').css('top', -offset*1.5);
             },
             onBottomVisible: function() {
               $('.section-5 .images .image-1 > *').removeClass('visible');
@@ -171,11 +154,11 @@ $(document).ready(() => {
         videoElement.id = "primary-video"
 
         const webmSource = document.createElement("source");
-        webmSource.src = "/static/index/video.webm";
+        webmSource.src = "/static/index/src/video.webm";
         webmSource.type = "video/webm";
 
         const mp4Source = document.createElement("source");
-        mp4Source.src = "/static/index/video-fallback.mp4";
+        mp4Source.src = "/static/index/src/video-fallback.mp4";
         mp4Source.type = "video/mp4";
 
         videoElement.appendChild(webmSource);

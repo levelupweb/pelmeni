@@ -93,7 +93,7 @@ export default class Card extends React.Component {
             </span>
             <span>
               <div style={styles.left}>
-                {isArray(data.weight) && <div class="field" style={styles.weightField}>
+                {isArray(data.weight) && <div className="field" style={styles.weightField}>
                   <select style={styles.input} onChange={this.handleWeight}>
                     {this.renderOptions()}
                   </select>

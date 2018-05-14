@@ -14,5 +14,17 @@ export default {
     cursor: "pointer", 
     display: "inline-block", 
     fontSize: "16px"
-  }
+  },
+  amountChanger: {
+    display: "flex",
+    alignItems: "center",
+    marginRight: "15px",
+  },
+  current: {
+    margin: "0 10px",
+  },
+  total: {
+    fontWeight: "bold",
+    fontSize:"17px",
+  },
 }

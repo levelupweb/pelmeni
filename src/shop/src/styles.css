@@ -70,6 +70,7 @@ p.lead.small {
   align-items:center;
   padding-top: 8em;
   padding-bottom: 2em;
+  min-height: 100vh;
 }
 
 .stripe h1.header {
@@ -114,24 +115,24 @@ p.lead.small {
   background:transparent!important;
 }
 
-.section-1 .primary-header {
+.primary-header {
   font-weight:bold!important;
   text-shadow: 1px 1px 12px #000;
   font-family: 'Bad Script', cursive;
 }
 
 @media screen and (max-width: 900px) {
-  .section-1  .primary-header {
+  .primary-header {
     font-size:30px!important;
   }
 }
 
-.section-1  .secondary-header {
-  margin-top:0;
-  font-size:25px;
+.secondary-header {
+  font-size:20px;
   text-transform: none!important;
   text-shadow: 1px 1px 12px #000;
   max-width:650px;
+  margin:auto;
   text-align:center;
 }
 

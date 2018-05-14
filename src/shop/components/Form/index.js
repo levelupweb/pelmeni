@@ -70,18 +70,17 @@ export default class Form extends React.Component {
 
     return (
       <div className="ui container text">
-          <p className="lead small">После того, как вы оформите заказ, с вами свяжется наш менеджер для уточнения деталей доставки. Пожалуйста, указывайте настоящие контактные данные</p>
-          {errors.length > 0 &&
-            <div className="ui error message">
-              <i className="close icon"></i>
-              <div className="header">
-                В ходе выполнения операции возникли следующие ошибки
-              </div>
-              <ul className="list">
-                {errors.map((err, i) => <li key={i}>{err}</li>)}
-              </ul>
+        {errors.length > 0 &&
+          <div className="ui error message">
+            <i className="close icon"></i>
+            <div className="header">
+              В ходе выполнения операции возникли следующие ошибки
             </div>
-          }
+            <ul className="list">
+              {errors.map((err, i) => <li key={i}>{err}</li>)}
+            </ul>
+          </div>
+        }
         <form onSubmit={this.sendForm} className={`ui form inverted big ${isHydrating && "loading"}`} >
           <div className="field">
             <label>Ваше имя</label>
