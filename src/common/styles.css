@@ -1,0 +1,39 @@
+/* segments basic styles */
+
+.ui.vertical.segment {
+  background: transparent;
+}
+
+.segment .section-content {
+  position: absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  z-index:100;
+  margin-top:-100px;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
+
+.segment h1.header {
+  font-size:60px;
+  font-family: 'Playfair Display', serif;
+}
+
+@media screen and (max-width: 900px) {
+  .segment h1.header {
+    font-size:40px;
+  }
+}
+
+.ui.vertical.segment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding-top:0;
+  padding-bottom:0;
+  flex-direction: column;
+}

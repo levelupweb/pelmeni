@@ -3,6 +3,8 @@ html, body {
   background:#111!important;
 }
 
+/* layout */
+
 #main {
   opacity:0;
   transition:.2s all ease;
@@ -24,11 +26,13 @@ html, body {
 }
 
 .pusher {
-  background:url('/static/index/img/background-section-2.jpg') repeat-y!important;
-  width: 100%;
+  background:url('./img/background-section-2.jpg') repeat-y;
   background-color: #111;
   overflow-x: hidden;
+  width: 100%;
 }
+
+/* typography */
 
 p.lead {
   font-size:30px!important;
@@ -38,20 +42,26 @@ p.lead.small {
   font-size:20px!important;
 }
 
-.animated {
-  transition:.6s all ease-in-out;
-}
+
+/* utils */
 
 .hidden.menu {
   display: none;
 }
+
 .hidden {
   opacity:0;
 }
+
 .hidden.visible {
   opacity:1!important;
 }
 
+.animated {
+  transition:.6s all ease-in-out;
+}
+
+/* logo animation */
 
 @keyframes chief-animation {
   0% { transform: translate(-20px) rotate(-5deg); }
@@ -60,6 +70,8 @@ p.lead.small {
   75% { transform: translate(0px) rotate(0deg); }
   100% { transform: translate(-20px) rotate(-5deg); }
 }
+
+/* visuals basic styles */
 
 .visuals,
 .visuals-head {
@@ -75,7 +87,19 @@ p.lead.small {
   position: absolute;
 }
 
-.stripe .section-content {
+
+@media screen and (max-width: 700px){
+
+  /* disable all visuals on mobile */
+
+  .visual {
+    display:none;
+  }
+}
+
+/* segments basic styles */
+
+.segment .section-content {
   position: absolute;
   left:0;
   bottom:0;
@@ -87,24 +111,18 @@ p.lead.small {
   align-items:center;
 }
 
-.stripe h1.header {
+.segment h1.header {
   font-size:60px;
   font-family: 'Playfair Display', serif;
 }
 
 @media screen and (max-width: 900px) {
-  .stripe h1.header {
+  .segment h1.header {
     font-size:40px;
   }
 }
 
-@media screen and (max-width: 700px){
-  .visual {
-    display:none;
-  }
-}
-
-.ui.vertical.stripe {
+.ui.vertical.segment {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -113,32 +131,26 @@ p.lead.small {
   padding-bottom: 4em;
   flex-direction: column;
 }
-.ui.vertical.stripe.section-1 {
+
+.ui.vertical.segment.section-1 {
   justify-content: flex-start;
 }
-.ui.vertical.stripe h3 {
+
+.ui.vertical.segment h3 {
   font-size: 2em;
 }
-.ui.vertical.stripe .button + h3,
-.ui.vertical.stripe p + h3 {
+
+.ui.vertical.segment .button + h3,
+.ui.vertical.segment p + h3 {
   margin-top: 3em;
 }
-.ui.vertical.stripe .floated.image {
+
+.ui.vertical.segment .floated.image {
   clear: both;
 }
-.ui.vertical.stripe p {
-  font-size: 1.33em;
-}
-.ui.vertical.stripe .horizontal.divider {
-  margin: 3em 0em;
-}
 
-.quote.stripe.segment {
-  padding: 0em;
-}
-.quote.stripe.segment .grid .column {
-  padding-top: 5em;
-  padding-bottom: 5em;
+.ui.vertical.segment p {
+  font-size: 1.33em;
 }
 
 .footer.segment {
@@ -166,6 +178,7 @@ p.lead.small {
   align-items: center;
   justify-content: center;
   margin-bottom: 51px;
+  height:480px;
 }
 
 .section-1 {
