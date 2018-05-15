@@ -21,16 +21,21 @@
     "image-data-uri": "^1.1.0",
     "imagesloaded": "^4.1.4",
     "jquery": "^3.3.1",
+    "nuka-carousel": "^4.2.1",
     "parallax-js": "^3.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
+    "react-redux": "^5.0.7",
     "react-reveal": "^1.2.1",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-yandex-maps": "^2.1.5",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.2.0",
     "scrollreveal": "^3.3.6",
-    "semantic-ui": "^2.3.1"
+    "semantic-ui": "^2.3.1",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -40,7 +45,9 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
     "dotenv": "^5.0.0",
+    "file-loader": "^1.1.11",
     "randomstring": "^1.1.5",
+    "redux-devtools-extension": "^2.13.2",
     "style-loader": "^0.21.0",
     "webpack": "^3.11.0"
   }

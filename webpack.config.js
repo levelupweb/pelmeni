@@ -1,5 +1,7 @@
+require("dotenv").load();
 const path = require('path');
 const webpack = require("webpack");
+const config = require("./config");
 
 const jqueryPath = "jquery";
 
@@ -27,14 +29,14 @@ module.exports = {
       { test: /\.(ico|png|jpg|gif|woff(2)?|ttf|eot|svg|mp4|webm)$/, exclude: /node_modules/, use: [ { loader: 'file-loader', options: { 
         name: '[hash].[ext]', 
         outputPath: "assets/",
-        publicPath: "static/assets",
+        publicPath: config.dist + "/assets",
       } } ] }
     ]
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      'semantic-ui': path.join(__dirname, "node_modules", "semantic-ui-css", "semantic.js"), 
+      'semantic-ui': path.join(__dirname, "node_modules", "semantic-ui-css", "semantic.js"),
     },
   }
 };

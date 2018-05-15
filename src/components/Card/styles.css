@@ -1,0 +1,58 @@
+.ui.fluid.card.inverted.shop-card {
+  background: rgba(0,0,0,0.2);
+  border-color: transparent;
+  box-shadow: none;
+  color:#fff;
+}
+
+.shop-card .card-title {
+  font-size: 30px!important;
+  font-family: 'Playfair Display', serif!important;
+  color:#fff!important;
+}
+
+.shop-card .card-description {
+  font-size:19px!important;
+}
+
+.shop-card .card-price {
+  font-size:24px!important;
+  font-weight:bold;
+  color:#fff;
+  display:inline-block;
+  margin-left:20px;
+}
+
+.shop-card .card-amount-changer {
+  display:flex;
+  margin-top:20px;
+  justify-content: space-between;
+  align-items:center;
+  flex-direction:row;
+}
+
+@media screen and (max-width:560px) {
+  .shop-card .card-amount-changer {
+    flex-wrap: wrap;
+  }
+  
+  .shop-card .card-amount-changer .card-primary-action {
+    width:100%;
+    display:block;
+    margin-left:0!important;
+    flex-grow:1;
+    margin-top:15px;
+  }
+
+  .shop-card .card-amount-changer .card-primary-action button {
+    width:100%;
+  }
+}
+
+.shop-card .card-amount-changer .buttons {
+  flex-grow:1;
+}
+
+.shop-card .card-amount-changer .card-primary-action {
+  margin-left:15px;
+}

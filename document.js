@@ -7,6 +7,8 @@ const document = (html, config, helmet) =>
     <meta name="theme-color" content="#ffffff" />
     ${helmet.title.toString()}
     ${helmet.meta.toString()}
+    <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
     <link rel="shortcut icon" href="${config.dist}/favicon.ico" />
     <meta name="keywords" content="Купить пельмени, пельмени Классные, Костромские пельмени Классные, доставка пельменей, заказать пельмени" />

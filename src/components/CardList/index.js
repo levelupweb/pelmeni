@@ -1,11 +1,11 @@
 import React from "react";
+import Helmet from "react-helmet";
 import styles from "./styles";
 import Card from "../Card";
 
 const checkIsAdded = (cart, id) => cart.filter((item) => item.id === id)[0];
 
 export default class CardList extends React.Component {
-
   renderCards() {
     const { data, onAdd, cart } = this.props;
 
@@ -20,10 +20,10 @@ export default class CardList extends React.Component {
   }
   render() {
     const { columns } = this.props;
-
+ 
     return (
       <div className="ui container">
-        <div className={`ui ${columns} column grid stackable `} style={styles.grid}>
+        <div className={`ui ${columns} column grid stackable`} style={styles.grid}>
           {this.renderCards()}
         </div>
       </div>

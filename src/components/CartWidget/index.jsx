@@ -1,30 +1,32 @@
 import React from "react";
-import styles from "./styles";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import styles from "./styles.css";
 
-const renderAmountChanger = (current, onChange) => (
-  <div style={styles.amountChanger}>
-    <div style={styles.minus}>
-      <button 
-        className={`ui button inverted small basic icon ${current < 1 && "disabled"}`} 
-        onClick={() => onChange(current - 1)}
-      >
-        <i className="ui icon minus" />
-      </button>
-    </div>
+import {
+  shopEditItem,
+  shopRemoveItem
+} from "../Shop/actions";
 
-    <div style={styles.current}>
-      <strong>{current}</strong> шт.
-    </div>
-
-
-    <div style={styles.plus}>
-      <button 
-        className={`ui button inverted small basic icon ${current < 0 && "disabled"}`} 
-        onClick={() => onChange(current + 1)}
-      >
-        <i className="ui icon plus" />
-      </button>
-    </div>
+const renderAmountChanger = (item, onChange) => (
+  <div className="ui buttons">
+    <button 
+      className={`ui button small icon ${item.amount < 1 && "disabled"}`} 
+      onClick={() => onChange(item.amount - 1, (item.amount - 1) * item.price)}
+    >
+      <i className="ui icon minus" />
+    </button>
+    <button 
+      className={`ui button small icon`}
+    >
+      <strong>{item.amount}</strong> шт.
+    </button>
+    <button 
+      className={`ui button small  icon`} 
+      onClick={() => onChange(item.amount + 1, (item.amount + 1) * item.price)}
+    >
+      <i className="ui icon plus" />
+    </button>
   </div>
 )
 
@@ -33,98 +35,62 @@ class CartButton extends React.Component {
     super(props);
     this.handleExpand = this.handleExpand.bind(this);
     this.handleChangeAmount = this.handleChangeAmount.bind(this);
+
     this.state = {
       isExpanded: false,
       hasError: false,
-      cart: null,
     }
   }
 
-  componentDidMount() {
-    this.getCartData();
-  }
+  editItem(id, data) {
+    const { shopEditItem } = this.props;
 
-  componentDidCatch(error, info) {
-    this.setState({ 
-      hasError: true,
-      error,
-    });
-  }
-
-  modifyCartData(cart) {
-    this.setState({ cart }, () => {
-      localStorage.setItem("cart", JSON.stringify(this.state.cart))
-    })
-  }
-
-  handleExpand() {
-    const { isExpanded } = this.state;
-
-    this.setState({
-      isExpanded: !isExpanded,
-    })
-  }
-
-  handleChangeAmount(id, amount) {
-    const { cart } = this.state;
-    
-    if (cart && cart.length) {
-      this.modifyCartData(cart.map(item => {
-        if (item.id === id) {
-          return Object.assign({}, item, {
-            amount,
-            total: amount * item.price,
-          });
-        }
-        return item;
-      }));
-    } 
-  }
-
-  getCartData() {
-    if (window.localStorage) {
-      this.setState({
-        cart: JSON.parse(localStorage.getItem("cart")),
-      })
+    if (shopEditItem && id && data) {
+      shopEditItem(id, data);
     }
   }
 
   removeItem(id) {
-    const { cart } = this.state;
+    const { shopRemoveItem } = this.props;
 
-    if (cart && cart.length) {
-      this.modifyCartData(cart.filter(item => item.id !== id));
+    if (shopRemoveItem && id) {
+      shopRemoveItem(id);
     }
+  }
+
+  handleExpand() {
+    this.setState(state => ({
+      isExpanded: !state.isExpanded,
+    }))
+  }
+
+  handleChangeAmount(id, amount, total) {
+    this.editItem(id, {
+      amount,
+      total,
+    });
   }
 
   getSumm() {
-    const { cart } = this.state;
-
-    if (cart) {
-      return cart.reduce((prev, curr) => prev + curr.total, 0);
-    }
-
-    return 0;
+    const { cart } = this.props;
+    
+    return cart.reduce((prev, curr) => prev + curr.total, 0);
   }
 
   getAmount() {
-    const { cart } = this.state;
+    const { cart } = this.props;
 
-    if (cart && cart.length !== 0) {
-      return cart.reduce((prev, curr) => prev + curr.amount, 0);
-    }
-
-    return 0;
+    return cart.reduce((prev, curr) => prev + curr.amount, 0);
   }
 
   renderItems() {
-    const { cart } = this.state;
+    const { cart } = this.props;
 
     if (cart && cart.length !== 0) {
       return cart.map((item, i) => (
-        <div style={styles.item}>
-          <div style={styles.title}>
-            <h4 style={styles.titleText} className="ui header inverted">
+        <div className="cart-widget-item">
+          <div className="cart-widget-item-title">
+            <h4 className="ui header inverted">
               {i+1}. {item.title}
               <div className="sub header">
                 {item.weight}
@@ -132,15 +98,16 @@ class CartButton extends React.Component {
             </h4>
             <div 
               onClick={() => this.removeItem(item.id)} 
-              className="ui button inverted icon basic tiny" 
-              style={styles.removeButton}
+              className="ui button icon inverted basic red tiny cart-widget-item-remove" 
             >
               <i className="ui close icon" />
             </div>
           </div>
-          <div style={styles.bar}>
-            {renderAmountChanger(item.amount, (newValue) => this.handleChangeAmount(item.id, newValue))}
-            <div style={styles.total}>
+          <div className="cart-widget-item-bar">
+            {renderAmountChanger(item, (newValue, newTotal) => 
+              this.handleChangeAmount(item.id, newValue, newTotal)
+            )}
+            <div className="cart-widget-item-total">
               {item.total} Руб.
             </div>
           </div>
@@ -149,7 +116,7 @@ class CartButton extends React.Component {
     }
 
     return (
-      <div style={styles.msg}>
+      <div className="cart-widget-item-msg">
         <p>Ваша корзина пока пуста</p>
         <a href="/shop">
           <div className="ui button inverted basic fluid">
@@ -161,19 +128,22 @@ class CartButton extends React.Component {
   }
 
   renderButton() {
-    const { cart } = this.state;
+    const { cart, } = this.props;
 
     if (cart && cart.length !== 0) {
       return [
         <div className="ui divider" />,
-        <div style={styles.totalButton}>
+        <div className="cart-widget-item-total">
           Итого: {this.getSumm()} Руб.
         </div>,
-        <a href="/shop">
-          <div className="ui button inverted basic fluid">
+        <Link 
+          onClick={() => this.setState({ isExpanded: false })} 
+          to="/shop/cart"
+        >
+          <button className="ui button fluid large">
             Оформить заказ
-          </div>
-        </a>
+          </button>
+        </Link>
       ]
     }
 
@@ -181,7 +151,8 @@ class CartButton extends React.Component {
   }
 
   render() {
-    const { hasError, isExpanded, cart } = this.state;
+    const { hasError, isExpanded } = this.state;
+    const { cart } = this.props;
 
     if (hasError) {
       return (
@@ -191,30 +162,27 @@ class CartButton extends React.Component {
 
     if (cart && cart.hasOwnProperty("length")) {
       return (
-        <div style={styles.cart}>
-          <div style={styles.info}>
-            <div style={styles.total}>
+        <div className="cart-widget-cart">
+          <div className="cart-widget-cart-info">
+            <div className="cart-widget-cart-total">
               <strong>{this.getSumm()}</strong> Руб.
             </div>
-            <div style={styles.amount}>
+            <div className="cart-widget-cart-amount">
               {this.getAmount()} в корзине
             </div>
           </div>
-          <div style={styles.button}>
+          <div className="cart-widget-cart-button">
             <div 
               onClick={this.handleExpand} 
-              style={styles.buttonButton} 
               className="ui button basic icon inverted"
             >
-              <span style={styles.buttonText}>
-                <i className={`ui icon ${!isExpanded ? "angle down" : "angle up"}`} /> Моя корзина
-              </span> 
+              <i className={`ui icon ${!isExpanded ? "angle down" : "angle up"}`} /> Моя корзина
             </div>
           </div>
           {isExpanded &&
-            <div style={styles.expand}>
-              <div style={styles.arrow} />
-              <div style={styles.items}>
+            <div className="cart-widget-cart-expand">
+              <div className="cart-widget-cart-arrow" />
+              <div className="cart-widget-cart-items">
                 {this.renderItems()}
               </div>
               {this.renderButton()}
@@ -228,4 +196,13 @@ class CartButton extends React.Component {
   }
 }
 
-export default CartButton;
+const mapStateToProps = ({ shop }) => ({
+  cart: shop.cart
+})
+
+const mapDispatchToProps = dispatch => ({
+  shopEditItem: (id, data) => dispatch(shopEditItem(id, data)),
+  shopRemoveItem: id => dispatch(shopRemoveItem(id)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartButton);

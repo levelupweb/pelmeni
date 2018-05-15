@@ -1,75 +1,101 @@
 import React from "react";
-import styles from "./styles";
+import styles from "./styles.css";
 
-const renderAmountChanger = (current, onChange) => (
-  <div style={styles.amountChanger}>
-    <div style={styles.minus}>
-      <button 
-        className={`ui button  small  icon ${current < 1 && "disabled"}`} 
-        onClick={() => onChange(current - 1)}
-      >
-        <i className="ui icon minus" />
-      </button>
-    </div>
-
-    <div style={styles.current}>
-      <strong>{current}</strong> шт.
-    </div>
-
-
-    <div style={styles.plus}>
-      <button 
-        className={`ui button  small   icon ${current < 0 && "disabled"}`} 
-        onClick={() => onChange(current + 1)}
-      >
-        <i className="ui icon plus" />
-      </button>
-    </div>
+const renderAmountChanger = (item, onChange) => (
+  <div className="ui buttons">
+    <button 
+      className={`ui button small icon ${item.amount < 1 && "disabled"}`} 
+      onClick={() => onChange(item.amount - 1, (item.amount - 1) * item.price)}
+    >
+      <i className="ui icon minus" />
+    </button>
+    <button 
+      className={`ui button small icon`}
+    >
+      <strong>{item.amount}</strong> шт.
+    </button>
+    <button 
+      className={`ui button small  icon`} 
+      onClick={() => onChange(item.amount + 1, (item.amount + 1) * item.price)}
+    >
+      <i className="ui icon plus" />
+    </button>
   </div>
 )
+
 
 export default class Cart extends React.Component {
   renderItems() {
     const { cart, onRemove, onChange } = this.props;
 
-    if (cart && cart.map) {
-      return cart.map((item) => (
-        <tr>
-          <td>
-            <h3 className="ui header">
-              <i style={styles.remove} onClick={() => onRemove(item.id)} className="ui icon close"></i> 
-              {item.title}
-            </h3>
-            {renderAmountChanger(item.amount, (amount) => 
-              onChange(item.id, { 
-                amount,
-                total: amount * item.price,
-              })
-            )}
-          </td>
-          <td>{item.amount} шт.</td>
-          <td>{item.weight}</td>
-          <td>{item.total} руб.</td>
-        </tr>
-      ))
+    if (!cart || (cart && !cart.map)) {
+      return null;
     }
 
-    return null;
+    return cart.map((item) => (
+      <tr>
+        <td>
+          <h3 className="ui header cart-title">
+            {item.title}
+            <div className="sub header">
+              {item.description}
+            </div>
+          </h3>
+          {renderAmountChanger(item, (amount, total) => 
+            onChange(item.id, { amount, total })
+          )}
+          <button 
+            className="ui button icon labeled cart-remove-button" 
+            onClick={() => onRemove(item.id)}
+          >
+            <i className="ui icon close"></i> Удалить
+          </button> 
+        </td>
+        <td>
+          {item.amount} шт.
+        </td>
+        <td>
+          {item.weight} гр.
+        </td>
+        <td>
+          {item.total} руб.
+        </td>
+      </tr>
+    ))
   }
 
-  getSumm() {
+
+  getTotalAmount() {
     const { cart } = this.props;
-    
-    if (cart && cart.reduce) {
-      return cart.reduce((prev, curr) => prev + curr.total, 0);
+
+    return cart.reduce((prev, curr) => prev + curr.amount, 0);
+  }
+
+  getTotalWeight() {
+    const { cart } = this.props;
+
+    return cart.reduce((prev, curr) => prev + curr.weight * curr.amount, 0);
+  }
+
+  getTotalSumm() {
+    const { cart } = this.props;
+
+    return cart.reduce((prev, curr) => prev + curr.total, 0);
+  }
+
+  getResultSumm() {
+    const totalSumm = this.getTotalSumm();
+
+    if (totalSumm < 1000) {
+      return totalSumm + 100;
     }
 
-    return 0;
+    return totalSumm;
   }
 
   render() {
-    const { cart } = this.props;
-    const summ = this.getSumm();
+    const { cart, submitter, backer } = this.props;
+    const summ = this.getTotalSumm();
 
     if (!cart) {
       return (
@@ -92,38 +118,46 @@ export default class Cart extends React.Component {
         <div className="ten wide column">
           <table className="ui celled table">
             <thead>
-              <tr><th>Наименование</th>
-              <th>Кол-во</th>
-              <th>Вес</th>
-              <th>Сумма</th>
-            </tr></thead>
+              <tr>
+                <th>Наименование</th>
+                <th>Кол-во</th>
+                <th>Вес</th>
+                <th>Сумма</th>
+              </tr>
+            </thead>
             <tbody>
               {this.renderItems()}
+              <tr>
+                <td>
+                  <strong>Итого</strong>
+                </td>
+                <td>
+                  {this.getTotalAmount()} кол-во
+                </td>
+                <td>
+                  {this.getTotalWeight()} гр.
+                </td>
+                <td>
+                  {summ} руб.
+                </td>
+              </tr>
             </tbody>
           </table>
           <div className="ui divider" />
-          <div style={styles.info}>
+          <div className="cart-info">
+            <h1 className="ui header inverted cart-finals">
+              Итого: {this.getResultSumm()} руб.
+            </h1>
             <p className="lead small">
-              Пожалуйста, подтвердите информацию о деталях заказа, а затем нажмите кнопку "Вперед"
-            </p>  
+              {summ > 1000 ? 
+                "Доставка бесплатно" : "С учетом доставки - 100 рублей (закажите от 1000 рублей - доставка бесплатно)"
+              }
+            </p>
           </div>
-          <div className="ui divider" />
-          <div style={styles.info}>
-            <h2 className="ui header inverted" style={styles.finals}>
-              Итого
-            </h2>
-            <h2 className="ui header inverted" style={styles.summ}>
-              {summ} руб.
-            </h2>
+          <div className="cart-action">
+            {backer}
+            {submitter}
           </div>
-          {summ > 1000 &&
-            <div>
-              <div className="ui divider" />
-              <p className="lead small">
-                Доставка бесплатно (заказ на сумму более 1000 руб.)
-              </p>
-            </div>
-          } 
         </div>
         <div className="six wide column">
           <h2 className="ui header inverted">Условия доставки</h2>

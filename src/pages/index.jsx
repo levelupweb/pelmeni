@@ -1,6 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
-import { Switch, Route } from "react-router";
+import { Switch, Route, withRouter } from "react-router";
 import Index from "./index/index.jsx";
 import Dostavka from "./dostavka";
 import Shop from "./shop";
@@ -33,6 +33,14 @@ class App extends React.Component {
 
   componentDidMount() {
     this.loadBackground();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { location } = this.props;
+
+    if (location !== prevProps.location) {
+      window.scrollTo(0, 0);
+    }
   }
 
   loadBackground() {
@@ -85,4 +93,4 @@ class App extends React.Component {
   }
 };
 
-export default App;
+export default withRouter(App);

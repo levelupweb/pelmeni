@@ -6,7 +6,7 @@ import Fade from "react-reveal/Fade";
 class Dostavka extends React.Component {
   render() {
     return (
-      <div className="ui container" style={{paddingTop:"80px"}}>
+      <div className="ui container text" style={{paddingTop:"120px"}}>
         <div className="ui inverted dostavka vertical segment" style={{textAlign: "left"}}>
           <Fade bottom cascade>
             <div>

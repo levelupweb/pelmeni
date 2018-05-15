@@ -1,0 +1,30 @@
+.cart-info {
+  margin: 20px 0;
+}
+
+.cart-finals {
+  margin: 0;
+}
+
+.cart-summ {
+  margin-top:0;
+  font-size:45px;
+}
+
+.cart-current {
+  margin: 0 10px;
+}
+
+.cart-total {
+  font-weight:bold;
+  font-size:17px;
+}
+
+.cart-remove-button {
+  display: inline-block;
+  margin-left:15px!important;
+}
+
+.cart-title {
+  max-width:400px;
+}
