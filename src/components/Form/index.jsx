@@ -32,7 +32,7 @@ class Form extends React.Component {
 
   handleSuccess() {
     this.setState({
-      form: defaultForm,
+      form: {},
       isHydrating: false,
       isSended: true,
     })
