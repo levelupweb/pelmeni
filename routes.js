@@ -109,8 +109,7 @@ module.exports = {
     const message	= {
       text: "Обратная связь",
       from: process.env.SMTP_USER,
-      //to: "<" + process.env.SMTP_USER + ">",
-      to: "<beatzhitta@gmail.com>",
+      to: "<" + process.env.SMTP_USER + ">",
       subject: "Обратная связь с сайта Klassnye.com",
       attachment: [ {
         data: generateHtmlFeedback(data),
@@ -164,8 +163,7 @@ module.exports = {
       const message	= {
         text: "Новая заявка",
         from: process.env.SMTP_USER,
-        //to: "<" + process.env.SMTP_USER + ">",
-        to: "<beatzhitta@gmail.com>",
+        to: "<" + process.env.SMTP_USER + ">",
         subject: "Новый заказ на сайте Klassnye.com",
         attachment: [ {
           data: generateHtml(data),
