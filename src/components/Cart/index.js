@@ -1,4 +1,6 @@
 import React from "react";
+import Fade from "react-reveal/Fade";
+import { Link } from "react-router-dom";
 import styles from "./styles.css";
 
 const renderAmountChanger = (item, onChange) => (
@@ -114,7 +116,7 @@ export default class Cart extends React.Component {
     }
 
     return (
-      <div className="ui grid">
+      <div className="ui grid stackable">
         <div className="ten wide column">
           <table className="ui celled table">
             <thead>
@@ -150,7 +152,7 @@ export default class Cart extends React.Component {
             </h1>
             <p className="lead small">
               {summ > 1000 ? 
-                "Доставка бесплатно" : "С учетом доставки - 100 рублей (закажите от 1000 рублей - доставка бесплатно)"
+                "Доставка бесплатно (заказ на сумму более 1000 рублей)" : "С учетом доставки - 100 рублей (закажите от 1000 рублей - доставка бесплатно)"
               }
             </p>
           </div>
@@ -160,34 +162,65 @@ export default class Cart extends React.Component {
           </div>
         </div>
         <div className="six wide column">
-          <h2 className="ui header inverted">Условия доставки</h2>
-          <div className="ui list">
-            <div className="item">
-              Доставка заказа в пределах г. Кострома 
-              <div className="right floated content">
-                <strong>100р</strong>
-              </div>
-            </div>
-            <div className="item">
-              Заказ от 1000р доставка по г. Кострома 
-              <div className="right floated content">
-                <strong>Бесплатно</strong>
-              </div>
-            </div>
-            <div className="ui divider"></div>
-            <div className="item">
+          <Fade bottom cascade>
+            <div>
+            <h2 class="ui inverted header primary-header">
+              Условия доставки
+            </h2>
+            <p>
+              Доставка заказа в пределах г. Кострома <strong>100р</strong>. 
+              Заказ от 1000р доставка по г. Кострома <strong>Бесплатно</strong>. 
               Доставка заказа за пределы г. Кострома – обсуждается индивидуально по телефону
+            </p>
+            <div class="ui divider" />
+            <h2 className="ui header inverted">
+              Время доставки
+            </h2>
+            <ul className="list ui inverted ordered">
+              <li className="item">
+                Интернет магазин «Классные ПФ из Костромы» работает с понедельника{" "}
+                по четверг с 8-00 до 17-00, пятница с 8-00 до 16-00.
+              </li>
+              <li className="item">
+                Все заказы, оформленные на сайте в выходные и праздничные дни, обрабатываются{" "}
+                в первый рабочий день после выходных.
+              </li>
+              <li className="item">
+                Доставка осуществляется в рабочие дни с 10-00 до 20-00.{" "}
+                В субботу с 10-00 до 14-00.
+              </li>
+              <li className="item">
+                Условия поставки: При заказе на сайте или по телефону до 14-00 – доставка с 16-00 до 20-00,{" "}
+                либо на следующий день в удобное время для покупателя с 10-00 до 20-00.
+              </li>
+              <li className="item">
+                При заказе на сайте или по телефону после 14-00 - доставка на следующий{" "}
+                день с 10-00 до 20-00.
+              </li>
+            </ul>
+            <div className="ui divider" />
+            <h2 className="ui header inverted">
+              Наши партнеры
+            </h2>
+            <ul className="list ui bulleted inverted horizontal">
+              <li className="item">Магнит</li>
+              <li className="item">Лента</li>
+              <li className="item">Пятерочка</li>
+              <li className="item">Глобус</li>
+              <li className="item">Десяточка</li>
+              <li className="item">Высшая Лига</li>
+              <li className="item">Гулливер</li>
+              <li className="item">Лидер</li>
+              <li className="item">Столбы</li>
+              <li className="item">Лотос</li>
+              <li className="item">Риат</li>
+            </ul>
+            <div class="ui divider" />
+              <Link to="/contact" className="ui button basic inverted large">
+                Связаться с нами
+              </Link>
             </div>
-          </div>
-          <h2 className="ui header inverted">Время доставки</h2>
-          <p>Интернет магазин «Классные ПФ из Костромы» работает с понедельника по четверг с 8-00 до 17-00, пятница с 8-00 до 16-00.</p>
-          <p>Все заказы, оформленные на сайте в выходные и праздничные дни, обрабатываются в первый рабочий день после выходных.</p>
-          <p>Доставка осуществляется в рабочие дни с 10-00 до 20-00. В субботу с 10-00 до 14-00.</p>
-          <p>Условия поставки: При заказе на сайте или по телефону до 14-00 – доставка с 16-00 до 20-00, либо на следующий день в удобное время для покупателя с 10-00 до 20-00.</p>
-          <p>При заказе на сайте или по телефону после 14-00 - доставка на следующий день с 10-00 до 20-00.</p>
-          <div className="ui divider" />
-          <h2 className="ui header inverted">Наши партнеры</h2>
-          <p>Магнит, Лента, Пятерочка, Глобус, Десяточка, Высшая Лига, Гулливер, Лидер, Столбы, Лотос, Риат.</p>
+          </Fade>
         </div>
       </div>
     )

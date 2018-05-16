@@ -11,18 +11,6 @@ html, body {
   width: 100%;
 }
 
-/* typography */
-
-p.lead {
-  font-size:30px!important;
-  line-height: 42px;
-}
-
-p.lead.small {
-  font-size: 26px!important;
-  line-height: 39px;
-}
-
 
 /* utils */
 
@@ -73,9 +61,11 @@ p.lead.small {
 
   /* disable all visuals on mobile */
 
-  .visual {
+  .visual, 
+  .visuals-head {
     display:none;
   }
+  
 }
 
 .ui.vertical.segment.section-1 {
@@ -320,11 +310,6 @@ p.lead.small {
 }
 
 @media screen and (max-width:700px) {
-  p.lead.small,
-  p.lead {
-    font-size:18px!important;
-  }
-
   .section-content {
     position: relative!important;
   }
@@ -572,8 +557,8 @@ p.lead.small {
 /* visuals-6 */
 
 .visuals-6 .visual-1 {
-  right:0;
-  bottom:-15%;
+  right:5%;
+  bottom:-5%;
   position:absolute;
 }
 

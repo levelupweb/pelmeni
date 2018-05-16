@@ -93,7 +93,7 @@ class CartButton extends React.Component {
             <h4 className="ui header inverted">
               {i+1}. {item.title}
               <div className="sub header">
-                {item.weight}
+                {item.weight} гр.
               </div>
             </h4>
             <div 
@@ -176,7 +176,7 @@ class CartButton extends React.Component {
               onClick={this.handleExpand} 
               className="ui button basic icon inverted"
             >
-              <i className={`ui icon ${!isExpanded ? "angle down" : "angle up"}`} /> Моя корзина
+              <i className={`ui icon ${!isExpanded ? "angle down" : "angle up"}`} /> Корзина
             </div>
           </div>
           {isExpanded &&

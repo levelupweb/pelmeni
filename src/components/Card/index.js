@@ -17,8 +17,8 @@ export default class Card extends React.Component {
 
     this.state = {
       amount: 1,
-      price: price[0],
-      weight: weight[0],
+      price: price[price.length - 1],
+      weight: weight[price.length - 1],
     }
   }
 
@@ -227,6 +227,7 @@ export default class Card extends React.Component {
               {this.renderAmountChanger()}
               <div className="card-price">
                 {this.renderPrice()} руб.
+                <span>{this.renderPrice() * 1.3} цена в магазинах</span>
               </div>
               <div className="card-primary-action">
                 {this.renderAction()}

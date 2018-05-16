@@ -56,3 +56,9 @@
 .shop-card .card-amount-changer .card-primary-action {
   margin-left:15px;
 }
+
+.card-price span {
+  font-size:13px!important;
+  display:block!important;
+  font-weight:300!important;
+}

@@ -1,9 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 
 const loadDependencies = () => {
   require("jquery");
   require("../../../semantic/semantic/dist/components/sidebar");
-  require("../../../semantic/semantic/dist/components/sidebar.css");
 }
 
 class SidebarMenu extends React.Component { 
@@ -13,10 +13,20 @@ class SidebarMenu extends React.Component {
     }
   }
 
-  loadSidebar() {
-    $('.ui.sidebar')
-      .sidebar('attach events', '.toc.item')
-    ;
+  componentDidUpdate(prevProps) {
+    const { isActive } = this.props;
+
+    if (isActive !== prevProps.isActive && isActive) {
+      $('.ui.sidebar')
+        .sidebar("show")
+      ;
+    } 
+
+    if (isActive !== prevProps.isActive && !isActive) {
+      $('.ui.sidebar')
+        .sidebar("hide")
+      ;
+    } 
   }
 
   render() {
@@ -28,14 +38,11 @@ class SidebarMenu extends React.Component {
         <a className="item" href="/">
           Главная
         </a>
-        <a className="item" href="/catalog">
+        <a className="item" href="/shop">
           Каталог продукции
         </a>
-        <a className="item"  href="/#contact">
+        <a className="item"  href="/contact">
           Связаться с нами
-        </a>
-        <a className="ui item" href="/shop">
-          Купить продукцию
         </a>
         <a className="item" href="/dostavka">
           Условия доставки
@@ -45,4 +52,8 @@ class SidebarMenu extends React.Component {
   }
 }
 
-export default SidebarMenu;
+const mapStateToProps = ({ menu }) => ({
+  isActive: menu.isActive
+})
+
+export default connect(mapStateToProps)(SidebarMenu);

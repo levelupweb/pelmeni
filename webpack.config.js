@@ -2,6 +2,8 @@ require("dotenv").load();
 const path = require('path');
 const webpack = require("webpack");
 const config = require("./config");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const jqueryPath = "jquery";
 
@@ -11,6 +13,14 @@ const jqueryPlugin = new webpack.ProvidePlugin({
   "window.jQuery": jqueryPath
 });
 
+const analyzer = new BundleAnalyzerPlugin({
+  bundleDir: "analyze"
+});
+
+const compressionPlugin = new CompressionPlugin({
+  test: /\.(ico|png|jpg|gif|woff(2)?|ttf|eot|svg|mp4|webm)$/
+})
+
 module.exports = {
   entry: {
     index: path.resolve(__dirname, 'src/index.jsx'),
@@ -19,7 +29,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'app.[name].js'
   },
-  plugins: [jqueryPlugin],
+  plugins: [jqueryPlugin, analyzer, compressionPlugin],
   devtool: 'eval-source-map',
   module: {
     loaders: [

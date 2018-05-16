@@ -61,12 +61,14 @@ class Shop extends Component {
     }
 
     const cartLength = cart.length;
-    const { pathname } = this.props.location;
+    const { pathname, hash } = this.props.location;
     
     return (
       <div className="shop-wrapper">
         <div className="shop-steps">
-          <Steps pathname={pathname} />
+          {hash !== "#success" &&
+            <Steps pathname={pathname} />
+          }
         </div>
         <div className="shop-content">
           <Switch>
@@ -126,17 +128,6 @@ class Shop extends Component {
                 />
               )}
             />
-            <Route
-              exact
-              path="/success"
-              render={() => (
-                <div className="ui text container" style={{textAlign: "center"}}>
-                    <a href="/" className="ui button inverted big">
-                      Вернуться на главную
-                    </a>
-                  </div>
-              )}
-            />
           </Switch>
         </div>
       </div>
@@ -151,7 +142,7 @@ Shop.defaultProps = {
 
 const mapStateToProps = ({ shop }) => ({
   cart: shop.cart,
-  canCart: shop.cart.length && shop.cart.length > 0,
+  canCart: !!(shop.cart.length && shop.cart.length > 0),
 })
 
 const mapDispatchToProps = dispatch => ({

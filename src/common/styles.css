@@ -1,3 +1,23 @@
+/* typography */
+
+p.lead {
+  font-size:30px!important;
+  line-height: 42px;
+}
+
+p.lead.small {
+  font-size: 26px!important;
+  line-height: 39px;
+}
+
+@media screen and (max-width:700px) {
+  p.lead.small,
+  p.lead {
+    font-size:18px!important;
+    line-height:27px!important;
+  }
+}
+
 /* segments basic styles */
 
 .ui.vertical.segment {
@@ -36,4 +56,18 @@
   padding-top:0;
   padding-bottom:0;
   flex-direction: column;
+}
+
+@media screen and (max-width: 700px) {
+  .ui.vertical.segment {
+    min-height: auto!important;
+    padding-top:0!important;
+    padding-bottom:0!important;
+    margin-top:4em!important;
+    margin-bottom:4em!important;
+    
+  }
+  .segment .section-content {
+    margin-top: 0!important;
+  }
 }

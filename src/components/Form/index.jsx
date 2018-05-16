@@ -3,11 +3,6 @@ import Fade from "react-reveal/Fade"
 import axios from "axios";
 import "./styles.css";
 
-const defaultForm = {
-  name: "",
-  email: "",
-  message: "",
-}
 
 class Form extends React.Component {
   constructor(props) {
@@ -18,7 +13,7 @@ class Form extends React.Component {
     this.handleServerErrors = this.handleServerErrors.bind(this);
 
     this.state = {
-      form: defaultForm,
+      form: {},
       errors: [],
       isHydrating: false,
       isSended: false,
@@ -83,8 +78,8 @@ class Form extends React.Component {
 
     if (errors.length > 0) {
       return (
-        <ul className="list ordered">
-          {errors.map((err, i) => <li className="item" key={i}>{err.msg}</li>)}
+        <ul className="ui list inverted bulleted">
+          {errors.map((err, i) => <li style={{color: "#fff"}} className="item" key={i}>{err.msg ? err.msg : err}</li>)}
         </ul>
       )
     }

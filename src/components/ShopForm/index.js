@@ -1,102 +1,213 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router"
+import Fade from "react-reveal/Fade";
+import { shopRefresh } from "../Shop/actions";
 import axios from "axios";
+import "./styles.css";
 
-const defaultForm = {
-  name: "",
-  email: "",
-  phone: "",
-}
 
-export default class Form extends React.Component {
+class ShopForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleForm = this.handleForm.bind(this);
-    this.sendForm = this.sendForm.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+    this.handleSuccess = this.handleSuccess.bind(this);
+    this.handleServerErrors = this.handleServerErrors.bind(this);
+
     this.state = {
-      form: defaultForm,
+      form: {},
       errors: [],
       isHydrating: false,
+      isSended: false,
     }
   }
 
-  handleForm(e) {
-    const field = e.target.name;
-    const value = e.target.value;
+  componentDidMount() {
+    require("jquery");
+    require("../../../semantic/semantic/dist/components/checkbox");
+
+    $('.ui.checkbox')
+      .checkbox()
+    ;
+  }
+
+  handleForm({ target }) {
+    const { name, value } = target;
 
     this.setState({
       form: Object.assign({}, this.state.form, {
-        [field]: value,
+        [name]: value,
       })
     })
   }
 
-  checkForm() {
-    const { name, phone, email } = this.state.form;
-    return (phone.length > 1);
+  handleSuccess() {
+    const { onSuccess, cart, shopRefresh } = this.props;
+    
+    this.setState({
+      form: {},
+      isHydrating: false,
+      isSended: true,
+    }, () => {
+      this.props.history.push(this.props.location.pathname + "#success");
+      shopRefresh()
+    })
   }
 
-  sendForm(e) {
+  submitForm() {
     const { form } = this.state;
-    const { onSuccess, cart } = this.props;
+    const { cart } = this.props;
+    
+    const result = Object.assign({}, form, { items: cart });
 
-    e.preventDefault();
-
-    this.setState({ isHydrating: true, })
-
-    if (this.checkForm()) {
-      return axios
-        .post("/send", Object.assign({}, form, { items: cart }))
-        .then(() => onSuccess())
-        .then(() => this.setState({ isHydrating: false }))
-        .catch((err) => this.handleServerErrors(err));
-    } else {
-      return this.handleErrors(["Пожалуйста, заполните обязательное поле - номер телефона"]);
-    }
+    this.setState({ isHydrating: true }, () => {
+      axios.post("/post", result)
+        .then(this.handleSuccess)
+        .catch(this.handleServerErrors);
+    })
   }
 
   handleServerErrors(err) {
-    if (!err.response) return this.handleErrors(["Произошла ошибка во время отправки заказа. Повторите позже"]);
-    if (err.response.status === 422) return this.handleErrors(err.response.data);
-    if (err.response.status >= 400) return this.handleErrors(["Произошла непредвиденная ошибка на сервере. Попробуйте позже"]);
+    if (err.response) {
+      if (err.response.status === 422) {
+        this.setState({
+          isHydrating: false,
+          errors: Object.values(err.response.data.errors)
+        });
+      } else {
+        this.setState({
+          isHydrating: false,
+          errors: ["Произошла непредвиденная ошибка на сервере. Попробуйте позже"],
+        });
+      }
+    } else {
+      this.setState({
+        isHydrating: false,
+        errors: ["Произошла ошибка во время отправки заказа. Повторите позже"]
+      })
+    }
   }
 
   handleErrors(errors) {
     this.setState({ errors, isHydrating: false })
   }
 
+  renderErrors() {
+    const { errors } = this.state;
+
+    if (errors.length > 0) {
+      return (
+        <ul className="ui list inverted">
+          {errors.map((err, i) => <li style={{color: "#fff"}} className="item" key={i}>{err.msg ? err.msg : err}</li>)}
+        </ul>
+      )
+    }
+
+    return null;
+  }
+
   render() {
-    const { form, errors, isHydrating } = this.state;
-    const { name, phone, email } = form;
+    const { form, isHydrating, isSended } = this.state;
+
+    if (isSended) {
+      return (
+        <div className="ui container text">
+          <Fade bottom cascade>
+            <h1 className="header ui inverted">
+              Готово!
+            </h1>
+            <p className="lead small" style={{color: "#fff"}}>
+              Ваш заказ успешно подтвержден! Мы свяжемся с{" "}
+              вами в течение 15 минут! Оплата производится при получении{" "}
+              заказа наличными деньгами или банковской картой.{" "}
+              Спасибо, что выбираете нашу продукцию!
+            </p>
+            <Link to="/">
+              <button className="ui button primary">
+                Вернуться на главную
+              </button>
+            </Link>
+          </Fade>
+        </div>
+      );
+    }
 
     return (
-      <div className="ui container text">
-        {errors.length > 0 &&
-          <div className="ui error message">
-            <i className="close icon"></i>
-            <div className="header">
-              В ходе выполнения операции возникли следующие ошибки
+      <div className="ui container text contact-form">
+        {this.renderErrors()}
+        <div className={`ui form inverted big ${isHydrating && "loading"}`}>
+          <Fade bottom>
+            <div className="field">
+              <label>Ваше имя</label>
+              <input 
+                value={form.name} 
+                onChange={this.handleForm} 
+                type="text" 
+                name="name" 
+                placeholder="Иван Иванов" 
+              />
             </div>
-            <ul className="list">
-              {errors.map((err, i) => <li key={i}>{err}</li>)}
-            </ul>
-          </div>
-        }
-        <form onSubmit={this.sendForm} className={`ui form inverted big ${isHydrating && "loading"}`} >
-          <div className="field">
-            <label>Ваше имя</label>
-            <input value={name} onChange={this.handleForm} type="text" name="name" placeholder="Иван Иванов" />
-          </div>
-          <div className="field">
-            <label>E-mail адрес</label>
-            <input value={email} onChange={this.handleForm} type="email" name="email" placeholder="inbox@mail.ru" />
-          </div>
-          <div className="field">
-            <label>Контактный телефон</label>
-            <input value={phone} onChange={this.handleForm} type="tel" name="phone" placeholder="+7" />
-          </div>
-          <button className="ui button big" type="submit">Отправить</button>
-        </form>
+          </Fade>
+          <Fade bottom>
+            <div className="field">
+              <label>Контактный телефон</label>
+              <input 
+                value={form.phone} 
+                onChange={this.handleForm} 
+                type="text" 
+                name="phone" 
+                placeholder="Телефон должен начинаться с +7" 
+              />
+            </div>
+          </Fade>
+          <Fade bottom>
+            <div className="field">
+              <label>Адрес доставки</label>
+              <input 
+                value={form.dostavka} 
+                onChange={this.handleForm} 
+                type="text" 
+                name="dostavka" 
+                placeholder="Укажите, если хотите ускорить процесс" 
+              />
+            </div>
+          </Fade>
+          <Fade bottom>
+            <div className="field">
+              <label>Ваше сообщение или вопрос</label>
+              <textarea 
+                value={form.message} 
+                onChange={this.handleForm} 
+                name="message" 
+                placeholder="Здесь вы можете оставить дополнительное сообщение к заказу" 
+              />
+            </div>
+          </Fade>
+          <Fade bottom>
+            <div className="field">
+              <div class="ui checkbox">
+                <label>Соглашаюсь с условиями обработки и хранения персональных данных</label>
+                <input type="checkbox" tabIndex="0" className="hidden" />
+              </div>
+            </div>
+          </Fade> 
+          <Fade bottom>
+            <button 
+              className="ui button big basic inverted" 
+              type="submit"
+              onClick={this.submitForm}
+            >
+              Отправить
+            </button>
+          </Fade>
+        </div>
       </div>
-    )
+    );
   }
 }
+
+export default withRouter(connect(null, dispatch => ({
+  shopRefresh: () => dispatch(shopRefresh()),
+}))(ShopForm));

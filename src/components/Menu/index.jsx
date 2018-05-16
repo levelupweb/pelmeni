@@ -1,18 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { menuToggle } from "../SidebarMenu/actions";
 import { withRouter } from 'react-router'
 import CartWidget from "../CartWidget";
 import "./styles.css";
 
 class Menu extends React.Component {
   render() {
+    const { menuToggle } = this.props;
     const { pathname } = this.props.location;
     return (
       <div className="main-menu">
         <div className="ui container">
           <div className="ui fluid secondary pointing inverted menu large">
             <a className="toc item" id="open_sidebar">
-              <i className="toc-icon" className="sidebar icon"></i>
+              <i className="toc-icon" onClick={() => menuToggle && menuToggle()} style={{fontSize: "35px"}} className="sidebar icon"></i>
             </a>
             <Link to='/' className={`${pathname === "/" && "active"} item`}>
               Главная
@@ -40,4 +43,6 @@ class Menu extends React.Component {
   }
 }
 
-export default withRouter(Menu);
+export default withRouter(connect(null, dispatch => ({
+  menuToggle: () => dispatch(menuToggle())
+}))(Menu));

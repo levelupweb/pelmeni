@@ -1,5 +1,41 @@
 export default [{
   id: 1,
+  title: "Пельмени 'Классные'. Премиум",
+  weight: [400, 900],
+  price: [145, 330],
+  description: "Продукт категории А. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, специи, чеснок, вода питьевая",
+  image: [
+    require("./img/premium-gotov.jpg"),
+    require("./img/premium-zamoroz.jpg"),
+    require("./img/premium-400.jpg"),
+    require("./img/premium-1000.jpg")
+  ],
+}, {
+  id: 2,
+  title: "Пельмени 'Классные'. Боярские",
+  weight: [400, 900],
+  price: [135, 305],
+  description: "Продукт категории А. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, специи, чеснок, вода питьевая",
+  image: [
+    require("./img/boyarskie-gotov.jpg"),
+    require("./img/boyarskie-zamoroz.jpg"),
+    require("./img/boyarskie-400.jpg"),
+    require("./img/boyarskie-1000.jpg")
+  ],
+}, {
+  id: 3,
+  title: "Пельмени 'Классные'. Славянские",
+  weight: [400, 900],
+  price: [140, 315],
+  description: "Продукт категории А. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, специи, чеснок, вода питьевая",
+  image: [
+    require("./img/slav-gotov.jpg"),
+    require("./img/slav-zamoroz.jpg"),
+    require("./img/slav-1000.jpg"),
+    require("./img/slavyanskie.jpg")
+  ],
+}, {
+  id: 4,
   title: "Чебуреки",
   weight: [300],
   price: [85],
@@ -10,7 +46,7 @@ export default [{
     require("./img/chebureki-a-300.jpg")
   ],
 }, {
-  id: 2,
+  id: 5,
   title: "Пельмени 'Классные'",
   weight: [400, 500, 950, 1000],
   price: [145, 195, 365, 360],
@@ -22,7 +58,7 @@ export default [{
     require("./img/pelmeni-a-1000.jpg")
   ],
 }, {
-  id: 3,
+  id: 6,
   title: "Пельмени 'Для вас' из говядины",
   weight: [400, 1000],
   price: [130, 315],
@@ -34,7 +70,7 @@ export default [{
     require("./img/dlya-vas-govyadina-400.jpg")
   ],
 }, {
-  id: 4,
+  id: 7,
   title: "Пельмени 'Для вас'",
   weight: [400, 1000],
   price: [120, 290],
@@ -57,7 +93,7 @@ export default [{
     require("./img/manti-a-530.jpg")
   ],
 }, {
-  id: 6,
+  id: 8,
   title: "Вареники с картофелем",
   weight: [400, 1000],
   price: [60, 140],
@@ -69,7 +105,7 @@ export default [{
     require("./img/vareniki-kartofel-1000.jpg")
   ],
 }, {
-  id: 7,
+  id: 9,
   title: "Вареники с картофелем и грибами",
   weight: [400, 1000],
   price: [65, 145],
@@ -81,7 +117,7 @@ export default [{
     require("./img/vareniki-kartofel-gribi-1000.jpg")
   ],
 }, {
-  id: 8,
+  id: 10,
   title: "Вареники с творогом",
   weight: [400, 1000],
   price: [105, 260],
@@ -93,7 +129,7 @@ export default [{
     require("./img/vareniki-tvorog-1000.jpg")
   ],
 }, {
-  id: 9,
+  id: 11,
   title: "Котлеты",
   weight: [430],
   price: [150],
@@ -104,7 +140,7 @@ export default [{
     require("./img/kotleti-a-430.jpg")
   ],
 }, {
-  id: 10,
+  id: 12,
   title: "Котлеты с чесноком",
   weight: [430],
   price: [150],

@@ -59,9 +59,6 @@ class App extends React.Component {
   }
 
   render() {
-    const { isReady } = this.props;
-    const { background } = this.state;
-
     return (
       <div className="site">
         <Helmet>
@@ -80,7 +77,7 @@ class App extends React.Component {
             </Switch>
           <Footer />
         </div>
-        <div className={`ui dimmer ${isReady && "active"}`}>
+        <div className={`ui dimmer ${background && "active"}`}>
           <div className="content">
             <h2 className="ui inverted icon header">
               <i className="heart icon"></i>

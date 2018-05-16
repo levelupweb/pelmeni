@@ -20,7 +20,7 @@ export default () => {
     $('.section-1').visibility(Object.assign({}, visibilityOptions, {
       onPassing: (calculations) => {
         const offset = calculations.percentagePassed * 400;
-        $('.section-2 .images .image-2').css('margin-top', offset*0.4);
+        $('.visuals-2 .images .image-2').css('margin-top', offset*0.4);
         $('.visuals-2 .visual-rotation img').css('transform', 'rotate(' + offset/2 + 'deg) scale('+ offset/400 +')');
         $('.visuals-2 .visual-custom-1 img').css({'top': 400-offset});
         $('.visuals-2 .visual-custom-2 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
@@ -37,7 +37,7 @@ export default () => {
         $('.visuals-3 .visual-custom-1 img').css('left', calculations.percentagePassed*40 + "%");
         $('.visuals-3 .visual-custom-5 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
         $('.visuals-2 .visual-custom-6 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
-        $('.section-1 .visuals-head .visual-custom-4 img').css('transform', 'scale('+ ((calculations.percentagePassed/1)+1.0)  +')');
+        $('.visuals-1 .visual-custom-4 img').css('transform', 'scale('+ ((calculations.percentagePassed/1)+1.0)  +')');
         
         if (calculations.percentagePassed > 0.7 && !isVisible) {
           $('.visuals-3 .visual-custom-1 img').attr("src", require("./img/section-3-chapter-2.jpg"));
@@ -55,9 +55,9 @@ export default () => {
     $('.section-3').visibility(Object.assign({}, visibilityOptions, {
       onPassing: (calculations) => {
         const offset = calculations.percentagePassed * 400;
-        $('.section-4 .visuals-head .visual-default img').css('left', calculations.percentagePassed*40 + "%");
-        $('.section-4 .visuals-head .visual-custom-4 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
-        $('.section-4 .images .image-2').css('margin-top', offset*0.3);
+        $('.visuals-4 .visual-default img').css('left', calculations.percentagePassed*40 + "%");
+        $('.visuals-4 .visual-custom-4 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
+        $('.visuals-4 .images .image-2').css('margin-top', offset*0.3);
       },
     }));
 
@@ -67,11 +67,11 @@ export default () => {
     $('.section-4').visibility(Object.assign({}, visibilityOptions, {
       onPassing: (calculations) => {
         const offset = calculations.percentagePassed * 400;
-        $('.section-5 .visuals-head .visual-custom-2 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
-        $('.section-4 .images .image-1').css('margin-top', offset*0.5);
-        $('.section-4 .visuals-head .visual-custom-1 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
-        $('.section-5 .visuals-head .visual-custom-2 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
-        $('.section-5 .visuals-head .visual-custom-3 img').css({'transform': 'scale('+ ((calculations.percentagePassed/4)+1.0)  +')'});
+        $('.visuals-5 .visual-custom-2 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
+        $('.visuals-4 .images .image-1').css('margin-top', offset*0.5);
+        $('.visuals-4 .visual-custom-1 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
+        $('.visuals-5 .visual-custom-2 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0)  +')'});
+        $('.visuals-5 .visual-custom-3 img').css({'transform': 'scale('+ ((calculations.percentagePassed/4)+1.0)  +')'});
       },
     }));
 
@@ -81,7 +81,7 @@ export default () => {
     $('.section-4').visibility(Object.assign({}, visibilityOptions, {
       onPassing: (calculations) => {
         const offset = calculations.percentagePassed * 400;
-        $('.section-5 .visuals-head .visual-custom-1 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0) +')'});
+        $('.visuals-5 .visual-custom-1 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0) +')'});
       },
     }));
 
@@ -120,7 +120,7 @@ export default () => {
   const videoContainer = $("#video-container");
 
   const imageFallback = document.createElement("img");
-  imageFallback.src = "/static/index/img/section-6-chapter-1.jpg";
+  imageFallback.src = require("./img/section-6-chapter-1.jpg");
 
   if (window.innerWidth > 1000) {
     videoContainer.append(videoElement);

@@ -3,15 +3,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 
-const emptyState = {
-  shop: {
-    cart: null
-  },
-}
-
 const defaultState = typeof window !== "undefined" && window.localStorage.getItem("state")
   ? JSON.parse(window.localStorage.getItem("state"))
-  : emptyState;
+  : { shop: { cart: [] }, };
 
 const store = createStore(
   reducers, 

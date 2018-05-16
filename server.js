@@ -17,7 +17,7 @@ const { renderToString } = require('react-dom/server');
 const { Helmet } = require('react-helmet');
 const StaticRouter = require('react-router-dom/StaticRouter').default; 
 const Provider = require("react-redux").Provider;
-const store = require("./src/store");
+const store = require("./src/store").default;
 const App = require('./src/pages/index.jsx').default; 
 const document = require('./document');
 
@@ -36,7 +36,7 @@ app.get('*', (req, res) => {
     location: req.url,
     context: {},
   }, React.createElement(Provider, { 
-    store 
+    store,
   }, React.createElement(App, {}))));
 
   res.status(200).send(document(html, config, Helmet.renderStatic()));
