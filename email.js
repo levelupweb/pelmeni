@@ -28,16 +28,11 @@ const checkPostData = [
   check("message")
     .optional()
     .isLength({
-      min: 50,
       max: 10000,
     })
-    .withMessage("Сообщение не может быть меньше 50 или больше 10000 символов"),
+    .withMessage("Сообщение не может быть больше 10000 символов"),
   check("items")
     .exists()
-    .custom(value => {
-      console.log(value)
-      return value
-    })
     .withMessage("Не заполнено поле 'Продукты'"),
 ]
 
@@ -75,10 +70,9 @@ const checkContactData = [
   check("message")
     .optional()
     .isLength({
-      min: 50,
       max: 10000,
     })
-    .withMessage("Сообщение не может быть меньше 50 или больше 10000 символов"),
+    .withMessage("Сообщение не может быть больше 10000 символов"),
 ];
 
 
