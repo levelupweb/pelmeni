@@ -59,6 +59,8 @@ class App extends React.Component {
   }
 
   render() {
+    const { background } = this.state;
+    
     return (
       <div className="site">
         <Helmet>
