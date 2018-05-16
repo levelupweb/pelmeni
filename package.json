@@ -27,6 +27,7 @@
     "jquery": "^3.3.1",
     "md5": "^2.2.1",
     "minimalistic-assert": "^1.0.1",
+    "mongoose": "^5.1.1",
     "nuka-carousel": "^4.2.1",
     "parallax-js": "^3.1.0",
     "react": "^16.3.2",

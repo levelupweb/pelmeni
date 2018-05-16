@@ -1,3 +1,4 @@
+require("./db")();
 const express = require('express');
 const config = require("./config");
 const fs = require("fs");
@@ -8,9 +9,11 @@ const http = require('http');
 const { 
   handlerContact, 
   handlerOffer, 
+  handlerCsv,
+  handlerData,
   checkContactData, 
   checkPostData 
-} = require("./email");
+} = require("./routes");
 
 const React = require('react');
 const { renderToString } = require('react-dom/server');
@@ -30,6 +33,8 @@ app.use('/static', express.static(__dirname + '/dist'));
 
 app.post("/post", [checkPostData], handlerOffer);
 app.post("/send", [checkContactData], handlerContact);
+app.get("/csv", handlerCsv)
+app.get("/data", handlerData);
 
 app.get('*', (req, res) => {
   const html = renderToString(React.createElement(StaticRouter, {

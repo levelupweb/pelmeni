@@ -12,4 +12,10 @@ module.exports = {
   isDev,
   dist: url + "/" + process.env.STATIC_FOLDER,
   prodUrl: url,
+  db: {
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+  }
 }
