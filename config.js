@@ -11,4 +11,5 @@ module.exports = {
   port,
   isDev,
   dist: url + "/" + process.env.STATIC_FOLDER,
+  prodUrl: url,
 }
