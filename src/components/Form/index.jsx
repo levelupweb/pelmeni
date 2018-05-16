@@ -62,6 +62,7 @@ class Form extends React.Component {
         });
       }
     } else {
+      console.log(err);
       this.setState({
         isHydrating: false,
         errors: ["Произошла ошибка во время отправки заказа. Повторите позже"]

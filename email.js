@@ -105,7 +105,7 @@ module.exports = {
     const message	= {
       text: "Обратная связь",
       from: process.env.SMTP_USER,
-      to: "<beatzhitta@gmail.com>",
+      to: "<" + process.env.SMTP_USER + ">",
       subject: "Обратная связь с сайта Klassnye.com",
       attachment: [ {
         data: generateHtmlFeedback(req.body),
