@@ -69,15 +69,17 @@ class App extends React.Component {
         <SidebarMenu />
         <div className="pusher" style={{backgroundImage: `url(${background && this.backgroundUrl})`}}>
           <Menu />
-            <Switch>
-              <Route exact path='/' component={Index}/>
-              <Route path='/dostavka' component={Dostavka}/>
-              <Route path='/shop' component={Shop}/>
-              <Route path='/catalog' component={Catalog}/>
-              <Route path='/contact' component={Contact}/>
-              <Route component={NotFound} />
-            </Switch>
+          <div className="pusher-content">
+          <Switch>
+            <Route exact path='/' component={Index}/>
+            <Route path='/dostavka' component={Dostavka}/>
+            <Route path='/shop' component={Shop}/>
+            <Route path='/catalog' component={Catalog}/>
+            <Route path='/contact' component={Contact}/>
+            <Route component={NotFound} />
+          </Switch>
           <Footer />
+          </div>
         </div>
         <div className={`ui dimmer ${!background && "active"}`}>
           <div className="content">

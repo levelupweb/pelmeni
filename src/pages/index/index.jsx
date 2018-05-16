@@ -44,6 +44,7 @@ class IndexPage extends React.Component {
                 <div className="logo">
                   <img 
                     src={require("./src/img/logo-1.png")}
+                    className="logo-background"
                     alt="Замороженные полуфабрикаты с доставкой на дом" 
                   />
                   <img 

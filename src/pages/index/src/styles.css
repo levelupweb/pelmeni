@@ -136,10 +136,9 @@ html, body {
 }
 
 @media screen and (max-width:700px) {
-  .logo-slice-1,
-  .logo-slice-2 {
-    width:70%;
-    margin-right: -35%;
+  .logo-chief,
+  .logo-background {
+    width:250px!important;
   }
 
   .section-2 .visual-rotation {
@@ -202,7 +201,7 @@ html, body {
   position: absolute;
   right: 300px;
   width: 400px;
-  top: 66px;
+  top: 200px;
 }
 
 

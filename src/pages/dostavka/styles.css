@@ -1,3 +1,7 @@
-.dostavka p {
+.dostavka-page {
+  text-align:left;
+}
+
+.dostavka-page p {
   font-size:18px!important;
 }

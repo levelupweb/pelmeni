@@ -5,7 +5,7 @@ import "./styles.css";
 class Contact extends React.Component {
   render() {
     return (
-      <div className="ui inverted vertical segment contact-page">
+      <div className="ui inverted vertical segment">
         <ContactForm />
       </div>
     );

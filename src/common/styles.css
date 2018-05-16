@@ -20,6 +20,10 @@ p.lead.small {
 
 /* segments basic styles */
 
+.pusher-content {
+  margin-top:100px;
+}
+
 .ui.vertical.segment {
   background: transparent;
 }
