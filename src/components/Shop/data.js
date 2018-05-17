@@ -5,9 +5,9 @@ export default [{
   price: [145, 330],
   description: "Продукт категории А. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, соль, вода питьевая",
   image: {
-    ["1000"]: require("./img/premium-1000.jpg"),
+    ["900"]: require("./img/premium-1000.jpg"),
     ["default"]: require("./img/premium-gotov.jpg"),
-    ["default"]: require("./img/premium-zamoroz.jpg"),
+    ["default1"]: require("./img/premium-zamoroz.jpg"),
     ["400"]: require("./img/premium-400.jpg"),
   },
 }, {
@@ -17,9 +17,9 @@ export default [{
   price: [135, 305],
   description: "Продукт категории Б. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, соль, шпик, вода питьевая",
   image: {
-    ["1000"]: require("./img/boyarskie-1000.jpg"),
+    ["900"]: require("./img/boyarskie-1000.jpg"),
     ["default"]: require("./img/boyarskie-gotov.jpg"),
-    ["default"]: require("./img/boyarskie-zamoroz.jpg"),
+    ["default1"]: require("./img/boyarskie-zamoroz.jpg"),
     ["400"]: require("./img/boyarskie-400.jpg"),
   },
 }, {
@@ -29,9 +29,9 @@ export default [{
   price: [140, 315],
   description: "Продукт категории А. В состав входят: свинина, мука в/с, яйцо, лук, перец, соль, вода питьевая",
   image: {
-    ["1000"]: require("./img/slav-1000.jpg"),
+    ["900"]: require("./img/slav-1000.jpg"),
     ["default"]: require("./img/slav-gotov.jpg"),
-    ["default"]: require("./img/slav-zamoroz.jpg"),
+    ["default1"]: require("./img/slav-zamoroz.jpg"),
     ["400"]: require("./img/slavyanskie.jpg"),
   },
 }, {
@@ -43,7 +43,7 @@ export default [{
   image: {
     ["300"]: require("./img/chebureki-a-300.jpg"),
     ["default"]: require("./img/chebureki.jpg"),
-    ["default"]: require("./img/chebureki-zamoroz.jpg"),
+    ["default1"]: require("./img/chebureki-zamoroz.jpg"),
   },
 }, {
   id: 5,
@@ -54,7 +54,7 @@ export default [{
   image: {
     ["1000"]: require("./img/pelmeni-a-1000.jpg"),
     ["default"]: require("./img/pelmeni-s-govyadinoy.jpg"),
-    ["default"]: require("./img/pelmeni-a-zamoroz.jpg"),
+    ["default1"]: require("./img/pelmeni-a-zamoroz.jpg"),
     ["400"]: require("./img/pelmeni-a-400.jpg")
   },
 }, {
@@ -66,7 +66,7 @@ export default [{
   image: {
     ["1000"]: require("./img/dlya-vas-govyadina-1000.jpg"),
     ["default"]: require("./img/pelmeni-dlya-vas-b-govyadina.jpg"),
-    ["default"]: require("./img/pelmeni-b-zamoroz.jpg"),
+    ["default1"]: require("./img/pelmeni-b-zamoroz.jpg"),
     ["400"]: require("./img/dlya-vas-govyadina-400.jpg"),
   },
 }, {
@@ -78,7 +78,7 @@ export default [{
   image: {
     ["1000"]: require("./img/pelmeni-dlya-vas-1000.jpg"),
     ["default"]: require("./img/pelmeni-dlya-vas-b.jpg"),
-    ["default"]: require("./img/pelmeni-b-fix-zamoroz.jpg"),
+    ["default1"]: require("./img/pelmeni-b-fix-zamoroz.jpg"),
     ["400"]: require("./img/dlya-vas-400.jpg"),
   },
 }, {
@@ -90,7 +90,7 @@ export default [{
   image: {
     ["530"]: require("./img/manti-a-530.jpg"),
     ["default"]: require("./img/manti.jpg"),
-    ["default"]: require("./img/manti-zamoroz.jpg"),
+    ["default1"]: require("./img/manti-zamoroz.jpg"),
   },
 }, {
   id: 8,
@@ -101,7 +101,7 @@ export default [{
   image: {
     ["1000"]: require("./img/vareniki-kartofel-1000.jpg"),
     ["default"]: require("./img/vareniki-s-kartofelem.jpg"),
-    ["default"]: require("./img/vareniki-kartofel-zamoroz.jpg"),
+    ["default1"]: require("./img/vareniki-kartofel-zamoroz.jpg"),
     ["400"]: require("./img/vareniki-kartofel-400.jpg"),
   },
 }, {
@@ -113,7 +113,7 @@ export default [{
   image: {
     ["1000"]: require("./img/vareniki-kartofel-gribi-1000.jpg"),
     ["default"]: require("./img/vareniki-s-kartofelem-i-gribami.jpg"),
-    ["default"]: require("./img/vareniki-kartofel-gribi-zamoroz.jpg"),
+    ["default1"]: require("./img/vareniki-kartofel-gribi-zamoroz.jpg"),
     ["400"]: require("./img/vareniki-kartofel-gribi-400.jpg"),
   },
 }, {
@@ -125,7 +125,7 @@ export default [{
   image: {
     ["1000"]: require("./img/vareniki-tvorog-1000.jpg"),
     ["default"]: require("./img/vareniki-s-tvorogom.jpg"),
-    ["default"]: require("./img/vareniki-tvorog-zamoroz.jpg"),
+    ["default1"]: require("./img/vareniki-tvorog-zamoroz.jpg"),
     ["400"]: require("./img/vareniki-s-tvorogom-400.jpg"),
   },
 }, {
@@ -137,7 +137,7 @@ export default [{
   image: {
     ["430"]: require("./img/kotleti-a-430.jpg"),
     ["default"]: require("./img/kotleti.jpg"),
-    ["default"]: require("./img/kotleti-zamoroz.jpg"),
+    ["default1"]: require("./img/kotleti-zamoroz.jpg"),
   },
 }, {
   id: 12,
@@ -148,6 +148,6 @@ export default [{
   image: {
     ["430"]: require("./img/kotleti-a-chesnok-430.jpg"),
     ["default"]: require("./img/kotleti-s-chesnokom.jpg"),
-    ["default"]: require("./img/kotleti-chesnok-zamoroz.jpg"),
+    ["default1"]: require("./img/kotleti-chesnok-zamoroz.jpg"),
   },
 }]

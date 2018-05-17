@@ -110,13 +110,14 @@ export default () => {
   videoElement.appendChild(webmSource);
   videoElement.appendChild(mp4Source);
 
-  $('.section-6').visibility(Object.assign({}, visibilityOptions, {
+  $('.section-6').visibility({
     once: true,
+    continuous: false,
     onTopPassed: () => {
       videoElement.currentTime = 0;
       videoElement.play();
     }
-  }));
+  });
 
   const videoContainer = $("#video-container");
 

@@ -13,14 +13,24 @@ export default class Card extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.handleDimensions = this.handleDimensions.bind(this);
 
-    const { weight, price } = props.data;
+    const { weight, price, image } = props.data;
+    
+    const index = price.length - 1;
 
     this.state = {
       amount: 1,
-      price: price[price.length - 1],
-      weight: weight[price.length - 1],
+      price: price[index],
+      weight: weight[index],
       slideIndex: 0,
     }
+  }
+
+  componentDidMount() {
+    const { image, weight } = this.props.data;
+
+    this.setState({
+      slideIndex:  Object.keys(image).indexOf(weight[weight.length - 1].toString()),
+    })
   }
 
   handleDimensions() {
@@ -165,7 +175,7 @@ export default class Card extends React.Component {
 
   renderSlider() {
     const { image, title } = this.props.data;
-
+    
     if (image && Object.values(image).map) {
       return (
         <Carousel
@@ -173,18 +183,15 @@ export default class Card extends React.Component {
           heightMode="first"
           width="100%"
           slideIndex={this.state.slideIndex}
+          afterSlide={slideIndex => this.setState({ slideIndex })}
           initialSlideWidth="100%"
           renderCenterLeftControls={({ previousSlide }) => (
-            <button className={`ui button icon ${!previousSlide && "disabled"}`} onClick={() => 
-              this.state({slideIndex: this.state.slideIndex - 1})
-            }>
+            <button className={`ui button icon ${!previousSlide && "disabled"}`} onClick={previousSlide}>
               <i className="ui icon angle left" />
             </button>
           )}
           renderCenterRightControls={({ nextSlide }) => (
-            <button className={`ui button icon ${!nextSlide && "disabled"}`} onClick={() => 
-              this.state({slideIndex: this.state.slideIndex + 1})
-            }>
+            <button className={`ui button icon ${!nextSlide && "disabled"}`} onClick={nextSlide}>
               <i className="ui icon angle right" />
             </button>
           )}
