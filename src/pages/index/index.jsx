@@ -10,6 +10,9 @@ class IndexPage extends React.Component {
   componentDidMount() {
     const script = require("./src/script").default;
     script();
+    if (window && window.scrollTo) {
+      window.scrollTo(0, 0);
+    }
   }
 
   render() {

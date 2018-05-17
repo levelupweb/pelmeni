@@ -19,6 +19,7 @@ export default class Card extends React.Component {
       amount: 1,
       price: price[price.length - 1],
       weight: weight[price.length - 1],
+      slideIndex: 0,
     }
   }
 
@@ -35,11 +36,12 @@ export default class Card extends React.Component {
   } 
 
   handleWeight(value) {
-    const { price, weight } = this.props.data;
-
+    const { price, weight, image } = this.props.data;
+    
     this.setState({
       weight: value,
       price: price[weight.indexOf(value)],
+      slideIndex: Object.keys(image).indexOf(value.toString()),
     })
   } 
 
@@ -60,7 +62,6 @@ export default class Card extends React.Component {
         id: randomstring.generate(),
         title: data.title,
         description: data.description,
-        image: data.image,
         weight: weight,
         price: price,
         amount: amount,
@@ -165,25 +166,30 @@ export default class Card extends React.Component {
   renderSlider() {
     const { image, title } = this.props.data;
 
-    if (image && image.map) {
+    if (image && Object.values(image).map) {
       return (
         <Carousel
           ref={c => this.carousel = c}
           heightMode="first"
           width="100%"
+          slideIndex={this.state.slideIndex}
           initialSlideWidth="100%"
           renderCenterLeftControls={({ previousSlide }) => (
-            <button className={`ui button icon ${!previousSlide && "disabled"}`} onClick={previousSlide}>
+            <button className={`ui button icon ${!previousSlide && "disabled"}`} onClick={() => 
+              this.state({slideIndex: this.state.slideIndex - 1})
+            }>
               <i className="ui icon angle left" />
             </button>
           )}
           renderCenterRightControls={({ nextSlide }) => (
-            <button className={`ui button icon ${!nextSlide && "disabled"}`} onClick={nextSlide}>
+            <button className={`ui button icon ${!nextSlide && "disabled"}`} onClick={() => 
+              this.state({slideIndex: this.state.slideIndex + 1})
+            }>
               <i className="ui icon angle right" />
             </button>
           )}
         >
-          {image.map((image, i) => (
+          {Object.values(image).map((image, i) => (
             <img width="100%" onLoad={this.handleDimensions} src={image} alt={`${title}. Изображение ${i}`} />
           ))}
         </Carousel>

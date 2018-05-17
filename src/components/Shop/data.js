@@ -3,151 +3,151 @@ export default [{
   title: "Пельмени 'Классные'. Премиум",
   weight: [400, 900],
   price: [145, 330],
-  description: "Продукт категории А. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, специи, чеснок, вода питьевая",
-  image: [
-    require("./img/premium-gotov.jpg"),
-    require("./img/premium-zamoroz.jpg"),
-    require("./img/premium-400.jpg"),
-    require("./img/premium-1000.jpg")
-  ],
+  description: "Продукт категории А. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, соль, вода питьевая",
+  image: {
+    ["1000"]: require("./img/premium-1000.jpg"),
+    ["default"]: require("./img/premium-gotov.jpg"),
+    ["default"]: require("./img/premium-zamoroz.jpg"),
+    ["400"]: require("./img/premium-400.jpg"),
+  },
 }, {
   id: 2,
   title: "Пельмени 'Классные'. Боярские",
   weight: [400, 900],
   price: [135, 305],
-  description: "Продукт категории А. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, специи, чеснок, вода питьевая",
-  image: [
-    require("./img/boyarskie-gotov.jpg"),
-    require("./img/boyarskie-zamoroz.jpg"),
-    require("./img/boyarskie-400.jpg"),
-    require("./img/boyarskie-1000.jpg")
-  ],
+  description: "Продукт категории Б. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, соль, шпик, вода питьевая",
+  image: {
+    ["1000"]: require("./img/boyarskie-1000.jpg"),
+    ["default"]: require("./img/boyarskie-gotov.jpg"),
+    ["default"]: require("./img/boyarskie-zamoroz.jpg"),
+    ["400"]: require("./img/boyarskie-400.jpg"),
+  },
 }, {
   id: 3,
   title: "Пельмени 'Классные'. Славянские",
   weight: [400, 900],
   price: [140, 315],
-  description: "Продукт категории А. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, специи, чеснок, вода питьевая",
-  image: [
-    require("./img/slav-gotov.jpg"),
-    require("./img/slav-zamoroz.jpg"),
-    require("./img/slav-1000.jpg"),
-    require("./img/slavyanskie.jpg")
-  ],
+  description: "Продукт категории А. В состав входят: свинина, мука в/с, яйцо, лук, перец, соль, вода питьевая",
+  image: {
+    ["1000"]: require("./img/slav-1000.jpg"),
+    ["default"]: require("./img/slav-gotov.jpg"),
+    ["default"]: require("./img/slav-zamoroz.jpg"),
+    ["400"]: require("./img/slavyanskie.jpg"),
+  },
 }, {
   id: 4,
   title: "Чебуреки",
   weight: [300],
   price: [85],
-  description: "В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, специи, чеснок, вода питьевая",
-  image: [
-    require("./img/chebureki.jpg"),
-    require("./img/chebureki-zamoroz.jpg"),
-    require("./img/chebureki-a-300.jpg")
-  ],
+  description: "Продукт категории А. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, соль, вода питьевая",
+  image: {
+    ["300"]: require("./img/chebureki-a-300.jpg"),
+    ["default"]: require("./img/chebureki.jpg"),
+    ["default"]: require("./img/chebureki-zamoroz.jpg"),
+  },
 }, {
   id: 5,
   title: "Пельмени 'Классные'",
-  weight: [400, 500, 950, 1000],
-  price: [145, 195, 365, 360],
-  description: "Категория A. В составе: охлажденная говядина, свинина, мука в/с, яйцо, лук, соль, перец, вода питьевая",
-  image: [
-    require("./img/pelmeni-s-govyadinoy.jpg"),
-    require("./img/pelmeni-a-zamoroz.jpg"),
-    require("./img/pelmeni-a-400.jpg"),
-    require("./img/pelmeni-a-1000.jpg")
-  ],
+  weight: [400, 1000],
+  price: [145, 360],
+  description: "Продукт категории А. В составе: охлажденная говядина, свинина, мука в/с, яйцо, лук, соль, перец, вода питьевая",
+  image: {
+    ["1000"]: require("./img/pelmeni-a-1000.jpg"),
+    ["default"]: require("./img/pelmeni-s-govyadinoy.jpg"),
+    ["default"]: require("./img/pelmeni-a-zamoroz.jpg"),
+    ["400"]: require("./img/pelmeni-a-400.jpg")
+  },
 }, {
   id: 6,
   title: "Пельмени 'Для вас' из говядины",
   weight: [400, 1000],
   price: [130, 315],
-  description: "Категория Б. В составе: охлажденная говядина, мука в/с, яйцо, лук, соль, перец, вода питьевая",
-  image: [
-    require("./img/pelmeni-dlya-vas-b-govyadina.jpg"),
-    require("./img/pelmeni-b-fix-zamoroz.jpg"),
-    require("./img/dlya-vas-govyadina-1000.jpg"),
-    require("./img/dlya-vas-govyadina-400.jpg")
-  ],
+  description: "Продукт категории Б. В составе: охлажденная говядина, мука в/с, яйцо, лук, соль, перец, вода питьевая",
+  image: {
+    ["1000"]: require("./img/dlya-vas-govyadina-1000.jpg"),
+    ["default"]: require("./img/pelmeni-dlya-vas-b-govyadina.jpg"),
+    ["default"]: require("./img/pelmeni-b-zamoroz.jpg"),
+    ["400"]: require("./img/dlya-vas-govyadina-400.jpg"),
+  },
 }, {
   id: 7,
   title: "Пельмени 'Для вас'",
   weight: [400, 1000],
   price: [120, 290],
-  description: "Категория Б. В составе: охлажденная говядина, свинина, мука в/с, яйцо, лук, соль, перец, вода питьевая",
-  image: [
-    require("./img/pelmeni-dlya-vas-b.jpg"),
-    require("./img/pelmeni-b-zamoroz.jpg"),
-    require("./img/pelmeni-dlya-vas-1000.jpg"),
-    require("./img/dlya-vas-400.jpg")
-  ],
+  description: "Продукт категории Б. В составе: охлажденная говядина, свинина, мука в/с, яйцо, лук, соль, перец, вода питьевая",
+  image: {
+    ["1000"]: require("./img/pelmeni-dlya-vas-1000.jpg"),
+    ["default"]: require("./img/pelmeni-dlya-vas-b.jpg"),
+    ["default"]: require("./img/pelmeni-b-fix-zamoroz.jpg"),
+    ["400"]: require("./img/dlya-vas-400.jpg"),
+  },
 }, {
   id: 5,
   title: "Манты",
   weight: [530],
   price: [150],
-  description: "В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, специи, вода питьевая",
-  image: [
-    require("./img/manti.jpg"),
-    require("./img/manti-zamoroz.jpg"),
-    require("./img/manti-a-530.jpg")
-  ],
+  description: "Продукт категории А. В состав входят: охлажденная говядина, свинина, мука в/с, яйцо, лук, перец, специи, вода питьевая",
+  image: {
+    ["530"]: require("./img/manti-a-530.jpg"),
+    ["default"]: require("./img/manti.jpg"),
+    ["default"]: require("./img/manti-zamoroz.jpg"),
+  },
 }, {
   id: 8,
   title: "Вареники с картофелем",
   weight: [400, 1000],
-  price: [60, 140],
+  price: [60, 150],
   description: "В состав входят: картофель, мука в/с, яйцо, соль, вода питьевая",
-  image: [
-    require("./img/vareniki-s-kartofelem.jpg"),
-    require("./img/vareniki-kartofel-zamoroz.jpg"),
-    require("./img/vareniki-kartofel-400.jpg"),
-    require("./img/vareniki-kartofel-1000.jpg")
-  ],
+  image: {
+    ["1000"]: require("./img/vareniki-kartofel-1000.jpg"),
+    ["default"]: require("./img/vareniki-s-kartofelem.jpg"),
+    ["default"]: require("./img/vareniki-kartofel-zamoroz.jpg"),
+    ["400"]: require("./img/vareniki-kartofel-400.jpg"),
+  },
 }, {
   id: 9,
   title: "Вареники с картофелем и грибами",
   weight: [400, 1000],
-  price: [65, 145],
+  price: [65, 160],
   description: "В состав входят: картофель, грибы, мука в/с, яйцо, соль, вода питьевая",
-  image: [
-    require("./img/vareniki-s-kartofelem-i-gribami.jpg"),
-    require("./img/vareniki-kartofel-gribi-zamoroz.jpg"),
-    require("./img/vareniki-kartofel-gribi-400.jpg"),
-    require("./img/vareniki-kartofel-gribi-1000.jpg")
-  ],
+  image: {
+    ["1000"]: require("./img/vareniki-kartofel-gribi-1000.jpg"),
+    ["default"]: require("./img/vareniki-s-kartofelem-i-gribami.jpg"),
+    ["default"]: require("./img/vareniki-kartofel-gribi-zamoroz.jpg"),
+    ["400"]: require("./img/vareniki-kartofel-gribi-400.jpg"),
+  },
 }, {
   id: 10,
   title: "Вареники с творогом",
   weight: [400, 1000],
   price: [105, 260],
   description: "В состав входят: творог, сахар, мука в/с, яйцо, соль, вода питьевая",
-  image: [
-    require("./img/vareniki-s-tvorogom.jpg"),
-    require("./img/vareniki-tvorog-zamoroz.jpg"),
-    require("./img/vareniki-s-tvorogom-400.jpg"),
-    require("./img/vareniki-tvorog-1000.jpg")
-  ],
+  image: {
+    ["1000"]: require("./img/vareniki-tvorog-1000.jpg"),
+    ["default"]: require("./img/vareniki-s-tvorogom.jpg"),
+    ["default"]: require("./img/vareniki-tvorog-zamoroz.jpg"),
+    ["400"]: require("./img/vareniki-s-tvorogom-400.jpg"),
+  },
 }, {
   id: 11,
   title: "Котлеты",
   weight: [430],
   price: [150],
   description: "Категория А. В состав входят: говядина, свинина, яйцо, хлеб, лук, соль, перец, специи",
-  image: [
-    require("./img/kotleti.jpg"),
-    require("./img/kotleti-zamoroz.jpg"),
-    require("./img/kotleti-a-430.jpg")
-  ],
+  image: {
+    ["430"]: require("./img/kotleti-a-430.jpg"),
+    ["default"]: require("./img/kotleti.jpg"),
+    ["default"]: require("./img/kotleti-zamoroz.jpg"),
+  },
 }, {
   id: 12,
   title: "Котлеты с чесноком",
   weight: [430],
   price: [150],
   description: "Категория А. В состав входят: охлажденная говядина, свинина, яйцо, хлеб, лук, соль, перец, специи, чеснок",
-  image: [
-    require("./img/kotleti-s-chesnokom.jpg"),
-    require("./img/kotleti-chesnok-zamoroz.jpg"),
-    require("./img/kotleti-a-chesnok-430.jpg")
-  ],
+  image: {
+    ["430"]: require("./img/kotleti-a-chesnok-430.jpg"),
+    ["default"]: require("./img/kotleti-s-chesnokom.jpg"),
+    ["default"]: require("./img/kotleti-chesnok-zamoroz.jpg"),
+  },
 }]

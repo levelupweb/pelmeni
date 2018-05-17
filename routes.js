@@ -14,9 +14,6 @@ const {
 } = require("express-validator/filter");
 
 const checkPostData = [
-  check("name")
-    .exists()
-    .withMessage("Не заполнено поле 'Имя'"),
   check("dostavka")
     .optional(),
   check("dostavka")
@@ -59,9 +56,6 @@ const generateHtml = data => `
 `;
 
 const checkContactData = [
-  check("name")
-    .exists()
-    .withMessage("Не заполнено поле 'Имя'"),
   check("email")
     .exists()
     .withMessage("Не заполнено поле 'Email"),

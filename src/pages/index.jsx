@@ -33,6 +33,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.loadBackground();
+    window.scrollTo(0, 0);
   }
 
   componentDidUpdate(prevProps) {

@@ -111,6 +111,7 @@ export default () => {
   videoElement.appendChild(mp4Source);
 
   $('.section-6').visibility(Object.assign({}, visibilityOptions, {
+    once: true,
     onTopPassed: () => {
       videoElement.currentTime = 0;
       videoElement.play();

@@ -4,6 +4,7 @@ const document = (html, config, helmet) =>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="yandex-verification" content="3ae891b4751b75eb" />
     <meta name="theme-color" content="#ffffff" />
     ${helmet.title.toString()}
     ${helmet.meta.toString()}
@@ -21,7 +22,7 @@ const document = (html, config, helmet) =>
     <meta property="og:title" content="Пельмени Классные" />
     <meta property="og:description" content="Пельмени Классные. Онлайн-доставка пельменей" />
     <meta property="og:image:height" content="240">
-    
+    <title>Пельмени классные. Замороженные полуфабрикаты с доставкой на дом.</title>
   </head>
   <body>
     <noscript>
@@ -55,6 +56,16 @@ const document = (html, config, helmet) =>
         })(document, window, "yandex_metrika_callbacks");
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/48895697" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119402035-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-119402035-1');
+    </script>
+
     <script src="${config.dist}/app.index.js"></script>
   </body>
 </html>
