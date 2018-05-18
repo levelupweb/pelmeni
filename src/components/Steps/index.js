@@ -49,23 +49,5 @@ export default ({ pathname }) => (
         {renderDescription(pathname)}
       </p>
     </Fade>
-    <Fade bottom>
-      {pathname !== "/shop/success" &&
-        <ol className="ordered ui list inverted big horizontal">
-          <li style={styles.active(pathname === "/shop")} className="ui item">
-            Корзина
-          </li>
-          <li style={styles.active(pathname === "/shop/cart")} className="ui item">
-            Подтверждение
-          </li>
-          <li style={styles.active(pathname === "/shop/form")} className="ui item">
-            Адрес доставки
-          </li>
-          <li className="ui item">
-            Получение и оплата
-          </li>
-        </ol>
-      }
-    </Fade>
   </div>
 );
