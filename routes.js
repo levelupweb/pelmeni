@@ -46,6 +46,7 @@ const generateHtml = data => `
       <li>E-mail: ${data.email || "Не указан"}</li>
       <li>Номер телефона: ${data.phone || "Не указан"}</li>
       <li>Адрес доставки: ${data.dostavka || "Не указано"}</li>
+      <li>Комментарий: ${data.message || "Не указано"}</li>
     </ul>
     <p>Информация о заказе:</p>
     <ul>
