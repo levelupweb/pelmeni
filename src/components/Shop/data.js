@@ -120,7 +120,7 @@ export default [{
   id: 10,
   title: "Вареники с творогом",
   weight: [400, 1000],
-  price: [105, 260],
+  price: [95, 240],
   description: "В состав входят: творог, сахар, мука в/с, яйцо, соль, вода питьевая",
   image: {
     ["1000"]: require("./img/vareniki-tvorog-1000.jpg"),
