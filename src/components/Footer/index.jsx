@@ -42,6 +42,22 @@ class Footer extends React.Component {
                 </p>
               </div>
               <div className="eight wide column">
+                <div className="social">
+                  <div class="ui horizontal list massive">
+                    <a class="item" target="_blank" rel="noopener norefferrer" href="https://vk.com/public166725755">
+                      <i class="vk icon"></i>
+                    </a>
+                    <a class="item" target="_blank" rel="noopener norefferrer" href="https://ok.ru/group/54032234578140">
+                    <i class="odnoklassniki icon"></i>
+                    </a>
+                    <a class="item" target="_blank" rel="noopener norefferrer" href="https://www.facebook.com/klassnye">
+                      <i class="facebook icon"></i>
+                    </a>
+                    <a class="item" target="_blank" rel="noopener norefferrer" href="https://www.instagram.com/klassnye44/">
+                      <i class="instagram icon"></i>
+                    </a>
+                  </div>
+                </div>
                 <div className="ui list text inverted">
                   <div className="item">
                     156012, г. Кострома, п. Новый, д. 3

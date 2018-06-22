@@ -24,3 +24,13 @@
   bottom: 20px;
   margin-left: -95px;
 }
+
+.social .item {
+  text-decoration: none;
+}
+
+.social .item i {
+  color:#fff!important;
+  font-size: 24px!important;
+  
+}
