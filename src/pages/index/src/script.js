@@ -1,21 +1,13 @@
 import "jquery";
-import Parallax from "parallax-js";
-import imagesLoaded from "imagesloaded";
 import "../../../../semantic/semantic/dist/components/visibility";
 
 export default () => {
-  const sceneOptions = { relativeInput: true };
-
   const visibilityOptions = {
     once: false,
     continuous: true,
   }
 
-
   if (window.innerWidth > 700) {
-
-    const scene1 = document.getElementById('scene-1');
-    const parallaxInstance1 = new Parallax(scene1, sceneOptions);
 
     $('.section-1').visibility(Object.assign({}, visibilityOptions, {
       onPassing: (calculations) => {
@@ -49,9 +41,6 @@ export default () => {
       }
     }));
 
-    const scene2 = document.getElementById('scene-2');
-    const parallaxInstance2 = new Parallax(scene2, sceneOptions);
-
     $('.section-3').visibility(Object.assign({}, visibilityOptions, {
       onPassing: (calculations) => {
         const offset = calculations.percentagePassed * 400;
@@ -60,9 +49,6 @@ export default () => {
         $('.visuals-4 .images .image-2').css('margin-top', offset*0.3);
       },
     }));
-
-    const scene3 = document.getElementById('scene-3');
-    const parallaxInstance3 = new Parallax(scene3, sceneOptions);
 
     $('.section-4').visibility(Object.assign({}, visibilityOptions, {
       onPassing: (calculations) => {
@@ -75,21 +61,12 @@ export default () => {
       },
     }));
 
-    const scene4 = document.getElementById('scene-4');
-    const parallaxInstance4 = new Parallax(scene4, sceneOptions);
-
     $('.section-4').visibility(Object.assign({}, visibilityOptions, {
       onPassing: (calculations) => {
-        const offset = calculations.percentagePassed * 400;
         $('.visuals-5 .visual-custom-1 img').css({'transform': 'scale('+ ((calculations.percentagePassed/2)+1.0) +')'});
       },
     }));
 
-    const scene5 = document.getElementById('scene-5');
-    const parallaxInstance5 = new Parallax(scene5, sceneOptions);
-
-    const scene6 = document.getElementById('scene-6');
-    const parallaxInstance6 = new Parallax(scene6, sceneOptions);
   }
 
   const videoElement = document.createElement("video");

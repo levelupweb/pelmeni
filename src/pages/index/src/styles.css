@@ -296,7 +296,7 @@ html, body {
   .section-4 .visual-custom-1,
   .section-1 .chapter-2,
   .section-1 .chapter-10,
-  .section-1 .chapter-11 {
+  .section-1 .chapter-11, {
     display:none!important;
   }
 }
@@ -332,7 +332,8 @@ html, body {
   .section-4 .visuals-head,
   .section-5 .visuals-head,
   .section-contact .visuals-head,
-  .geometry {
+  .geometry,
+  .section-4 .image-2 {
     display:none!important;
   }
   .section-2 .images,

@@ -3,6 +3,7 @@ import Helmet from "react-helmet";
 import { Switch, Route, withRouter } from "react-router";
 import Index from "./index/index.jsx";
 import Dostavka from "./dostavka";
+import Phone from "../components/Phone";
 import Shop from "./shop";
 import Catalog from "./catalog";
 import Footer from "../components/Footer";
@@ -68,6 +69,7 @@ class App extends React.Component {
           <title>Пельмени Классные. Онлайн-доставка пельменей</title>
         </Helmet>
         <SidebarMenu />
+        <Phone />
         <div className="pusher" style={{backgroundImage: `url(${background && this.backgroundUrl})`}}>
           <Menu />
           <div className="pusher-content">

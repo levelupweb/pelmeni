@@ -1,9 +1,8 @@
 import React from "react";
 import randomstring from "randomstring";
 import Carousel from "nuka-carousel";
+import LazyLoad from 'react-lazy-load';
 import "./styles.css";
-
-const isArray = array => Array.isArray(array);
 
 export default class Card extends React.Component {
   constructor(props) {
@@ -13,7 +12,7 @@ export default class Card extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.handleDimensions = this.handleDimensions.bind(this);
 
-    const { weight, price, image } = props.data;
+    const { weight, price } = props.data;
     
     const index = price.length - 1;
 
@@ -197,7 +196,14 @@ export default class Card extends React.Component {
           )}
         >
           {Object.values(image).map((image, i) => (
-            <img width="100%" onLoad={this.handleDimensions} src={image} alt={`${title}. Изображение ${i}`} />
+            <LazyLoad offsetTop={50}>
+              <img 
+                src={image} 
+                alt={`${title}. Изображение ${i}`} 
+                onLoad={this.handleDimensions}
+                width="100%"
+              />
+            </LazyLoad>
           ))}
         </Carousel>
       )
@@ -207,8 +213,6 @@ export default class Card extends React.Component {
   render() {
     const { 
       data, 
-      onAdd, 
-      isAdded
     } = this.props;
 
     const { 

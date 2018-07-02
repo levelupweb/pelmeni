@@ -4,6 +4,7 @@ const config = require("./config");
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const https = require('https');
+const expressStaticGzip = require("express-static-gzip")
 const http = require('http');
 
 const { 
@@ -29,12 +30,28 @@ const app = express();
 app.use(bodyParser({
   extended: true
 }));
-app.use('/static', express.static(__dirname + '/dist'));
+
+// brotli / gzip static serving
+
+app.use("/static", expressStaticGzip(__dirname + '/dist', {
+  enableBrotli: false,
+  customCompressions: [{
+      encodingName: "deflate",
+      fileExtension: "zz"
+  }]
+}));
+
+// email
 
 app.post("/post", [checkPostData], handlerOffer);
 app.post("/send", [checkContactData], handlerContact);
+
+// public data
+
 app.get("/csv", handlerCsv)
 app.get("/data", handlerData);
+
+// app serve
 
 app.get('*', (req, res) => {
   const html = renderToString(React.createElement(StaticRouter, {

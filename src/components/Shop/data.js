@@ -96,7 +96,7 @@ export default [{
   id: 8,
   title: "Вареники с картофелем",
   weight: [400, 1000],
-  price: [65, 150],
+  price: [65, 160],
   description: "В состав входят: картофель, мука в/с, яйцо, соль, вода питьевая",
   image: {
     ["1000"]: require("./img/vareniki-kartofel-1000.jpg"),
@@ -108,7 +108,7 @@ export default [{
   id: 9,
   title: "Вареники с картофелем и грибами",
   weight: [400, 1000],
-  price: [70, 160],
+  price: [70, 170],
   description: "В состав входят: картофель, грибы, мука в/с, яйцо, соль, вода питьевая",
   image: {
     ["1000"]: require("./img/vareniki-kartofel-gribi-1000.jpg"),
