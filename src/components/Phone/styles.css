@@ -25,14 +25,15 @@
 .phone-overlay-content {
   position: absolute;
   bottom: 100%;
+  right: 0;
   z-index: 1000;
   margin-bottom: 15px;
   border-radius: 4px;
   background: #fff;
   width: 200px; 
   padding: 20px;
-  border-bottom-left-radius: 26px;
-  border-top-right-radius: 26px;
+  border-bottom-right-radius: 26px;
+  border-top-left-radius: 26px;
 }
 
 .phone-overlay-content .phone-number {
