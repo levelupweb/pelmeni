@@ -30,7 +30,7 @@ class Phone extends React.Component {
           <div className="phone-overlay-content">
             <h3 className="ui header">У вас есть вопрос?</h3>
             <p>Задайте его нашему менеджеру, позвонив по номеру</p>
-            <p className="phone-number">(4942) 51-53-07</p>
+            <a href="tel:+74942515307" className="phone-number">+7 (4942) 51-53-07</a>
           </div>
         }
       </div>
