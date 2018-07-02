@@ -24,18 +24,37 @@
 
 .phone-overlay-content {
   position: absolute;
+  padding-right:30px;
   bottom: 100%;
   right: 0;
   z-index: 1000;
   margin-bottom: 15px;
   border-radius: 4px;
   background: #fff;
-  width: 200px; 
+  width: 230px; 
   padding: 20px;
   border-bottom-right-radius: 26px;
   border-top-left-radius: 26px;
 }
 
+.phone-overlay-content h3.header {
+  margin-top: 0!important;
+}
+
 .phone-overlay-content .phone-number {
   font-size: 17px;
+}
+
+.phone-overlay-content-close {
+  opacity: .5;
+  transition: .2s all ease;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.phone-overlay-content-close:hover {
+  opacity: 1;
+  font-size:14px;
 }

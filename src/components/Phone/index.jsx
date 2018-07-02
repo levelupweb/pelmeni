@@ -28,6 +28,12 @@ class Phone extends React.Component {
         </button>
         {isActive &&
           <div className="phone-overlay-content">
+            <div 
+              onClick={this.handleToggle.bind(this, false)} 
+              className="phone-overlay-content-close"
+            >
+              <i className="ui icon close"></i>
+            </div>
             <h3 className="ui header">У вас есть вопрос?</h3>
             <p>Задайте его нашему менеджеру, позвонив по номеру</p>
             <a href="tel:+74942515307" className="phone-number">+7 (4942) 51-53-07</a>
