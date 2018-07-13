@@ -1,4 +1,3 @@
-const emailjs = require("emailjs");
 const emailServer = require("./emailServer");
 const Purchase = require("./purchase").model;
 const purchaseConsts = require("./purchase").consts;
@@ -18,22 +17,18 @@ const checkPostData = [
     .optional(),
   check("dostavka")
     .optional()
-    .isLength({
-      max: 10000,
-    })
+    .isLength({ max: 500 })
     .withMessage("Адрес доставки не может быть больше 500 символов"),
   check("phone")
     .exists()
     .withMessage("Не заполнено поле \"Контактный телефон\""),
   check("message")
     .optional()
-    .isLength({
-      max: 10000,
-    })
+    .isLength({ max: 10000 })
     .withMessage("Сообщение не может быть больше 10000 символов"),
   check("items")
     .exists()
-    .withMessage("Не заполнено поле 'Продукты'"),
+    .withMessage("Не заполнено поле 'Продукты'. Попробуйте перезагрузить страницу и выбрать заново"),
 ]
 
 const generateHtml = data => `
@@ -59,17 +54,14 @@ const generateHtml = data => `
 const checkContactData = [
   check("email")
     .exists()
-    .withMessage("Не заполнено поле 'Email"),
-  check("email")
+    .withMessage("Не заполнено поле 'Email")
     .isEmail()
     .trim()
     .normalizeEmail()
-    .withMessage("Неверный формат Email адреса"),
+    .withMessage("Неверный формат E-mail адреса"),
   check("message")
     .optional()
-    .isLength({
-      max: 10000,
-    })
+    .isLength({ max: 10000 })
     .withMessage("Сообщение не может быть больше 10000 символов"),
 ];
 

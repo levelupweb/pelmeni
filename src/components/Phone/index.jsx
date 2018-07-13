@@ -36,7 +36,7 @@ class Phone extends React.Component {
             </div>
             <h3 className="ui header">У вас есть вопрос?</h3>
             <p>Задайте его нашему менеджеру, позвонив по номеру</p>
-            <a href="tel:+79038987736" className="phone-number">+7 (903) 898 77-36</a>
+            <a href="tel:+79610080166" className="phone-number">+7 (961) 008-01-66</a>
           </div>
         }
       </div>

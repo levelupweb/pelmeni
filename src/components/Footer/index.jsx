@@ -65,11 +65,8 @@ class Footer extends React.Component {
                   <div className="map-expander" onClick={() => this.handleMap()}>
                     Показать на карте
                   </div>
-                  <a className="item" href="tel:+74942515307">
-                    <i className="icon ui phone"></i> +7 (4942) 51-53-07
-                  </a>
-                  <a className="item" href="tel:+79038987736">
-                    <i className="icon ui phone"></i> +7 (903) 898 77-36
+                  <a className="item" href="tel:+79610080166">
+                    <i className="icon ui phone"></i> +7 (961) 008-01-66
                   </a>
                   <div className="item">
                     <a href="mailto:pfklassnye@rambler.ru">
