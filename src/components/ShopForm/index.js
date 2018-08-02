@@ -164,6 +164,18 @@ class ShopForm extends React.Component {
           </Fade>
           <Fade bottom>
             <div className="field">
+              <label>E-mail адрес</label>
+              <input 
+                value={form.email} 
+                onChange={this.handleForm} 
+                type="email" 
+                name="email" 
+                placeholder="В формете noreply@mail.ru" 
+              />
+            </div>
+          </Fade>
+          <Fade bottom>
+            <div className="field">
               <label>Адрес доставки</label>
               <input 
                 value={form.dostavka} 
