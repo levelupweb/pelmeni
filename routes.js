@@ -22,6 +22,16 @@ const checkPostData = [
   check("phone")
     .exists()
     .withMessage("Не заполнено поле \"Контактный телефон\""),
+  check("name")
+    .optional()
+    .isLength({ max: 200 })
+    .withMessage("Имя не может быть больше 200 символов"),
+  check("email")
+    .optional()
+    .isEmail()
+    .trim()
+    .normalizeEmail()
+    .withMessage("Неверный формат E-mail адреса"),
   check("message")
     .optional()
     .isLength({ max: 10000 })
