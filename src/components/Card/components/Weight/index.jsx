@@ -1,14 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { CardContext } from "../../context";
-import "../../../../../semantic/semantic/dist/components/dropdown";
-import "../../../../../semantic/semantic/dist/components/transition";
+import { requireSemanticDependecies } from "./utils";
 
 const getItemIdByWeight = (category, weight) => {
     const item = category.items.filter(item => 
         item.weight === Number(weight)
     )[0];
-    console.log(item);
+
     if (item) {
         return item._id
     }
@@ -27,19 +26,21 @@ class Weight extends React.Component {
     componentDidMount() {
         const { id } = this.state;
 
-        $(`.${id}`).dropdown({
-            onChange: (value) => {
-                const { 
-                    handleItem,
-                    category
-                } = this.props;
-                
-                const nextItem = getItemIdByWeight(category, value);
-                
-                if (nextItem) {
-                    handleItem(nextItem);
+        requireSemanticDependecies(() => {
+            $(`.${id}`).dropdown({
+                onChange: (value) => {
+                    const { 
+                        handleItem,
+                        category
+                    } = this.props;
+                    
+                    const nextItem = getItemIdByWeight(category, value);
+                    
+                    if (nextItem) {
+                        handleItem(nextItem);
+                    }
                 }
-            }
+            });
         });
     }
 

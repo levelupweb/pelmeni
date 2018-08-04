@@ -10,13 +10,9 @@ import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 import SidebarMenu from "../components/SidebarMenu";
 import Contact from "./contact";
+import { ShopProvider } from "../components/Shop/context";
 import NotFound from "./404";
 import "../common/styles.css";
-
-const loadDependencies = () => {
-  require("jquery");
-  require("../../semantic/semantic/dist/components/dimmer");
-}
 
 const createImage = (url) => {
   const image = new Image();
@@ -70,28 +66,32 @@ class App extends React.Component {
         </Helmet>
         <SidebarMenu />
         <Phone />
-        <div className="pusher" style={{backgroundImage: `url(${background && this.backgroundUrl})`}}>
-          <Menu />
-          <div className="pusher-content">
-          <Switch>
-            <Route exact path='/' component={Index}/>
-            <Route path='/dostavka' component={Dostavka}/>
-            <Route path='/shop' component={Shop}/>
-            <Route path='/catalog' component={Catalog}/>
-            <Route path='/contact' component={Contact}/>
-            <Route component={NotFound} />
-          </Switch>
-          <Footer />
-          </div>
-        </div>
-        <div className={`ui dimmer ${!background && "active"}`}>
-          <div className="content">
-            <h2 className="ui inverted icon header">
-              <i className="heart icon"></i>
-              <div className="ui loader active" />
-            </h2>
-          </div>
-        </div>
+        <ShopProvider>
+          <React.Fragment>
+            <div className="pusher" style={{backgroundImage: `url(${background && this.backgroundUrl})`}}>
+              <Menu />
+              <div className="pusher-content">
+              <Switch>
+                <Route exact path='/' component={Index}/>
+                <Route path='/dostavka' component={Dostavka}/>
+                <Route path='/shop' component={Shop}/>
+                <Route path='/catalog' component={Catalog}/>
+                <Route path='/contact' component={Contact}/>
+                <Route component={NotFound} />
+              </Switch>
+              <Footer />
+              </div>
+            </div>
+            <div className={`ui dimmer ${!background && "active"}`}>
+              <div className="content">
+                <h2 className="ui inverted icon header">
+                  <i className="heart icon"></i>
+                  <div className="ui loader active" />
+                </h2>
+              </div>
+            </div>
+          </React.Fragment>
+        </ShopProvider>
       </div>
     )
   }

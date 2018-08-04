@@ -24,6 +24,15 @@ class CardProviderClass extends React.Component {
         this.setState({ amount })
     }
 
+    getCurrentItem() {
+        const { category } = this.props;
+        const { selectedItem } = this.state;
+
+        return category.items.filter(item => 
+            item._id === selectedItem
+        )[0];
+    }
+
     render() {
         const {
             state: {
@@ -35,12 +44,10 @@ class CardProviderClass extends React.Component {
                 children
             },
             handleItem,
-            handleAmount
+            handleAmount,
         } = this;
 
-        const currentItem = category.items.filter(item => 
-            item._id === selectedItem
-        )[0];
+        const currentItem = this.getCurrentItem();
 
         return (
             <CardContext.Provider
@@ -50,7 +57,7 @@ class CardProviderClass extends React.Component {
                     handleItem,
                     handleAmount,
                     amount,
-                    currentItem
+                    currentItem,
                 }}
             >
                 {children}

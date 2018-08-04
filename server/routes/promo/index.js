@@ -5,7 +5,8 @@ const validateCreate = require("./middleware/validateCreate");
 const handleValidation = require("./middleware/handleValidation");
 
 const {
-    PROMO_CODE
+    PROMO_CODE,
+    PROMO_DISCOUNT
 } = require("../../models/Promo/consts");
 
 const { 
@@ -30,10 +31,10 @@ router.get("/check", (req, res) => Promo
         [PROMO_CODE]: req.query.code
     })
     .then(promo => {
-        if (promo) {
-            return res.json(true);
-        }
-        return res.json(false)
+        res.json({
+            discount: promo && promo[PROMO_DISCOUNT],
+            isValid: !!promo
+        });
     })
     .catch(error => console.log(error) || res.status(500).json(errCode0010(error)))
 )

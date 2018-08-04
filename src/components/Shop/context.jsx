@@ -11,15 +11,57 @@ class ShopProviderClass extends React.Component {
 		this.fetchItemsProcess = this.fetchItemsProcess.bind(this);
 		this.fetchItemsSuccess = this.fetchItemsSuccess.bind(this);
 		this.fetchItemsFail = this.fetchItemsFail.bind(this);
+		this.updateAmount = this.updateAmount.bind(this);
+		this.getTotalSumm = this.getTotalSumm.bind(this);
+		this.addToCart = this.addToCart.bind(this);
+		this.removeFromCart = this.removeFromCart.bind(this);
 		this.state = {
 			isFetching: false,
 			items: null,
 			error: null,
+			cart: [],
 		}
 	}
 
 	componentDidMount() {
 		this.fetchItemsStart();
+	}
+
+	addToCart(item) {
+		this.setState(state => {
+			const existedItem = state.cart.filter(i => i.id === item.id)[0];
+
+			if (existedItem) {
+				return {
+					cart: state.cart.map(i => i._id === item.id ? ({
+						...i,
+						amount: existedItem.amount + item.amount,
+					}) : i)
+				}
+			}
+
+			return {
+				cart: [
+					...state.cart,
+					item,
+				]
+			}
+		})
+	}
+
+	removeFromCart(itemId) {
+		this.setState(state => ({
+			cart: state.cart.filter(item => item._id !== itemId)
+		}))
+	}
+
+	updateAmount(itemId, amount) {
+		this.setState(state => ({
+			cart: state.cart.map(item => item._id === itemId ? ({
+				...item,
+				amount,
+			}) : item)
+		}))
 	}
 
 	fetchItemsStart() {
@@ -73,6 +115,14 @@ class ShopProviderClass extends React.Component {
 		})
 	}
 
+	getTotalSumm() {
+		const { cart } = this.state;
+
+		return cart.reduce((prev, curr) => 
+			prev + (curr.price * curr.amount)
+		, 0)
+	}
+
 	render() {
 		const {
 			props: {
@@ -82,8 +132,13 @@ class ShopProviderClass extends React.Component {
 				isFetching,
 				error,
 				items,
+				cart
 			},
-			fetchItemsStart
+			fetchItemsStart,
+			addToCart,
+			removeFromCart,
+			updateAmount,
+			getTotalSumm,
 		} = this;
 
 		return (
@@ -92,7 +147,12 @@ class ShopProviderClass extends React.Component {
 					isFetching,
 					error,
 					items,
-					fetchItemsStart
+					fetchItemsStart,
+					addToCart,
+					removeFromCart,
+					updateAmount,
+					getTotalSumm,
+					cart
 				}}
 			>
 				{children}

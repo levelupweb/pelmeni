@@ -81,14 +81,17 @@ const document = (config, html, helmet) =>
     </head>
     <body>
         <noscript>
-        ${html || "Для просмотра требуется активация Javascript"}
+            ${html || "Для просмотра требуется активация Javascript"}
         </noscript>
-        <div id="root"></div>
-        
+        <div id="root">
+        </div>
         <script type="text/javascript">
             window.siteConfig = ${JSON.stringify(config)}
         </script>
-        <script type="text/javascript" src="${config.dist}/app.index.js"></script>
+        <script 
+            type="text/javascript" 
+            src="${config.dist}/app.index.js"
+        ></script>
     </body>
 </html>
 `

@@ -16,7 +16,7 @@ const {
 } = require("./consts");
 
 const ItemSchema = {
-  item: {
+  id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: MODEL_ITEM,
     required: true, 

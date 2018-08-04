@@ -2,19 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import Image from "../../../Image";
 import Carousel from "nuka-carousel";
-import "./styles.css";
 import { CardContext } from "../../context";
+import "./styles.css";
 
 class Slider extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleDimensions = this.handleDimensions.bind(this);
-		this.handleSlide = this.handleSlide.bind(this);
 		this.renderRight = this.renderRight.bind(this);
 		this.handleCarouselRef = this.handleCarouselRef.bind(this);
 		this.renderLeft = this.renderLeft.bind(this);
 		this.state = {
-			slideIndex: 0,
 			carousel: null,
 		}
 	}
@@ -35,19 +33,7 @@ class Slider extends React.Component {
 		this.setState({ carousel })
 	}
 
-	handleSlide(slideIndex, handleItem) {
-		this.setState({ slideIndex }, () => {
-			handleItem()
-		})
-	}
-
 	renderLeft({ previousSlide }) {
-		const { slideIndex } = this.state;
-
-		if (slideIndex === 0) {
-			return null;
-		}
-
 		return (
 			<button 
 				className={`ui button icon slider-button`} 
@@ -88,10 +74,6 @@ class Slider extends React.Component {
 			initialSlideWidth,
 		} = this.props;
 
-		const {
-			slideIndex
-		} = this.state;
-
 		return (
 			<CardContext.Consumer>
 				{({ category, handleItem, selectedItem }) => {
@@ -102,10 +84,10 @@ class Slider extends React.Component {
 							width={width}
 							slideIndex={category.items.map(item => item._id).indexOf(selectedItem)}
 							initialSlideHeight={initialSlideHeight}
-							afterSlide={(nextSlide) => this.handleSlide(nextSlide, () => handleItem(category.items[nextSlide]._id))}
+							afterSlide={(nextSlide) => handleItem(category.items[nextSlide]._id)}
 							initialSlideWidth={initialSlideWidth}
-							renderCenterLeftControls={this.renderLeft}
-							renderCenterRightControls={this.renderRight}
+							renderCenterLeftControls={(data) => data.currentSlide !== 0 ? this.renderLeft(data) : null}
+							renderCenterRightControls={(data) => data.currentSlide !== category.items.length - 1 ? this.renderRight(data) : null}
 						>
 							{this.renderImages(category)}
 						</Carousel>

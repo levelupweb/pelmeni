@@ -12,6 +12,10 @@
   },
   "keywords": [],
   "author": "",
+  "nodemonConfig": {
+    "ignore": ["src/*", "dist/*", "semantic/*"],
+    "delay": "2500"
+  },
   "license": "ISC",
   "dependencies": {
     "axios": "^0.17.1",

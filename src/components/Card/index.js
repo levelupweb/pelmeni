@@ -1,20 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Slider from "./components/Slider";
-import randomstring from "randomstring";
-import Image from "../Image";
 import Title from "./components/Title";
 import Weight from "./components/Weight";
 import Amount from "./components/Amount";
 import Submit from "./components/Submit";
 import Price from "./components/Price";
-import Carousel from "nuka-carousel";
+import { CardProvider } from "./context";
 import "./styles.css";
-
-import {
-  CardProvider,
-  CardContext
-} from "./context";
 
 const getDefaultItem = category => 
   category.items.sort((a, b) => a.price > b.price)[0];

@@ -7,15 +7,13 @@ const expressStaticGzip = require("express-static-gzip")
 const http = require("http");
 const morgan = require("morgan");
 const serverRoutes = require("./routes/index");
-
+const document = require("./html");
 const { createElement } = require("react");
 const { renderToString } = require("react-dom/server");
-const { Helmet } = require("react-helmet");
+const { Provider } = require("react-redux");
 const StaticRouter = require("react-router-dom/StaticRouter").default; 
-const Provider = require("react-redux").Provider;
 const store = require("../src/store").default;
-const App = require("../src/pages/index.jsx").default; 
-const document = require("./html");
+const App = require("../src/pages/index.jsx").default;
 
 const app = express();
 
@@ -88,6 +86,8 @@ app.get("*", (req, res) => {
     )
   );
 
+  const { Helmet } = require("react-helmet");
+
   return res.send(document(
     config.client, 
     html, 
@@ -97,13 +97,13 @@ app.get("*", (req, res) => {
 
 let server;
 
-if (!config.server.isDev) {
-  const key = fs.readFileSync("ssl/key.key", "utf8");
-  const cert = fs.readFileSync("ssl/cert.crt", "utf8");
-  server = https.createServer({ key, cert }, app);
-} else {
+// if (!config.server.isDev) {
+//   const key = fs.readFileSync("ssl/key.key", "utf8");
+//   const cert = fs.readFileSync("ssl/cert.crt", "utf8");
+//   server = https.createServer({ key, cert }, app);
+// } else {
   server = http.createServer(app);
-}
+// }
 
 server.listen(config.server.port, () => {
   if (config.server.isDev) {

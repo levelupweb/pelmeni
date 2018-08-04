@@ -1,34 +1,30 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./styles";
 import Card from "../Card";
-
-const checkIsAdded = (cart, id) => 
-  cart.filter((item) => item.id === id)[0];
 
 class CardList extends React.Component {
   renderCards() {
     const { 
-      items, 
-      onAdd, 
-      cart 
+      itemsWithImages 
     } = this.props;
 
-    return items.map((item, i) => 
-      <Card 
-        isAdded={checkIsAdded(cart, item.id)} 
-        key={i} 
-        onAdd={onAdd} 
-        category={item} 
-      />
-    )
+    return itemsWithImages
+      .map((item, i) => 
+        <Card 
+          key={i} 
+          category={item} 
+        />
+      );
   }
+
   render() {
     const { 
       columns,
-      items,
+      itemsWithImages,
     } = this.props;
  
-    if (!items) {
+    if (!itemsWithImages) {
       return "loading.."
     }
 
@@ -43,6 +39,21 @@ class CardList extends React.Component {
       </div>
     )
   }
+}
+
+CardList.propTypes = {
+  itemsWithImages: PropTypes.arrayOf(PropTypes.shape({
+    price: PropTypes.number,
+    weight: PropTypes.number,
+    image: PropTypes.shape({
+      src: PropTypes.string,
+      srcThumbnail: PropTypes.string
+    }),
+  }))
+}
+
+CardList.defaultProps = {
+  itemsWithImages: null,
 }
 
 export default CardList;

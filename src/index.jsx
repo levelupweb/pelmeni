@@ -1,10 +1,10 @@
 import "jquery";
 import "../semantic/semantic/dist/semantic.min.css";
-import React from 'react';
+import React from "react";
 import { Provider } from "react-redux";
-import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './pages';
+import { render } from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import App from "./pages";
 import store from "./store";
 
 render((
@@ -13,4 +13,4 @@ render((
       <App />
     </BrowserRouter>
   </Provider>
-), document.getElementById('root'));
+), document.getElementById("root"));
