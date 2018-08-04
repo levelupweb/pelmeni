@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Menu from "../../components/Menu";
 import ContactForm from "../../components/Form";
+import Image from "../../components/Image";
 import Fade from 'react-reveal/Fade';
 import Zoom from 'react-reveal/Fade';
 import "./src/styles.css";
@@ -28,7 +29,7 @@ class IndexPage extends React.Component {
               </div>
               <div className="visual visual-custom-1 layer" data-depth="0.1">
                 <Fade top>
-                <img src={require("./src/img/zelenka.png")} className="visual-2" alt="" />
+                  <img src={require("./src/img/zelenka.png")} className="visual-2" alt="" />
                 </Fade>
               </div>
               <div className="visual visual-custom-3 layer" data-depth="0.3">
@@ -115,10 +116,20 @@ class IndexPage extends React.Component {
                   <div className="images">
                     <Fade bottom cascade>
                       <div className="image-1">
-                        <img src={require("./src/img/section-2-1.png")} alt="" width="100%" />
+                        <Image
+                          src={require("./src/img/section-2-1.png")}
+                          srcThumbnail={require("./src/img/thumbnail/section-2-1.png")}
+                          fluid
+                          alt="Качество продукции"
+                        />
                       </div>
                       <div className="image-2">
-                        <img src={require("./src/img/section-2.png")} alt="" width="100%" />
+                        <Image
+                          src={require("./src/img/section-2.png")}
+                          srcThumbnail={require("./src/img/thumbnail/section-2.png")}
+                          fluid
+                          alt="Качество продукции"
+                        />
                       </div>
                     </Fade>
                   </div>
@@ -165,12 +176,12 @@ class IndexPage extends React.Component {
                 Свежее, только охлажденное мясо фермерских хозяйств, натуральное яйцо,{" "}
                 лук, картошка, творог делают нашу продукцию вкусной, безопасной и полезной.
               </p>
-              <img 
-                className="mobile-only" 
-                src={require("./src/img/section-3-chapter-2.jpg")} 
-                style={{ maxWidth: "400px", margin: "auto" }}
-                width="100%" 
-                alt=""
+              <Image
+                className="mobile-only"
+                src={require("./src/img/section-3-chapter-2.jpg")}
+                srcThumbnail={require("./src/img/thumbnail/section-3-chapter-2.jpg")}
+                fluid
+                alt="Качество продукции"
               />
             </div>
           </div>
@@ -214,24 +225,19 @@ class IndexPage extends React.Component {
                   <div className="eight wide right floated column">
                     <div className="images">
                       <div className="image-1">
-                        <img 
-                          className="image-1-1 animated" 
-                          src={require("./src/img/section-4-chapter-1.jpg")} 
-                          alt="" 
-                          width="60%" 
-                        />
-                        <img 
-                          className="image-1-2 animated hidden" 
-                          src={require("./src/img/section-4-chapter-2.jpg")} 
-                          alt="" 
-                          width="60%" 
+                        <img
+                          className="image-1-1 animated"
+                          src={require("./src/img/section-4-chapter-1.jpg")}
+                          width="60%"
+                          alt="Натуральность продуктов"
                         />
                       </div>
                       <div className="image-2">
-                        <img 
-                          src={require("./src/img/section-4-chapter-3.png")} 
-                          alt="" 
-                          width="100%"
+                        <Image
+                          src={require("./src/img/section-4-chapter-3.jpg")}
+                          srcThumbnail={require("./src/img/thumbnail/section-4-chapter-3.jpg")}
+                          fluid
+                          alt="Натуральность продуктов"
                         />
                       </div>
                     </div>
@@ -260,17 +266,19 @@ class IndexPage extends React.Component {
                   <div className="eight wide right floated column">
                     <div className="images">
                       <div className="image-1">
-                        <img  
-                          src={require("./src/img/section-5-chapter-3.png")} 
-                          alt="" 
-                          width="100%" 
+                        <Image
+                          src={require("./src/img/section-5-chapter-3.png")}
+                          srcThumbnail={require("./src/img/thumbnail/section-5-chapter-3.png")}
+                          fluid
+                          alt="Гарантия"
                         />
                       </div>
                       <div className="image-2">
-                        <img 
-                          src={require("./src/img/section-5-chapter-2.png")} 
-                          alt="" 
-                          width="100%" 
+                        <Image
+                          src={require("./src/img/section-5-chapter-2.png")}
+                          srcThumbnail={require("./src/img/thumbnail/section-5-chapter-2.png")}
+                          fluid
+                          alt="Гарантия"
                         />
                       </div>
                     </div>

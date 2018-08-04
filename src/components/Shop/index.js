@@ -6,8 +6,36 @@ import CardList from "../CardList";
 import Cart from "../Cart";
 import ShopForm from "../ShopForm";
 import Steps from "../Steps";
-import data from "./data";
+import images from "./images";
 import "./styles.css";
+
+import {
+  ShopProvider,
+  ShopContext
+} from "./context";
+
+const attachImagesToEntries = (items) => items
+  .map((category) => {
+    const categoryImages = images[category._id];
+
+    if (categoryImages) {
+      return {
+        ...category,
+        items: category.items.map((item) => {
+          const itemImage = categoryImages[item._id];
+
+          if (itemImage) {
+            return {
+              ...item,
+              image: itemImage
+            }
+          }
+          return item;
+        })
+      }
+    }
+    return category;
+  })
 
 class Shop extends Component {
   constructor(props) {
@@ -51,86 +79,109 @@ class Shop extends Component {
     }
   }
 
+  renderSteps() {
+    const {
+      location: {
+        hash,
+        pathname
+      }
+    } = this.props;
+
+    if (hash !== "#success") {
+      return (
+        <div className="shop-steps">
+          <Steps pathname={pathname} />
+        </div>
+      );
+    } 
+
+    return null
+  }
+
   render() {
-    const { cart, canCart } = this.props;
+    const { 
+      cart, 
+      canCart
+    } = this.props;
 
     if (!cart) { 
       return (
         <div className="ui loader active" />
-      )
+      );
     }
 
     const cartLength = cart.length;
-    const { pathname, hash } = this.props.location;
     
     return (
-      <div className="shop-wrapper">
-        <div className="shop-steps">
-          {hash !== "#success" &&
-            <Steps pathname={pathname} />
-          }
-        </div>
-        <div className="shop-content">
-          <Switch>
-            <Route 
-              exact
-              path="/shop"
-              render={() => (
-                <div className="shop-card-list">
-                  {canCart &&
-                    <Link to="/shop/cart" className="shop-next-button">
-                      <button className="ui labeled icon button positive big">
-                        Продолжить <i className="ui icon angle right" />
-                      </button>
-                    </Link>
-                  }
-                  <CardList 
+      <ShopProvider>
+        <div className="shop-wrapper">
+          {this.renderSteps()}
+          <div className="shop-content">
+            <Switch>
+              <Route 
+                exact
+                path="/shop"
+                render={() => (
+                  <div className="shop-card-list">
+                    {canCart &&
+                      <Link to="/shop/cart" className="shop-next-button">
+                        <button className="ui labeled icon button positive big">
+                          Продолжить <i className="ui icon angle right" />
+                        </button>
+                      </Link>
+                    }
+                    <ShopContext.Consumer>
+                      {({ items }) => (
+                        <CardList
+                          cart={cart}
+                          onAdd={this.addToCart}
+                          items={items && attachImagesToEntries(items)}
+                          columns="two"
+                        />
+                      )}
+                    </ShopContext.Consumer>
+                  </div>
+                )} 
+              />
+              <Route 
+                exact
+                path="/shop/cart"
+                render={() => (
+                  <Cart
                     cart={cart} 
-                    onAdd={this.addToCart} 
-                    data={data} 
-                    columns="two" 
+                    onRemove={this.removeItem} 
+                    onChange={this.changeItem}
+                    submitter={
+                      <Link to="/shop/form">
+                        <button className="ui button positive big">
+                          Оформить заказ
+                        </button>
+                      </Link>
+                    }
+                    backer={
+                      <Link to="/shop">
+                        <button className="ui button big">
+                          Назад
+                        </button>
+                      </Link>
+                    }
                   />
-                </div>
-              )} 
-            />
-            <Route 
-              exact
-              path="/shop/cart"
-              render={() => (
-                <Cart
-                  cart={cart} 
-                  onRemove={this.removeItem} 
-                  onChange={this.changeItem}
-                  submitter={
-                    <Link to="/shop/form">
-                      <button className="ui button positive big">
-                        Оформить заказ
-                      </button>
-                    </Link>
-                  }
-                  backer={
-                    <Link to="/shop">
-                      <button className="ui button big">
-                        Назад
-                      </button>
-                    </Link>
-                  }
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/shop/form"
-              render={() => (
-                <ShopForm 
-                  cart={cart} 
-                  onSuccess={this.handleSuccess}
-                />
-              )}
-            />
-          </Switch>
+                )}
+              />
+              <Route
+                exact
+                path="/shop/form"
+                render={() => (
+                  <ShopForm 
+                    cart={cart} 
+                    onSuccess={this.handleSuccess}
+                  />
+                )}
+              />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </ShopProvider>
     );
   }
 }
@@ -150,6 +201,6 @@ const mapDispatchToProps = dispatch => ({
   shopEditItem: (id, data) => dispatch(shopEditItem(id, data)),
   shopRemoveItem: id => dispatch(shopRemoveItem(id)),
   shopRefresh: () => dispatch(shopRefresh()),
-})
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Shop));

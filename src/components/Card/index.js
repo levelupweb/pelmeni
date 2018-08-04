@@ -1,258 +1,332 @@
 import React from "react";
+import PropTypes from "prop-types";
+import Slider from "./components/Slider";
 import randomstring from "randomstring";
+import Image from "../Image";
+import Title from "./components/Title";
+import Weight from "./components/Weight";
+import Amount from "./components/Amount";
+import Submit from "./components/Submit";
+import Price from "./components/Price";
 import Carousel from "nuka-carousel";
-import LazyLoad from 'react-lazy-load';
 import "./styles.css";
 
-export default class Card extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleAmount = this.handleAmount.bind(this);
-    this.handleWeight = this.handleWeight.bind(this);
-    this.addToCart = this.addToCart.bind(this);
-    this.handleDimensions = this.handleDimensions.bind(this);
+import {
+  CardProvider,
+  CardContext
+} from "./context";
 
-    const { weight, price } = props.data;
-    
-    const index = price.length - 1;
+const getDefaultItem = category => 
+  category.items.sort((a, b) => a.price > b.price)[0];
 
-    this.state = {
-      amount: 1,
-      price: price[index],
-      weight: weight[index],
-      slideIndex: 0,
+class Card extends React.Component {
+  render() {
+    const { category } = this.props;
+
+    if (!category) {
+      return null;
     }
-  }
-
-  componentDidMount() {
-    const { image, weight } = this.props.data;
-
-    this.setState({
-      slideIndex:  Object.keys(image).indexOf(weight[weight.length - 1].toString()),
-    })
-  }
-
-  handleDimensions() {
-    if (this.carousel) {
-      this.carousel.setDimensions();
-    }
-  }
-
-  handleAmount(value) {
-    this.setState({
-      amount: value,
-    })
-  } 
-
-  handleWeight(value) {
-    const { price, weight, image } = this.props.data;
-    
-    this.setState({
-      weight: value,
-      price: price[weight.indexOf(value)],
-      slideIndex: Object.keys(image).indexOf(value.toString()),
-    })
-  } 
-
-  addToCart() {
-    const { 
-      data, 
-      onAdd 
-    } = this.props;
-    
-    const { 
-      amount, 
-      weight, 
-      price 
-    } = this.state;
-
-    if (data && onAdd) {
-      onAdd({
-        id: randomstring.generate(),
-        title: data.title,
-        description: data.description,
-        weight: weight,
-        price: price,
-        amount: amount,
-        total: amount * price,
-      }, () => {
-        this.setState({
-          amount: 1,
-        })
-      })
-    }
-  }
-
-  renderWeights() {
-    const { weight } = this.props.data;
-    
-    return weight.map((item) => <span>{item} гр., </span>);
-  }
-
-  renderWeightSelector() {
-    const { weight } = this.props.data;
-
-    if (weight && weight.map) {
-      return weight.map((item) => (
-        <button 
-          onClick={() => this.handleWeight(item)} 
-          class={`ui button ${this.state.weight === item && "active"}`}
-        >
-          {item} гр.
-        </button>
-      ));
-    }
-
-    return null;
-  }
-
-  renderOptions() {
-    const { weight } = this.props.data;
-    
-    if (weight && weight.map) {
-      return weight.map((item) => <option value={item}>{item}</option>)
-    }
-
-    return null;
-  }
-
-  renderPrice() {
-    const { 
-      weight, 
-      price,
-    } = this.props.data;
-
-    if (weight && price && weight.indexOf) {
-      return price[weight.indexOf(this.state.weight)] * this.state.amount
-    }
-  }
-
-  renderAmountChanger() {
-    const { amount } = this.state;
     
     return (
-      <div className="ui buttons">
-        <button
-          onClick={() => this.handleAmount(amount - 1)} 
-          className={`ui button small icon ${amount === 1 && "disabled"}`} 
-        >
-          <i className="ui icon minus" />
-        </button>
-        <button
-          className="ui button small icon" 
-        >
-          {amount} шт.
-        </button>
-        <button
-          onClick={() => this.handleAmount(amount + 1)} 
-          className={`ui button small icon`} 
-        >
-          <i className="ui icon plus" />
-        </button>
-      </div>
-    )
-  }
-
-  renderAction() {
-    const { isAdded } = this.state;
-
-    return (
-      <button 
-        onClick={this.addToCart} 
-        className="ui animated fade button positive" 
-        tabIndex="0"
-      >
-        <div className="visible content">
-          {isAdded ? "Добавить ещё" : "Добавить в корзину"}
+      <CardProvider category={category}>
+        <div className="column inverted">
+          <div className="ui fluid inverted card shop-card">
+            <div className="image">
+              <Slider />
+            </div>
+            <div className="content">
+              <Title />
+              <div className="card-price">
+                <Price />
+              </div>
+              <div className="card-bar">
+                <div className="card-weight">
+                  <Weight />
+                </div>
+                <div className="card-amount">
+                  <Amount />
+                </div>
+                <div className="card-submit">
+                  <Submit />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="hidden content">
-          Добавить <i className="right arrow icon"></i>
-        </div>
-      </button>
+      </CardProvider>
     );
   }
-
-  renderSlider() {
-    const { image, title } = this.props.data;
-    
-    if (image && Object.values(image).map) {
-      return (
-        <Carousel
-          ref={c => this.carousel = c}
-          heightMode="first"
-          width="100%"
-          slideIndex={this.state.slideIndex}
-          afterSlide={slideIndex => this.setState({ slideIndex })}
-          initialSlideWidth="100%"
-          renderCenterLeftControls={({ previousSlide }) => (
-            <button className={`ui button icon ${!previousSlide && "disabled"}`} onClick={previousSlide}>
-              <i className="ui icon angle left" />
-            </button>
-          )}
-          renderCenterRightControls={({ nextSlide }) => (
-            <button className={`ui button icon ${!nextSlide && "disabled"}`} onClick={nextSlide}>
-              <i className="ui icon angle right" />
-            </button>
-          )}
-        >
-          {Object.values(image).map((image, i) => (
-            <LazyLoad offsetTop={50}>
-              <img 
-                src={image} 
-                alt={`${title}. Изображение ${i}`} 
-                onLoad={this.handleDimensions}
-                width="100%"
-              />
-            </LazyLoad>
-          ))}
-        </Carousel>
-      )
-    }
-  }
- 
-  render() {
-    const { 
-      data, 
-    } = this.props;
-
-    const { 
-      amount 
-    } = this.state;
-
-    return (
-      <div className="column inverted">
-        <div className="ui fluid card inverted shop-card">
-          <div className="image">
-            {this.renderSlider()}
-          </div>
-          <div className="content">
-            <h2 className="ui header inverted card-title">
-              {data.title}
-              <div className="sub header">{this.renderWeights()}</div>
-            </h2>
-            <p className="card-description">
-              {data.description}
-            </p>
-          </div>
-          <div className="extra content">
-            <div className="card-weights">
-              <div class="ui buttons fluid">
-                {this.renderWeightSelector()}
-              </div>
-            </div>
-            <div className="card-amount-changer">
-              {this.renderAmountChanger()}
-              <div className="card-price">
-                {this.renderPrice()} руб.
-                <span>{this.renderPrice() * 1.3} цена в магазинах</span>
-              </div>
-              <div className="card-primary-action">
-                {this.renderAction()}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
 }
+
+Card.propTypes = {
+  category: PropTypes.shape({
+    items: PropTypes.arrayOf(PropTypes.shape(({
+      weight: PropTypes.number,
+      price: PropTypes.number,
+      category: PropTypes.string,
+    })))
+  }),
+  title: PropTypes.string,
+  description: PropTypes.string,
+}
+
+Card.defaultProps = {
+  category: null,
+}
+
+export default Card;
+
+// export default class Card extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.handleAmount = this.handleAmount.bind(this);
+//     this.handleWeight = this.handleWeight.bind(this);
+//     this.addToCart = this.addToCart.bind(this);
+//     this.handleDimensions = this.handleDimensions.bind(this);
+
+//     // const { weight, price } = props.data;
+    
+//     // const index = price.length - 1;
+
+//     // this.state = {
+//     //   amount: 1,
+//     //   price: price[index],
+//     //   weight: weight[index],
+//     //   slideIndex: 0,
+//     // }
+//   }
+
+//   componentDidMount() {
+//     // const { image, weight } = this.props.data;
+
+//     // this.setState({
+//     //   slideIndex:  Object.keys(image).indexOf(weight[weight.length - 1].toString()),
+//     // })
+//   }
+
+//   handleDimensions() {
+//     if (this.carousel) {
+//       this.carousel.setDimensions();
+//     }
+//   }
+
+//   handleAmount(value) {
+//     this.setState({
+//       amount: value,
+//     })
+//   } 
+
+//   handleWeight(value) {
+//     const { price, weight, image } = this.props.data;
+    
+//     this.setState({
+//       weight: value,
+//       price: price[weight.indexOf(value)],
+//       slideIndex: Object.keys(image).indexOf(value.toString()),
+//     })
+//   } 
+
+//   addToCart() {
+//     const { 
+//       data, 
+//       onAdd 
+//     } = this.props;
+    
+//     const { 
+//       amount, 
+//       weight, 
+//       price 
+//     } = this.state;
+
+//     if (data && onAdd) {
+//       onAdd({
+//         id: randomstring.generate(),
+//         title: data.title,
+//         description: data.description,
+//         weight: weight,
+//         price: price,
+//         amount: amount,
+//         total: amount * price,
+//       }, () => {
+//         this.setState({
+//           amount: 1,
+//         })
+//       })
+//     }
+//   }
+
+//   renderWeights() {
+//     const { weight } = this.props.data;
+    
+//     return weight.map((item) => <span>{item} гр., </span>);
+//   }
+
+//   renderWeightSelector() {
+//     const { weight } = this.props.data;
+
+//     if (weight && weight.map) {
+//       return weight.map((item) => (
+//         <button 
+//           onClick={() => this.handleWeight(item)} 
+//           className={`ui button ${this.state.weight === item && "active"}`}
+//         >
+//           {item} гр.
+//         </button>
+//       ));
+//     }
+
+//     return null;
+//   }
+
+//   renderOptions() {
+//     const { weight } = this.props.data;
+    
+//     if (weight && weight.map) {
+//       return weight.map((item) => <option value={item}>{item}</option>)
+//     }
+
+//     return null;
+//   }
+
+//   renderPrice() {
+//     const { 
+//       weight, 
+//       price,
+//     } = this.props.data;
+
+//     if (weight && price && weight.indexOf) {
+//       return price[weight.indexOf(this.state.weight)] * this.state.amount
+//     }
+//   }
+
+//   renderAmountChanger() {
+//     const { amount } = this.state;
+    
+//     return (
+//       <div className="ui buttons">
+//         <button
+//           onClick={() => this.handleAmount(amount - 1)} 
+//           className={`ui button small icon ${amount === 1 && "disabled"}`} 
+//         >
+//           <i className="ui icon minus" />
+//         </button>
+//         <button
+//           className="ui button small icon" 
+//         >
+//           {amount}  т.
+//         </button>
+//         <button
+//           onClick={() => this.handleAmount(amount + 1)} 
+//           className={`ui button small icon`} 
+//         >
+//           <i className="ui icon plus" />
+//         </button>
+//       </div>
+//     )
+//   }
+
+//   renderAction() {
+//     const { isAdded } = this.state;
+
+//     return (
+//       <button 
+//         onClick={this.addToCart} 
+//         className="ui animated fade button positive" 
+//         tabIndex="0"
+//       >
+//         <div className="visible content">
+//           {isAdded ? "Добавить ещё" : "Добавить в корзину"}
+//         </div>
+//         <div className="hidden content">
+//           Добавить <i className="right arrow icon"></i>
+//         </div>
+//       </button>
+//     );
+//   }
+
+//   renderSlider() {
+//     const { image, title } = this.props.data;
+    
+//     if (image && Object.values(image).map) {
+//       return (
+//         <Carousel
+//           ref={c => this.carousel = c}
+//           heightMode="first"
+//           width="100%"
+//           slideIndex={this.state.slideIndex}
+//           initialSlideHeight={350}
+//           afterSlide={slideIndex => this.setState({ slideIndex })}
+//           initialSlideWidth="100%"
+//           renderCenterLeftControls={({ previousSlide }) => (
+//             <button className={`ui button icon ${!previousSlide && "disabled"}`} onClick={previousSlide}>
+//               <i className="ui icon angle left" />
+//             </button>
+//           )}
+//           renderCenterRightControls={({ nextSlide }) => (
+//             <button className={`ui button icon ${!nextSlide && "disabled"}`} onClick={nextSlide}>
+//               <i className="ui icon angle right" />
+//             </button>
+//           )}
+//         >
+//           {Object.values(image).map(({ src, srcThumbnail }, i) => (
+//             <Image
+//               src={src}
+//               srcThumbnail={srcThumbnail}
+//               alt={`${title}. Изображение ${i}`}
+//               onThumbnailLoaded={this.handleDimensions}
+//               fluid
+//             />
+//           ))}
+//         </Carousel>
+//       )
+//     }
+//   }
+ 
+//   render() {
+//     const { 
+//       data, 
+//     } = this.props;
+
+//     // const { 
+//     //   amount 
+//     // } = this.state;
+
+//     return data.title;
+
+//     // return (
+//     //   <div className="column inverted">
+//     //     <div className="ui fluid card inverted shop-card">
+//     //       <div className="image">
+//     //         {this.renderSlider()}
+//     //       </div>
+//     //       <div className="content">
+//     //         <h2 className="ui header inverted card-title">
+//     //           {data.title}
+//     //           <div className="sub header">{this.renderWeights()}</div>
+//     //         </h2>
+//     //         <p className="card-description">
+//     //           {data.description}
+//     //         </p>
+//     //       </div>
+//     //       <div className="extra content">
+//     //         <div className="card-weights">
+//     //           <div className="ui buttons fluid">
+//     //             {this.renderWeightSelector()}
+//     //           </div>
+//     //         </div>
+//     //         <div className="card-amount-changer">
+//     //           {this.renderAmountChanger()}
+//     //           <div className="card-price">
+//     //             {this.renderPrice()} руб.
+//     //             <span>{this.renderPrice() * 1.3} цена в магазинах</span>
+//     //           </div>
+//     //           <div className="card-primary-action">
+//     //             {this.renderAction()}
+//     //           </div>
+//     //         </div>
+//     //       </div>
+//     //     </div>
+//     //   </div>
+//     // )
+//   }
+// }

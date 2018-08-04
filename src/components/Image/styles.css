@@ -1,0 +1,47 @@
+.image-component {
+  max-width: 100%;
+  position: relative;
+}
+.image-component img {
+    max-width: 100%;
+}
+.image-component .trueImage {
+    opacity: 0;
+    transition: .5s all ease;
+}
+.image-component .thumbnail {
+    opacity: 1;
+    -webkit-filter: blur(25px);
+    filter: blur(25px);
+    transition: .5s all ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.image-component  .hiddenImage {
+    display: none;
+}
+.image-component.loaded .trueImage {
+    opacity: 1;
+}
+.image-component.loaded .thumbnail {
+    opacity: 0;
+    z-index: -1;
+}
+.image-component.fluid img {
+    width: 100%;
+}
+.image-component.circular {
+    border-radius: 100%;
+}
+
+.image-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: 000;
+    padding: 20px;
+    color: #c0c0c0;
+    height: 100px;
+}

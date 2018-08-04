@@ -1,8 +1,8 @@
 require("dotenv").load();
-const path = require('path');
+const path = require("path");
 const webpack = require("webpack");
 const config = require("./config");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const CompressionPlugin = require("compression-webpack-plugin");
 
 const jqueryPath = "jquery";
@@ -23,30 +23,47 @@ const compressionPlugin = new CompressionPlugin({
 
 module.exports = {
   entry: {
-    index: path.resolve(__dirname, 'src/index.jsx'),
+    index: path.resolve(__dirname, "src/index.jsx"),
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'app.[name].js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "app.[name].js"
   },
   plugins: [jqueryPlugin, analyzer, compressionPlugin],
-  devtool: 'eval-source-map',
+  devtool: "eval-source-map",
   module: {
     rules: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.css$/, loader: ["style-loader", "css-loader"], exclude: /node_modules/ },
-      { test: /\.(ico|png|jpg|gif|woff(2)?|ttf|eot|svg|mp4|webm)$/, exclude: /node_modules/, use: [ { loader: 'file-loader', options: { 
-        name: '[hash].[ext]', 
-        outputPath: "assets/",
-        publicPath: config.dist + "/assets",
-      } } ] }
+      { 
+        test: /\.(js|jsx)$/, 
+        loader: "babel-loader", 
+        exclude: /node_modules/ 
+      },
+      { 
+        test: /\.css$/, 
+        loader: ["style-loader", "css-loader"], 
+        exclude: /node_modules/ 
+      },
+      {
+        test: /\.(ico|png|jpg|gif|woff(2)?|ttf|eot|svg|mp4|webm)$/, 
+        exclude: /node_modules/, 
+        use: [{
+          loader: "file-loader", options: {
+            name: "[hash].[ext]",
+            outputPath: "assets/",
+            publicPath: config.server.dist + "/assets",
+          }
+        }]
+      }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [".js", ".jsx"],
     alias: {
-      'semantic-ui': path.join(__dirname, "node_modules", "semantic-ui-css", "semantic.js"),
+      "semantic-ui": path.join(__dirname, "node_modules", "semantic-ui-css", "semantic.js"),
+      "@root": path.resolve(__dirname, "/"),
+      "@components": path.resolve(__dirname, "/src/components"),
+      "@pages": path.resolve(__dirname, "/src/pages"),
+      "@src": path.resolve(__dirname, "/src")
     },
   }
 };
