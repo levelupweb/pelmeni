@@ -1,30 +1,22 @@
 import React from "react";
-import { CardContext } from "../../context";
+import { CardContext } from "@components/Card/context";
+import AmountChanger from "@components/AmountChanger";
+
+import {
+	Icon,
+	Button
+} from "semantic-ui-react";
 
 const Amount = () => (
-    <CardContext.Consumer>
-        {({ amount, handleAmount }) => (
-            <div className="ui buttons">
-                <button
-                    onClick={() => handleAmount(amount - 1)} 
-                    className={`ui button small icon ${amount === 1 && "disabled"}`} 
-                >
-                    <i className="ui icon minus" />
-                </button>
-                <button
-                    className="ui button small icon" 
-                >
-                    {amount} шт.
-                </button>
-                <button
-                    onClick={() => handleAmount(amount + 1)} 
-                    className={`ui button small icon`} 
-                >
-                    <i className="ui icon plus" />
-                </button>
-            </div>
-        )}
-    </CardContext.Consumer>
-);
+	<CardContext.Consumer>
+		{({ amount, handleAmount }) => (
+			<AmountChanger 
+				amount={amount} 
+				onChange={handleAmount} 
+				size="medium"
+			/>
+		)}
+	</CardContext.Consumer>
+)
 
 export default Amount;

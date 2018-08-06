@@ -1,24 +1,47 @@
 import React from "react";
-import { CardContext } from "../../context";
+import PropTypes from "prop-types";
+import { CardContext } from "@components/Card/context";
+import styles from "./styles.less";
 
-const Price = () => (
-    <CardContext.Consumer>
-        {({ currentItem, amount }) => (
-            <React.Fragment>
-                <p className="site-price">
-                    {currentItem.price * amount} руб.
-                </p>
-                <p className="in-markets">
-                    <span>
-                        Цена в магазинах за ед.
-                    </span>
-                    <span>
-                        {currentItem.price * 1.3} руб.
-                    </span>
-                </p>
-            </React.Fragment>
-        )}
-    </CardContext.Consumer>
+const Price = ({ currentItem, amount }) => (
+	<React.Fragment>
+		<p className={styles.real}>
+			{currentItem.price * amount} руб.
+		</p>
+		<p className={styles.market}>
+			<span>
+				Цена в магазинах за ед.
+			</span>
+			<span>
+				{currentItem.price * 1.3} руб.
+			</span>
+		</p>
+	</React.Fragment>
 );
 
-export default Price;
+Price.propTypes = {
+	amount: PropTypes.number,
+	currentItem: PropTypes.shape({
+		weight: PropTypes.number,
+		price: PropTypes.number,
+		category: PropTypes.string,
+	}),
+}
+
+Price.defaultProps = {
+	amount: 0,
+	currentItem: 0,
+}
+
+const EnhancedPrice = () => (
+	<CardContext.Consumer>
+		{({ currentItem, amount }) => (
+			<Price
+				currentItem={currentItem}
+				amount={amount}
+			/>
+		)}
+	</CardContext.Consumer>
+);
+
+export default EnhancedPrice;

@@ -1,24 +1,33 @@
 import React from "react";
 import { CardContext } from "../../context";
+import styles from "./styles.less";
+
+import {
+  Header
+} from "semantic-ui-react"
 
 const renderWeights = (items) => items.map((item, i) => (
     `${item.weight} гр.${i !== items.length - 1 ? "," : ""} `
 ))
 
-const Title = () => (
-    <CardContext.Consumer>
-        {({ category }) => (
-            <React.Fragment>
-              <h2 className="ui header inverted card-title">
-                {category.title}
-                <div className="sub header">{renderWeights(category.items)}</div>
-              </h2>
-              <p className="card-description">
-                {category.description}
-              </p>
-            </React.Fragment>
-        )}
-    </CardContext.Consumer>
+const Title = ({ category }) => (
+	<React.Fragment>
+		<Header className={styles.title} as="h2" inverted>
+			{category.title}
+			<Header.Subheader>
+				{renderWeights(category.items)}
+			</Header.Subheader>
+		</Header>
+		<p className={styles.description}>
+			{category.description}
+		</p>
+	</React.Fragment>
 );
 
-export default Title;
+const EnhancedTitle = () => (
+	<CardContext.Consumer>
+		{({ category }) => <Title category={category} />}
+	</CardContext.Consumer>
+)
+
+export default EnhancedTitle;

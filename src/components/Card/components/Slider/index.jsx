@@ -1,9 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Image from "../../../Image";
+import Image from "@components/Image";
 import Carousel from "nuka-carousel";
-import { CardContext } from "../../context";
-import "./styles.css";
+import { CardContext } from "@components/Card/context";
+import styles from "./styles.less";
+
+import {
+	Button,
+	Icon,
+} from "semantic-ui-react"
 
 class Slider extends React.Component {
 	constructor(props) {
@@ -35,23 +40,25 @@ class Slider extends React.Component {
 
 	renderLeft({ previousSlide }) {
 		return (
-			<button 
-				className={`ui button icon slider-button`} 
+			<Button
 				onClick={previousSlide}
+				className={styles.button}
+				icon
 			>
-				<i className="ui icon angle left" />
-			</button>
+				<Icon name="angle left" />
+			</Button>
 		)
 	}
 
 	renderRight({ nextSlide }) {
 		return (
-			<button 
-				className={`ui button icon slider-button`} 
+			<Button 
 				onClick={nextSlide}
+				className={styles.button}
+				icon
 			>
-				<i className="ui icon angle right" />
-			</button>
+				<Icon name="angle right" />
+			</Button>
 		);
 	}
 

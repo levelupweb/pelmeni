@@ -1,0 +1,36 @@
+.wrapper {
+  border: 0 !important;
+  height: 100%;
+  color: #fff;
+  box-shadow: none !important;
+  display: flex;
+  align-items: stretch;
+  background: rgba(0, 0, 0, 0.45) !important;
+  .bar {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    & > * {
+      margin: 5px;
+    }
+    .submit {
+      flex-grow: 1;
+    }
+    .weight {
+      flex-grow: 1;
+    }
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    .title {
+      flex-grow: 1;
+    }
+    .price {
+      display: flex;
+      flex-flow: row wrap;
+      margin-bottom: 15px;
+    }
+  }
+}
