@@ -38,9 +38,28 @@ module.exports = {
         loader: "babel-loader", 
         exclude: /node_modules/ 
       },
-      { 
+      {
         test: /\.css$/, 
-        loader: ["style-loader", "css-loader"], 
+        loader: [{ 
+          loader: "style-loader" 
+        }, { 
+          loader: "css-loader" 
+        }],
+        exclude: /node_modules/ 
+      },
+      { 
+        test: /\.less$/, 
+        loader: [{
+          loader: "style-loader"
+        }, {
+          loader: "css-loader",
+          options: {
+            modules: true,
+            localIdentName: "[path][name]__[local]--[hash:base64:5]"
+          }
+        }, {
+          loader: "less-loader"
+        }], 
         exclude: /node_modules/ 
       },
       {
@@ -60,10 +79,11 @@ module.exports = {
     extensions: [".js", ".jsx"],
     alias: {
       "semantic-ui": path.join(__dirname, "node_modules", "semantic-ui-css", "semantic.js"),
-      "@root": path.resolve(__dirname, "/"),
-      "@components": path.resolve(__dirname, "/src/components"),
-      "@pages": path.resolve(__dirname, "/src/pages"),
-      "@src": path.resolve(__dirname, "/src")
+      "@root": path.resolve("/"),
+      "@components": path.resolve("src/components"),
+      "@pages": path.resolve("src/pages"),
+      "@src": path.resolve("src"),
+      "@variables": path.resolve("src/variables")
     },
   }
 };

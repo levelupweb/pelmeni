@@ -24,7 +24,7 @@ class Phone extends React.Component {
           className="phone-overlay-button" 
           onClick={this.handleToggle.bind(this, !isActive)}
         >
-          <i class="phone icon"></i>
+          <i className="phone icon"></i>
         </button>
         {isActive &&
           <div className="phone-overlay-content">

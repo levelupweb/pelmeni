@@ -1,9 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router"
 import Fade from "react-reveal/Fade";
-import { shopRefresh } from "../Shop/actions";
 import axios from "axios";
 import "./styles.css";
 
@@ -23,7 +21,7 @@ class ShopForm extends React.Component {
       isSended: false,
     }
   }
-
+ 
   componentDidMount() {
     require("jquery");
     require("../../../semantic/semantic/dist/components/checkbox");
@@ -220,6 +218,4 @@ class ShopForm extends React.Component {
   }
 }
 
-export default withRouter(connect(null, dispatch => ({
-  shopRefresh: () => dispatch(shopRefresh()),
-}))(ShopForm));
+export default ShopForm;

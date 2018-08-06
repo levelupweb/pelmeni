@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import CardList from "../CardList";
 import Cart from "../Cart";
 import ShopForm from "../ShopForm";
@@ -13,13 +12,6 @@ import {
   withRouter, 
   Link 
 } from "react-router-dom";
-
-import { 
-  shopAddItem, 
-  shopEditItem, 
-  shopRemoveItem, 
-  shopRefresh 
-} from "./actions";
 
 import {
   ShopContext
@@ -63,7 +55,7 @@ class Shop extends Component {
           <Steps pathname={pathname} />
         </div>
       );
-    } 
+    }
 
     return null
   }
@@ -157,16 +149,4 @@ Shop.defaultProps = {
   cart: [],
 }
 
-const mapStateToProps = ({ shop }) => ({
-  cart: shop.cart,
-  canCart: !!(shop.cart.length && shop.cart.length > 0),
-})
-
-const mapDispatchToProps = dispatch => ({
-  shopAddItem: data => dispatch(shopAddItem(data)),
-  shopEditItem: (id, data) => dispatch(shopEditItem(id, data)),
-  shopRemoveItem: id => dispatch(shopRemoveItem(id)),
-  shopRefresh: () => dispatch(shopRefresh()),
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Shop));
+export default withRouter(Shop);

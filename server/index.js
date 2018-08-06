@@ -10,9 +10,7 @@ const serverRoutes = require("./routes/index");
 const document = require("./html");
 const { createElement } = require("react");
 const { renderToString } = require("react-dom/server");
-const { Provider } = require("react-redux");
 const StaticRouter = require("react-router-dom/StaticRouter").default; 
-const store = require("../src/store").default;
 const App = require("../src/pages/index.jsx").default;
 
 const app = express();
@@ -80,10 +78,7 @@ app.get("*", (req, res) => {
     createElement(StaticRouter, {
       location: req.url,
       context: {},
-    }, createElement(Provider, { 
-        store,
-      }, createElement(App, {}))
-    )
+    }, createElement(App, {}))
   );
 
   const { Helmet } = require("react-helmet");
