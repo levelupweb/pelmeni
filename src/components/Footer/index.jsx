@@ -1,117 +1,157 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
-import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import "./styles.css";
+import styles from "./styles.less";
+import scrollToBottom from "@utils/scrollToBottom";
+import config from "@utils/config";
+
+import {
+  Container,
+  Grid,
+  Header,
+  Button,
+  List
+} from "semantic-ui-react";
+
+import { 
+  YMaps, 
+  Map, 
+  Placemark 
+} from "react-yandex-maps";
+
+const linkProps = {
+  rel: "noopener norefferrer",
+  target: "_blank",
+}
 
 class Footer extends React.Component {
   constructor(props) {
     super(props);
     this.handleMap = this.handleMap.bind(this);
     this.state = {
-      isActive: false,
+      displayYandexMap: false,
     }
   }
 
   handleMap() {
-    this.setState(state => ({
-      isActive: !state.isActive,
-    }), () => {
-      if (window && window.scrollBy) {
-        window.scrollBy({ 
-          top: window.innerHeight,
-          behavior: 'smooth',
-        });
-      }
-    });
+    const { displayYandexMap } = this.props;
+
+    this.setState({
+      displayYandexMap: !displayYandexMap,
+    }, scrollToBottom);
   }
 
   render() {
-    const { isActive } = this.state;
+    const { displayYandexMap } = this.state;
 
     return (
-      <div>
-        <div className="ui vertical section-footer footer segment inverted">
-          <div className="ui container">
-            <div className="ui stackable equal height stackable grid">
-              <div className="four wide column">
-                <h4 className="ui header inverted">ИП Бондаренко А.А.
-                  <div className="sub header">Copyright, 2018</div>
-                </h4> 
-                <p>
-                  Все права защищены, все материалы, размещенные на сайте принадлежат ИП Бондаренко А.А.
+      <React.Fragment>
+        <div className={styles.wrapper}>
+          <Container>
+            <Grid stackable columns={3}>
+              <Grid.Column>
+                <Header inverted as="h2">
+                  ИП Бондаренко А.А.
+                  <Header.Subheader>
+                    Copyright, 2018
+                  </Header.Subheader>
+                </Header>
+                <p className={styles.disclaimer}>
+                  Все права защищены, все материалы, размещенные на сайте 
+                  принадлежат ИП Бондаренко А.А.
                 </p>
-              </div>
-              <div className="eight wide column">
-                <div className="social">
-                  <div class="ui horizontal list massive">
-                    <a class="item" target="_blank" rel="noopener norefferrer" href="https://vk.com/public166725755">
-                      <i class="vk icon"></i>
-                    </a>
-                    <a class="item" target="_blank" rel="noopener norefferrer" href="https://ok.ru/group/54032234578140">
-                    <i class="odnoklassniki icon"></i>
-                    </a>
-                    <a class="item" target="_blank" rel="noopener norefferrer" href="https://www.facebook.com/klassnye">
-                      <i class="facebook icon"></i>
-                    </a>
-                    <a class="item" target="_blank" rel="noopener norefferrer" href="https://www.instagram.com/klassnye44/">
-                      <i class="instagram icon"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="ui list text inverted">
-                  <div className="item">
-                    156012, г. Кострома, п. Новый, д. 3
-                  </div>
-                  <div className="map-expander" onClick={() => this.handleMap()}>
-                    Показать на карте
-                  </div>
-                  <a className="item" href="tel:+79610080166">
-                    <i className="icon ui phone"></i> +7 (961) 008-01-66
+                <div className={styles.socialLinks}>
+                  <a 
+                    {...linkProps}
+                    href={config.social.vk}
+                  >
+                    <Button inverted circular icon="vk" />
                   </a>
-                  <div className="item">
-                    <a href="mailto:pfklassnye@rambler.ru">
-                      pfklassnye@rambler.ru
-                    </a>
-                  </div>
+                  <a 
+                    {...linkProps}
+                    href={config.social.odnoklassniki}
+                  >
+                    <Button inverted circular icon="odnoklassniki" />
+                  </a>
+                  <a 
+                    {...linkProps}
+                    href={config.social.facebook}
+                  >
+                    <Button inverted circular icon="facebook" />
+                  </a>
+                  <a 
+                    {...linkProps}
+                    href={config.social.instagram}
+                  >
+                    <Button inverted circular icon="instagram" />
+                  </a>
                 </div>
-              </div>
-              <div className="four wide column">
-                <h3 className="ui header inverted">
+              </Grid.Column>
+              <Grid.Column>
+                <div className={styles.contact}>
+                  <Header as="h3" inverted>
+                    Наши контакты
+                  </Header>
+                  <List vertical>
+                    <List.Item 
+                      icon="marker" 
+                      content="156012, г. Кострома, п. Новый, д. 3"
+                    />
+                    <List.Item 
+                      icon="mail" 
+                      content={
+                        <a href="mailto:pfklassnye@rambler.ru">
+                          pfklassnye@rambler.ru
+                        </a>
+                      }
+                    />
+                    <List.Item 
+                      icon="phone"
+                      content={
+                        <a href="tel:+79610080166">
+                          +7 (961) 008-01-66
+                        </a>
+                      }
+                    />
+                  </List>
+                </div>
+              </Grid.Column>
+              <Grid.Column>
+                <Header inverted as="h3">
                   Разработка
-                  <div className="sub header">
-                    Разработано в <a href="http://levelupworlds.com" target="_blank">
-                      Levelup Worlds
-                    </a>
-                  </div>
-                  <div className="sub header">
-                    <a href="mailto:levelupworlds@gmail.com">
-                      levelupworlds@gmail.com
-                    </a>
-                  </div>
-                </h3>
-              </div>
-            </div>
-          </div>
+                </Header>
+                <p>
+                  Разработано в {" "}
+                  <a 
+                    href={config.createdAt} 
+                    {...linkProps}
+                  >
+                    Levelup Web
+                  </a>
+                  <br />
+                  <a href="mailto:web@levelupworlds.com">
+                    web@levelupworlds.com
+                  </a>
+                </p>
+              </Grid.Column>
+            </Grid>
+          </Container>
         </div>
 
-        {isActive &&
-          <div>
-            <YMaps>
-              <Map width="100%" height="600px" state={{ center: [57.80, 41.01], zoom: 14 }}>
-                <Placemark
-                  geometry={{
-                    coordinates: [57.799390, 41.004859]
-                  }}
-                  properties={{
-                    hintContent: 'Наш офис в Костроме',
-                    balloonContent: 'Пельмени Классные. Офис в г. Костроме'
-                  }}
-                />
-              </Map>
-            </YMaps>
-          </div>
+        {displayYandexMap &&
+          <YMaps>
+            <Map width="100%" height="600px" state={{ center: [57.80, 41.01], zoom: 14 }}>
+              <Placemark
+                geometry={{
+                  coordinates: [57.799390, 41.004859]
+                }}
+                properties={{
+                  hintContent: "Наш офис в Костроме",
+                  balloonContent: "Пельмени Классные. Офис в г. Костроме"
+                }}
+              />
+            </Map>
+          </YMaps>
         }
-      </div>
+      </React.Fragment>
     )
   }
 }
