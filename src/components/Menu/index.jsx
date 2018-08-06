@@ -1,81 +1,74 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { menuToggle } from "../SidebarMenu/actions";
-import { withRouter } from "react-router"
 import CartWidget from "../CartWidget";
-import "./styles.css";
+import { LayoutContext } from "../Layout/context";
+import styles from "./styles.less";
 
 import {
   Menu,
   Container,
   Icon,
-  Button,
 } from "semantic-ui-react";
 
-class MenuWrapper extends React.Component {
-  render() {
-    const {
-      menuToggle,
-      location: {
-        pathname
-      }
-    } = this.props;
+const MenuWrapper = ({ activeItem, handleExpand }) => (
+  <div className={styles.wrapper}>
+    <Container>
+      <Menu className={styles.menu} secondary pointing inverted size="large" fluid>
+        <Menu.Item 
+          onClick={() => handleExpand(true)}
+          className={styles.toc}
+        >
+          <Icon name="sidebar" />
+        </Menu.Item>
+        <Menu.Item active={activeItem === "/"}>
+          <Link to="/">
+            Главная
+          </Link>
+        </Menu.Item>
+        <Menu.Item active={activeItem === "/shop"}>
+          <Link to="/shop">
+            Выберите продукты
+          </Link>
+        </Menu.Item>
+        <Menu.Item active={activeItem === "/dostavka"}>
+          <Link to="/dostavka">
+            Доставка и оплата
+          </Link>
+        </Menu.Item>
+        <Menu.Item active={activeItem === "/contact"}>
+          <Link to="/contact">
+            Связаться с нами
+          </Link>
+        </Menu.Item>
+        <Menu.Menu position="right">
+          <Menu.Item className={styles.widget}>
+            <CartWidget />
+          </Menu.Item>
+        </Menu.Menu>
+      </Menu>
+    </Container>
+  </div>
+);
 
-    return (
-      <div className="main-menu">
-        <Container>
-          <Menu
-            secondary
-            pointing
-            inverted
-            size="large"
-            fluid
-          >
-            <Button
-              icon
-              className="toc"
-              onClick={menuToggle}
-            >
-              <Icon
-                name="sidebar"
-              />
-            </Button>
-            <Link to="/">
-              <Menu.Item active={pathname === "/"}>
-                Главная
-              </Menu.Item>
-            </Link>
-            <Link to="/shop">
-              <Menu.Item
-                className="primary"
-                active={pathname === "/shop"}
-              >
-                Выберите продукты
-              </Menu.Item>
-            </Link>
-            <Link to="/dostavka">
-              <Menu.Item active={pathname === "/dostavka"}>
-                Доставка и оплата
-              </Menu.Item>
-            </Link>
-            <Link to="/contact">
-              <Menu.Item active={pathname === "/contact"}>
-                Связаться с нами
-              </Menu.Item>
-            </Link>
-            <Menu.Menu position="right">
-              <Menu.Item>
-                <CartWidget />
-              </Menu.Item>
-            </Menu.Menu>
-          </Menu>
-        </Container>
-      </div>
-    )
-  }
+MenuWrapper.propTypes = {
+  handleExpand: PropTypes.func.isRequired,
+  activeItem: PropTypes.string
 }
 
-export default withRouter(connect(null, dispatch => ({
-  menuToggle: () => dispatch(menuToggle())
-}))(MenuWrapper));
+MenuWrapper.defaultProps = {
+  activeItem: null,
+}
+
+const EnhancedMenuWrapper = () => (
+  <LayoutContext.Consumer>
+    {({ handleExpand, activeItem }) => (
+      <MenuWrapper 
+        handleExpand={handleExpand}
+        activeItem={activeItem}
+      />
+    )}
+  </LayoutContext.Consumer>
+)
+
+export default EnhancedMenuWrapper;
