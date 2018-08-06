@@ -1,0 +1,43 @@
+.blur(@blur: 5px) {
+    -webkit-filter: blur(@blur);
+    filter: blur(@blur);
+}
+
+.wrapper {
+    max-width: 100%;
+    position: relative;
+    img {
+        max-width: 100%;
+    }
+    .true {
+        opacity: 0;
+        transition: .5s all ease;
+    }
+    .thumbnail {
+        .blur(25px);
+        opacity: 1;
+        transition: .5s all ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+    .hidden {
+        display: none !important;
+    }
+    &.loaded {
+        .true {
+            opacity: 1;
+        }
+        .thumbnail {
+            opacity: 0;
+            z-index: -1;
+        }
+    }
+    &.fluid {
+        img {
+            width: 100% !important;
+        }
+    }
+}
+
