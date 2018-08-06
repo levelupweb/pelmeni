@@ -4,7 +4,7 @@ import Footer from "../Footer";
 import Menu from "../Menu";
 import SidebarMenu from "../SidebarMenu";
 import { ShopProvider } from "../Shop/context";
-import "./styles.css";
+import styles from "./styles.less";
 
 import { 
 	Dimmer
@@ -24,7 +24,7 @@ const Layout = ({ children }) => (
 					<Menu />
 					<SidebarMenu />
 					<Dimmer.Dimmable dimmed={isExpanded}>
-						<div className="layout-inner">
+						<div className={styles.inner}>
 							{children}
 							<Footer />
 						</div>
