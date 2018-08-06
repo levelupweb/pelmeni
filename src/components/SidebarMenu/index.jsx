@@ -7,7 +7,7 @@ import styles from "./styles.less";
 import { 
   Menu, 
   Sidebar,
-  Sticky
+  Icon
 } from "semantic-ui-react";
 
 const SidebarMenu = ({ 
@@ -25,6 +25,9 @@ const SidebarMenu = ({
     visible={isExpanded}
     width="wide"
   >
+    <Menu.Item as="a" onClick={() => handleExpand(false)}>
+      <Icon name="angle left" /> Закрыть меню
+    </Menu.Item>
     <Link to="/" onClick={() => handleExpand(false)}>
       <Menu.Item as="a" active={activeItem === "/"}>
         Главная

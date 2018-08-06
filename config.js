@@ -4,6 +4,16 @@ const host = isDev ? "localhost" : process.env.DOMAIN;
 const url = !isDev ? "https://" + host : "http://" + host + ":" + port;
 const dist = url + "/" + process.env.STATIC_FOLDER;
 
+const social = {
+  instagram: process.env.SOCIAL_INSTAGRAM,
+  vk: process.env.SOCIAL_VK,
+  facebook: process.env.SOCIAL_FACEBOOK,
+  odnoklassniki: process.env.SOCIAL_ODNOKLASSNIKI,
+}
+
+const createdAt = process.env.CREATED_AT;
+
+
 module.exports.server = {
   url,
   host,
@@ -12,6 +22,8 @@ module.exports.server = {
   dist,
   prodUrl: url,
   ssr: !isDev,
+  social,
+  createdAt,
   db: {
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
@@ -24,4 +36,6 @@ module.exports.client = {
   url,
   host,
   dist,
+  social,
+  createdAt,
 }

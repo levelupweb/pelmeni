@@ -9,6 +9,20 @@
       "transform-semantic-ui-react-imports", {
         "importType": "commonjs"
       }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "@root": "./",
+          "@components": "./src/components",
+          "@utils": "./src/utils",
+          "@src": "./src",
+          "@variables": "./src/variables"
+        },
+        "extensions": [".js", ".json", ""]
+      }
     ]
   ]
 }

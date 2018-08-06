@@ -83,7 +83,8 @@ module.exports = {
       "@components": path.resolve("src/components"),
       "@pages": path.resolve("src/pages"),
       "@src": path.resolve("src"),
-      "@variables": path.resolve("src/variables")
+      "@variables": path.resolve("src/variables"),
+      "@utils": path.resolve("src/utils")
     },
   }
 };

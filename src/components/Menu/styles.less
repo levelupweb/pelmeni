@@ -6,41 +6,37 @@
 @background-opacity: 0.9;
 @background: rgba(0, 0, 0, @background-opacity);
 
-.wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background: @background;
-  z-index: @menu-z-index;
+.menu {
+  transition: .2s all ease;
+  background: @background !important;
   height: @header-space;
   max-height: @header-space;
   min-height: @header-space;
-
-  .menu {
-    :global(.item) {
-      padding: 10px !important;
-      font-size: 18px!important;
-      align-self: center!important;
-      &:hover {
-        background: transparent !important;
-      }
-      &:global(.active) {
-        border-color: transparent !important;
-        a {
-          color: @primary !important;
-        }
-      }
-      &.widget {
-        position: initial !important;
-      }
-      &.toc {
-        display: none;
-        font-size: 21px !important;
-        padding: 16px 0 !important;
+  opacity: 1;
+  :global(.item) {
+    padding: 10px !important;
+    font-size: 18px!important;
+    align-self: center!important;
+    &:hover {
+      background: transparent !important;
+    }
+    &:global(.active) {
+      border-color: transparent !important;
+      a {
+        color: @primary !important;
       }
     }
+    &.widget {
+      position: initial !important;
+    }
+    &.toc {
+      display: none !important;
+      font-size: 21px !important;
+      margin-left: 15px !important;
+    }
+  }
+  &.hidden {
+    opacity: 0 !important
   }
 }
 
@@ -52,7 +48,7 @@
         display: block !important;
       }
       &.toc {
-        display: block !important
+        display: block !important;
       }
     }
   }

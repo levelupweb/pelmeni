@@ -7,7 +7,8 @@ import { ShopProvider } from "../Shop/context";
 import styles from "./styles.less";
 
 import { 
-	Dimmer
+	Dimmer,
+	Sticky,
 } from "semantic-ui-react";
 
 import { 
@@ -20,7 +21,7 @@ const Layout = ({ children }) => (
 		<Phone />
 		<LayoutContext.Consumer>
 			{({ isExpanded }) => (
-				<div>
+				<React.Fragment>
 					<Menu />
 					<SidebarMenu />
 					<Dimmer.Dimmable dimmed={isExpanded}>
@@ -30,7 +31,7 @@ const Layout = ({ children }) => (
 						</div>
 						<Dimmer active={isExpanded} />
 					</Dimmer.Dimmable>
-				</div>
+				</React.Fragment>
 			)}
 		</LayoutContext.Consumer>
 	</React.Fragment>
