@@ -9,7 +9,7 @@ const {
     PROMO_DISCOUNT
 } = require("../../models/Promo/consts");
 
-const { 
+const {
     errCode0009,
     errCode0010
 } = require("../../errors");
@@ -33,7 +33,7 @@ router.get("/check", (req, res) => Promo
     .then(promo => {
         res.json({
             discount: promo && promo[PROMO_DISCOUNT],
-            isValid: !!promo
+            code: promo && promo[PROMO_CODE],
         });
     })
     .catch(error => console.log(error) || res.status(500).json(errCode0010(error)))

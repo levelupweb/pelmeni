@@ -2,6 +2,16 @@ import React from "react";
 import axios from "axios";
 import config from "../../utils/config";
 
+import {
+	LOCAL_STORAGE_CART,
+	LOCAL_STORAGE_PROMO
+} from "../../consts";
+
+import {
+	setItemToLocalStorage,
+	getFromLocalStorage,
+} from "../../utils/localStorage";
+
 export const ShopContext = React.createContext();
 
 class ShopProviderClass extends React.Component {
@@ -13,13 +23,17 @@ class ShopProviderClass extends React.Component {
 		this.fetchItemsFail = this.fetchItemsFail.bind(this);
 		this.updateAmount = this.updateAmount.bind(this);
 		this.getTotalSumm = this.getTotalSumm.bind(this);
+		this.getTotalSummWithDiscount = this.getTotalSummWithDiscount.bind(this);
 		this.addToCart = this.addToCart.bind(this);
 		this.removeFromCart = this.removeFromCart.bind(this);
+		this.handlePromo = this.handlePromo.bind(this);
 		this.state = {
 			isFetching: false,
 			items: null,
 			error: null,
-			cart: [],
+			cart: JSON.parse(getFromLocalStorage(LOCAL_STORAGE_CART)) || [],
+			promo: JSON.parse(getFromLocalStorage(LOCAL_STORAGE_PROMO)),
+			addSpy: 0,
 		}
 	}
 
@@ -28,25 +42,36 @@ class ShopProviderClass extends React.Component {
 	}
 
 	addToCart(item) {
-		this.setState(state => {
-			const existedItem = state.cart.filter(i => i.id === item.id)[0];
+		return new Promise((resolve) => {
+			this.setState(state => {
+				const existedItem = state.cart.filter(i =>
+					i.id === item.id
+				)[0];
 
-			if (existedItem) {
-				return {
-					cart: state.cart.map(i => i._id === item.id ? ({
-						...i,
-						amount: existedItem.amount + item.amount,
-					}) : i)
+				if (existedItem) {
+					return {
+						addSpy: state.addSpy + 1,
+						cart: state.cart.map(i => i._id === item.id ? ({
+							...i,
+							amount: existedItem.amount + item.amount,
+						}) : i)
+					}
 				}
-			}
 
-			return {
-				cart: [
-					...state.cart,
-					item,
-				]
-			}
-		})
+				return {
+					addSpy: state.addSpy + 1,
+					cart: [
+						...state.cart,
+						item,
+					]
+				}
+			}, () => {
+				const { cart } = this.state;
+
+				setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
+				return resolve(cart);
+			})
+		});
 	}
 
 	removeFromCart(itemId) {
@@ -69,7 +94,7 @@ class ShopProviderClass extends React.Component {
 
 		if (!isFetching) {
 			this.setState({ isFetching: true }, () => {
-					this.fetchItemsProcess();
+				this.fetchItemsProcess();
 			})
 		}
 	}
@@ -115,12 +140,32 @@ class ShopProviderClass extends React.Component {
 		})
 	}
 
+	handlePromo(code, discount) {
+		this.setState({
+			promo: { code, discount }
+		}, () => {
+			const { promo } = this.state;
+
+			setItemToLocalStorage(LOCAL_STORAGE_PROMO, JSON.stringify(promo));
+		})
+	}
+
 	getTotalSumm() {
 		const { cart } = this.state;
 
-		return cart.reduce((prev, curr) => 
+		return cart.reduce((prev, curr) =>
 			prev + (curr.price * curr.amount)
-		, 0)
+			, 0);
+	}
+
+	getTotalSummWithDiscount() {
+		const { promo } = this.state;
+
+		if (promo && promo.discount) {
+			return Math.ceil((this.getTotalSumm() / 100) * promo.discount)
+		}
+
+		return null;
 	}
 
 	render() {
@@ -132,18 +177,23 @@ class ShopProviderClass extends React.Component {
 				isFetching,
 				error,
 				items,
-				cart
+				cart,
+				promo,
+				addSpy,
 			},
 			fetchItemsStart,
 			addToCart,
 			removeFromCart,
 			updateAmount,
 			getTotalSumm,
+			handlePromo,
+			getTotalSummWithDiscount
 		} = this;
 
 		return (
 			<ShopContext.Provider
 				value={{
+					addSpy,
 					isFetching,
 					error,
 					items,
@@ -152,7 +202,10 @@ class ShopProviderClass extends React.Component {
 					removeFromCart,
 					updateAmount,
 					getTotalSumm,
-					cart
+					getTotalSummWithDiscount,
+					cart,
+					handlePromo,
+					promo
 				}}
 			>
 				{children}

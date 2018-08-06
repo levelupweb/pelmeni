@@ -13,7 +13,11 @@
   "keywords": [],
   "author": "",
   "nodemonConfig": {
-    "ignore": ["src/*", "dist/*", "semantic/*"],
+    "ignore": [
+      "src/*",
+      "dist/*",
+      "semantic/*"
+    ],
     "delay": "2500"
   },
   "license": "ISC",
@@ -33,6 +37,7 @@
     "morgan": "^1.9.0",
     "nuka-carousel": "^4.2.1",
     "password-hash-and-salt": "^0.1.4",
+    "randomstring": "^1.1.5",
     "react": "^16.4.2",
     "react-dom": "^16.3.2",
     "react-helmet": "^5.2.0",
@@ -43,9 +48,9 @@
     "react-router-dom": "^4.2.2",
     "react-yandex-maps": "^2.1.5",
     "redux": "^4.0.0",
-    "randomstring": "^1.1.5",
     "redux-thunk": "^2.2.0",
-    "semantic-ui": "^2.3.1"
+    "semantic-ui": "^2.3.1",
+    "semantic-ui-react": "^0.82.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

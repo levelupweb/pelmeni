@@ -2,48 +2,75 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { menuToggle } from "../SidebarMenu/actions";
-import { withRouter } from 'react-router'
+import { withRouter } from "react-router"
 import CartWidget from "../CartWidget";
 import "./styles.css";
 
-class Menu extends React.Component {
+import {
+  Menu,
+  Container,
+  Icon,
+  Button,
+} from "semantic-ui-react";
+
+class MenuWrapper extends React.Component {
   render() {
-    const { menuToggle } = this.props;
-    const { pathname } = this.props.location;
-    
+    const {
+      menuToggle,
+      location: {
+        pathname
+      }
+    } = this.props;
+
     return (
       <div className="main-menu">
-        <div className="ui container">
-          <div className="ui fluid secondary pointing inverted menu large">
-            <a className="toc item" id="open_sidebar">
-              <i 
-                className="toc-icon" 
-                onClick={() => menuToggle && menuToggle()} 
-                style={{fontSize: "35px"}} 
-                className="sidebar icon"
-              ></i>
-            </a>
-            <Link to='/' className={`${pathname === "/" && "active"} item`}>
-              Главная
-            </Link>
-            <Link 
-              to='/shop' className={`${pathname === "/shop" && "active"} item`}
+        <Container>
+          <Menu
+            secondary
+            pointing
+            inverted
+            size="large"
+            fluid
+          >
+            <Button
+              icon
+              className="toc"
+              onClick={menuToggle}
             >
-              <span ref={(node) => node && node.style.setProperty("color", "#af9063", "important")} >
+              <Icon
+                name="sidebar"
+              />
+            </Button>
+            <Link to="/">
+              <Menu.Item active={pathname === "/"}>
+                Главная
+              </Menu.Item>
+            </Link>
+            <Link to="/shop">
+              <Menu.Item
+                className="primary"
+                active={pathname === "/shop"}
+              >
                 Выберите продукты
-              </span>
+              </Menu.Item>
             </Link>
-            <Link to='/dostavka' className={`${pathname === "/dostavka" && "active"} item`}>
-              Доставка и оплата
+            <Link to="/dostavka">
+              <Menu.Item active={pathname === "/dostavka"}>
+                Доставка и оплата
+              </Menu.Item>
             </Link>
-            <Link to='/contact' className={`${pathname === "/contact" && "active"} item`}>
-              Связаться с нами
+            <Link to="/contact">
+              <Menu.Item active={pathname === "/contact"}>
+                Связаться с нами
+              </Menu.Item>
             </Link>
-            <div className="right menu">
-              <CartWidget />
-            </div>
-          </div>
-        </div>
+            <Menu.Menu position="right">
+              <Menu.Item>
+                <CartWidget />
+              </Menu.Item>
+            </Menu.Menu>
+          </Menu>
+        </Container>
       </div>
     )
   }
@@ -51,4 +78,4 @@ class Menu extends React.Component {
 
 export default withRouter(connect(null, dispatch => ({
   menuToggle: () => dispatch(menuToggle())
-}))(Menu));
+}))(MenuWrapper));

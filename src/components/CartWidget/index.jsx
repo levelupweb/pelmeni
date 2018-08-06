@@ -6,31 +6,41 @@ import { ShopContext } from "../Shop/context";
 import config from "../../utils/config";
 import "./styles.css";
 
+import {
+  Button,
+  Header,
+  Icon,
+  Message,
+  Input,
+  Form,
+} from "semantic-ui-react";
+
 const renderAmountChanger = (item, onChange) => (
-  <div className="ui buttons tiny">
-    <button 
-      className={`ui button small icon`} 
-      onClick={() => onChange(item.amount - 1, (item.amount - 1) * item.price)}
+  <Button.Group size="small">
+    <Button
+      onClick={() => onChange(item.amount - 1)}
+      icon
     >
-      <i className="ui icon minus" />
-    </button>
-    <button 
-      className={`ui button small icon`}
+      <Icon name="minus" />
+    </Button>
+    <Button
+      icon
     >
       <strong>{item.amount}</strong> шт.
-    </button>
-    <button 
-      className={`ui button small icon`} 
-      onClick={() => onChange(item.amount + 1, (item.amount + 1) * item.price)}
+    </Button>
+    <Button
+      icon
+      onClick={() => onChange(item.amount + 1)}
     >
-      <i className="ui icon plus" />
-    </button>
-  </div>
+      <Icon name="plus" />
+    </Button>
+  </Button.Group>
 )
 
 class CartWidget extends React.Component {
   constructor(props) {
     super(props);
+    this.handleTemporaryCode = this.handleTemporaryCode.bind(this);
     this.handleExpand = this.handleExpand.bind(this);
     this.checkCodeStart = this.checkCodeStart.bind(this);
     this.checkCodeProcess = this.checkCodeProcess.bind(this);
@@ -41,25 +51,35 @@ class CartWidget extends React.Component {
       isExpanded: false,
       isChecking: false,
       temporaryCode: null,
-      discount: null,
-      isValid: true,
+      animation: false,
+      isValid: true
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { addSpy } = this.props;
+
+    if (JSON.stringify(addSpy) !== JSON.stringify(prevProps.addSpy)) {
+      this.setState({ animation: true }, () => setTimeout(() =>
+        this.setState({ animation: false }), 1000
+      ))
     }
   }
 
   handleExpand() {
-    this.setState(state => ({ 
-      isExpanded: !state.isExpanded 
+    this.setState(state => ({
+      isExpanded: !state.isExpanded
     }));
   }
 
   checkCodeStart() {
-    const { 
+    const {
       isChecking,
       discount,
     } = this.state;
 
     if (!isChecking && !discount) {
-      this.setState({  isChecking: true, error: null, isValid: true }, () => {
+      this.setState({ isChecking: true, error: null }, () => {
         this.checkCodeProcess();
       })
     }
@@ -71,48 +91,60 @@ class CartWidget extends React.Component {
     axios.get(config.url + "/promo/check", {
       params: { code: temporaryCode }
     })
-			.then(this.checkCodeSuccess)
-			.catch(this.checkCodeFail);
+      .then(this.checkCodeSuccess)
+      .catch(this.checkCodeFail);
   }
 
-  checkCodeSuccess({ data: { isValid, discount } }) {
+  checkCodeSuccess({ data }) {
+    const { handlePromo } = this.props;
+
+    if (data.code) {
+      this.setState({ isChecking: false, isValid: true }, () => {
+        handlePromo(data.code, data.discount);
+      })
+    }
+
     this.setState({
       isChecking: false,
-      discount: discount,
-      isValid
-    })
+      isValid: false
+    });
   }
 
   checkCodeFail({ response }) {
-		if (response) {
-			if (response.data.code) {
-				this.handleError(response.data)
+    if (response) {
+      if (response.data.code) {
+        this.handleError(response.data)
 
-				return;
-			}
+        return;
+      }
 
-			this.handleError({
-				message: "Неизвестная ошибка сервера"
-			})
+      this.handleError({
+        message: "Неизвестная ошибка сервера"
+      })
 
-			return;
-		}
-		this.handleError({
-			message: "Неизвестная ошибка клиента"
-		})
-	}
+      return;
+    }
 
-	handleError(error) {
-		console.log(error);
+    this.handleError({
+      message: "Неизвестная ошибка клиента"
+    })
+  }
 
-		this.setState({
-			isFetching: false,
-			error,
-		})
-	}
+  handleError(error) {
+    console.log(error);
+
+    this.setState({
+      isFetching: false,
+      error,
+    });
+  }
+
+  handleTemporaryCode({ target: { value } }) {
+    this.setState({ temporaryCode: value })
+  }
 
   renderItems() {
-    const { 
+    const {
       cart,
       removeFromCart,
       updateAmount
@@ -122,21 +154,25 @@ class CartWidget extends React.Component {
       return cart.map((item, i) => (
         <div className="cart-widget-item">
           <div className="title">
-            <h3 className="ui inverted header">
-              {item.title}
-              <div className="sub header">
-                {item.weight} гр.
-              </div>
-            </h3>
-            <div 
-              onClick={() => removeFromCart(item.id)} 
-              className="ui button icon tiny" 
+            <Header
+              inverted
+              as="h3"
             >
-              <i className="ui close icon" />
-            </div>
+              {item.title}
+              <Header.Subheader>
+                {item.weight} гр.
+              </Header.Subheader>
+            </Header>
+            <Button
+              onClick={() => removeFromCart(item.id)}
+              size="tiny"
+              icon
+            >
+              <Icon name="close" />
+            </Button>
           </div>
           <div className="bar">
-            {renderAmountChanger(item, value =>  
+            {renderAmountChanger(item, value =>
               updateAmount(item.id, value))
             }
             <div className="total">
@@ -149,41 +185,82 @@ class CartWidget extends React.Component {
 
     return (
       <div className="empty">
-        <p>Ваша корзина пока пуста</p>
-        <Link 
+        <p className="message">
+          Ваша корзина пока пуста
+        </p>
+        <Link
           to="/shop"
           onClick={this.handleExpand}
         >
-          <div className="ui button inverted basic fluid">
+          <Button
+            inverted
+            basic
+            fluid
+          >
             Выбрать товар
-          </div>
+          </Button>
         </Link>
       </div>
-    )
+    );
+  }
+
+  renderTotal() {
+    const {
+      total,
+      totalWithDiscount
+    } = this.props;
+
+    if (totalWithDiscount) {
+      return (
+        <span className="cart-total">
+          <span className="lined-throught">
+            {total}
+          </span>
+          <span className="total-to-checkout">
+            {totalWithDiscount}
+          </span>
+          <span className="suffix">
+            руб.
+          </span>
+        </span>
+      );
+    }
+
+    return (
+      <span className="cart-total">
+        <span className="total-to-checkout">
+          {total}
+        </span>
+        <span className="suffix">
+          руб.
+        </span>
+      </span>
+    );
   }
 
   renderButton() {
-    const { total } = this.props;
-
     return (
-      <React.Fragment>
+      <div className="cart-checkout-button">
         <div className="total">
-          Итого: <span>{total} Руб.</span>
+          Итого: {this.renderTotal()}
         </div>
-        <Link 
-          onClick={this.handleExpand} 
+        <Link
+          onClick={this.handleExpand}
           to="/shop/cart"
         >
-          <button className="ui button fluid basic">
+          <Button
+            fluid
+            basic
+          >
             Перейти к оформлению
-          </button>
+          </Button>
         </Link>
-      </React.Fragment>
+      </div>
     );
   }
 
   renderInput() {
-    const { 
+    const {
       temporaryCode,
       isChecking,
       error,
@@ -191,45 +268,48 @@ class CartWidget extends React.Component {
     } = this.state;
 
     return (
-      <div 
-        className={`
-          ui action input fluid
-          ${!isValid ? "error" : ""}
-        `}
-      >
-        {error && 
-          <div className="ui negative message">
-            <i className="ui close icon" />
-            <div className="header">Ошибка</div>
+      <Form onSubmit={this.checkCodeStart}>
+        {error &&
+          <Message negative>
             <p>{error.message}</p>
-          </div>
+          </Message>
         }
-        <input 
-          type="text"
-          value={temporaryCode}
-          placeholder="У вас есть промокод?"
-          onChange={({ target: { value } }) => 
-            this.setState({
-              temporaryCode: value
-            })
+        <Form.Field>
+          <Input
+            value={temporaryCode}
+            placeholder="У вас есть промокод?"
+            onChange={this.handleTemporaryCode}
+            loading={isChecking}
+            action={(
+              <Button
+                basic
+                onClick={this.checkCodeStart}
+                loading={isChecking}
+              >
+                <Icon name="angle right" />
+              </Button>
+            )}
+          />
+          {isValid === false &&
+            <p className="invalid-code">
+              Код не действителен. Попробуйте ввести другой
+            </p>
           }
-        />
-        <button 
-          className={`basic ui button ${isChecking && "loading"}`}
-          onClick={this.checkCodeStart}
-        >
-          <i className="ui icon angle right" />
-        </button>
-      </div>
+        </Form.Field>
+      </Form>
     );
   }
 
   render() {
-    const { isExpanded } = this.state;
+    const {
+      isExpanded,
+      animation
+    } = this.state;
 
-    const { 
+    const {
       cart,
       total,
+      promo
     } = this.props;
 
     if (cart && cart.hasOwnProperty("length")) {
@@ -243,19 +323,17 @@ class CartWidget extends React.Component {
               {cart.length} в корзине
             </div>
           </div>
-          <div className="button">
-            <div 
-              onClick={this.handleExpand} 
-              className="ui button basic icon inverted"
-            >
-              <i 
-                className={`
-                  ui icon 
-                  ${!isExpanded ? "angle down" : "angle up"}
-                `} 
-              /> Моя корзина
-            </div>
-          </div>
+          <Button
+            className={animation && "shaking"}
+            onClick={this.handleExpand}
+            inverted
+            basic
+            icon
+          >
+            <Icon
+              name={!isExpanded ? "angle down" : "angle up"}
+            /> Моя корзина
+          </Button>
           {isExpanded &&
             <div className="expand">
               <div className="arrow" />
@@ -267,16 +345,18 @@ class CartWidget extends React.Component {
                   <div className="checkout">
                     {this.renderButton()}
                   </div>
-                  <div className="promo">
-                    {this.renderInput()}
-                  </div>
+                  {!promo &&
+                    <div className="promo">
+                      {this.renderInput()}
+                    </div>
+                  }
                 </div>
               )}
             </div>
           }
         </div>
       )
-    } 
+    }
 
     return null;
   }
@@ -291,24 +371,46 @@ CartWidget.propTypes = {
     price: PropTypes.number,
   })),
   removeFromCart: PropTypes.func.isRequired,
-  total: PropTypes.number
+  total: PropTypes.number,
+  updateAmount: PropTypes.func.isRequired,
+  promo: PropTypes.shape({
+    code: PropTypes.string.isRequired,
+    discount: PropTypes.number.isRequired,
+  }),
+  handlePromo: PropTypes.func.isRequired,
+  totalWithDiscount: PropTypes.number,
 }
 
 CartWidget.defaultProps = {
   cart: [],
   total: 0,
+  totalWithDiscount: null,
+  promo: null,
 }
 
 const EnhancedCartWidget = () => (
   <ShopContext.Consumer>
-    {({ cart, removeFromCart, updateAmount, getTotalSumm }) => (
-      <CartWidget
-        cart={cart}
-        removeFromCart={removeFromCart}
-        updateAmount={updateAmount}
-        total={getTotalSumm()}
-      />
-    )}
+    {({
+      cart,
+      removeFromCart,
+      updateAmount,
+      getTotalSumm,
+      promo,
+      handlePromo,
+      getTotalSummWithDiscount,
+      addSpy,
+    }) => (
+        <CartWidget
+          cart={cart}
+          removeFromCart={removeFromCart}
+          updateAmount={updateAmount}
+          total={getTotalSumm()}
+          totalWithDiscount={getTotalSummWithDiscount()}
+          promo={promo}
+          addSpy={addSpy}
+          handlePromo={handlePromo}
+        />
+      )}
   </ShopContext.Consumer>
 )
 

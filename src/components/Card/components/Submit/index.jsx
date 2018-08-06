@@ -6,17 +6,18 @@ const Submit = () => (
     <ShopContext.Consumer>
         {({ addToCart }) => (
             <CardContext.Consumer>
-                {({ currentItem, amount, category }) => (
+                {({ currentItem, amount, category, handleAmount }) => (
                     <button
-                        onClick={() => 
+                        onClick={() =>
                             addToCart({
                                 ...currentItem,
                                 id: currentItem._id,
                                 title: category.title,
                                 amount,
                             })
-                        } 
-                        className="ui fluid button primary" 
+                                .then(() => handleAmount(1))
+                        }
+                        className="ui fluid button primary"
                     >
                         В корзину
                     </button>
