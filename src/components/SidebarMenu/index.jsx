@@ -1,59 +1,74 @@
 import React from "react";
-import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { LayoutContext } from "../Layout/context";
+import styles from "./styles.less";
 
-const loadDependencies = () => {
-  require("jquery");
-  require("../../../semantic/semantic/dist/components/sidebar");
+import { 
+  Menu, 
+  Sidebar,
+  Sticky
+} from "semantic-ui-react";
+
+const SidebarMenu = ({ 
+  activeItem, 
+  isExpanded,
+  handleExpand
+}) => (
+  <Sidebar
+    animation="push"
+    inverted
+    className={styles.wrapper}
+    as={Menu}
+    onHide={() => handleExpand(false)}
+    vertical
+    visible={isExpanded}
+    width="wide"
+  >
+    <Link to="/" onClick={() => handleExpand(false)}>
+      <Menu.Item as="a" active={activeItem === "/"}>
+        Главная
+      </Menu.Item>
+    </Link>
+    <Link to="/shop" onClick={() => handleExpand(false)}>
+      <Menu.Item as="a" active={activeItem === "/shop"}>
+        Каталог продукции
+      </Menu.Item>
+    </Link>
+    <Link to="/contact" onClick={() => handleExpand(false)}>
+      <Menu.Item as="a" active={activeItem === "/contact"}>
+        Связаться с нами
+      </Menu.Item>
+    </Link>
+    <Link to="/" onClick={() => handleExpand(false)}>
+      <Menu.Item as="a"  active={activeItem === "/dostavka"}>
+        Условия доставки
+      </Menu.Item>
+    </Link>
+  </Sidebar>
+);
+
+SidebarMenu.propTypes = {
+  isExpanded: PropTypes.bool,
+  handleExpand: PropTypes.func.isRequired,
+  activeItem: PropTypes.string
+};
+
+SidebarMenu.defaultProps = {
+  isExpanded: false,
+  activeItem: null,
 }
 
-class SidebarMenu extends React.Component { 
-  componentDidMount() {
-    if (typeof window === "object") {
-      loadDependencies();
-    }
-  }
+const EnhancedSidebarMenu = () => (
+  <LayoutContext.Consumer>
+    {({ activeItem, isExpanded, handleExpand }) => (
+      <SidebarMenu
+        activeItem={activeItem}
+        isExpanded={isExpanded}
+        handleExpand={handleExpand}
+      />
+    )}
+  </LayoutContext.Consumer>
+);
 
-  componentDidUpdate(prevProps) {
-    const { isActive } = this.props;
-
-    if (isActive !== prevProps.isActive && isActive) {
-      $('.ui.sidebar')
-        .sidebar("show")
-      ;
-    } 
-
-    if (isActive !== prevProps.isActive && !isActive) {
-      $('.ui.sidebar')
-        .sidebar("hide")
-      ;
-    } 
-  }
-
-  render() {
-    return (
-      <div 
-        className="ui vertical inverted sidebar menu left uncover" 
-        id="sidebar"
-      >
-        <a className="item" href="/">
-          Главная
-        </a>
-        <a className="item" href="/shop">
-          Каталог продукции
-        </a>
-        <a className="item"  href="/contact">
-          Связаться с нами
-        </a>
-        <a className="item" href="/dostavka">
-          Условия доставки
-        </a>
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = ({ menu }) => ({
-  isActive: menu.isActive
-})
-
-export default connect(mapStateToProps)(SidebarMenu);
+export default EnhancedSidebarMenu;
