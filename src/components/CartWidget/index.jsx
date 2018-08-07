@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { ShopContext } from "../Shop/context";
-import config from "../../utils/config";
+import { ShopContext } from "@components/Shop/context";
+import AmountChanger from "@components/AmountChanger";
+import PromoInput from "@components/PromoInput";
 import "./styles.css";
 
 import {
@@ -15,44 +15,13 @@ import {
   Form,
 } from "semantic-ui-react";
 
-const renderAmountChanger = (item, onChange) => (
-  <Button.Group size="small">
-    <Button
-      onClick={() => onChange(item.amount - 1)}
-      icon
-    >
-      <Icon name="minus" />
-    </Button>
-    <Button
-      icon
-    >
-      <strong>{item.amount}</strong> шт.
-    </Button>
-    <Button
-      icon
-      onClick={() => onChange(item.amount + 1)}
-    >
-      <Icon name="plus" />
-    </Button>
-  </Button.Group>
-)
-
 class CartWidget extends React.Component {
   constructor(props) {
     super(props);
-    this.handleTemporaryCode = this.handleTemporaryCode.bind(this);
     this.handleExpand = this.handleExpand.bind(this);
-    this.checkCodeStart = this.checkCodeStart.bind(this);
-    this.checkCodeProcess = this.checkCodeProcess.bind(this);
-    this.checkCodeSuccess = this.checkCodeSuccess.bind(this);
-    this.checkCodeFail = this.checkCodeFail.bind(this);
-
     this.state = {
       isExpanded: false,
-      isChecking: false,
-      temporaryCode: null,
       animation: false,
-      isValid: true
     }
   }
 
@@ -70,77 +39,6 @@ class CartWidget extends React.Component {
     this.setState(state => ({
       isExpanded: !state.isExpanded
     }));
-  }
-
-  checkCodeStart() {
-    const {
-      isChecking,
-      discount,
-    } = this.state;
-
-    if (!isChecking && !discount) {
-      this.setState({ isChecking: true, error: null }, () => {
-        this.checkCodeProcess();
-      })
-    }
-  }
-
-  checkCodeProcess() {
-    const { temporaryCode } = this.state;
-
-    axios.get(config.url + "/promo/check", {
-      params: { code: temporaryCode }
-    })
-      .then(this.checkCodeSuccess)
-      .catch(this.checkCodeFail);
-  }
-
-  checkCodeSuccess({ data }) {
-    const { handlePromo } = this.props;
-
-    if (data.code) {
-      this.setState({ isChecking: false, isValid: true }, () => {
-        handlePromo(data.code, data.discount);
-      })
-    }
-
-    this.setState({
-      isChecking: false,
-      isValid: false
-    });
-  }
-
-  checkCodeFail({ response }) {
-    if (response) {
-      if (response.data.code) {
-        this.handleError(response.data)
-
-        return;
-      }
-
-      this.handleError({
-        message: "Неизвестная ошибка сервера"
-      })
-
-      return;
-    }
-
-    this.handleError({
-      message: "Неизвестная ошибка клиента"
-    })
-  }
-
-  handleError(error) {
-    console.log(error);
-
-    this.setState({
-      isFetching: false,
-      error,
-    });
-  }
-
-  handleTemporaryCode({ target: { value } }) {
-    this.setState({ temporaryCode: value })
   }
 
   renderItems() {
@@ -172,9 +70,10 @@ class CartWidget extends React.Component {
             </Button>
           </div>
           <div className="bar">
-            {renderAmountChanger(item, value =>
-              updateAmount(item.id, value))
-            }
+            <AmountChanger
+              amount={item.amount}
+              onChange={amount => updateAmount(item.id, amount)}
+            />
             <div className="total">
               {item.price * item.amount} Руб.
             </div>
@@ -259,47 +158,6 @@ class CartWidget extends React.Component {
     );
   }
 
-  renderInput() {
-    const {
-      temporaryCode,
-      isChecking,
-      error,
-      isValid
-    } = this.state;
-
-    return (
-      <Form onSubmit={this.checkCodeStart}>
-        {error &&
-          <Message negative>
-            <p>{error.message}</p>
-          </Message>
-        }
-        <Form.Field>
-          <Input
-            value={temporaryCode}
-            placeholder="У вас есть промокод?"
-            onChange={this.handleTemporaryCode}
-            loading={isChecking}
-            action={(
-              <Button
-                basic
-                onClick={this.checkCodeStart}
-                loading={isChecking}
-              >
-                <Icon name="angle right" />
-              </Button>
-            )}
-          />
-          {isValid === false &&
-            <p className="invalid-code">
-              Код не действителен. Попробуйте ввести другой
-            </p>
-          }
-        </Form.Field>
-      </Form>
-    );
-  }
-
   render() {
     const {
       isExpanded,
@@ -347,7 +205,7 @@ class CartWidget extends React.Component {
                   </div>
                   {!promo &&
                     <div className="promo">
-                      {this.renderInput()}
+                      <PromoInput />
                     </div>
                   }
                 </div>

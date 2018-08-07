@@ -1,0 +1,9 @@
+export const PURCHASE_STATUS_SENDED = "sended";
+export const PURCHASE_STATUS_CREATED = "created";
+export const PURCHASE_STATUS_DONE = "done";
+export const PURCHASE_USER = "user";
+export const PURCHASE_ITEMS = "items";
+export const PURCHASE_CREATED = "created";
+export const PURCHASE_STATUS = "status";
+export const PURCHASE_PROMO = "promo";
+export const PURCHASE_AGREEMENT = "agreement";

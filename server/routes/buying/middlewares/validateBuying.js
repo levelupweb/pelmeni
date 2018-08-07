@@ -13,7 +13,8 @@ const {
 
 const { 
     PURCHASE_ITEMS,
-    PURCHASE_PROMO
+    PURCHASE_PROMO,
+    PURCHASE_AGREEMENT
 } = require("../../../models/Purchase/consts");
 
 const checkItems = value => Item.count({ $in: [value] })
@@ -25,6 +26,9 @@ const checkPromo = value => Promo.count({ [PROMO_CODE]: value })
     .catch(err => Promise.resolve(false))
 
 module.exports = [
+    check(PURCHASE_AGREEMENT)
+        .exists()
+        .withMessage("Вы не согласились с правилами обработки и хранения персональных данных"),
     check(PURCHASE_PROMO)
         .optional()
         .custom(checkPromo)

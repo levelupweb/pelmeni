@@ -6,6 +6,8 @@ import Contact from "./contact";
 import Catalog from "./catalog";
 import Layout from "../components/Layout";
 import NotFound from "./404";
+import loadImageAsync from "@utils/loadImageAsync";
+import scrollToTop from "@utils/scrollToTop";
 import "../common/styles.css";
 
 import { 
@@ -17,23 +19,41 @@ import {
 class App extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-
-  componentDidUpdate(prevProps) {
-    const { location } = this.props;
-
-    if (location !== prevProps.location) {
-      window.scrollTo(0, 0);
+    this.loadBackground = this.loadBackground.bind(this);
+    this.loadBackgroundSuccess = this.loadBackgroundSuccess.bind(this);
+    this.loadBackgroundFail = this.loadBackgroundFail.bind(this);
+    this.state = {
+      isLoaded: false,
     }
   }
 
+  componentDidMount() {
+    this.loadBackground();
+  }
+
+  loadBackground() {
+    loadImageAsync(require("@src/common/background.jpg"))
+      .then(this.loadBackgroundSuccess)
+      .catch(this.loadBackgroundFail)
+  }
+
+  loadBackgroundSuccess() {
+    this.setState({
+      isLoaded: true
+    })
+  }
+
+  loadBackgroundFail(reason) {
+    this.setState({ isLoaded: true }, () => 
+      console.warn("Не удалось загрузить фоновое изображение")
+    )
+  }
+
   render() {
+    const { isLoaded } = this.state;
+    
     return (
-      <Layout>
+      <Layout isLoaded={isLoaded}>
         <Switch>
           <Route exact path="/" component={Index}/>
           <Route path="/dostavka" component={Dostavka}/>

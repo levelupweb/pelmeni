@@ -12,7 +12,8 @@ const {
   PURCHASE_USER,
   PURCHASE_ITEMS,
   PURCHASE_CREATED,
-  PURCHASE_PROMO
+  PURCHASE_PROMO,
+  PURCHASE_AGREEMENT
 } = require("./consts");
 
 const ItemSchema = {
@@ -42,6 +43,11 @@ const PurchaseSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  [PURCHASE_AGREEMENT]: {
+    type: Boolean,
+    required: true,
+    default: false,
+  }
 });
 
 

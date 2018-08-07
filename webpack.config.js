@@ -84,7 +84,8 @@ module.exports = {
       "@pages": path.resolve("src/pages"),
       "@src": path.resolve("src"),
       "@variables": path.resolve("src/variables"),
-      "@utils": path.resolve("src/utils")
+      "@utils": path.resolve("src/utils"),
+      "@consts": path.resolve("src/consts")
     },
   }
 };

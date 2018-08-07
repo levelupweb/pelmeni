@@ -1,11 +1,5 @@
 /* typography */
 
-body,
-html {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
 p.lead {
   font-size:30px!important;
   line-height: 42px;

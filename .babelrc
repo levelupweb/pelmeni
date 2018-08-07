@@ -19,7 +19,8 @@
           "@components": "./src/components",
           "@utils": "./src/utils",
           "@src": "./src",
-          "@variables": "./src/variables"
+          "@variables": "./src/variables",
+          "@consts": "./src/consts"
         },
         "extensions": [".js", ".json", ""]
       }

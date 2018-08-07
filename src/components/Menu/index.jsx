@@ -35,6 +35,14 @@ const MenuWrapper = ({
       >
         <Icon name="sidebar" />
       </Menu.Item>
+      <Menu.Item 
+        active={activeItem === "/"} 
+        className={styles.logo} 
+      >
+        <Link to="/">
+          Класс!ные
+        </Link>
+      </Menu.Item>
       <Menu.Item active={activeItem === "/"}>
         <Link to="/">
           Главная

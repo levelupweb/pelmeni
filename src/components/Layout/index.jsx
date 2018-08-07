@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Phone from "../Phone";
 import Footer from "../Footer";
 import Menu from "../Menu";
@@ -8,7 +9,7 @@ import styles from "./styles.less";
 
 import { 
 	Dimmer,
-	Sticky,
+	Loader,
 } from "semantic-ui-react";
 
 import { 
@@ -16,8 +17,11 @@ import {
 	LayoutContext 
 } from "./context";
 
-const Layout = ({ children }) => (
-	<React.Fragment>
+const Layout = ({ children, isLoaded }) => (
+	<Dimmer.Dimmable dimmed={!isLoaded}>
+		<Dimmer page active={!isLoaded}>
+			<Loader>Идет загрузка..</Loader>
+		</Dimmer>
 		<Phone />
 		<LayoutContext.Consumer>
 			{({ isExpanded }) => (
@@ -25,7 +29,10 @@ const Layout = ({ children }) => (
 					<Menu />
 					<SidebarMenu />
 					<Dimmer.Dimmable dimmed={isExpanded}>
-						<div className={styles.inner}>
+						<div 
+							style={{background: `url(${require("@src/common/background.jpg")})`}} 
+							className={styles.inner}
+						>
 							{children}
 							<Footer />
 						</div>
@@ -34,17 +41,35 @@ const Layout = ({ children }) => (
 				</React.Fragment>
 			)}
 		</LayoutContext.Consumer>
-	</React.Fragment>
+	</Dimmer.Dimmable>
 );
 
-const EnhancedLayout = ({ children }) => (
+Layout.propTypes = {
+	isLoaded: PropTypes.bool,
+	children: PropTypes.element.isRequired,
+};
+
+Layout.defaultProps = {
+	isLoaded: false,
+}
+
+const EnhancedLayout = ({ children, isLoaded }) => (
 	<LayoutProvider>
 		<ShopProvider>
-			<Layout>
+			<Layout isLoaded={isLoaded}>
 				{children}
 			</Layout>
 		</ShopProvider>
 	</LayoutProvider>
 );
+
+EnhancedLayout.propTypes = {
+	isLoaded: PropTypes.bool,
+	children: PropTypes.element.isRequired,
+};
+
+EnhancedLayout.defaultProps = {
+	isLoaded: false,
+}
 
 export default EnhancedLayout;

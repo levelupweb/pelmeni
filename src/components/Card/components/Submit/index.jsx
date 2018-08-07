@@ -19,6 +19,7 @@ const Submit = ({
 					...currentItem,
 					id: currentItem._id,
 					title: category.title,
+					description: category.description,
 					amount,
 				})
 					.then(() => handleAmount(1))

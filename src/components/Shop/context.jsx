@@ -26,6 +26,7 @@ class ShopProviderClass extends React.Component {
 		this.getTotalSummWithDiscount = this.getTotalSummWithDiscount.bind(this);
 		this.addToCart = this.addToCart.bind(this);
 		this.removeFromCart = this.removeFromCart.bind(this);
+		this.refreshCart = this.refreshCart.bind(this);
 		this.handlePromo = this.handlePromo.bind(this);
 		this.state = {
 			isFetching: false,
@@ -77,7 +78,17 @@ class ShopProviderClass extends React.Component {
 	removeFromCart(itemId) {
 		this.setState(state => ({
 			cart: state.cart.filter(item => item._id !== itemId)
-		}))
+		}), () => {
+			const { cart } = this.state;
+
+			setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
+		})
+	}
+
+	refreshCart() {
+		this.setState({ cart: [] }, () => (
+			setItemToLocalStorage(LOCAL_STORAGE_CART, [])
+		))
 	}
 
 	updateAmount(itemId, amount) {
@@ -86,7 +97,11 @@ class ShopProviderClass extends React.Component {
 				...item,
 				amount,
 			}) : item)
-		}))
+		}), () => {
+			const { cart } = this.state;
+
+			setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
+		})
 	}
 
 	fetchItemsStart() {
@@ -185,6 +200,7 @@ class ShopProviderClass extends React.Component {
 			addToCart,
 			removeFromCart,
 			updateAmount,
+			refreshCart,
 			getTotalSumm,
 			handlePromo,
 			getTotalSummWithDiscount
@@ -198,6 +214,7 @@ class ShopProviderClass extends React.Component {
 					error,
 					items,
 					fetchItemsStart,
+					refreshCart,
 					addToCart,
 					removeFromCart,
 					updateAmount,

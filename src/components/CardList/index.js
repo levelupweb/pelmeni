@@ -1,44 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./styles";
-import Card from "../Card";
+import Card from "@components/Card";
 
-class CardList extends React.Component {
-  renderCards() {
-    const { 
-      itemsWithImages 
-    } = this.props;
+import {
+  Grid
+} from "semantic-ui-react";
 
-    return itemsWithImages
-      .map((item, i) => 
-        <Card 
-          key={i} 
-          category={item} 
-        />
-      );
+const CardList = ({ itemsWithImages }) => {
+  if (!itemsWithImages) {
+    return "loading.."
   }
 
-  render() {
-    const { 
-      columns,
-      itemsWithImages,
-    } = this.props;
- 
-    if (!itemsWithImages) {
-      return "loading.."
-    }
-
-    return (
-      <div className="ui container">
-        <div 
-          className={`ui ${columns} column grid stackable`} 
-          style={styles.grid}
-        >
-          {this.renderCards()}
-        </div>
-      </div>
-    )
-  }
+  return (
+    <Grid columns={2} stackable>
+      {itemsWithImages.map((item, i) => 
+        <Card key={i} category={item} />
+      )}
+    </Grid>
+  )
 }
 
 CardList.propTypes = {
