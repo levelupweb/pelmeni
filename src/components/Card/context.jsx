@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export const CardContext = React.createContext();
 
@@ -12,8 +13,8 @@ class CardProviderClass extends React.Component {
 		this.handleAmount = this.handleAmount.bind(this);
 		this.state = {
 			selectedItem: getDefaultItem(props.category)._id,
-			amount: 1,
-		}
+			amount: 1
+		};
 	}
 
 	handleItem(selectedItem) {
@@ -21,30 +22,22 @@ class CardProviderClass extends React.Component {
 	}
 
 	handleAmount(amount) {
-		this.setState({ amount })
+		this.setState({ amount });
 	}
 
 	getCurrentItem() {
 		const { category } = this.props;
 		const { selectedItem } = this.state;
 
-		return category.items.filter(item =>
-			item._id === selectedItem
-		)[0];
+		return category.items.filter(item => item._id === selectedItem)[0];
 	}
 
 	render() {
 		const {
-			state: {
-				selectedItem,
-				amount
-			},
-			props: {
-				category,
-				children
-			},
+			state: { selectedItem, amount },
+			props: { category, children },
 			handleItem,
-			handleAmount,
+			handleAmount
 		} = this;
 
 		const currentItem = this.getCurrentItem();
@@ -57,13 +50,27 @@ class CardProviderClass extends React.Component {
 					handleItem,
 					handleAmount,
 					amount,
-					currentItem,
+					currentItem
 				}}
 			>
 				{children}
 			</CardContext.Provider>
-		)
+		);
 	}
 }
+
+CardProviderClass.propTypes = {
+	children: PropTypes.element.isRequired,
+	category: PropTypes.shape({
+		title: PropTypes.string.isRequired,
+		description: PropTypes.string.isRequired,
+		items: PropTypes.arrayOf(
+			PropTypes.shape({
+				weight: PropTypes.number,
+				price: PropTypes.string
+			})
+		).isRequired
+	}).isRequired
+};
 
 export const CardProvider = CardProviderClass;

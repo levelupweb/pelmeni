@@ -4,30 +4,46 @@ import CardList from "@components/CardList";
 import { ShopContext } from "../../context";
 import { attachImagesToEntries } from "./utils";
 
-const Items = ({ items }) => (
-	<CardList
-		itemsWithImages={items && attachImagesToEntries(items)}
-		columns="two"
-	/>
-); 
+import { Loader } from "semantic-ui-react";
+
+const Items = ({ items }) => {
+	if (!items) {
+		return (
+			<Loader active inline centered>
+				Подождите, идёт загрузка
+			</Loader>
+		);
+	}
+
+	return (
+		<CardList
+			itemsWithImages={items && attachImagesToEntries(items)}
+			columns="two"
+		/>
+	);
+};
 
 Items.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.shape({
-		_id: PropTypes.string,
-		description: PropTypes.string,
-		title: PropTypes.string,
-		items: PropTypes.arrayOf(PropTypes.shape({
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
 			_id: PropTypes.string,
-			weight: PropTypes.number,
-			price: PropTypes.number,
-			category: PropTypes.string
-		}))
-	}))
-}
+			description: PropTypes.string,
+			title: PropTypes.string,
+			items: PropTypes.arrayOf(
+				PropTypes.shape({
+					_id: PropTypes.string,
+					weight: PropTypes.number,
+					price: PropTypes.number,
+					category: PropTypes.string
+				})
+			)
+		})
+	)
+};
 
 Items.defaultProps = {
-	items: [],
-}
+	items: []
+};
 
 const EnhancedItems = () => (
 	<ShopContext.Consumer>

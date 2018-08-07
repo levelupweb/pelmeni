@@ -1,1 +1,1 @@
-export default typeof window !== "undefined" ? window.siteConfig : {};
+export default (typeof window !== "undefined" ? window.siteConfig : {});

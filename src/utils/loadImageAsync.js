@@ -1,6 +1,7 @@
-export default src => new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => resolve(src);
-    image.onerror = err => reject(err);
-    image.src = src;
-});
+export default src =>
+	new Promise((resolve, reject) => {
+		const image = new Image();
+		image.onload = () => resolve(src);
+		image.onerror = err => reject(err);
+		image.src = src;
+	});

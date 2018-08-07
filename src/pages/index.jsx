@@ -3,68 +3,61 @@ import Index from "./index/index.jsx";
 import Dostavka from "./dostavka";
 import Shop from "./shop";
 import Contact from "./contact";
-import Catalog from "./catalog";
 import Layout from "../components/Layout";
 import NotFound from "./404";
 import loadImageAsync from "@utils/loadImageAsync";
-import scrollToTop from "@utils/scrollToTop";
 import "../common/styles.css";
 
-import { 
-  Switch, 
-  Route, 
-  withRouter 
-} from "react-router";
+import { Switch, Route, withRouter } from "react-router";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.loadBackground = this.loadBackground.bind(this);
-    this.loadBackgroundSuccess = this.loadBackgroundSuccess.bind(this);
-    this.loadBackgroundFail = this.loadBackgroundFail.bind(this);
-    this.state = {
-      isLoaded: false,
-    }
-  }
+	constructor(props) {
+		super(props);
+		this.loadBackground = this.loadBackground.bind(this);
+		this.loadBackgroundSuccess = this.loadBackgroundSuccess.bind(this);
+		this.loadBackgroundFail = this.loadBackgroundFail.bind(this);
+		this.state = {
+			isLoaded: false
+		};
+	}
 
-  componentDidMount() {
-    this.loadBackground();
-  }
+	componentDidMount() {
+		this.loadBackground();
+	}
 
-  loadBackground() {
-    loadImageAsync(require("@src/common/background.jpg"))
-      .then(this.loadBackgroundSuccess)
-      .catch(this.loadBackgroundFail)
-  }
+	loadBackground() {
+		loadImageAsync(require("@src/common/background.jpg"))
+			.then(this.loadBackgroundSuccess)
+			.catch(this.loadBackgroundFail);
+	}
 
-  loadBackgroundSuccess() {
-    this.setState({
-      isLoaded: true
-    })
-  }
+	loadBackgroundSuccess() {
+		this.setState({
+			isLoaded: true
+		});
+	}
 
-  loadBackgroundFail(reason) {
-    this.setState({ isLoaded: true }, () => 
-      console.warn("Не удалось загрузить фоновое изображение")
-    )
-  }
+	loadBackgroundFail() {
+		this.setState({ isLoaded: true }, () =>
+			console.warn("Не удалось загрузить фоновое изображение")
+		);
+	}
 
-  render() {
-    const { isLoaded } = this.state;
-    
-    return (
-      <Layout isLoaded={isLoaded}>
-        <Switch>
-          <Route exact path="/" component={Index}/>
-          <Route path="/dostavka" component={Dostavka}/>
-          <Route path="/shop" component={Shop}/>
-          <Route path="/catalog" component={Catalog}/>
-          <Route path="/contact" component={Contact}/>
-          <Route component={NotFound} />
-        </Switch>
-      </Layout>
-    )
-  }
-};
+	render() {
+		const { isLoaded } = this.state;
+
+		return (
+			<Layout isLoaded={isLoaded}>
+				<Switch>
+					<Route exact path="/" component={Index} />
+					<Route path="/dostavka" component={Dostavka} />
+					<Route path="/shop" component={Shop} />
+					<Route path="/contact" component={Contact} />
+					<Route component={NotFound} />
+				</Switch>
+			</Layout>
+		);
+	}
+}
 
 export default withRouter(App);

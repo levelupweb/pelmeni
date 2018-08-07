@@ -1,16 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import config from "../../utils/config";
 
-import {
-	LOCAL_STORAGE_CART,
-	LOCAL_STORAGE_PROMO
-} from "../../consts";
+import { LOCAL_STORAGE_CART, LOCAL_STORAGE_PROMO } from "@src/consts";
 
 import {
 	setItemToLocalStorage,
 	getFromLocalStorage,
-} from "../../utils/localStorage";
+	removeFromLocalStorage
+} from "@utils/localStorage";
 
 export const ShopContext = React.createContext();
 
@@ -34,8 +33,8 @@ class ShopProviderClass extends React.Component {
 			error: null,
 			cart: JSON.parse(getFromLocalStorage(LOCAL_STORAGE_CART)) || [],
 			promo: JSON.parse(getFromLocalStorage(LOCAL_STORAGE_PROMO)),
-			addSpy: 0,
-		}
+			addSpy: 0
+		};
 	}
 
 	componentDidMount() {
@@ -43,65 +42,79 @@ class ShopProviderClass extends React.Component {
 	}
 
 	addToCart(item) {
-		return new Promise((resolve) => {
-			this.setState(state => {
-				const existedItem = state.cart.filter(i =>
-					i.id === item.id
-				)[0];
+		return new Promise(resolve => {
+			this.setState(
+				state => {
+					const existedItem = state.cart.filter(i => i.id === item.id)[0];
 
-				if (existedItem) {
+					if (existedItem) {
+						return {
+							addSpy: state.addSpy + 1,
+							cart: state.cart.map(
+								i =>
+									i._id === item.id
+										? {
+											...i,
+											amount: existedItem.amount + item.amount
+										  }
+										: i
+							)
+						};
+					}
+
 					return {
 						addSpy: state.addSpy + 1,
-						cart: state.cart.map(i => i._id === item.id ? ({
-							...i,
-							amount: existedItem.amount + item.amount,
-						}) : i)
-					}
-				}
+						cart: [...state.cart, item]
+					};
+				},
+				() => {
+					const { cart } = this.state;
 
-				return {
-					addSpy: state.addSpy + 1,
-					cart: [
-						...state.cart,
-						item,
-					]
+					setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
+					return resolve(cart);
 				}
-			}, () => {
-				const { cart } = this.state;
-
-				setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
-				return resolve(cart);
-			})
+			);
 		});
 	}
 
 	removeFromCart(itemId) {
-		this.setState(state => ({
-			cart: state.cart.filter(item => item._id !== itemId)
-		}), () => {
-			const { cart } = this.state;
+		this.setState(
+			state => ({
+				cart: state.cart.filter(item => item._id !== itemId)
+			}),
+			() => {
+				const { cart } = this.state;
 
-			setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
-		})
+				setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
+			}
+		);
 	}
 
 	refreshCart() {
-		this.setState({ cart: [] }, () => (
-			setItemToLocalStorage(LOCAL_STORAGE_CART, [])
-		))
+		this.setState({ cart: [] }, () =>
+			removeFromLocalStorage(LOCAL_STORAGE_CART)
+		);
 	}
 
 	updateAmount(itemId, amount) {
-		this.setState(state => ({
-			cart: state.cart.map(item => item._id === itemId ? ({
-				...item,
-				amount,
-			}) : item)
-		}), () => {
-			const { cart } = this.state;
+		this.setState(
+			state => ({
+				cart: state.cart.map(
+					item =>
+						item._id === itemId
+							? {
+								...item,
+								amount
+							  }
+							: item
+				)
+			}),
+			() => {
+				const { cart } = this.state;
 
-			setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
-		})
+				setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
+			}
+		);
 	}
 
 	fetchItemsStart() {
@@ -110,12 +123,13 @@ class ShopProviderClass extends React.Component {
 		if (!isFetching) {
 			this.setState({ isFetching: true }, () => {
 				this.fetchItemsProcess();
-			})
+			});
 		}
 	}
 
 	fetchItemsProcess() {
-		axios.get(config.url + "/category/all")
+		axios
+			.get(config.url + "/category/all")
 			.then(this.fetchItemsSuccess)
 			.catch(this.fetchItemsFail);
 	}
@@ -124,60 +138,59 @@ class ShopProviderClass extends React.Component {
 		this.setState({
 			isFetching: false,
 			items: data
-		})
+		});
 	}
 
-	fetchItemsFail({ response }) {
-		if (response) {
-			if (response.data.code) {
-				this.handleError(response.data)
-
-				return;
+	fetchItemsFail(error) {
+		if (error) {
+			const { response } = error;
+			if (response) {
+				if (response.status) {
+					return this.handleError(response.data);
+				}
+				return this.handleError({
+					message:
+						"Неизвестная ошибка сервера. Попробуйте отправить свой заказ чуть позже"
+				});
 			}
-
-			this.handleError({
-				message: "Неизвестная ошибка сервера"
-			})
-
-			return;
 		}
-		this.handleError({
-			message: "Неизвестная ошибка клиента"
-		})
+		return this.handleError({
+			message:
+				"Неизвестная ошибка клиента. Попробуйте обновить страницу и отправить форму ещё раз"
+		});
 	}
 
 	handleError(error) {
-		console.log(error);
-
 		this.setState({
 			isFetching: false,
-			error,
-		})
+			error
+		});
 	}
 
-	handlePromo(code, discount) {
-		this.setState({
-			promo: { code, discount }
-		}, () => {
-			const { promo } = this.state;
+	handlePromo(promo) {
+		this.setState(
+			{
+				promo
+			},
+			() => {
+				const { promo } = this.state;
 
-			setItemToLocalStorage(LOCAL_STORAGE_PROMO, JSON.stringify(promo));
-		})
+				setItemToLocalStorage(LOCAL_STORAGE_PROMO, JSON.stringify(promo));
+			}
+		);
 	}
 
 	getTotalSumm() {
 		const { cart } = this.state;
 
-		return cart.reduce((prev, curr) =>
-			prev + (curr.price * curr.amount)
-			, 0);
+		return cart.reduce((prev, curr) => prev + curr.price * curr.amount, 0);
 	}
 
 	getTotalSummWithDiscount() {
 		const { promo } = this.state;
 
 		if (promo && promo.discount) {
-			return Math.ceil((this.getTotalSumm() / 100) * promo.discount)
+			return Math.ceil((this.getTotalSumm() / 100) * promo.discount);
 		}
 
 		return null;
@@ -185,17 +198,8 @@ class ShopProviderClass extends React.Component {
 
 	render() {
 		const {
-			props: {
-				children,
-			},
-			state: {
-				isFetching,
-				error,
-				items,
-				cart,
-				promo,
-				addSpy,
-			},
+			props: { children },
+			state: { isFetching, error, items, cart, promo, addSpy },
 			fetchItemsStart,
 			addToCart,
 			removeFromCart,
@@ -227,8 +231,12 @@ class ShopProviderClass extends React.Component {
 			>
 				{children}
 			</ShopContext.Provider>
-		)
+		);
 	}
 }
+
+ShopProviderClass.propTypes = {
+	children: PropTypes.element.isRequired
+};
 
 export const ShopProvider = ShopProviderClass;

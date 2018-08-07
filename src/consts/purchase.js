@@ -7,3 +7,5 @@ export const PURCHASE_CREATED = "created";
 export const PURCHASE_STATUS = "status";
 export const PURCHASE_PROMO = "promo";
 export const PURCHASE_AGREEMENT = "agreement";
+export const PURCHASE_ITEMS_ITEM = "item";
+export const PURCHASE_ITEMS_AMOUNT = "amount";

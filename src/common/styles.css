@@ -1,27 +1,27 @@
 /* typography */
 
 p.lead {
-  font-size:30px!important;
+  font-size: 30px !important;
   line-height: 42px;
 }
 
 p.lead.small {
-  font-size: 26px!important;
+  font-size: 26px !important;
   line-height: 39px;
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width: 700px) {
   p.lead.small,
   p.lead {
-    font-size:18px!important;
-    line-height:27px!important;
+    font-size: 18px !important;
+    line-height: 27px !important;
   }
 }
 
 /* segments basic styles */
 
 .pusher-content {
-  margin-top:100px;
+  margin-top: 100px;
 }
 
 .ui.vertical.segment {
@@ -30,25 +30,25 @@ p.lead.small {
 
 .segment .section-content {
   position: absolute;
-  left:0;
-  bottom:0;
-  width:100%;
-  height:100%;
-  z-index:100;
-  margin-top:-100px;
-  display:flex;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  margin-top: -100px;
+  display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
 }
 
 .segment h1.header {
-  font-size:60px;
-  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  font-family: serif;
 }
 
 @media screen and (max-width: 900px) {
   .segment h1.header {
-    font-size:40px;
+    font-size: 40px;
   }
 }
 
@@ -57,21 +57,20 @@ p.lead.small {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding-top:0;
-  padding-bottom:0;
+  padding-top: 0;
+  padding-bottom: 0;
   flex-direction: column;
 }
 
 @media screen and (max-width: 700px) {
   .ui.vertical.segment {
-    min-height: auto!important;
-    padding-top:0!important;
-    padding-bottom:0!important;
-    margin-top:4em!important;
-    margin-bottom:4em!important;
-    
+    min-height: auto !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 4em !important;
+    margin-bottom: 4em !important;
   }
   .segment .section-content {
-    margin-top: 0!important;
+    margin-top: 0 !important;
   }
 }

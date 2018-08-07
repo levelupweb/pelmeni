@@ -1,175 +1,269 @@
 import React from "react";
-import Fade from "react-reveal/Fade"
+import PropTypes from "prop-types";
+import Fade from "react-reveal/Fade";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import "./styles.css";
+import config from "@utils/config";
+import styles from "./styles.less";
 
+import { Form, Container, Button, Message, Header } from "semantic-ui-react";
 
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleForm = this.handleForm.bind(this);
-    this.submitForm = this.submitForm.bind(this);
-    this.handleSuccess = this.handleSuccess.bind(this);
-    this.handleServerErrors = this.handleServerErrors.bind(this);
+class ContactForm extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleTemporaryForm = this.handleTemporaryForm.bind(this);
+		this.publishStart = this.publishStart.bind(this);
+		this.publishProcess = this.publishProcess.bind(this);
+		this.publishSuccess = this.publishSuccess.bind(this);
+		this.publishFail = this.publishFail.bind(this);
+		this.dismissError = this.dismissError.bind(this);
+		this.state = {
+			temporaryForm: {},
+			isHydrating: null,
+			error: null,
+			validationErrors: null,
+			isSended: false
+		};
+	}
 
-    this.state = {
-      form: {},
-      errors: [],
-      isHydrating: false,
-      isSended: false,
-    }
-  }
+	handleTemporaryForm({ target: { value, name } }) {
+		this.setState(state => ({
+			temporaryForm: {
+				...state.temporaryForm,
+				[name]: value
+			}
+		}));
+	}
 
-  handleForm({ target }) {
-    const { name, value } = target;
+	publishStart() {
+		const { isHydrating } = this.state;
 
-    this.setState({
-      form: Object.assign({}, this.state.form, {
-        [name]: value,
-      })
-    })
-  }
+		if (!isHydrating) {
+			this.setState(
+				{
+					isHydrating: true,
+					error: null,
+					validationErrors: null
+				},
+				() => this.publishProcess()
+			);
+		}
+	}
 
-  handleSuccess() {
-    this.setState({
-      form: {},
-      isHydrating: false,
-      isSended: true,
-    })
-  }
+	publishProcess() {
+		const { temporaryForm } = this.state;
 
-  submitForm() {
-    const { form } = this.state;
+		axios
+			.post(config.url + "/contact", temporaryForm)
+			.then(this.publishSuccess)
+			.catch(this.publishFail);
+	}
 
-    this.setState({ isHydrating: true }, () => {
-      axios.post("/send", form)
-        .then(this.handleSuccess)
-        .catch(this.handleServerErrors);
-    })
-  }
+	publishSuccess() {
+		this.setState({
+			isHydrating: false,
+			isSended: true
+		});
+	}
 
-  handleServerErrors(err) {
-    if (err.response) {
-      if (err.response.status === 422) {
-        this.setState({
-          isHydrating: false,
-          errors: Object.values(err.response.data.errors)
-        });
-      } else {
-        this.setState({
-          isHydrating: false,
-          errors: ["Произошла непредвиденная ошибка на сервере. Попробуйте позже"],
-        });
-      }
-    } else {
-      console.log(err);
-      this.setState({
-        isHydrating: false,
-        errors: ["Произошла ошибка во время отправки заказа. Повторите позже"]
-      })
-    }
-  }
+	publishFail(error) {
+		if (error) {
+			const { response } = error;
+			if (response) {
+				if (response.status) {
+					if (response.status === 422) {
+						return this.handleValidationError(response.data.errors);
+					}
+					return this.handleError(response.data);
+				}
+				return this.handleError({
+					message:
+						"Неизвестная ошибка сервера. Попробуйте отправить свой заказ чуть позже"
+				});
+			}
+		}
+		return this.handleError({
+			message:
+				"Неизвестная ошибка клиента. Попробуйте обновить страницу и отправить форму ещё раз"
+		});
+	}
 
-  handleErrors(errors) {
-    this.setState({ errors, isHydrating: false })
-  }
+	handleValidationError(errors) {
+		this.setState({
+			isHydrating: false,
+			validationErrors: errors
+		});
+	}
 
-  renderErrors() {
-    const { errors } = this.state;
+	handleError(error) {
+		this.setState({
+			error,
+			isHydrating: false
+		});
+	}
 
-    if (errors.length > 0) {
-      return (
-        <ul className="ui list inverted bulleted">
-          {errors.map((err, i) => <li style={{color: "#fff"}} className="item" key={i}>{err.msg ? err.msg : err}</li>)}
-        </ul>
-      )
-    }
+	dismissError() {
+		this.setState({ error: null });
+	}
 
-    return null;
-  }
+	renderError(field) {
+		const { validationErrors } = this.state;
 
-  render() {
-    const { form, isHydrating, isSended } = this.state;
+		if (validationErrors && validationErrors[field]) {
+			return (
+				<Fade>
+					<Message negative>
+						<p>{validationErrors[field].msg}</p>
+					</Message>
+				</Fade>
+			);
+		}
 
-    if (isSended) {
-      return (
-        <div className="ui container text">
-          <Fade bottom cascade>
-            <h1 className="header ui inverted">
-              Поздравляем!
-            </h1>
-            <p className="lead small" style={{color: "#fff"}}>
-              Ваше сообщение было успешно отправлено. Совсем скоро наши менеджеры смогут вам{" "}
-              ответить письмом на почту, которую вы указали в форме
-            </p>
-          </Fade>
-        </div>
-      );
-    }
+		return null;
+	}
 
-    return (
-      <div className="ui container text contact-form">
-        <Fade top>
-          <h1 className="header ui inverted">
-            Обратная связь
-          </h1>
-        </Fade>
-        <Fade top>
-          <p className="lead small" style={{color: "#fff"}}>
-            Отправьте нам свое сообщение или вопрос, на который хотите{" "}
-            получить ответ при помощи данной формы
-          </p>
-        </Fade>
-        {this.renderErrors()}
-        <div className={`ui form inverted big ${isHydrating && "loading"}`}>
-          <Fade bottom>
-            <div className="field">
-              <label>Ваше имя</label>
-              <input 
-                value={form.name} 
-                onChange={this.handleForm} 
-                type="text" 
-                name="name" 
-                placeholder="Иван Иванов" 
-              />
-            </div>
-          </Fade>
-          <Fade bottom>
-            <div className="field">
-              <label>E-mail адрес для ответа</label>
-              <input 
-                value={form.email} 
-                onChange={this.handleForm} 
-                type="text" 
-                name="email" 
-                placeholder="inbox@mail.ru" 
-              />
-            </div>
-          </Fade>
-          <Fade bottom>
-            <div className="field">
-              <label>Ваше сообщение или вопрос</label>
-              <textarea 
-                value={form.message} 
-                onChange={this.handleForm} 
-                name="message" 
-                placeholder="Здесь вы можете задать свой вопрос или написать нам пожелание" 
-              />
-            </div>
-          </Fade>
-          <Fade bottom>
-            <button 
-              className="ui button big basic inverted" 
-              type="submit"
-              onClick={this.submitForm}
-            >
-              Отправить
-            </button>
-          </Fade>
-        </div>
-      </div>
-    );
-  }
+	render() {
+		const {
+			temporaryForm,
+			isHydrating,
+			validationErrors,
+			error,
+			isSended
+		} = this.state;
+
+		const { withTitle } = this.props;
+
+		if (isSended) {
+			return (
+				<Container text className={styles.successWrapper}>
+					<Fade>
+						<Header
+							textAlign="center"
+							as="h2"
+							className={styles.success}
+							inverted
+						>
+							Ваше сообщение отправлено
+							<Header.Subheader>
+								Наши менеджеры получили ваше сообщение. Мы постараемся вам
+								ответить как можно скорее. Спасибо за вашу обратную связь!
+							</Header.Subheader>
+						</Header>
+						<Link to="/">
+							<Button primary>Вернуться на главную</Button>
+						</Link>
+					</Fade>
+				</Container>
+			);
+		}
+
+		return (
+			<Container text>
+				<Fade>
+					<div className={styles.wrapper}>
+						{withTitle && (
+							<div className={styles.title}>
+								<Header as="h1" inverted>
+									Обратная связь
+								</Header>
+								<p className={styles.description}>
+									Оставьте свое пожелание или отзыв, заполнив форму обратной
+									связи. Если вы хотите получить ответ, обязательно укажите
+									контактный E-mail адрес
+								</p>
+							</div>
+						)}
+						{error && (
+							<Fade>
+								<Message
+									className={styles.error}
+									negative
+									onDismiss={this.dismissError}
+								>
+									<Message.Header>Непредвиденная ошибка</Message.Header>
+									<p>{error.message}</p>
+								</Message>
+							</Fade>
+						)}
+						<Form size="large" error={!!validationErrors}>
+							<Form.Field className={styles.field}>
+								<label>Ваше имя</label>
+								<Form.Input
+									className={styles.input}
+									error={validationErrors && !!validationErrors.name}
+									disabled={isHydrating}
+									onChange={this.handleTemporaryForm}
+									value={temporaryForm.name}
+									placeholder="Как к вам обращаться?"
+									name="name"
+								/>
+								{this.renderError("name")}
+							</Form.Field>
+							<Form.Field className={styles.field}>
+								<label>E-mail адрес для ответа</label>
+								<Form.Input
+									type="email"
+									className={styles.input}
+									error={validationErrors && !!validationErrors.email}
+									disabled={isHydrating}
+									onChange={this.handleTemporaryForm}
+									value={temporaryForm.email}
+									placeholder="Введите ваш E-mail адрес"
+									name="email"
+								/>
+								{this.renderError("email")}
+							</Form.Field>
+							<Form.Field className={styles.field}>
+								<label>Ваше сообщение</label>
+								<Form.TextArea
+									className={styles.input}
+									onChange={this.handleTemporaryForm}
+									disabled={isHydrating}
+									error={validationErrors && !!validationErrors.message}
+									value={temporaryForm.message}
+									placeholder="Начните писать ваше сообщение в этом текстовом поле"
+									name="message"
+								/>
+								{this.renderError("message")}
+							</Form.Field>
+							<Form.Field>
+								<Button
+									loading={isHydrating}
+									size="large"
+									onClick={this.publishStart}
+									primary
+								>
+									Отправить
+								</Button>
+							</Form.Field>
+						</Form>
+					</div>
+				</Fade>
+			</Container>
+		);
+	}
 }
 
-export default Form;
+ContactForm.propTypes = {
+	refreshCart: PropTypes.func.isRequired,
+	cart: PropTypes.arrayOf(PropTypes.shape({})),
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired
+	}).isRequired,
+	promo: PropTypes.shape({
+		discount: PropTypes.number,
+		code: PropTypes.string
+	}),
+	withTitle: PropTypes.bool
+};
+
+ContactForm.defaultProps = {
+	cardIds: [],
+	withTitle: false,
+	promo: {
+		discount: null,
+		code: null
+	}
+};
+
+export default ContactForm;

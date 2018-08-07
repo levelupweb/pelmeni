@@ -1,3 +1,3 @@
 export default () => {
-    window.scrollX = 0;
-}
+	window.scrollX = 0;
+};

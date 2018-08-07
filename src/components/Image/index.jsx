@@ -5,153 +5,133 @@ import isFunction from "@utils/isFunction";
 import loadImageAsync from "@utils/loadImageAsync";
 
 class Image extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleLoad = this.handleLoad.bind(this);
-    this.handleError = this.handleError.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleThumbnailLoad = this.handleThumbnailLoad.bind(this);
-    this.state = {
-      isLoaded: false,
-      cantLoad: false,
-      isHydrating: false,
-      loadedAttachment: null,
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.handleLoad = this.handleLoad.bind(this);
+		this.handleError = this.handleError.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+		this.handleThumbnailLoad = this.handleThumbnailLoad.bind(this);
+		this.state = {
+			isLoaded: false,
+			cantLoad: false,
+			isHydrating: false,
+			loadedAttachment: null
+		};
+	}
 
-  componentDidMount() {
-    this.loadImage();
-  }
+	componentDidMount() {
+		this.loadImage();
+	}
 
-  loadImage() {
-    const {
-      src,
-      srcThumbnail
-    } = this.props;
+	loadImage() {
+		const { src, srcThumbnail } = this.props;
 
-    if (src && srcThumbnail) {
-      loadImageAsync(src)
-        .then(this.handleLoad)
-        .catch(this.handleError);
-    }
-  }
+		if (src && srcThumbnail) {
+			loadImageAsync(src)
+				.then(this.handleLoad)
+				.catch(this.handleError);
+		}
+	}
 
-  handleClick() {
-    const { onClick } = this.props;
+	handleClick() {
+		const { onClick } = this.props;
 
-    if (isFunction(onClick)) {
-      onClick();
-    }
-  }
+		if (isFunction(onClick)) {
+			onClick();
+		}
+	}
 
-  handleLoad() {
-    const { onLoad } = this.props;
+	handleLoad() {
+		const { onLoad } = this.props;
 
-    this.setState({ isLoaded: true }, () => 
-      isFunction(onLoad) && onLoad()
-    );
-  }
+		this.setState({ isLoaded: true }, () => isFunction(onLoad) && onLoad());
+	}
 
-  handleError() {
-    const { onError } = this.props;
+	handleError() {
+		const { onError } = this.props;
 
-    this.setState({ cantLoad: true }, () => 
-      isFunction(onError) && onError()
-    );
-  }
+		this.setState({ cantLoad: true }, () => isFunction(onError) && onError());
+	}
 
-  handleThumbnailLoad() {
-      const { onThumbnailLoaded } = this.props;
-      
-      if (isFunction(onThumbnailLoaded)) {
-        onThumbnailLoaded();
-      }
-  }
+	handleThumbnailLoad() {
+		const { onThumbnailLoaded } = this.props;
 
-  render() {
-    const {
-      className,
-      fluid,
-      fallback,
-      alt,
-      src,
-      srcThumbnail
-    } = this.props;
+		if (isFunction(onThumbnailLoaded)) {
+			onThumbnailLoaded();
+		}
+	}
 
-    const {
-      isLoaded,
-      cantLoad,
-    } = this.state;
+	render() {
+		const { className, fluid, fallback, alt, src, srcThumbnail } = this.props;
 
-    if (cantLoad) {
-      if (fallback) {
-        return fallback;
-      }
-      return (
-        <div className={styles.empty}>
-          <p>Не удалось загрузить изображение</p>
-        </div>
-      );
-    }
+		const { isLoaded, cantLoad } = this.state;
 
-    if (src && srcThumbnail) {
-      return (
-        <div
-          onClick={this.handleClick}
-          className={`
+		if (cantLoad) {
+			if (fallback) {
+				return fallback;
+			}
+			return (
+				<div className={styles.empty}>
+					<p>Не удалось загрузить изображение</p>
+				</div>
+			);
+		}
+
+		if (src && srcThumbnail) {
+			return (
+				<div
+					onClick={this.handleClick}
+					className={`
             ${styles.wrapper}
             ${isLoaded && styles.loaded}
             ${fluid && styles.fluid}
             ${className}
           `}
-        >
-          <img
-            src={srcThumbnail}
-            onLoad={this.handleThumbnailLoad}
-            className={styles.thumbnail}
-          />
-          <picture className={styles.true}>
-            <img
-              src={src}
-              alt={alt}
-            />
-          </picture>
-        </div>
-      );
-    }
+				>
+					<img
+						src={srcThumbnail}
+						onLoad={this.handleThumbnailLoad}
+						className={styles.thumbnail}
+					/>
+					<picture className={styles.true}>
+						<img src={src} alt={alt} />
+					</picture>
+				</div>
+			);
+		}
 
-    if (fallback) {
-      return fallback;
-    }
+		if (fallback) {
+			return fallback;
+		}
 
-    return null;
-  }
+		return null;
+	}
 }
 
 Image.propTypes = {
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  fluid: PropTypes.bool,
-  alt: PropTypes.string,
-  fallback: PropTypes.element,
-  src: PropTypes.string,
-  srcThumbnail: PropTypes.string,
-  onThumbnailLoaded: PropTypes.func,
-  onError: PropTypes.func,
-  onLoad: PropTypes.func,
+	className: PropTypes.string,
+	onClick: PropTypes.func,
+	fluid: PropTypes.bool,
+	alt: PropTypes.string,
+	fallback: PropTypes.element,
+	src: PropTypes.string,
+	srcThumbnail: PropTypes.string,
+	onThumbnailLoaded: PropTypes.func,
+	onError: PropTypes.func,
+	onLoad: PropTypes.func
 };
 
 Image.defaultProps = {
-  onThumbnailLoaded: null,
-  onClick: null,
-  className: "",
-  fluid: false,
-  alt: null,
-  fallback: null,
-  src: null,
-  srcThumbnail: null,
-  onError: null,
-  onLoad: null,
+	onThumbnailLoaded: null,
+	onClick: null,
+	className: "",
+	fluid: false,
+	alt: null,
+	fallback: null,
+	src: null,
+	srcThumbnail: null,
+	onError: null,
+	onLoad: null
 };
 
 export default Image;

@@ -5,16 +5,10 @@ import styles from "./styles.less";
 
 const Price = ({ currentItem, amount }) => (
 	<React.Fragment>
-		<p className={styles.real}>
-			{currentItem.price * amount} руб.
-		</p>
+		<p className={styles.real}>{currentItem.price * amount} руб.</p>
 		<p className={styles.market}>
-			<span>
-				Цена в магазинах за ед.
-			</span>
-			<span>
-				{currentItem.price * 1.3} руб.
-			</span>
+			<span>Цена в магазинах за ед.</span>
+			<span>{currentItem.price * 1.3} руб.</span>
 		</p>
 	</React.Fragment>
 );
@@ -24,22 +18,19 @@ Price.propTypes = {
 	currentItem: PropTypes.shape({
 		weight: PropTypes.number,
 		price: PropTypes.number,
-		category: PropTypes.string,
-	}),
-}
+		category: PropTypes.string
+	})
+};
 
 Price.defaultProps = {
 	amount: 0,
-	currentItem: 0,
-}
+	currentItem: 0
+};
 
 const EnhancedPrice = () => (
 	<CardContext.Consumer>
 		{({ currentItem, amount }) => (
-			<Price
-				currentItem={currentItem}
-				amount={amount}
-			/>
+			<Price currentItem={currentItem} amount={amount} />
 		)}
 	</CardContext.Consumer>
 );

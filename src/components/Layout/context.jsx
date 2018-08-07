@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 
 export const LayoutContext = React.createContext();
@@ -8,25 +9,21 @@ class LayoutProviderClass extends React.Component {
 		super(props);
 		this.handleExpand = this.handleExpand.bind(this);
 		this.state = {
-				isExpanded: false,
-		}
+			isExpanded: false
+		};
 	}
 
 	handleExpand(isExpanded) {
-		this.setState({ isExpanded })
+		this.setState({ isExpanded });
 	}
 
 	render() {
 		const {
 			props: {
 				children,
-				location: {
-					pathname
-				}
+				location: { pathname }
 			},
-			state: {
-					isExpanded,
-			},
+			state: { isExpanded },
 			handleExpand
 		} = this;
 
@@ -44,4 +41,11 @@ class LayoutProviderClass extends React.Component {
 	}
 }
 
-export const LayoutProvider = withRouter(LayoutProviderClass); 
+LayoutProviderClass.propTypes = {
+	children: PropTypes.element.isRequired,
+	location: PropTypes.shape({
+		pathname: PropTypes.string.isRequired
+	}).isRequired
+};
+
+export const LayoutProvider = withRouter(LayoutProviderClass);

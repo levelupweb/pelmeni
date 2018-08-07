@@ -1,0 +1,39 @@
+.wrapper {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 999;
+
+  .content {
+    position: absolute;
+    padding-right: 30px;
+    bottom: 100%;
+    right: 0;
+    z-index: 1000;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    background: #fff;
+    width: 230px;
+    padding: 20px;
+    border-bottom-right-radius: 26px;
+    border-top-left-radius: 26px;
+    h3 {
+      margin-top: 0 !important;
+    }
+    .phone {
+      font-size: 17px;
+    }
+    .close {
+      opacity: 0.5;
+      transition: 0.2s all ease;
+      cursor: pointer;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      &:hover {
+        opacity: 1;
+        font-size: 14px;
+      }
+    }
+  }
+}

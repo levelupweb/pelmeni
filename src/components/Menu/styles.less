@@ -1,13 +1,13 @@
 @import "~@variables/z-index.less";
 @import "~@variables/breakpoints.less";
-@import "~@variables/colors.less"; 
+@import "~@variables/colors.less";
 @import "~@variables/spacings.less";
 
 @background-opacity: 0.9;
 @background: rgba(0, 0, 0, @background-opacity);
 
 .menu {
-  transition: .2s all ease;
+  transition: 0.2s all ease;
   background: @background !important;
   height: @header-space;
   max-height: @header-space;
@@ -15,8 +15,8 @@
   opacity: 1;
   :global(.item) {
     padding: 10px !important;
-    font-size: 18px!important;
-    align-self: center!important;
+    font-size: 18px !important;
+    align-self: center !important;
     &:hover {
       background: transparent !important;
     }
@@ -39,7 +39,7 @@
     }
   }
   &.hidden {
-    opacity: 0 !important
+    opacity: 0 !important;
   }
 }
 

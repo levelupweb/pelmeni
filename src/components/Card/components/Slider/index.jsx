@@ -5,10 +5,7 @@ import Carousel from "nuka-carousel";
 import { CardContext } from "@components/Card/context";
 import styles from "./styles.less";
 
-import {
-	Button,
-	Icon,
-} from "semantic-ui-react"
+import { Button, Icon } from "semantic-ui-react";
 
 class Slider extends React.Component {
 	constructor(props) {
@@ -18,8 +15,8 @@ class Slider extends React.Component {
 		this.handleCarouselRef = this.handleCarouselRef.bind(this);
 		this.renderLeft = this.renderLeft.bind(this);
 		this.state = {
-			carousel: null,
-		}
+			carousel: null
+		};
 	}
 
 	componentDidMount() {
@@ -35,42 +32,37 @@ class Slider extends React.Component {
 	}
 
 	handleCarouselRef(carousel) {
-		this.setState({ carousel })
+		this.setState({ carousel });
 	}
 
 	renderLeft({ previousSlide }) {
 		return (
-			<Button
-				onClick={previousSlide}
-				className={styles.button}
-				icon
-			>
+			<Button onClick={previousSlide} className={styles.button} icon>
 				<Icon name="angle left" />
 			</Button>
-		)
+		);
 	}
 
 	renderRight({ nextSlide }) {
 		return (
-			<Button 
-				onClick={nextSlide}
-				className={styles.button}
-				icon
-			>
+			<Button onClick={nextSlide} className={styles.button} icon>
 				<Icon name="angle right" />
 			</Button>
 		);
 	}
 
 	renderImages({ items }) {
-		return items.map(({ image }) => image && (
-			<Image
-				src={image.src}
-				srcThumbnail={image.srcThumbnail}
-				onThumbnailLoaded={this.handleDimensions}
-				fluid
-			/>
-		))
+		return items.map(
+			({ image }) =>
+				image && (
+					<Image
+						src={image.src}
+						srcThumbnail={image.srcThumbnail}
+						onThumbnailLoaded={this.handleDimensions}
+						fluid
+					/>
+				)
+		);
 	}
 
 	render() {
@@ -78,7 +70,7 @@ class Slider extends React.Component {
 			width,
 			heightMode,
 			initialSlideHeight,
-			initialSlideWidth,
+			initialSlideWidth
 		} = this.props;
 
 		return (
@@ -89,16 +81,26 @@ class Slider extends React.Component {
 							ref={this.handleCarouselRef}
 							heightMode={heightMode}
 							width={width}
-							slideIndex={category.items.map(item => item._id).indexOf(selectedItem)}
+							slideIndex={category.items
+								.map(item => item._id)
+								.indexOf(selectedItem)}
 							initialSlideHeight={initialSlideHeight}
-							afterSlide={(nextSlide) => handleItem(category.items[nextSlide]._id)}
+							afterSlide={nextSlide =>
+								handleItem(category.items[nextSlide]._id)
+							}
 							initialSlideWidth={initialSlideWidth}
-							renderCenterLeftControls={(data) => data.currentSlide !== 0 ? this.renderLeft(data) : null}
-							renderCenterRightControls={(data) => data.currentSlide !== category.items.length - 1 ? this.renderRight(data) : null}
+							renderCenterLeftControls={data =>
+								data.currentSlide !== 0 ? this.renderLeft(data) : null
+							}
+							renderCenterRightControls={data =>
+								data.currentSlide !== category.items.length - 1
+									? this.renderRight(data)
+									: null
+							}
 						>
 							{this.renderImages(category)}
 						</Carousel>
-					)
+					);
 				}}
 			</CardContext.Consumer>
 		);
@@ -106,20 +108,17 @@ class Slider extends React.Component {
 }
 
 Slider.propTypes = {
-	width: PropTypes.oneOfType([
-		PropTypes.string, 
-		PropTypes.number
-	]),
+	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	heightMode: PropTypes.string,
 	initialSlideHeight: PropTypes.number,
-	initialSlideWidth: PropTypes.string,
-}
+	initialSlideWidth: PropTypes.string
+};
 
 Slider.defaultProps = {
 	heightMode: "first",
 	width: "100%",
 	initialSlideHeight: 350,
-	initialSlideWidth: "100%",
-}
+	initialSlideWidth: "100%"
+};
 
 export default Slider;
