@@ -1,26 +1,102 @@
-const { 
-    PURCHASE_ITEMS 
+const {
+	PURCHASE_ITEMS,
+	PURCHASE_PROMO,
+	PURCHASE_ITEMS_ITEM,
+	PURCHASE_ITEMS_AMOUNT,
+	PURCHASE_USER
 } = require("../../models/Purchase/consts");
 
-const { 
-    ITEM_PRICE,
-    ITEM_AMOUNT,
-    ITEM_TITLE,
-    ITEM_WEIGHT
+const { PROMO_CODE, PROMO_DISCOUNT } = require("../../models/Promo/consts");
+
+const {
+	ITEM_PRICE,
+	ITEM_WEIGHT,
+	ITEM_CATEGORY
 } = require("../../models/Item/consts");
 
+const { CATEGORY_TITLE } = require("../../models/Category/consts");
 
-const { 
-    USER_NAME,
-    USER_DOSTAVKA,
-    USER_EMAIL,
-    USER_MESSAGE,
-    USER_PHONE,
+const {
+	USER_NAME,
+	USER_DOSTAVKA,
+	USER_EMAIL,
+	USER_MESSAGE,
+	USER_PHONE
 } = require("../../models/User/consts");
 
+const mapItems = purchasedItems =>
+	purchasedItems.reduce(
+		(prev, curr) =>
+			prev +
+			`<li>${curr.item[ITEM_CATEGORY][CATEGORY_TITLE]} (Кол-во: ${
+				curr.amount
+			}, Вес за шт.: ${curr.item[ITEM_WEIGHT]})</li>`,
+		""
+	);
 
-module.exports = (data) => [
-    { data: `<html>
+const getFinalTotal = data => {
+	const total = data[PURCHASE_ITEMS].reduce(
+		(prev, curr) =>
+			prev +
+			curr[PURCHASE_ITEMS_ITEM][ITEM_PRICE] * curr[PURCHASE_ITEMS_AMOUNT],
+		0
+	);
+
+	if (data[PURCHASE_PROMO] && data[PURCHASE_PROMO][PROMO_DISCOUNT]) {
+		return Math.ceil((total / 100) * data[PURCHASE_PROMO][PROMO_DISCOUNT]);
+	}
+
+	return total;
+};
+
+const renderPrice = data =>
+	`<p style="font-size: 25px">
+    К оплате: ${getFinalTotal(data)} руб. ${
+	data[PURCHASE_PROMO] ? "(с учетом скидки)" : ""
+}
+</p>`;
+
+const renderDiscount = data => {
+	if (data[PURCHASE_PROMO]) {
+		return `
+    <p style="font-size: 20px">
+Был активирован промо-код: ${data[PURCHASE_PROMO][PROMO_CODE]}
+<span style="font-size:16px">
+  Скидка составила ${data[PURCHASE_PROMO][PROMO_DISCOUNT]} %
+</span>
+</p>`;
+	}
+
+	return "";
+};
+
+const renderItems = data => `
+  <ul>
+    ${mapItems(data[PURCHASE_ITEMS])}
+  </ul>
+`;
+
+const renderUser = data => `
+<ul>
+                            <li>Имя клиента: ${data[PURCHASE_USER][USER_NAME] ||
+															"Не указано"}</li>
+                            <li>E-mail: ${data[PURCHASE_USER][USER_EMAIL] ||
+															"Не указан"}</li>
+                            <li>Номер телефона: ${data[PURCHASE_USER][
+		USER_PHONE
+	] || "Не указан"}</li>
+                            <li>Адрес доставки: ${data[PURCHASE_USER][
+		USER_DOSTAVKA
+	] || "Не указано"}</li>
+                            <li>Комментарий: ${data[PURCHASE_USER][
+		USER_MESSAGE
+	] || "Не указано"}</li>
+                        </ul>`;
+
+module.exports = data => [
+	{
+		data: `
+      <html>
         <head>
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,23 +129,14 @@ module.exports = (data) => [
                         </p>
 
                         <p style="margin-top: 20px; font-size: 20px"><b>Информация о клиенте</b></p>
-                        <ul>
-                            <li>Имя клиента: ${data[USER_NAME] || "Не указано"}</li>
-                            <li>E-mail: ${data[USER_EMAIL] || "Не указан"}</li>
-                            <li>Номер телефона: ${data[USER_PHONE] || "Не указан"}</li>
-                            <li>Адрес доставки: ${data[USER_DOSTAVKA] || "Не указано"}</li>
-                            <li>Комментарий: ${data[USER_MESSAGE] || "Не указано"}</li>
-                        </ul>
-                        
-                        <p style="margin-top: 20px; font-size: 20px"><b>Информация о заказе</b></p>
-                        <ul>
-                            ${data[PURCHASE_ITEMS].map((item) => 
-                                `<li>${item[ITEM_TITLE]} (Кол-во: ${item[ITEM_AMOUNT]}, Вес за шт.: ${item[ITEM_WEIGHT]})</li>`
-                            )}
-                        </ul>
-                        <p style="font-size: 25px">
-                            К оплате: ${data[PURCHASE_ITEMS].reduce((prev, curr) => prev + (curr[ITEM_PRICE] * curr[ITEM_AMOUNT]),0)} руб.
-                        </p>
+                        ${renderUser(data)}
+                        <p style="margin-top: 20px; font-size: 20px"><b>
+                          Информация о заказе
+                        </b></p>
+
+                        ${renderItems(data)}
+                        ${renderPrice(data)}
+                        ${renderDiscount(data)}
                       </td>
                       <td width="30px" valign="top">
                         &nbsp;
@@ -86,7 +153,7 @@ module.exports = (data) => [
             </table>
           </center>
         </body>
-        </html>`,
-    alternative: true
-    },
-  ];
+      </html>`,
+		alternative: true
+	}
+];

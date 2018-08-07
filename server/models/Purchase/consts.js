@@ -7,3 +7,5 @@ module.exports.PURCHASE_CREATED = "created";
 module.exports.PURCHASE_STATUS = "status";
 module.exports.PURCHASE_PROMO = "promo";
 module.exports.PURCHASE_AGREEMENT = "agreement";
+module.exports.PURCHASE_ITEMS_ITEM = "item";
+module.exports.PURCHASE_ITEMS_AMOUNT = "amount";
