@@ -57,3 +57,32 @@ module.exports.errCode0013 = err =>
 
 module.exports.errCode0014 = err =>
 	createError("0014", "Ошибка сервера во время отправки обратной связи", err);
+
+module.exports.errCode0015 = err => createError("0015", "Неверный пароль", err);
+
+module.exports.errCode0016 = err =>
+	createError("0016", "Ошибка сервера во время обновления товара", err);
+
+module.exports.errCode0017 = err =>
+	createError("0017", "Не указан идентификатор товара", err);
+
+module.exports.errCode0018 = err =>
+	createError("0018", "Товар с данным идентификатором не найден", err);
+
+module.exports.errCode0019 = err =>
+	createError("0019", "Ошибка во время обновления товара", err);
+
+module.exports.errCode0020 = err =>
+	createError("0020", "Ошибка во время поиска промо-кодов", err);
+
+module.exports.errCode0021 = err =>
+	createError("0021", "Промо-код с данным идентификатором не найден", err);
+
+module.exports.errCode0022 = err =>
+	createError("0022", "Ошибка во время поиска промо-кода", err);
+
+module.exports.errCode0023 = err =>
+	createError("0023", "Ошибка во время удаления промо-кода", err);
+
+module.exports.errCode0024 = err =>
+	createError("0024", "Ошибка во время обновления промо-кода", err);
