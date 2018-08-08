@@ -1,9 +1,16 @@
 @import "~@variables/colors.less";
+@import "~@variables/spacings.less";
 
 .wrapper {
   background: rgba(0, 0, 0, 0.45) !important;
   padding: 40px 0;
   margin-top: 50px;
+  max-height: @footer-space;
+  overflow-y: hidden;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
   color: #ffffff;
   .contact {

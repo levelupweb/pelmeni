@@ -33,6 +33,7 @@
 		"image-data-uri": "^1.1.0",
 		"imagesloaded": "^4.1.4",
 		"jquery": "^3.3.1",
+		"js-cookie": "^2.2.0",
 		"jsonwebtoken": "^8.3.0",
 		"mongoose": "^5.2.5",
 		"morgan": "^1.9.0",

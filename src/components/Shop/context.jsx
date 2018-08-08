@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import config from "../../utils/config";
-
-import { LOCAL_STORAGE_CART, LOCAL_STORAGE_PROMO } from "@src/consts";
+import { LOCAL_STORAGE_CART } from "@src/consts";
 
 import {
 	setItemToLocalStorage,
@@ -32,7 +31,7 @@ class ShopProviderClass extends React.Component {
 			items: null,
 			error: null,
 			cart: JSON.parse(getFromLocalStorage(LOCAL_STORAGE_CART)) || [],
-			promo: JSON.parse(getFromLocalStorage(LOCAL_STORAGE_PROMO)),
+			promo: null,
 			addSpy: 0
 		};
 	}
@@ -168,16 +167,9 @@ class ShopProviderClass extends React.Component {
 	}
 
 	handlePromo(promo) {
-		this.setState(
-			{
-				promo
-			},
-			() => {
-				const { promo } = this.state;
-
-				setItemToLocalStorage(LOCAL_STORAGE_PROMO, JSON.stringify(promo));
-			}
-		);
+		this.setState({
+			promo
+		});
 	}
 
 	getTotalSumm() {
@@ -190,7 +182,7 @@ class ShopProviderClass extends React.Component {
 		const { promo } = this.state;
 
 		if (promo && promo.discount) {
-			return Math.ceil((this.getTotalSumm() / 100) * promo.discount);
+			return Math.ceil((this.getTotalSumm() / 100) * (100 - promo.discount));
 		}
 
 		return null;

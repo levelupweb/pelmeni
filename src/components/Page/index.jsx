@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.less";
 import Fade from "react-reveal/Fade";
-import { Header, Container } from "semantic-ui-react";
+import { Header, Container, Segment } from "semantic-ui-react";
 
 const Page = ({ title, description, children, className, text }) => (
 	<Container text={text}>
-		<div className={`ui inverted vertical segment ${className}`}>
+		<Segment vertical inverted className={`${className} ${styles.page}`}>
 			{title &&
 				description && (
 				<Fade bottom>
@@ -19,7 +19,7 @@ const Page = ({ title, description, children, className, text }) => (
 				</Fade>
 			)}
 			<Fade>{children}</Fade>
-		</div>
+		</Segment>
 	</Container>
 );
 

@@ -1,3 +1,4 @@
+// prettier-ignore
 {
   "presets":[
       "env", "react"
@@ -20,7 +21,8 @@
           "@utils": "./src/utils",
           "@src": "./src",
           "@variables": "./src/variables",
-          "@consts": "./src/consts"
+          "@consts": "./src/consts",
+          "@HOC": "./src/HOC"
         },
         "extensions": [".js", ".json", ""]
       }
