@@ -3,7 +3,9 @@ import Index from "./index/index.jsx";
 import Dostavka from "./dostavka";
 import Shop from "./shop";
 import Contact from "./contact";
+import Auth from "./auth";
 import Layout from "../components/Layout";
+import Admin from "./admin";
 import NotFound from "./404";
 import loadImageAsync from "@utils/loadImageAsync";
 import "../common/styles.css";
@@ -53,6 +55,8 @@ class App extends React.Component {
 					<Route path="/dostavka" component={Dostavka} />
 					<Route path="/shop" component={Shop} />
 					<Route path="/contact" component={Contact} />
+					<Route path="/admin" component={Admin} />
+					<Route path="/auth" component={Auth} />
 					<Route component={NotFound} />
 				</Switch>
 			</Layout>
