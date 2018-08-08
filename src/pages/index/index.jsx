@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import ContactForm from "@components/Form";
 import Image from "@components/Image";
 import Fade from "react-reveal/Fade";
-import "./src/styles.css";
+import styles from "./src/styles.less";
+import "./src/styles.less";
+
+import { Segment, Container, Header, Grid } from "semantic-ui-react";
 
 class IndexPage extends React.Component {
 	componentDidMount() {
@@ -12,161 +15,170 @@ class IndexPage extends React.Component {
 
 	render() {
 		return (
-			<div className="index-page">
-				<div className="ui inverted vertical segment section-1">
-					<div className="section-content flex-column-start">
-						<div className="visuals-head visuals-1" id="scene-1">
-							<div className="visual visual-custom-0 layer" data-depth="0.2">
-								<Fade bottom>
+			<div className={styles.wrapper}>
+				<svg style={{visibility: "hidden", position: "absolute"}} width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+					<defs>
+						<filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />    
+							<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+							<feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+						</filter>
+					</defs>
+				</svg>
+				<Segment inverted className={styles.one}>
+					<div className={styles.content}>
+						<div className={styles.visuals}>
+							<div className={styles.visual}>
+								<Fade>
 									<img
 										src={require("./src/img/goroshek.png")}
-										className="visual-1"
-										alt=""
+										className={styles.visualOne}
 									/>
 								</Fade>
 							</div>
-							<div className="visual visual-custom-1 layer" data-depth="0.1">
-								<Fade top>
+							<div className={styles.visual}>
+								<Fade delay={200}>
 									<img
 										src={require("./src/img/zelenka.png")}
-										className="visual-2"
-										alt=""
+										className={styles.visualTwo}
 									/>
 								</Fade>
 							</div>
-							<div className="visual visual-custom-3 layer" data-depth="0.3">
-								<Fade bottom>
+							<div className={styles.visual}>
+								<Fade delay={400}>
 									<img
 										src={require("./src/img/section-2-chapter-1.png")}
-										className="visual-3"
-										width="50%"
-										alt=""
+										className={styles.visualThree}
 									/>
 								</Fade>
 							</div>
-							<div className="visual visual-custom-4 layer" data-depth="0.4">
-								<Fade top>
+							<div className={styles.visual}>
+								<Fade delay={600}>
 									<img
 										src={require("./src/img/section-2-chapter-1.png")}
-										className="visual-4"
-										width="50%"
-										alt=""
+										className={styles.visualFour}
+									/>
+								</Fade>
+							</div>
+							<div className={styles.visual}>
+								<Fade delay={800}>
+									<img
+										src={require("./src/img/section-2-chapter-1.png")}
+										className={styles.visualFive}
 									/>
 								</Fade>
 							</div>
 						</div>
-						<div className="ui container jumbotron">
+						<Container className={styles.jumbotron}>
 							<Fade bottom>
-								<div className="logo">
+								<div className={styles.logo}>
 									<img
 										src={require("./src/img/logo-1.png")}
-										className="logo-background"
 										alt="Замороженные полуфабрикаты с доставкой на дом"
 									/>
 									<img
-										className="logo-chief chief-animated"
+										className={styles.chief}
 										src={require("./src/img/logo-2.png")}
 										alt="Замороженные полуфабрикаты с доставкой на дом"
 									/>
 								</div>
 							</Fade>
 							<Fade bottom>
-								<h1 className="logo-header">
+								<div className={styles.titleWrapper}>
+									<Header inverted as="h1" className={styles.primary}>
 									Замороженные полуфабрикаты с доставкой на дом
-								</h1>
+									</Header>
+								</div>
 							</Fade>
-						</div>
+						</Container>
 					</div>
-				</div>
+				</Segment>
 
-				<div className="ui inverted vertical segment section-2">
-					<div className="visuals-head visuals-2" id="scene-2">
-						<div className="visual visual-rotation layer" data-depth="0.4">
+				<Segment inverted className={styles.two}>
+					<div className={styles.visuals}>
+						<div className={styles.visual}>
 							<Fade bottom>
 								<img
 									src={require("./src/img/pelmeni-2-shadow.png")}
-									className="visual-1"
-									alt=""
+									className={styles.visualOne}
 								/>
 							</Fade>
 						</div>
-						<div className="visual visual-custom-1 layer" data-depth="0">
+						<div className={styles.visual}>
 							<Fade bottom>
 								<img
 									src={require("./src/img/section-2-chapter-2.png")}
-									className="visual-2"
-									width="12%"
-									alt=""
+									className={styles.visualTwo}
 								/>
 							</Fade>
 						</div>
-						<div className="visual visual-custom-2 layer" data-depth="0.2">
+						<div className={styles.visual}>
 							<Fade bottom>
 								<img
 									src={require("./src/img/section-2-chapter-1.png")}
-									className="visual-3"
-									width="50%"
-									alt=""
+									className={styles.visualThree}
 								/>
 							</Fade>
 						</div>
-						<div className="visual visual-custom-3 layer" data-depth="0.2">
+						<div className={styles.visual}>
 							<Fade bottom>
 								<img
 									src={require("./src/img/section-2-chapter-1.png")}
-									className="visual-4"
-									width="50%"
-									alt=""
+									className={styles.visualFour}
 								/>
 							</Fade>
 						</div>
 					</div>
-
-					<div className="section-content">
-						<div className="ui middle aligned stackable grid container">
-							<div className="row">
-								<div className="eight wide column">
-									<Fade bottom>
-										<h1 className="ui header inverted">Качество</h1>
-										<p className="lead small">
-											Мы производим полуфабрикаты исключительно из натуральных
-											ингредиентов. Наша компания никогда не использовала в
-											производстве добавки и консерванты!
-										</p>
-										<h1 className="ui header inverted">Вкус</h1>
-										<p className="lead small">
-											Натуральность и качество продуктов используемых при
-											производстве, обеспечивают высочайшие вкусовые качества
-											наших полуфабрикатов.
-										</p>
-									</Fade>
-								</div>
-								<div className="eight wide right floated column">
-									<div className="images">
-										<Fade bottom cascade>
-											<div className="image-1">
-												<Image
-													src={require("./src/img/section-2-1.png")}
-													srcThumbnail={require("./src/img/thumbnail/section-2-1.png")}
-													fluid
-													alt="Качество продукции"
-												/>
-											</div>
-											<div className="image-2">
-												<Image
-													src={require("./src/img/section-2.png")}
-													srcThumbnail={require("./src/img/thumbnail/section-2.png")}
-													fluid
-													alt="Качество продукции"
-												/>
-											</div>
+					<div className={styles.content}>
+						<Container>
+							<Grid stackable>
+								<Grid.Row columns="equal">
+									<Grid.Column>
+										<Fade bottom>
+											<Header as="h1" inverted className={styles.primary}>
+												Качество
+											</Header>
+											<p className="lead small">
+												Мы производим полуфабрикаты исключительно из натуральных
+												ингредиентов. Наша компания никогда не использовала в
+												производстве добавки и консерванты!
+											</p>
+											<Header as="h1" className={styles.primary} inverted>
+												Вкус
+											</Header>
+											<p className="lead small">
+												Натуральность и качество продуктов используемых при
+												производстве, обеспечивают высочайшие вкусовые качества
+												наших полуфабрикатов.
+											</p>
 										</Fade>
-									</div>
-								</div>
-							</div>
-						</div>
+									</Grid.Column>
+									<Grid.Column>
+										<div className={styles.images}>
+											<Fade bottom cascade>
+												<div className={styles.imageOne}>
+													<Image
+														src={require("./src/img/section-2-1.png")}
+														srcThumbnail={require("./src/img/thumbnail/section-2-1.png")}
+														fluid
+														alt="Качество продукции"
+													/>
+												</div>
+												<div className={styles.imageTwo}>
+													<Image
+														src={require("./src/img/section-2.png")}
+														srcThumbnail={require("./src/img/thumbnail/section-2.png")}
+														fluid
+														alt="Качество продукции"
+													/>
+												</div>
+											</Fade>
+										</div>
+									</Grid.Column>
+								</Grid.Row>
+							</Grid>
+						</Container>
 					</div>
-				</div>
+				</Segment>
 				<div className="ui inverted vertical segment section-3">
 					<div className="visuals-head desktop-only visuals-3" id="scene-3">
 						<div className="visual visual-custom-1 layer" data-depth="0">

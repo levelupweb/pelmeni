@@ -106,7 +106,7 @@ class PromoInput extends React.Component {
 						onChange={this.handleTemporaryCode}
 						loading={isChecking}
 						action={
-							<Button basic onClick={this.checkCodeStart} loading={isChecking}>
+							<Button icon onClick={this.checkCodeStart} loading={isChecking}>
 								<Icon name="angle right" />
 							</Button>
 						}
