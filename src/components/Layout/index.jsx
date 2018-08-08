@@ -5,6 +5,7 @@ import Footer from "../Footer";
 import Menu from "../Menu";
 import SidebarMenu from "../SidebarMenu";
 import { ShopProvider } from "../Shop/context";
+import { AuthFormProvider } from "../AuthForm/context";
 import styles from "./styles.less";
 
 import { Dimmer, Loader } from "semantic-ui-react";
@@ -51,9 +52,11 @@ Layout.defaultProps = {
 
 const EnhancedLayout = ({ children, isLoaded }) => (
 	<LayoutProvider>
-		<ShopProvider>
-			<Layout isLoaded={isLoaded}>{children}</Layout>
-		</ShopProvider>
+		<AuthFormProvider>
+			<ShopProvider>
+				<Layout isLoaded={isLoaded}>{children}</Layout>
+			</ShopProvider>
+		</AuthFormProvider>
 	</LayoutProvider>
 );
 
