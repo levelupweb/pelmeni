@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "semantic-ui-react";
-import { PanelItemContext } from "../../context";
+import { ItemsContext } from "../../context";
 
-const Item = ({ handleEditing, data }) => (
+const Item = ({ handleCategoryEditing, data }) =>
 	<Card>
 		<Card.Content>
-			<Card.Header onClick={() => handleEditing(data._id)}>
+			<Card.Header onClick={() => handleCategoryEditing(data._id)}>
 				{data.title}
 			</Card.Header>
 			<Card.Meta>
@@ -17,12 +17,11 @@ const Item = ({ handleEditing, data }) => (
 		</Card.Content>
 		<Card.Content description={data.description} />
 		<Card.Content extra>
-			<Button onClick={() => handleEditing(data._id)} primary fluid>
+			<Button onClick={() => handleCategoryEditing(data._id)} primary fluid>
 				Редактировать
 			</Button>
 		</Card.Content>
-	</Card>
-);
+	</Card>;
 
 Item.propTypes = {
 	data: PropTypes.shape({
@@ -30,14 +29,14 @@ Item.propTypes = {
 		weight: PropTypes.number,
 		category: PropTypes.string
 	}).isRequired,
-	handleEditing: PropTypes.func.isRequired
+	handleCategoryEditing: PropTypes.func.isRequired
 };
 
-const EnhancedItem = ({ data }) => (
-	<PanelItemContext.Consumer>
-		{({ handleEditing }) => <Item data={data} handleEditing={handleEditing} />}
-	</PanelItemContext.Consumer>
-);
+const EnhancedItem = ({ data }) =>
+	<ItemsContext.Consumer>
+		{({ handleCategoryEditing }) =>
+			<Item data={data} handleCategoryEditing={handleCategoryEditing} />}
+	</ItemsContext.Consumer>;
 
 EnhancedItem.propTypes = {
 	data: PropTypes.shape({

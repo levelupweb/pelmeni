@@ -1,83 +1,41 @@
 import React from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
-import { PanelContext } from "@components/Panel/context";
-import config from "@utils/config";
-import EditModal from "./components/EditModal";
-import parseError from "@utils/parseError";
+import CategoryEditModal from "./components/CategoryEditModal";
 import Item from "./components/Item";
-import { PanelItemProvider } from "./context";
-import { Loader, Card } from "semantic-ui-react";
+import { ItemsContext, ItemsProvider } from "./context";
+import { Loader, Card, Header } from "semantic-ui-react";
+import styles from "./styles.less";
 
-class Items extends React.Component {
-	constructor(props) {
-		super(props);
-		this.fetchItemsStart = this.fetchItemsStart.bind(this);
-		this.fetchItemsStartProcess = this.fetchItemsStartProcess.bind(this);
-		this.fetchItemsSuccess = this.fetchItemsSuccess.bind(this);
-		this.fetchItemsFail = this.fetchItemsFail.bind(this);
-		this.state = {
-			isHydrating: false,
-			error: null
-		};
-	}
-	componentDidMount() {
-		this.fetchItemsStart();
-	}
-
-	fetchItemsStart() {
-		const { isHydrating } = this.state;
-
-		if (!isHydrating) {
-			this.setState({ isHydrating: true }, () => this.fetchItemsStartProcess());
-		}
-	}
-
-	fetchItemsStartProcess() {
-		axios
-			.get(config.url + "/category/all")
-			.then(this.fetchItemsSuccess)
-			.catch(this.fetchItemsFail);
-	}
-
-	fetchItemsSuccess({ data }) {
-		const { handleItems } = this.props;
-
-		if (data && data.length > 0) {
-			handleItems(data);
-		}
-	}
-
-	fetchItemsFail(reason) {
-		const error = parseError(reason);
-
-		this.setState({
-			isHydrating: false,
-			error
-		});
-	}
-
-	render() {
-		const { items } = this.props;
-
-		if (!items) {
-			return (
-				<Loader active inline centered>
-					Загружаем товары...
-				</Loader>
-			);
-		}
-
+const Items = ({ items, isHydrating, error }) => {
+	if (error) {
 		return (
-			<React.Fragment>
-				<EditModal />
-				<Card.Group itemsPerRow={4} stackable>
-					{items.map(item => <Item key={item._id} data={item} />)}
-				</Card.Group>
-			</React.Fragment>
+			<Header className={styles.error} textAlign="center" as="h2">
+				Не удалось загрузить товары
+				<Header.Subheader>
+					Если вы видите эту ошибку, обратитесь к администратору
+				</Header.Subheader>
+			</Header>
 		);
 	}
-}
+
+	if (!items || isHydrating) {
+		return (
+			<Loader active inline centered>
+				Загружаем товары...
+			</Loader>
+		);
+	}
+
+	return (
+		<React.Fragment>
+			<CategoryEditModal /> 
+			<Card.Group itemsPerRow={4} stackable>
+				{items.map(item => <Item key={item._id} data={item} />)}
+			</Card.Group>
+		</React.Fragment>
+	);
+};
+
 
 Items.propTypes = {
 	items: PropTypes.arrayOf(
@@ -93,17 +51,20 @@ Items.propTypes = {
 			)
 		})
 	),
-	handleItems: PropTypes.func.isRequired
+	isHydrating: PropTypes.bool,
+	error: PropTypes.shape({
+		message: PropTypes.string
+	})
 };
 
 const EnhancedItems = () => (
-	<PanelItemProvider>
-		<PanelContext.Consumer>
-			{({ items, handleItems }) => (
-				<Items items={items} handleItems={handleItems} />
+	<ItemsProvider>
+		<ItemsContext.Consumer>
+			{({ items, fetching }) => (
+				<Items items={items} isHydrating={fetching.isHydrating} error={fetching.error} />
 			)}
-		</PanelContext.Consumer>
-	</PanelItemProvider>
+		</ItemsContext.Consumer>
+	</ItemsProvider>
 );
 
 export default EnhancedItems;

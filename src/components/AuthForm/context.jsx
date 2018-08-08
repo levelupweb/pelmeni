@@ -115,7 +115,7 @@ class AuthFormProviderClass extends React.Component {
 			state: { isHydrating, error, validationErrors, temporaryCredentials },
 			props: { children },
 			handleTemporaryCredentials,
-			sendCredentialsStart
+			sendCredentialsStart,
 		} = this;
 
 		return (
@@ -126,7 +126,7 @@ class AuthFormProviderClass extends React.Component {
 					validationErrors,
 					temporaryCredentials,
 					handleTemporaryCredentials,
-					sendCredentialsStart
+					sendCredentialsStart,
 				}}
 			>
 				{children}

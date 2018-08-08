@@ -1,127 +1,295 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { PanelContext } from "../../context";
 import config from "@utils/config";
 import { TOKEN } from "@src/consts";
 import cookies from "js-cookie";
-import parseError from "@utils/parseError";
 import { CATEGORY_ITEMS } from "@consts/category";
-import { ITEM_CATEGORY } from "@consts/item";
-export const PanelItemContext = React.createContext();
+import parseError from "@utils/parseError";
 
-class PanelItemClass extends React.Component {
+export const ItemsContext = React.createContext();
+
+class ItemsProviderClass extends React.Component {
 	constructor(props) {
 		super(props);
-		this.handleEditing = this.handleEditing.bind(this);
-		this.handleEditingVariation = this.handleEditingVariation.bind(this);
-		this.getValue = this.getValue.bind(this);
-		this.getFieldError = this.getFieldError.bind(this);
-		this.getVariationFieldError = this.getVariationFieldError.bind(this);
-		this.cancelEditing = this.cancelEditing.bind(this);
-		this.cancelEditingVariation = this.cancelEditingVariation.bind(this);
-		this.handleTemporaryItem = this.handleTemporaryItem.bind(this);
+		this.fetchItemsStart = this.fetchItemsStart.bind(this);
+		this.fetchItemsStartProcess = this.fetchItemsStartProcess.bind(this);
+		this.fetchItemsSuccess = this.fetchItemsSuccess.bind(this);
+		this.fetchItemsFail = this.fetchItemsFail.bind(this);
+		this.getCategoryUpdatingError = this.getCategoryUpdatingError.bind(this);
+		this.handleCategoryTemporary = this.handleCategoryTemporary.bind(this);
+		this.handleCategoryEditing = this.handleCategoryEditing.bind(this);
+		this.handleCategoryUpdating = this.handleCategoryUpdating.bind(this);
+		this.handleItemUpdating = this.handleItemUpdating.bind(this);
+		this.getItemUpdatingError = this.getItemUpdatingError.bind(this);
 		this.updateItemStart = this.updateItemStart.bind(this);
-		this.updateItemProcess = this.updateItemProcess.bind(this);
-		this.updateItemSuccess = this.updateItemSuccess.bind(this);
-		this.getTemporaryItemVariationValue = this.getTemporaryItemVariationValue.bind(
-			this
-		);
-		this.handleTemporaryItemVariation = this.handleTemporaryItemVariation.bind(
-			this
-		);
-		this.updateItemStart = this.updateItemStart.bind(this);
+		this.handleItemTemporary = this.handleItemTemporary.bind(this);
+		this.handleItemEditing = this.handleItemEditing.bind(this);
 		this.updateItemProcess = this.updateItemProcess.bind(this);
 		this.updateItemSuccess = this.updateItemSuccess.bind(this);
 		this.updateItemFail = this.updateItemFail.bind(this);
-		this.updateVariationStart = this.updateVariationStart.bind(this);
-		this.updateVariationProcess = this.updateVariationProcess.bind(this);
-		this.updateVariationSuccess = this.updateVariationSuccess.bind(this);
-		this.updateVariationFail = this.updateVariationFail.bind(this);
-		this.updateVariationFail = this.updateVariationFail.bind(this);
+		this.updateCategoryStart = this.updateCategoryStart.bind(this);
+		this.updateCategoryProcess = this.updateCategoryProcess.bind(this);
+		this.updateCategorySuccess = this.updateCategorySuccess.bind(this);
+		this.updateCategoryFail = this.updateCategoryFail.bind(this);
 		this.state = {
-			currentlyEditing: null,
-			temporaryItem: {},
-			isHydrating: false,
-			validationErrors: null,
-			error: null,
-			temporaryItemVariation: {},
-			currentlyEditingVariation: null,
-			variationValidationErrors: null,
-			variationError: null
+			categoryUpdating: {
+				isHydrating: false,
+				id: null,
+				error: null,
+				validationErrors: null,
+				temporary: {}
+			},
+			itemUpdating: {
+				isHydrating: false,
+				id: null,
+				error: null,
+				validationErrors: null,
+				temporary: {}
+			},
+			fetching: {
+				isHydrating: false,
+				error: null
+			},
+			items: null
 		};
 	}
 
-	handleEditingVariation(currentlyEditingVariation) {
-		this.setState({ currentlyEditingVariation });
+	/**
+   * Start fetching when 
+   * component is mounted
+   */
+
+	componentDidMount() {
+		this.fetchItemsStart();
 	}
 
-	cancelEditingVariation() {
+	/**
+   * Fetching lifecycle
+   */
+
+	fetchItemsStart() {
+		const { fetching, items } = this.state;
+
+		if (!fetching.isHydrating && !items) {
+			this.setState(
+				{ fetching: { ...fetching, isHydrating: true, error: null } },
+				() => this.fetchItemsStartProcess()
+			);
+		}
+	}
+
+	fetchItemsStartProcess() {
+		return axios
+			.get(config.url + "/category/all")
+			.then(this.fetchItemsSuccess)
+			.catch(this.fetchItemsFail);
+	}
+
+	fetchItemsSuccess({ data }) {
+		const { fetching } = this.state;
+
 		this.setState({
-			currentlyEditingVariation: null,
-			temporaryItemVariation: {}
+			items: data,
+			fetching: {
+				...fetching,
+				isHydrating: false
+			}
 		});
 	}
 
-	handleTemporaryItemVariation(data) {
-		const { temporaryItemVariation } = this.state;
+	fetchItemsFail(reason) {
+		const error = parseError(reason);
 
 		this.setState({
-			temporaryItemVariation: {
-				...temporaryItemVariation,
+			fetching: {
+				error,
+				isHydrating: false
+			}
+		});
+	}
+
+	/**
+   * Updating lifecycle
+   * and handlers
+   */
+
+	getCategoryUpdatingError(field) {
+		const { categoryUpdating } = this.state;
+
+		if (categoryUpdating.validationErrors) {
+			return categoryUpdating.validationErrors[field];
+		}
+		return null;
+	} 
+
+	handleCategoryUpdating(data, cb) {
+		const { categoryUpdating } = this.state;
+
+		this.setState(
+			{
+				categoryUpdating: {
+					...categoryUpdating,
+					...data
+				}
+			},
+			() => cb && cb()
+		);
+	}
+  
+	handleCategoryTemporary(data) {
+		const { temporary } = this.state.categoryUpdating;
+
+		this.handleCategoryUpdating({
+			temporary: {
+				...temporary,
 				...data
 			}
 		});
 	}
 
-	getTemporaryItemVariationValue(field) {
-		const {
-			temporaryItemVariation,
-			currentlyEditing,
-			currentlyEditingVariation
-		} = this.state;
-		const { getItemById } = this.props;
+	handleCategoryEditing(id) {
+		this.handleCategoryUpdating({
+			id,
+			temporary: {}
+		});
+	}
 
-		if (temporaryItemVariation[field] !== undefined) {
-			return temporaryItemVariation[field];
+	updateCategoryStart() {
+		const { categoryUpdating } = this.state;
+
+		if (!categoryUpdating.isHydrating) {
+			this.handleCategoryUpdating(
+				{
+					isHydrating: true,
+					error: null,
+					validationErrors: null,
+				},
+				this.updateCategoryProcess
+			);
+		}
+	}
+
+	updateCategoryProcess() {
+		const { categoryUpdating } = this.state;
+
+		return axios
+			.put(
+				`${config.url}/category/update?id=${categoryUpdating.id}`,
+				categoryUpdating.temporary,
+				{
+					headers: {
+						authorization: cookies.get(TOKEN)
+					}
+				}
+			)
+			.then(this.updateCategorySuccess)
+			.catch(this.updateCategoryFail);
+	}
+
+	updateCategorySuccess({ data }) {
+		const { categoryUpdating, items } = this.state;
+
+		this.setState({
+			categoryUpdating: {
+				...categoryUpdating,
+				id: null,
+				isHydrating: false,
+				temporary: {}
+			},
+			items: items.map(item => 
+				item._id === data._id ? data : item
+			)
+		});
+	}
+
+	updateCategoryFail(reason) {
+		const error = parseError(reason);
+
+		if (error.message) {
+			this.handleCategoryUpdating({
+				error,
+				isHydrating: false
+			});
+			return;
 		}
 
-		const currentItem = getItemById(currentlyEditing);
-
-		if (currentItem) {
-			const currentVariation = currentItem.items.filter(
-				item => item._id === currentlyEditingVariation
-			)[0];
-			if (currentVariation) {
-				return currentVariation[field];
-			}
-		}
-
-		return null;
+		this.handleCategoryUpdating({
+			validationErrors: error,
+			isHydrating: false
+		});
 	}
 
 	/**
-	 * Updating item lifecycle
-	 */
+   * Item updating lifecycle
+   * and handlers
+   */
+
+	getItemUpdatingError(field) {
+		const { itemUpdating } = this.state;
+
+		if (itemUpdating.validationErrors) {
+			return itemUpdating.validationErrors[field];
+		}
+    
+		return null;
+	}
+
+	handleItemEditing(id) {
+		this.handleItemUpdating({
+			id,
+			temporary: {}
+		});
+	}
+  
+	handleItemTemporary(data) {
+		const { temporary } = this.state.itemUpdating;
+
+		this.handleItemUpdating({
+			temporary: {
+				...temporary,
+				...data
+			}
+		});
+	}
+
+	handleItemUpdating(data, cb) {
+		const { itemUpdating } = this.state;
+
+		this.setState(
+			{
+				itemUpdating: {
+					...itemUpdating,
+					...data
+				}
+			},
+			cb
+		);
+	}
+
 
 	updateItemStart() {
 		const { isHydrating } = this.state;
 
 		if (!isHydrating) {
-			this.setState(
-				{ isHydrating: true, error: null, validationErrors: null },
+			this.handleItemUpdating(
+				{
+					isHydrating: true,
+					validationErrors: null,
+					error: null
+				},
 				() => this.updateItemProcess()
 			);
 		}
 	}
 
 	updateItemProcess() {
-		const { temporaryItem, currentlyEditing } = this.state;
+		const { itemUpdating } = this.state;
 
 		axios
 			.put(
-				`${config.url}/category/update?id=${currentlyEditing}`,
-				temporaryItem,
+				`${config.url}/item/update?id=${itemUpdating.id}`,
+				itemUpdating.temporary,
 				{
 					headers: {
 						authorization: cookies.get(TOKEN)
@@ -133,264 +301,87 @@ class PanelItemClass extends React.Component {
 	}
 
 	updateItemSuccess({ data }) {
-		const { updateItemById } = this.props;
+		const { items, itemUpdating, categoryUpdating } = this.state;
 
-		this.setState(
-			{
+		this.setState({
+			itemUpdating: {
+				...itemUpdating,
 				isHydrating: false,
-				currentlyEditing: null,
-				temporaryItem: {}
+				id: null,
+				temporary: {}
 			},
-			/**
-			 * Finally update item in items list
-			 */
-			() => updateItemById(data._id, data)
-		);
+			items: items.map(
+				category =>
+					category._id === categoryUpdating.id
+						? {
+							...category,
+							[CATEGORY_ITEMS]: category[CATEGORY_ITEMS].map(
+								item => (item._id === itemUpdating.id ? data : item)
+							)
+						}
+						: category
+			)
+		});
 	}
 
 	updateItemFail(reason) {
 		const error = parseError(reason);
 
 		if (error.message) {
-			this.setState({
+			this.handleItemUpdating({
 				error,
 				isHydrating: false
 			});
 			return;
 		}
 
-		this.setState({
+		this.handleItemUpdating({
 			validationErrors: error,
 			isHydrating: false
 		});
 	}
 
-	/**
-	 * Updating variation lifecycle
-	 */
-
-	updateVariationStart() {
-		const { isHydrating } = this.state;
-
-		if (!isHydrating) {
-			this.setState(
-				{
-					isHydrating: true,
-					variationError: null,
-					variationValidationErrors: null
-				},
-				() => this.updateVariationProcess()
-			);
-		}
-	}
-
-	updateVariationProcess() {
-		const { temporaryItemVariation, currentlyEditingVariation } = this.state;
-
-		axios
-			.put(
-				`${config.url}/item/update?id=${currentlyEditingVariation}`,
-				temporaryItemVariation,
-				{
-					headers: {
-						authorization: cookies.get(TOKEN)
-					}
-				}
-			)
-			.then(this.updateVariationSuccess)
-			.catch(this.updateVariationFail);
-	}
-
-	updateVariationSuccess({ data }) {
-		const { updateItemById, getItemById } = this.props;
-		const { currentlyEditing, currentlyEditingVariation } = this.state;
-
-		this.setState(
-			{
-				isHydrating: false,
-				temporaryItemVariation: {},
-				currentlyEditingVariation: null
-			},
-			() => {
-				const item = getItemById(currentlyEditing);
-				/**
-				 * Update inner items of category
-				 */
-
-				updateItemById(data[ITEM_CATEGORY], {
-					...item,
-					[CATEGORY_ITEMS]: item[CATEGORY_ITEMS].map(item => {
-						if (item._id === currentlyEditingVariation) {
-							console.log(data);
-							return data;
-						}
-						return item;
-					})
-				});
-			}
-		);
-	}
-
-	updateVariationFail(reason) {
-		const error = parseError(reason);
-
-		if (error.message) {
-			this.setState({
-				variationError: error,
-				isHydrating: false
-			});
-			return;
-		}
-
-		this.setState({
-			variationValidationErrors: error,
-			isHydrating: false
-		});
-	}
-
-	handleEditing(currentlyEditing) {
-		this.setState({
-			currentlyEditing
-		});
-	}
-
-	cancelEditing() {
-		this.setState({
-			currentlyEditing: null,
-			temporaryItem: {}
-		});
-	}
-
-	getValue(field) {
-		const { temporaryItem, currentlyEditing } = this.state;
-		const { getItemById } = this.props;
-
-		if (temporaryItem[field] !== undefined) {
-			return temporaryItem[field];
-		}
-
-		const currentItem = getItemById(currentlyEditing);
-
-		if (currentItem) {
-			return currentItem[field];
-		}
-
-		return null;
-	}
-
-	handleTemporaryItem(data) {
-		const { temporaryItem } = this.state;
-
-		this.setState({
-			temporaryItem: {
-				...temporaryItem,
-				...data
-			}
-		});
-	}
-
-	getFieldError(field) {
-		const { validationErrors } = this.state;
-
-		if (
-			validationErrors &&
-			validationErrors[field] &&
-			validationErrors[field].msg
-		) {
-			return validationErrors[field].msg;
-		}
-
-		return null;
-	}
-
-	getVariationFieldError(field) {
-		const { variationValidationErrors } = this.state;
-
-		if (
-			variationValidationErrors &&
-			variationValidationErrors[field] &&
-			variationValidationErrors[field].msg
-		) {
-			return variationValidationErrors[field].msg;
-		}
-
-		return null;
-	}
-
 	render() {
 		const {
 			props: { children },
-			state: {
-				currentlyEditing,
-				temporaryItem,
-				isHydrating,
-				error,
-				currentlyEditingVariation,
-				variationValidationErrors,
-				variationError
-			},
-			handleEditing,
-			getValue,
-			getFieldError,
+			state: { categoryUpdating, itemUpdating, fetching, items },
+			handleCategoryEditing,
+			handleItemEditing,
+			fetchItemsStart,
+			updateCategoryStart,
 			updateItemStart,
-			handleTemporaryItem,
-			cancelEditing,
-			handleEditingVariation,
-			cancelEditingVariation,
-			handleTemporaryItemVariation,
-			getTemporaryItemVariationValue,
-			getVariationFieldError,
-			updateVariationStart
+			getCategoryUpdatingError,
+			handleItemTemporary,
+			getItemUpdatingError,
+			handleCategoryTemporary 
 		} = this;
 
 		return (
-			<PanelItemContext.Provider
+			<ItemsContext.Provider
 				value={{
-					handleEditing,
-					currentlyEditing,
-					temporaryItem,
-					isHydrating,
-					getValue,
-					handleTemporaryItem,
-					getFieldError,
+					categoryUpdating,
+					itemUpdating,
+					handleItemTemporary,
+					fetching,
+					items,
+					handleCategoryEditing,
+					handleItemEditing,
+					handleCategoryTemporary,
+					fetchItemsStart,
+					updateCategoryStart,
 					updateItemStart,
-					cancelEditing,
-					handleEditingVariation,
-					cancelEditingVariation,
-					currentlyEditingVariation,
-					handleTemporaryItemVariation,
-					updateVariationStart,
-					getTemporaryItemVariationValue,
-					variationValidationErrors,
-					getVariationFieldError,
-					variationError,
-					error
+					getCategoryUpdatingError,
+					getItemUpdatingError
 				}}
 			>
 				{children}
-			</PanelItemContext.Provider>
+			</ItemsContext.Provider>
 		);
 	}
 }
 
-PanelItemClass.propTypes = {
-	children: PropTypes.element.isRequired,
-	getItemById: PropTypes.func.isRequired,
-	updateItemById: PropTypes.func.isRequired
-};
-
-const EnhancedPanelItemClass = ({ children }) => (
-	<PanelContext.Consumer>
-		{({ getItemById, updateItemById }) => (
-			<PanelItemClass getItemById={getItemById} updateItemById={updateItemById}>
-				{children}
-			</PanelItemClass>
-		)}
-	</PanelContext.Consumer>
-);
-
-EnhancedPanelItemClass.propTypes = {
+ItemsProviderClass.propTypes = {
 	children: PropTypes.element.isRequired
 };
 
-export const PanelItemProvider = EnhancedPanelItemClass;
+export const ItemsProvider = ItemsProviderClass;
