@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import ContactForm from "@components/Form";
 import Image from "@components/Image";
@@ -8,6 +9,26 @@ import "./src/styles.less";
 
 import { Segment, Container, Header, Grid } from "semantic-ui-react";
 
+const IndexSegment = ({ visuals, content, className }) => (
+	<Segment inverted className={className}>
+		<div className={styles.visuals}>{visuals}</div>
+		<div className={styles.content}>
+			<Container>{content}</Container>
+		</div>
+	</Segment>
+);
+
+IndexSegment.propTypes = {
+	visuals: PropTypes.arrayOf(PropTypes.element),
+	className: PropTypes.string,
+	content: PropTypes.element.isRequired
+};
+
+IndexSegment.defaultProps = {
+	className: null,
+	visuals: []
+};
+
 class IndexPage extends React.Component {
 	componentDidMount() {
 		require("./src/script").default();
@@ -16,19 +37,47 @@ class IndexPage extends React.Component {
 	render() {
 		return (
 			<div className={styles.wrapper}>
-				<svg style={{visibility: "hidden", position: "absolute"}} width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+				{/** 
+					This svg for title bordering
+					with curve
+				*/}
+
+				<svg
+					style={{ visibility: "hidden", position: "absolute" }}
+					width="0"
+					height="0"
+					xmlns="http://www.w3.org/2000/svg"
+					version="1.1"
+				>
 					<defs>
-						<filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />    
-							<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-							<feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+						<filter id="goo">
+							<feGaussianBlur
+								in="SourceGraphic"
+								stdDeviation="10"
+								result="blur"
+							/>
+							<feColorMatrix
+								in="blur"
+								mode="matrix"
+								values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+								result="goo"
+							/>
+							<feComposite in="SourceGraphic" in2="goo" operator="atop" />
 						</filter>
 					</defs>
 				</svg>
-				<Segment inverted className={styles.one}>
-					<div className={styles.content}>
-						<div className={styles.visuals}>
+
+				{/** 
+					First slide
+					Index slide with jumbotron
+				*/}
+
+				<IndexSegment
+					className={styles.one}
+					visuals={
+						<React.Fragment>
 							<div className={styles.visual}>
-								<Fade>
+								<Fade top>
 									<img
 										src={require("./src/img/goroshek.png")}
 										className={styles.visualOne}
@@ -36,7 +85,7 @@ class IndexPage extends React.Component {
 								</Fade>
 							</div>
 							<div className={styles.visual}>
-								<Fade delay={200}>
+								<Fade top>
 									<img
 										src={require("./src/img/zelenka.png")}
 										className={styles.visualTwo}
@@ -44,7 +93,7 @@ class IndexPage extends React.Component {
 								</Fade>
 							</div>
 							<div className={styles.visual}>
-								<Fade delay={400}>
+								<Fade top>
 									<img
 										src={require("./src/img/section-2-chapter-1.png")}
 										className={styles.visualThree}
@@ -52,7 +101,7 @@ class IndexPage extends React.Component {
 								</Fade>
 							</div>
 							<div className={styles.visual}>
-								<Fade delay={600}>
+								<Fade top>
 									<img
 										src={require("./src/img/section-2-chapter-1.png")}
 										className={styles.visualFour}
@@ -60,15 +109,17 @@ class IndexPage extends React.Component {
 								</Fade>
 							</div>
 							<div className={styles.visual}>
-								<Fade delay={800}>
+								<Fade top>
 									<img
 										src={require("./src/img/section-2-chapter-1.png")}
 										className={styles.visualFive}
 									/>
 								</Fade>
 							</div>
-						</div>
-						<Container className={styles.jumbotron}>
+						</React.Fragment>
+					}
+					content={
+						<div className={styles.jumbotron}>
 							<Fade bottom>
 								<div className={styles.logo}>
 									<img
@@ -85,252 +136,243 @@ class IndexPage extends React.Component {
 							<Fade bottom>
 								<div className={styles.titleWrapper}>
 									<Header inverted as="h1" className={styles.primary}>
-									Замороженные полуфабрикаты с доставкой на дом
+										Замороженные полуфабрикаты с доставкой на дом
 									</Header>
 								</div>
 							</Fade>
-						</Container>
-					</div>
-				</Segment>
+						</div>
+					}
+				/>
 
-				<Segment inverted className={styles.two}>
-					<div className={styles.visuals}>
-						<div className={styles.visual}>
-							<Fade bottom>
-								<img
-									src={require("./src/img/pelmeni-2-shadow.png")}
-									className={styles.visualOne}
-								/>
+				{/** 
+					Second slide
+				*/}
+
+				<IndexSegment
+					className={styles.two}
+					visuals={
+						<React.Fragment>
+							<div className={styles.visual}>
+								<Fade bottom>
+									<img
+										src={require("./src/img/section-2-chapter-2.png")}
+										className={styles.visualTwo}
+									/>
+								</Fade>
+							</div>
+							<div className={styles.visual}>
+								<Fade bottom>
+									<img
+										src={require("./src/img/section-2-chapter-1.png")}
+										className={styles.visualThree}
+									/>
+								</Fade>
+							</div>
+							<div className={styles.visual}>
+								<Fade bottom>
+									<img
+										src={require("./src/img/section-2-chapter-1.png")}
+										className={styles.visualFour}
+									/>
+								</Fade>
+							</div>
+						</React.Fragment>
+					}
+					content={
+						<Grid stackable>
+							<Grid.Row columns="equal">
+								<Grid.Column>
+									<Fade bottom>
+										<Header as="h1" inverted>
+											Качество
+										</Header>
+										<p className="lead small">
+											Мы производим полуфабрикаты исключительно из натуральных
+											ингредиентов. Наша компания никогда не использовала в
+											производстве добавки и консерванты!
+										</p>
+										<Header as="h1" inverted>
+											Вкус
+										</Header>
+										<p className="lead small">
+											Натуральность и качество продуктов используемых при
+											производстве, обеспечивают высочайшие вкусовые качества
+											наших полуфабрикатов.
+										</p>
+									</Fade>
+								</Grid.Column>
+								<Grid.Column>
+									<div className={styles.images}>
+										<Fade>
+											<div className={styles.imageOne}>
+												<Image
+													src={require("./src/img/section-2-1.png")}
+													srcThumbnail={require("./src/img/thumbnail/section-2-1.png")}
+													fluid
+													alt="Качество продукции"
+												/>
+											</div>
+										</Fade>
+										<Fade right>
+											<div className={styles.imageTwo}>
+												<Image
+													src={require("./src/img/section-2.png")}
+													srcThumbnail={require("./src/img/thumbnail/section-2.png")}
+													fluid
+													alt="Качество продукции"
+												/>
+											</div>
+										</Fade>
+									</div>
+								</Grid.Column>
+							</Grid.Row>
+						</Grid>
+					}
+				/>
+
+				{/** 
+					Third slide
+				*/}
+
+				<IndexSegment
+					className={styles.three}
+					visuals={
+						<React.Fragment>
+							<div className={styles.visual}>
+								<Fade left>
+									<img
+										src={require("./src/img/background-main-chapter-8.png")}
+										className={styles.visualTwo}
+									/>
+								</Fade>
+							</div>
+							<div className={styles.visual}>
+								<Fade bottom>
+									<img
+										src={require("./src/img/section-3-chapter-3.png")}
+										className={styles.visualThree}
+									/>
+								</Fade>
+							</div>
+							<div className={styles.visual}>
+								<Fade right>
+									<img
+										src={require("./src/img/background-main-chapter-8.png")}
+										className={styles.visualFour}
+									/>
+								</Fade>
+							</div>
+						</React.Fragment>
+					}
+					content={
+						<React.Fragment>
+							<Fade>
+								<div className={styles.image}>
+									<Image
+										src={require("./src/img/section-3-chapter-1.jpg")}
+										srcThumbnail={require("./src/img/thumbnail/section-3-chapter-1.jpg")}
+										alt="Качество продукции"
+									/>
+								</div>
 							</Fade>
-						</div>
-						<div className={styles.visual}>
 							<Fade bottom>
-								<img
-									src={require("./src/img/section-2-chapter-2.png")}
-									className={styles.visualTwo}
-								/>
+								<div className={styles.title}>
+									<Header textAlign="center" as="h1" inverted>
+										Свежесть
+									</Header>
+									<p className="lead small">
+										Свежее, только охлажденное мясо фермерских хозяйств,
+										натуральное яйцо, лук, картошка, творог делают нашу
+										продукцию вкусной, безопасной и полезной.
+									</p>
+								</div>
 							</Fade>
-						</div>
-						<div className={styles.visual}>
-							<Fade bottom>
-								<img
-									src={require("./src/img/section-2-chapter-1.png")}
-									className={styles.visualThree}
-								/>
-							</Fade>
-						</div>
-						<div className={styles.visual}>
-							<Fade bottom>
-								<img
-									src={require("./src/img/section-2-chapter-1.png")}
-									className={styles.visualFour}
-								/>
-							</Fade>
-						</div>
-					</div>
-					<div className={styles.content}>
-						<Container>
-							<Grid stackable>
-								<Grid.Row columns="equal">
-									<Grid.Column>
+						</React.Fragment>
+					}
+				/>
+
+				{/** 
+					Fourth slide
+				*/}
+
+				<IndexSegment
+					className={styles.four}
+					visuals={
+						<React.Fragment>
+							<div className={styles.visual}>
+								<Fade bottom>
+									<img
+										src={require("./src/img/section-2-chapter-1.png")}
+										className={styles.visualOne}
+									/>
+								</Fade>
+							</div>
+							<div className={styles.visual}>
+								<Fade bottom>
+									<img
+										src={require("./src/img/section-2-chapter-1.png")}
+										className={styles.visualTwo}
+									/>
+								</Fade>
+							</div>
+							<div className={styles.visual}>
+								<Fade bottom>
+									<img
+										src={require("./src/img/section-4-chapter-4.png")}
+										className={styles.visualThree}
+									/>
+								</Fade>
+							</div>
+							<div className={styles.visual}>
+								<Fade bottom>
+									<img
+										src={require("./src/img/background-main-chapter-8.png")}
+										className={styles.visualFour}
+									/>
+								</Fade>
+							</div>
+						</React.Fragment>
+					}
+					content={
+						<React.Fragment>
+							<Grid>
+								<Grid.Row>
+									<Grid.Column width={8}>
 										<Fade bottom>
-											<Header as="h1" inverted className={styles.primary}>
-												Качество
+											<Header as="h1" inverted>
+												Натуральность продуктов
 											</Header>
 											<p className="lead small">
-												Мы производим полуфабрикаты исключительно из натуральных
-												ингредиентов. Наша компания никогда не использовала в
-												производстве добавки и консерванты!
-											</p>
-											<Header as="h1" className={styles.primary} inverted>
-												Вкус
-											</Header>
-											<p className="lead small">
-												Натуральность и качество продуктов используемых при
-												производстве, обеспечивают высочайшие вкусовые качества
-												наших полуфабрикатов.
+												Тесто из муки высшего сорта замешанное на свежем яйце,
+												его эластичность и вкусовые качества не оставят вас
+												равнодушными.
 											</p>
 										</Fade>
 									</Grid.Column>
-									<Grid.Column>
-										<div className={styles.images}>
-											<Fade bottom cascade>
-												<div className={styles.imageOne}>
-													<Image
-														src={require("./src/img/section-2-1.png")}
-														srcThumbnail={require("./src/img/thumbnail/section-2-1.png")}
-														fluid
-														alt="Качество продукции"
-													/>
-												</div>
-												<div className={styles.imageTwo}>
-													<Image
-														src={require("./src/img/section-2.png")}
-														srcThumbnail={require("./src/img/thumbnail/section-2.png")}
-														fluid
-														alt="Качество продукции"
-													/>
-												</div>
-											</Fade>
+									<Grid.Column width={8}>
+										<div className={styles.image}>
+											<div className={styles.imageOne}>
+												<img
+													src={require("./src/img/section-4-chapter-1.jpg")}
+													width="60%"
+													alt="Натуральность продуктов"
+												/>
+											</div>
+											<div className={styles.imageTwo}>
+												<Image
+													src={require("./src/img/section-4-chapter-3.jpg")}
+													srcThumbnail={require("./src/img/thumbnail/section-4-chapter-3.jpg")}
+													alt="Натуральность продуктов"
+													fluid
+												/>
+											</div>
 										</div>
 									</Grid.Column>
 								</Grid.Row>
 							</Grid>
-						</Container>
-					</div>
-				</Segment>
-				<div className="ui inverted vertical segment section-3">
-					<div className="visuals-head desktop-only visuals-3" id="scene-3">
-						<div className="visual visual-custom-1 layer" data-depth="0">
-							<img
-								src={require("./src/img/section-3-chapter-1.jpg")}
-								className="visual-1"
-								height="50%"
-								alt=""
-							/>
-						</div>
-						<div className="visual visual-custom-5 layer" data-depth="0.5">
-							<Fade bottom>
-								<img
-									src={require("./src/img/background-main-chapter-8.png")}
-									className="visual-3"
-									width="30%"
-									alt=""
-								/>
-							</Fade>
-						</div>
-						<div className="visual visual-custom-3 layer" data-depth="0.1">
-							<Fade bottom>
-								<img
-									src={require("./src/img/section-3-chapter-3.png")}
-									className="visual-4"
-									width="30%"
-									alt=""
-								/>
-							</Fade>
-						</div>
-						<div className="visual visual-custom-6 layer" data-depth="0.1">
-							<Fade bottom>
-								<img
-									src={require("./src/img/background-main-chapter-8.png")}
-									className="visual-5"
-									width="35%"
-									alt=""
-								/>
-							</Fade>
-						</div>
-						<div className="visual visual-custom-4 layer" data-depth="0.2">
-							<Fade bottom>
-								<img
-									src={require("./src/img/background-main-chapter-6.png")}
-									className="visual-6"
-									width="35%"
-									alt=""
-								/>
-							</Fade>
-						</div>
-					</div>
-					<div className="section-content">
-						<div className="ui text container">
-							<h1 style={{ marginTop: "100px" }} className="ui header inverted">
-								Свежесть
-							</h1>
-							<p className="lead">
-								Свежее, только охлажденное мясо фермерских хозяйств, натуральное
-								яйцо, лук, картошка, творог делают нашу продукцию вкусной,
-								безопасной и полезной.
-							</p>
-							<Image
-								className="mobile-only"
-								src={require("./src/img/section-3-chapter-2.jpg")}
-								srcThumbnail={require("./src/img/thumbnail/section-3-chapter-2.jpg")}
-								fluid
-								alt="Качество продукции"
-							/>
-						</div>
-					</div>
-				</div>
-
-				<div className="ui inverted vertical segment section-4">
-					<div className="visuals-head visuals-4" id="scene-4">
-						<div className="visual visual-custom-2 layer" data-depth="0">
-							<Fade bottom>
-								<img
-									src={require("./src/img/section-2-chapter-1.png")}
-									className="visual-1"
-									width="50%"
-									alt=""
-								/>
-							</Fade>
-						</div>
-						<div className="visual visual-custom-3 layer" data-depth="0">
-							<Fade bottom>
-								<img
-									src={require("./src/img/section-2-chapter-1.png")}
-									className="visual-2"
-									width="40%"
-									alt=""
-								/>
-							</Fade>
-						</div>
-						<div className="visual visual-custom-1 layer" data-depth="0.2">
-							<Fade bottom>
-								<img
-									src={require("./src/img/section-4-chapter-4.png")}
-									className="visual-3"
-									width="35%"
-									alt=""
-								/>
-							</Fade>
-						</div>
-						<div className="visual visual-custom-4 layer" data-depth="0.2">
-							<Fade bottom>
-								<img
-									src={require("./src/img/background-main-chapter-8.png")}
-									className="visual-4"
-									width="32%"
-									alt=""
-								/>
-							</Fade>
-						</div>
-					</div>
-					<div className="section-content">
-						<div className="ui middle aligned stackable grid container">
-							<div className="row">
-								<div className="eight wide column">
-									<h1 className="ui header inverted">
-										Натуральность продуктов
-									</h1>
-									<p className="lead small">
-										Тесто из муки высшего сорта замешанное на свежем яйце, его
-										эластичность и вкусовые качества не оставят вас
-										равнодушными.
-									</p>
-								</div>
-								<div className="eight wide right floated column">
-									<div className="images">
-										<div className="image-1">
-											<img
-												className="image-1-1 animated"
-												src={require("./src/img/section-4-chapter-1.jpg")}
-												width="60%"
-												alt="Натуральность продуктов"
-											/>
-										</div>
-										<div className="image-2">
-											<Image
-												src={require("./src/img/section-4-chapter-3.jpg")}
-												srcThumbnail={require("./src/img/thumbnail/section-4-chapter-3.jpg")}
-												fluid
-												alt="Натуральность продуктов"
-											/>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+						</React.Fragment>
+					}
+				/>
 
 				<div className="ui inverted vertical segment section-5">
 					<div className="visuals-head visuals-5" id="scene-5">
