@@ -64,7 +64,8 @@ class Layout extends React.Component {
 							<Dimmer.Dimmable dimmed={isExpanded}>
 								<div
 									style={{
-										background: `url(${require("@src/common/background.jpg")})`
+										background: `url('${require("@src/common/background.jpg")}')`,
+										backgroundSize: "100%",
 									}}
 									className={styles.inner}
 								>

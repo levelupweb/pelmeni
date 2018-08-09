@@ -1,4 +1,7 @@
 /* typography */
+html, body {
+  background: #0e0e0e !important;  
+}
 
 p.lead {
   font-size: 30px !important;
