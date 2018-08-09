@@ -5,7 +5,7 @@ import CartWidget from "../CartWidget";
 import { LayoutContext } from "../Layout/context";
 import styles from "./styles.less";
 
-import { Menu, Container, Icon } from "semantic-ui-react";
+import { Menu, Container, Icon, Responsive } from "semantic-ui-react";
 
 const MenuWrapper = ({ activeItem, handleExpand, isExpanded }) => (
 	<Menu
@@ -21,24 +21,28 @@ const MenuWrapper = ({ activeItem, handleExpand, isExpanded }) => (
 		fluid
 	>
 		<Container>
-			<Menu.Item onClick={() => handleExpand(true)} className={styles.toc}>
+			<Responsive
+				as={Menu.Item}
+				className={styles.toc}
+				maxWidth={1000}
+				onClick={() => handleExpand(true)}
+			>
 				<Icon name="sidebar" />
-			</Menu.Item>
-			<Menu.Item active={activeItem === "/"} className={styles.logo}>
-				<Link to="/">Класс!ные</Link>
-			</Menu.Item>
-			<Menu.Item active={activeItem === "/"}>
-				<Link to="/">Главная</Link>
-			</Menu.Item>
-			<Menu.Item active={activeItem === "/shop"}>
-				<Link to="/shop">Выберите продукты</Link>
-			</Menu.Item>
-			<Menu.Item active={activeItem === "/dostavka"}>
-				<Link to="/dostavka">Доставка и оплата</Link>
-			</Menu.Item>
-			<Menu.Item active={activeItem === "/contact"}>
-				<Link to="/contact">Связаться с нами</Link>
-			</Menu.Item>
+			</Responsive>
+			<Responsive as={React.Fragment} minWidth={1000}>
+				<Menu.Item active={activeItem === "/"}>
+					<Link to="/">Главная</Link>
+				</Menu.Item>
+				<Menu.Item active={activeItem === "/shop"}>
+					<Link to="/shop">Выберите продукты</Link>
+				</Menu.Item>
+				<Menu.Item active={activeItem === "/dostavka"}>
+					<Link to="/dostavka">Доставка и оплата</Link>
+				</Menu.Item>
+				<Menu.Item active={activeItem === "/contact"}>
+					<Link to="/contact">Связаться с нами</Link>
+				</Menu.Item>
+			</Responsive>
 			<Menu.Menu position="right">
 				<Menu.Item className={styles.widget}>
 					<CartWidget />

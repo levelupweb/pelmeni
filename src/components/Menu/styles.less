@@ -26,46 +26,12 @@
         color: @primary !important;
       }
     }
-    &.widget {
-      position: initial !important;
-    }
     &.toc {
-      display: none !important;
-      font-size: 21px !important;
-      margin-left: 15px !important;
-    }
-    &.logo {
-      display: none !important;
+      margin-left: 20px !important;
     }
   }
   &.hidden {
     opacity: 0 !important;
   }
 }
-
-@media only screen and (max-width: @largeMin) {
-  .menu {
-    :global(.item) {
-      display: none !important;
-      &.widget {
-        display: block !important;
-      }
-      &.toc {
-        display: block !important;
-      }
-      &.logo {
-        display: block !important;
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: @tabletMin) {
-  .menu {
-    :global(.item) {
-      &.logo {
-        display: none !important;
-      }
-    }
-  }
-}
+ 
