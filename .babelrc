@@ -14,7 +14,7 @@
     [
       "module-resolver",
       {
-        "root": ["./"],
+        "root": "./",
         "alias": {
           "@root": "./",
           "@components": "./src/components",

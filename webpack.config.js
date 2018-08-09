@@ -1,18 +1,9 @@
 require("dotenv").load();
 const path = require("path");
-const webpack = require("webpack");
 const config = require("./config");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 	.BundleAnalyzerPlugin;
 const CompressionPlugin = require("compression-webpack-plugin");
-
-const jqueryPath = "jquery";
-
-const jqueryPlugin = new webpack.ProvidePlugin({
-	$: jqueryPath,
-	jQuery: jqueryPath,
-	"window.jQuery": jqueryPath
-});
 
 const analyzer = new BundleAnalyzerPlugin({
 	bundleDir: "analyze"
@@ -30,7 +21,8 @@ module.exports = {
 		path: path.resolve(__dirname, "dist"),
 		filename: "app.[name].js"
 	},
-	plugins: [jqueryPlugin, analyzer, compressionPlugin],
+	target: "web",
+	plugins: [analyzer, compressionPlugin],
 	devtool: "eval-source-map",
 	module: {
 		rules: [
@@ -89,12 +81,12 @@ module.exports = {
 	resolve: {
 		extensions: [".js", ".jsx"],
 		alias: {
-			"semantic-ui": path.join(
-				__dirname,
-				"node_modules",
-				"semantic-ui-css",
-				"semantic.js"
-			),
+			// "semantic-ui": path.join(
+			// 	__dirname,
+			// 	"node_modules",
+			// 	"semantic-ui-css",
+			// 	"semantic.js"
+			// ),
 			"@root": path.resolve("/"),
 			"@components": path.resolve("src/components"),
 			"@pages": path.resolve("src/pages"),

@@ -1,16 +1,55 @@
 const renderHelmet = helmet => {
-  if (!helmet) {
-    return "";
-  }
+	if (!helmet) {
+		return "";
+	}
 
-  return `
+	return `
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
     `;
 };
 
+const renderScript = () => `
+	<script type="text/javascript" >
+		(function (d, w, c) {
+				(w[c] = w[c] || []).push(function() {
+						try {
+								w.yaCounter48895697 = new Ya.Metrika({
+										id:48895697,
+										clickmap:true,
+										trackLinks:true,
+										accurateTrackBounce:true,
+										webvisor:true
+								});
+						} catch(e) { }
+				});
+
+				var n = d.getElementsByTagName("script")[0],
+						s = d.createElement("script"),
+						f = function () { n.parentNode.insertBefore(s, n); };
+				s.type = "text/javascript";
+				s.async = true;
+				s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+				if (w.opera == "[object Opera]") {
+						d.addEventListener("DOMContentLoaded", f, false);
+				} else { f(); }
+		})(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/48895697" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119402035-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-119402035-1');
+	</script>
+`;
+
 const document = (config, html, helmet) =>
-  `<!DOCTYPE html>
+	`<!DOCTYPE html>
 	<html lang="ru">
 			<head>
 					<meta 
@@ -27,10 +66,6 @@ const document = (config, html, helmet) =>
 					<meta 
 							name="theme-color" 
 							content="#ffffff" 
-					/>
-					<link 
-							href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" 
-							rel="stylesheet"
 					/>
 					<link 
 							rel="shortcut icon" href="${config.dist}/favicon.ico" 
@@ -74,6 +109,20 @@ const document = (config, html, helmet) =>
 							property="og:image:height" 
 							content="240"
 					/>
+					<link 
+						rel="stylesheet" 
+						type="text/css" 
+						media="all" 
+						title="normal" 
+						href="${config.dist}/normalizer.css"
+					>
+					<link 
+						rel="stylesheet" 
+						type="text/css" 
+						media="all" 
+						title="normal" 
+						href="${config.dist}/semantic.min.css"
+					>
 					<title>
 							Пельмени классные. Замороженные полуфабрикаты с доставкой на дом.
 					</title>
@@ -81,10 +130,11 @@ const document = (config, html, helmet) =>
 			</head>
 			<body>
 					<noscript>
-							${html || "Для просмотра требуется активация Javascript"}
+						${html || "Для просмотра требуется активация Javascript"}
 					</noscript>
 					<div id="root">
 					</div>
+					${renderScript()}
 					<script type="text/javascript">
 							window.siteConfig = ${JSON.stringify(config)}
 					</script>

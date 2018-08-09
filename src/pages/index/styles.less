@@ -1,0 +1,369 @@
+@import "~@variables/responsive.less";
+@import "~@variables/colors.less";
+@import "~@variables/spacings.less";
+
+.animated {
+  transition: 0.6s all ease-in-out;
+}
+
+/* logo animation */
+
+@keyframes chief-animation {
+  0% {
+    transform: translate(-20px) rotate(-5deg);
+  }
+  25% {
+    transform: translate(0px) rotate(0deg);
+  }
+  50% {
+    transform: translate(20px) rotate(5deg);
+  }
+  75% {
+    transform: translate(0px) rotate(0deg);
+  }
+  100% {
+    transform: translate(-20px) rotate(-5deg);
+  }
+}
+
+/* visuals basic styles */
+
+@media @mobile {
+  .visual,
+  .visuals-head {
+    display: none !important;
+  }
+}
+
+.wrapper {
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+  :global(.segment) {
+    background: transparent !important;
+    min-height: 100vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 55px !important;
+    &.primary {
+      display: inline !important;
+      font-size: 44px !important;
+      filter: url("#goo");
+      background: @primary !important;
+      color: #ffffff !important;
+      padding: 0.5rem 1rem !important;
+    }
+  }
+
+  .visuals {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    .visual {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      img {
+        position: absolute;
+      }
+    }
+  }
+
+  .content {
+    height: inherit;
+    min-height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  /**
+    First section
+    Intro
+  */
+
+  .one {
+    .visuals {
+      .visualOne {
+        bottom: 0;
+        right: 0px;
+      }
+      .visualTwo {
+        top: 171px;
+        left: 175px;
+      }
+      .visualThree {
+        top: -400px;
+        left: 0;
+      }
+      .visualFour {
+        bottom: 0;
+        left: 0px;
+      }
+      .visualFive {
+        top: -300px;
+        right: 0;
+      }
+    }
+    .jumbotron {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 51px;
+      .logo {
+        position: relative;
+        .chief {
+          top: -15px;
+          left: -31px;
+          position: absolute;
+          animation: chief-animation 2s infinite linear;
+        }
+      }
+    }
+    .titleWrapper {
+      max-width: 700px;
+      text-align: center;
+    }
+  }
+
+  .two {
+    .visuals {
+      .visualOne {
+        right: 0;
+        bottom: -25%;
+      }
+      .visualTwo {
+        top: 0;
+        left: 0%;
+      }
+      .visualThree {
+        bottom: -4%;
+        left: 0;
+      }
+      .visualFour {
+        top: -25%;
+        right: 0;
+      }
+    }
+    .content {
+      .images {
+        position: relative;
+        height: 500px;
+        width: 100%;
+        .imageOne {
+          padding-top: 25%;
+          img {
+            box-shadow: 1px 1px 113px 3px #271f13;
+          }
+        }
+        .imageTwo {
+          position: absolute;
+          left: -9%;
+          top: 0;
+          width: 50%;
+        }
+      }
+    }
+  }
+
+  .three {
+    text-align: center;
+    .visuals {
+      .visualOne {
+        top: 0;
+        left: -20%;
+      }
+      .visualTwo {
+        top: 0;
+        right: -30%;
+      }
+    }
+    .content {
+      max-width: 700px !important;
+      position: relative;
+      .title {
+        position: absolute;
+        bottom: 0;
+        :global(.header) {
+          text-align: center;
+          margin-top: 30px;
+        }
+      }
+      .image {
+        margin: auto;
+        img {
+          box-shadow: 1px 1px 113px 3px #271f13;
+        }
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .four {
+    .visuals {
+      .visualOne {
+        bottom: -50px;
+        left: 0;
+      }
+      .visualTwo {
+        top: -200px;
+        right: -100px;
+      }
+      .visualThree {
+        bottom: -169px;
+        left: -100px;
+        width: 400px;
+      }
+    }
+    .content {
+      .images {
+        text-align: right;
+        position: relative;
+        width: 320px;
+        .imageOne {
+          width: 100%;
+          img {
+            box-shadow: 1px 1px 113px 3px #271f13;
+          }
+        }
+        .imageTwo {
+          position: absolute;
+          right: -17%;
+          width: 100%;
+          bottom: -10%;
+        }
+      }
+    }
+  }
+
+  .five {
+    .visuals {
+      .visualOne {
+        bottom: -300px;
+        right: -300px;
+      }
+      .visualTwo {
+        top: -100px;
+        right: -425px;
+      }
+    }
+    .content {
+      .images {
+        position: relative;
+        width: 450px;
+        .imageOne {
+          width: 100%;
+          box-shadow: 1px 1px 113px 3px #271f13;
+        }
+        .imageTwo {
+          position: absolute;
+          right: -200px;
+          width: 80%;
+          bottom: -150px;
+        }
+      }
+    }
+  }
+
+  .six {
+    padding: 0 !important;
+    .content {
+      position: relative;
+      width: 100%;
+      text-align: center;
+      .description {
+        position: absolute;
+        left: 50%;
+        margin-left: -300px;
+        max-width: 600px;
+        bottom: 50%;
+        width: 100%;
+        margin-bottom: -100px;
+      }
+      .video {
+        min-height: inherit;
+        height: inherit;
+      }
+      video {
+        width: auto;
+        height: inherit;
+        min-height: inherit;
+      }
+    }
+  }
+}
+
+@media @mobile {
+  .wrapper {
+    :global(.segment) {
+      min-height: 100% !important;
+      padding-bottom: 4em !important;
+      padding-top: 4em !important;
+    }
+    .content {
+      h1 {
+        font-size: 29px !important;
+        &.primary {
+          font-size: 29px !important;
+          filter: none !important;
+          background: transparent !important;
+        }
+      }
+    }
+  }
+  .segment {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .pageWrapper {
+    :global(.container) {
+      padding: 0 !important;
+    }
+  }
+  .one {
+    .content {
+      .logo {
+        margin-bottom: 50px !important;
+        max-width: 100%;
+        .chief {
+          max-width: 253px;
+        }
+        .back {
+          max-width: 241px;
+        }
+      }
+    }
+  }
+  .two {
+    .content {
+      .images {
+        height: 100% !important;
+      }
+    }
+  }
+  .five,
+  .four,
+  .three,
+  .two {
+    .content {
+      .images {
+        max-width: 100%;
+        .imageTwo {
+          display: none !important;
+        }
+      }
+    }
+  }
+
+  .six {
+    display: none !important;
+  }
+}

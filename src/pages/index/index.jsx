@@ -6,20 +6,15 @@ import Image from "@components/Image";
 import Video from "./components/Video";
 import Fade from "react-reveal/Fade";
 import Page from "@components/Page";
-import styles from "./src/styles.less";
-import "./src/styles.less";
+import styles from "./styles.less";
 
 import { Segment, Container, Header, Grid, Button } from "semantic-ui-react";
 
 const IndexSegment = ({ visuals, content, className, withContainer, text }) => (
-	<Segment inverted className={className}>
+	<Segment inverted className={`${className} ${styles.segment}`}>
 		<div className={styles.visuals}>{visuals}</div>
 		<div className={styles.content}>
-			{withContainer ?
-				<Container text={text}>{content}</Container>
-				:
-				content
-			}
+			{withContainer ? <Container text={text}>{content}</Container> : content}
 		</div>
 	</Segment>
 );
@@ -29,18 +24,18 @@ IndexSegment.propTypes = {
 	className: PropTypes.string,
 	content: PropTypes.element.isRequired,
 	withContainer: PropTypes.bool,
-	text: PropTypes.bool,
+	text: PropTypes.bool
 };
 
 IndexSegment.defaultProps = {
 	className: null,
 	withContainer: true,
 	visuals: [],
-	text: false,
+	text: false
 };
 
 const IndexPage = () => (
-	<Page fluid={true}>
+	<Page className={styles.pageWrapper} fluid={true}>
 		<div className={styles.wrapper}>
 			{/** 
 			This svg for title bordering
@@ -84,7 +79,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade top>
 								<img
-									src={require("./src/img/goroshek.png")}
+									src={require("./img/goroshek.png")}
 									className={styles.visualOne}
 								/>
 							</Fade>
@@ -92,7 +87,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade top>
 								<img
-									src={require("./src/img/zelenka.png")}
+									src={require("./img/zelenka.png")}
 									className={styles.visualTwo}
 								/>
 							</Fade>
@@ -100,7 +95,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade top>
 								<img
-									src={require("./src/img/section-2-chapter-1.png")}
+									src={require("./img/section-2-chapter-1.png")}
 									className={styles.visualThree}
 								/>
 							</Fade>
@@ -108,7 +103,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade top>
 								<img
-									src={require("./src/img/section-2-chapter-1.png")}
+									src={require("./img/section-2-chapter-1.png")}
 									className={styles.visualFour}
 								/>
 							</Fade>
@@ -116,7 +111,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade top>
 								<img
-									src={require("./src/img/section-2-chapter-1.png")}
+									src={require("./img/section-2-chapter-1.png")}
 									className={styles.visualFive}
 								/>
 							</Fade>
@@ -128,12 +123,13 @@ const IndexPage = () => (
 						<Fade bottom>
 							<div className={styles.logo}>
 								<img
-									src={require("./src/img/logo-1.png")}
+									src={require("./img/logo-1.png")}
 									alt="Замороженные полуфабрикаты с доставкой на дом"
+									className={styles.back}
 								/>
 								<img
 									className={styles.chief}
-									src={require("./src/img/logo-2.png")}
+									src={require("./img/logo-2.png")}
 									alt="Замороженные полуфабрикаты с доставкой на дом"
 								/>
 							</div>
@@ -141,7 +137,7 @@ const IndexPage = () => (
 						<Fade bottom>
 							<div className={styles.titleWrapper}>
 								<Header inverted as="h1" className={styles.primary}>
-								Замороженные полуфабрикаты с доставкой на дом
+									Замороженные полуфабрикаты с доставкой на дом
 								</Header>
 							</div>
 						</Fade>
@@ -160,7 +156,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade bottom>
 								<img
-									src={require("./src/img/section-2-chapter-2.png")}
+									src={require("./img/section-2-chapter-2.png")}
 									className={styles.visualTwo}
 								/>
 							</Fade>
@@ -168,7 +164,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade bottom>
 								<img
-									src={require("./src/img/section-2-chapter-1.png")}
+									src={require("./img/section-2-chapter-1.png")}
 									className={styles.visualThree}
 								/>
 							</Fade>
@@ -176,7 +172,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade bottom>
 								<img
-									src={require("./src/img/section-2-chapter-1.png")}
+									src={require("./img/section-2-chapter-1.png")}
 									className={styles.visualFour}
 								/>
 							</Fade>
@@ -189,20 +185,20 @@ const IndexPage = () => (
 							<Grid.Column>
 								<Fade bottom>
 									<Header as="h1" inverted>
-									Качество
+										Качество
 									</Header>
 									<p className="lead small">
-									Мы производим полуфабрикаты исключительно из натуральных
-									ингредиентов. Наша компания никогда не использовала в
-									производстве добавки и консерванты!
+										Мы производим полуфабрикаты исключительно из натуральных
+										ингредиентов. Наша компания никогда не использовала в
+										производстве добавки и консерванты!
 									</p>
 									<Header as="h1" inverted>
-									Вкус
+										Вкус
 									</Header>
 									<p className="lead small">
-									Натуральность и качество продуктов используемых при
-									производстве, обеспечивают высочайшие вкусовые качества
-									наших полуфабрикатов.
+										Натуральность и качество продуктов используемых при
+										производстве, обеспечивают высочайшие вкусовые качества
+										наших полуфабрикатов.
 									</p>
 								</Fade>
 							</Grid.Column>
@@ -211,8 +207,8 @@ const IndexPage = () => (
 									<Fade>
 										<div className={styles.imageOne}>
 											<Image
-												src={require("./src/img/section-2-1.png")}
-												srcThumbnail={require("./src/img/thumbnail/section-2-1.png")}
+												src={require("./img/section-2-1.png")}
+												srcThumbnail={require("./img/thumbnail/section-2-1.png")}
 												fluid
 												alt="Качество продукции"
 											/>
@@ -221,8 +217,8 @@ const IndexPage = () => (
 									<Fade bottom>
 										<div className={styles.imageTwo}>
 											<Image
-												src={require("./src/img/section-2.png")}
-												srcThumbnail={require("./src/img/thumbnail/section-2.png")}
+												src={require("./img/section-2.png")}
+												srcThumbnail={require("./img/thumbnail/section-2.png")}
 												fluid
 												alt="Качество продукции"
 											/>
@@ -246,7 +242,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade bottom>
 								<img
-									src={require("./src/img/background-main-chapter-8.png")}
+									src={require("./img/background-main-chapter-8.png")}
 									className={styles.visualOne}
 								/>
 							</Fade>
@@ -254,7 +250,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade bottom>
 								<img
-									src={require("./src/img/background-main-chapter-8.png")}
+									src={require("./img/background-main-chapter-8.png")}
 									className={styles.visualTwo}
 								/>
 							</Fade>
@@ -266,8 +262,8 @@ const IndexPage = () => (
 						<Fade>
 							<div className={styles.image}>
 								<Image
-									src={require("./src/img/section-3-chapter-1.jpg")}
-									srcThumbnail={require("./src/img/thumbnail/section-3-chapter-1.jpg")}
+									src={require("./img/section-3-chapter-1.jpg")}
+									srcThumbnail={require("./img/thumbnail/section-3-chapter-1.jpg")}
 									alt="Качество продукции"
 								/>
 							</div>
@@ -275,12 +271,12 @@ const IndexPage = () => (
 						<Fade bottom>
 							<div className={styles.title}>
 								<Header textAlign="center" as="h1" inverted>
-								Свежесть
+									Свежесть
 								</Header>
 								<p className="lead small">
-								Свежее, только охлажденное мясо фермерских хозяйств,
-								натуральное яйцо, лук, картошка, творог делают нашу
-								продукцию вкусной, безопасной и полезной.
+									Свежее, только охлажденное мясо фермерских хозяйств,
+									натуральное яйцо, лук, картошка, творог делают нашу продукцию
+									вкусной, безопасной и полезной.
 								</p>
 							</div>
 						</Fade>
@@ -299,7 +295,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade bottom>
 								<img
-									src={require("./src/img/section-2-chapter-1.png")}
+									src={require("./img/section-2-chapter-1.png")}
 									className={styles.visualOne}
 								/>
 							</Fade>
@@ -307,7 +303,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade bottom>
 								<img
-									src={require("./src/img/section-2-chapter-1.png")}
+									src={require("./img/section-2-chapter-1.png")}
 									className={styles.visualTwo}
 								/>
 							</Fade>
@@ -315,7 +311,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade bottom>
 								<img
-									src={require("./src/img/section-4-chapter-4.png")}
+									src={require("./img/section-4-chapter-4.png")}
 									className={styles.visualThree}
 								/>
 							</Fade>
@@ -328,12 +324,12 @@ const IndexPage = () => (
 							<Grid.Column width={8}>
 								<Fade bottom>
 									<Header as="h1" inverted>
-									Натуральность продуктов
+										Натуральность продуктов
 									</Header>
 									<p className="lead small">
-									Тесто из муки высшего сорта замешанное на свежем яйце,
-									его эластичность и вкусовые качества не оставят вас
-									равнодушными.
+										Тесто из муки высшего сорта замешанное на свежем яйце, его
+										эластичность и вкусовые качества не оставят вас
+										равнодушными.
 									</p>
 								</Fade>
 							</Grid.Column>
@@ -342,8 +338,8 @@ const IndexPage = () => (
 									<Fade bottom>
 										<div className={styles.imageOne}>
 											<Image
-												src={require("./src/img/section-4-chapter-1.jpg")}
-												srcThumbnail={require("./src/img/thumbnail/section-4-chapter-1.jpg")}
+												src={require("./img/section-4-chapter-1.jpg")}
+												srcThumbnail={require("./img/thumbnail/section-4-chapter-1.jpg")}
 												alt="Натуральность продуктов"
 												fluid
 											/>
@@ -352,8 +348,8 @@ const IndexPage = () => (
 									<Fade bottom>
 										<div className={styles.imageTwo}>
 											<Image
-												src={require("./src/img/section-4-chapter-3.jpg")}
-												srcThumbnail={require("./src/img/thumbnail/section-4-chapter-3.jpg")}
+												src={require("./img/section-4-chapter-3.jpg")}
+												srcThumbnail={require("./img/thumbnail/section-4-chapter-3.jpg")}
 												alt="Натуральность продуктов"
 												fluid
 											/>
@@ -377,7 +373,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade bottom>
 								<img
-									src={require("./src/img/background-main-chapter-8.png")}
+									src={require("./img/background-main-chapter-8.png")}
 									className={styles.visualOne}
 								/>
 							</Fade>
@@ -385,7 +381,7 @@ const IndexPage = () => (
 						<div className={styles.visual}>
 							<Fade bottom>
 								<img
-									src={require("./src/img/background-main-chapter-8.png")}
+									src={require("./img/background-main-chapter-8.png")}
 									className={styles.visualTwo}
 								/>
 							</Fade>
@@ -400,8 +396,8 @@ const IndexPage = () => (
 									<Fade bottom>
 										<div className={styles.imageOne}>
 											<Image
-												src={require("./src/img/section-5-chapter-3.png")}
-												srcThumbnail={require("./src/img/thumbnail/section-5-chapter-3.png")}
+												src={require("./img/section-5-chapter-3.png")}
+												srcThumbnail={require("./img/thumbnail/section-5-chapter-3.png")}
 												fluid
 												alt="Гарантия"
 											/>
@@ -410,8 +406,8 @@ const IndexPage = () => (
 									<Fade bottom>
 										<div className={styles.imageTwo}>
 											<Image
-												src={require("./src/img/section-5-chapter-2.png")}
-												srcThumbnail={require("./src/img/thumbnail/section-5-chapter-2.png")}
+												src={require("./img/section-5-chapter-2.png")}
+												srcThumbnail={require("./img/thumbnail/section-5-chapter-2.png")}
 												fluid
 												alt="Гарантия"
 											/>
@@ -422,11 +418,11 @@ const IndexPage = () => (
 							<Grid.Column width={8}>
 								<Fade bottom>
 									<Header as="h1" inverted>
-									Гарантия
+										Гарантия
 									</Header>
 									<p className="lead small">
-									Мы гордимся своей продукцией, ее едят наши внуки, дети и мы
-									сами. Это главная гарантия нашего качества.
+										Мы гордимся своей продукцией, ее едят наши внуки, дети и мы
+										сами. Это главная гарантия нашего качества.
 									</p>
 								</Fade>
 							</Grid.Column>
@@ -449,16 +445,14 @@ const IndexPage = () => (
 						</div>
 						<div className={styles.description}>
 							<Header as="h1" inverted>
-							Попробуйте сами
+								Попробуйте сами
 							</Header>
 							<p className="lead small">
-							Закажите нашу продукцию онлайн, оформив заказ прямо на нашем
-							сайте!
+								Закажите нашу продукцию онлайн, оформив заказ прямо на нашем
+								сайте!
 							</p>
 							<Link to="/shop">
-								<Button size="big">
-								Купить продукцию
-								</Button>
+								<Button size="big">Купить продукцию</Button>
 							</Link>
 						</div>
 					</React.Fragment>
