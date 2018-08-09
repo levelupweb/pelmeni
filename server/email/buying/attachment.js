@@ -43,7 +43,9 @@ const getFinalTotal = data => {
 	);
 
 	if (data[PURCHASE_PROMO] && data[PURCHASE_PROMO][PROMO_DISCOUNT]) {
-		return Math.ceil((total / 100) * data[PURCHASE_PROMO][PROMO_DISCOUNT]);
+		return Math.ceil(
+			(total / 100) * (100 - data[PURCHASE_PROMO][PROMO_DISCOUNT])
+		);
 	}
 
 	return total;

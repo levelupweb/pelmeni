@@ -81,11 +81,17 @@ class FormWrapper extends React.Component {
 		const { promo, cart } = this.props;
 
 		axios
-			.post(config.url + "/buying/buy", {
-				...temporaryForm,
-				[PURCHASE_PROMO]: promo ? promo._id : undefined,
-				[PURCHASE_ITEMS]: cart
-			})
+			.post(
+				config.url + "/buying/buy",
+				{
+					...temporaryForm,
+					[PURCHASE_PROMO]: promo ? promo._id : undefined,
+					[PURCHASE_ITEMS]: cart
+				},
+				{
+					timeout: 10000
+				}
+			)
 			.then(this.createPurchaseSuccess)
 			.catch(this.createPurchaseFail);
 	}
