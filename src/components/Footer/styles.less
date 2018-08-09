@@ -1,5 +1,6 @@
 @import "~@variables/colors.less";
 @import "~@variables/spacings.less";
+@import "~@variables/responsive.less";
 
 .wrapper {
   background: rgba(0, 0, 0, 0.45) !important;
@@ -25,5 +26,12 @@
   }
   a {
     color: #eee !important;
+  }
+}
+
+@media @mobile {
+  .wrapper {
+    position: initial;
+    max-height: none !important;
   }
 }

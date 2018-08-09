@@ -135,7 +135,7 @@ class ContactForm extends React.Component {
 
 		if (isSended) {
 			return (
-				<Container text className={styles.successWrapper}>
+				<div className={styles.successWrapper}>
 					<Fade>
 						<Header
 							textAlign="center"
@@ -153,93 +153,91 @@ class ContactForm extends React.Component {
 							<Button primary>Вернуться на главную</Button>
 						</Link>
 					</Fade>
-				</Container>
+				</div>
 			);
 		}
 
 		return (
-			<Container text>
-				<Fade>
-					<div className={styles.wrapper}>
-						{withTitle && (
-							<div className={styles.title}>
-								<Header as="h1" inverted>
+			<Fade>
+				<div className={styles.wrapper}>
+					{withTitle && (
+						<div className={styles.title}>
+							<Header as="h1" inverted>
 									Обратная связь
-								</Header>
-								<p className={styles.description}>
+							</Header>
+							<p className={styles.description}>
 									Оставьте свое пожелание или отзыв, заполнив форму обратной
 									связи. Если вы хотите получить ответ, обязательно укажите
 									контактный E-mail адрес
-								</p>
-							</div>
-						)}
-						{error && (
-							<Fade>
-								<Message
-									className={styles.error}
-									negative
-									onDismiss={this.dismissError}
-								>
-									<Message.Header>Непредвиденная ошибка</Message.Header>
-									<p>{error.message}</p>
-								</Message>
-							</Fade>
-						)}
-						<Form size="large" error={!!validationErrors}>
-							<Form.Field className={styles.field}>
-								<label>Ваше имя</label>
-								<Form.Input
-									className={styles.input}
-									error={validationErrors && !!validationErrors.name}
-									disabled={isHydrating}
-									onChange={this.handleTemporaryForm}
-									value={temporaryForm.name}
-									placeholder="Как к вам обращаться?"
-									name="name"
-								/>
-								{this.renderError("name")}
-							</Form.Field>
-							<Form.Field className={styles.field}>
-								<label>E-mail адрес для ответа</label>
-								<Form.Input
-									type="email"
-									className={styles.input}
-									error={validationErrors && !!validationErrors.email}
-									disabled={isHydrating}
-									onChange={this.handleTemporaryForm}
-									value={temporaryForm.email}
-									placeholder="Введите ваш E-mail адрес"
-									name="email"
-								/>
-								{this.renderError("email")}
-							</Form.Field>
-							<Form.Field className={styles.field}>
-								<label>Ваше сообщение</label>
-								<Form.TextArea
-									className={styles.input}
-									onChange={this.handleTemporaryForm}
-									disabled={isHydrating}
-									error={validationErrors && !!validationErrors.message}
-									value={temporaryForm.message}
-									placeholder="Начните писать ваше сообщение в этом текстовом поле"
-									name="message"
-								/>
-								{this.renderError("message")}
-							</Form.Field>
-							<Form.Field>
-								<Button
-									loading={isHydrating}
-									size="large"
-									onClick={this.publishStart}
-									primary
-								>
+							</p>
+						</div>
+					)}
+					{error && (
+						<Fade>
+							<Message
+								className={styles.error}
+								negative
+								onDismiss={this.dismissError}
+							>
+								<Message.Header>Непредвиденная ошибка</Message.Header>
+								<p>{error.message}</p>
+							</Message>
+						</Fade>
+					)}
+					<Form size="large" error={!!validationErrors}>
+						<Form.Field className={styles.field}>
+							<label>Ваше имя</label>
+							<Form.Input
+								className={styles.input}
+								error={validationErrors && !!validationErrors.name}
+								disabled={isHydrating}
+								onChange={this.handleTemporaryForm}
+								value={temporaryForm.name}
+								placeholder="Как к вам обращаться?"
+								name="name"
+							/>
+							{this.renderError("name")}
+						</Form.Field>
+						<Form.Field className={styles.field}>
+							<label>E-mail адрес для ответа</label>
+							<Form.Input
+								type="email"
+								className={styles.input}
+								error={validationErrors && !!validationErrors.email}
+								disabled={isHydrating}
+								onChange={this.handleTemporaryForm}
+								value={temporaryForm.email}
+								placeholder="Введите ваш E-mail адрес"
+								name="email"
+							/>
+							{this.renderError("email")}
+						</Form.Field>
+						<Form.Field className={styles.field}>
+							<label>Ваше сообщение</label>
+							<Form.TextArea
+								className={styles.input}
+								onChange={this.handleTemporaryForm}
+								disabled={isHydrating}
+								error={validationErrors && !!validationErrors.message}
+								value={temporaryForm.message}
+								placeholder="Начните писать ваше сообщение в этом текстовом поле"
+								name="message"
+							/>
+							{this.renderError("message")}
+						</Form.Field>
+						<Form.Field>
+							<Button
+								loading={isHydrating}
+								size="large"
+								onClick={this.publishStart}
+								primary
+							>
 									Отправить
-								</Button>
-							</Form.Field>
-						</Form>
-					</div>
-				</Fade>
-			</Container>
+							</Button>
+						</Form.Field>
+					</Form>
+				</div>
+			</Fade>
 		);
 	}
 }
