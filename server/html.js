@@ -121,7 +121,7 @@ const document = (config, html, helmet) =>
 						type="text/css" 
 						media="all" 
 						title="normal" 
-						href="${config.dist}/semantic.min.css"
+						href="${config.dist}/semantic/dist/semantic.min.css"
 					>
 					<title>
 							Пельмени классные. Замороженные полуфабрикаты с доставкой на дом.
