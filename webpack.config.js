@@ -19,7 +19,8 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, "dist"),
-		filename: "app.[name].js"
+		filename: "app.[name].js",
+		chunkFilename: "[name].bundle.js",
 	},
 	target: "web",
 	plugins: [analyzer, compressionPlugin],

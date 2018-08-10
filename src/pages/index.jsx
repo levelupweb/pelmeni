@@ -1,16 +1,26 @@
 import React from "react";
-import Index from "./index/index.jsx";
+import Loadable from "react-loadable";
+// import Index from "./index/index.jsx";
 import Dostavka from "./dostavka";
-import Shop from "./shop";
+// import Shop from "./shop";
 import Contact from "./contact";
 import Auth from "./auth";
 import Layout from "../components/Layout";
 import Admin from "./admin";
 import NotFound from "./404";
 import loadImageAsync from "@utils/loadImageAsync";
+import { Switch, Route, withRouter } from "react-router";
 import "../common/styles.css";
 
-import { Switch, Route, withRouter } from "react-router";
+const AsyncIndex = Loadable({
+	loader: () => import("./index/index.jsx"),
+	loading: () => <div>Loading..</div>
+});
+
+const AsyncShop = Loadable({
+	loader: () => import("./shop"),
+	loading: () => <div>Loading..</div>
+});
 
 class App extends React.Component {
 	constructor(props) {
@@ -51,9 +61,9 @@ class App extends React.Component {
 		return (
 			<Layout isLoaded={isLoaded}>
 				<Switch>
-					<Route exact path="/" component={Index} />
+					<Route exact path="/" component={AsyncIndex} />
 					<Route path="/dostavka" component={Dostavka} />
-					<Route path="/shop" component={Shop} />
+					<Route path="/shop" component={AsyncShop} />
 					<Route path="/contact" component={Contact} />
 					<Route path="/admin" component={Admin} />
 					<Route path="/auth" component={Auth} />

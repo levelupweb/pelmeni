@@ -5,6 +5,7 @@ import ContactForm from "@components/Form";
 import Image from "@components/Image";
 import Video from "./components/Video";
 import Fade from "react-reveal/Fade";
+import Loadable from "react-loadable";
 import Page from "@components/Page";
 import styles from "./styles.less";
 
