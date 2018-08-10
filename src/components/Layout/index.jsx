@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Phone from "../Phone";
-import Footer from "../Footer";
-import Menu from "../Menu";
-import SidebarMenu from "../SidebarMenu";
-import { ShopProvider } from "../Shop/context";
-import { AuthFormProvider } from "../AuthForm/context";
+import Phone from "@components/Phone";
+import Footer from "@components/Footer";
+import Menu from "@components/Menu";
+import SidebarMenu from "@components/SidebarMenu";
+import { ShopProvider } from "@components/Shop/context";
+import { AuthFormProvider } from "@components/AuthForm/context";
 import styles from "./styles.less";
 
 import { Dimmer, Loader, Segment, Header, Container } from "semantic-ui-react";

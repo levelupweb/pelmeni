@@ -33,7 +33,7 @@ class Phone extends React.Component {
 				{isActive && (
 					<div className={styles.content}>
 						<div
-							onClick={this.handleToggle.bind(this, false)}
+							onClick={() => this.handleToggle(false)}
 							className={styles.close}
 						>
 							<Icon name="close" />

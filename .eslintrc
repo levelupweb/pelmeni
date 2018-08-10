@@ -4,6 +4,7 @@
 		"node": true,
 		"es6": true
 	},
+	"parser": "babel-eslint",
 	"extends": ["eslint:recommended", "plugin:react/recommended"],
 	"parserOptions": {
 		"ecmaFeatures": {
@@ -12,7 +13,7 @@
 		},
 		"sourceType": "module"
 	},
-	"plugins": ["react"],
+	"plugins": ["react", "babel"],
 	"rules": {
 		"indent": [2, "tab"],
 		"quotes": ["error", "double"],

@@ -9,7 +9,7 @@ import parseError from "@utils/parseError";
 
 export const ItemsContext = React.createContext();
 
-class ItemsProviderClass extends React.Component {
+export class ItemsProvider extends React.Component {
 	constructor(props) {
 		super(props);
 		this.fetchItemsStart = this.fetchItemsStart.bind(this);
@@ -343,8 +343,6 @@ class ItemsProviderClass extends React.Component {
 
 	render() {
 		const {
-			props: { children },
-			state: { categoryUpdating, itemUpdating, fetching, items },
 			handleCategoryEditing,
 			handleItemEditing,
 			fetchItemsStart,
@@ -355,6 +353,9 @@ class ItemsProviderClass extends React.Component {
 			getItemUpdatingError,
 			handleCategoryTemporary 
 		} = this;
+
+		const { children } = this.props;
+		const { categoryUpdating, itemUpdating, fetching, items } = this.state;
 
 		return (
 			<ItemsContext.Provider
@@ -380,8 +381,7 @@ class ItemsProviderClass extends React.Component {
 	}
 }
 
-ItemsProviderClass.propTypes = {
+ItemsProvider.propTypes = {
 	children: PropTypes.element.isRequired
 };
 
-export const ItemsProvider = ItemsProviderClass;

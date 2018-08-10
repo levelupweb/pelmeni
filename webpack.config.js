@@ -81,12 +81,6 @@ module.exports = {
 	resolve: {
 		extensions: [".js", ".jsx"],
 		alias: {
-			// "semantic-ui": path.join(
-			// 	__dirname,
-			// 	"node_modules",
-			// 	"semantic-ui-css",
-			// 	"semantic.js"
-			// ),
 			"@root": path.resolve("/"),
 			"@components": path.resolve("src/components"),
 			"@pages": path.resolve("src/pages"),
@@ -94,7 +88,8 @@ module.exports = {
 			"@variables": path.resolve("src/variables"),
 			"@utils": path.resolve("src/utils"),
 			"@consts": path.resolve("src/consts"),
-			"@HOC": path.resolve("src/HOC")
+			"@HOC": path.resolve("src/HOC"),
+			"@API": path.resolve("src/API")
 		}
 	}
 };

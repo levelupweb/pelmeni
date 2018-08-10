@@ -6,8 +6,11 @@
   background: transparent !important;
   padding-top: @header-space + 30px !important;
   padding-bottom: @footer-space + 30px !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-
 
 .title {
   margin: auto;
@@ -32,6 +35,9 @@
 @media @mobile {
   .page {
     padding-top: @header-space + 20px !important;
+    /**
+      it's because footer on mobile position: initial
+    */
     padding-bottom: 30px !important;
   }
 }

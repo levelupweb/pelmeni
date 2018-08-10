@@ -6,7 +6,7 @@ import axios from "axios";
 import config from "@utils/config";
 import styles from "./styles.less";
 
-import { Form, Container, Button, Message, Header } from "semantic-ui-react";
+import { Form, Button, Message, Header } from "semantic-ui-react";
 
 class ContactForm extends React.Component {
 	constructor(props) {

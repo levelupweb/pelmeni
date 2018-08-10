@@ -48,7 +48,7 @@ const renderDescription = path => {
 
 const ShopPage = ({ location: { pathname } }) => (
 	<Page
-		text={["/shop/form"].indexOf(pathname) !== -1}
+		text={["/shop/form", "/shop/success"].indexOf(pathname) !== -1}
 		title={renderTitle(pathname)}
 		description={renderDescription(pathname)}
 	>

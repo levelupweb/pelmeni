@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
-import styles from "./styles.less";
 import Fade from "react-reveal/Fade";
 import { Header, Container, Segment } from "semantic-ui-react";
+import PropTypes from "prop-types";
+import styles from "./styles.less";
 
 const Page = ({ title, description, children, className, text, fluid }) => (
 	<Container fluid={fluid} text={text}>

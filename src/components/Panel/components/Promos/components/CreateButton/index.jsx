@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PromosContext } from "../../context";
 import { Button } from "semantic-ui-react";
+import { PromosContext } from "../../context";
 
 const CreateButton = ({ handleAdding }) => (
 	<Button size="large" onClick={() => handleAdding(true)} fluid>

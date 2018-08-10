@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import CartWidget from "../CartWidget";
 import { LayoutContext } from "../Layout/context";
-import styles from "./styles.less";
-
 import { Menu, Container, Icon, Responsive } from "semantic-ui-react";
+import styles from "./styles.less";
 
 const MenuWrapper = ({ activeItem, handleExpand, isExpanded }) => (
 	<Menu

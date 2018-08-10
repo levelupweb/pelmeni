@@ -1,7 +1,6 @@
 import React from "react";
 import withAuth from "@HOC/withAuth";
 import { Segment, Header, Divider } from "semantic-ui-react";
-import { PanelProvider } from "./context";
 import Items from "./components/Items";
 import Promos from "./components/Promos";
 import styles from "./styles.less";
@@ -24,10 +23,5 @@ const Panel = () => (
 		<Promos />
 	</Segment>
 );
-const EnhancedPanel = () => (
-	<PanelProvider>
-		<Panel />
-	</PanelProvider>
-);
 
-export default withAuth(EnhancedPanel);
+export default withAuth(Panel);

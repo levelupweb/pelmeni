@@ -6,6 +6,7 @@
   "plugins": [
     "transform-runtime",
     "transform-object-rest-spread",
+    "transform-class-properties",
     [
       "transform-semantic-ui-react-imports", {
         "importType": "commonjs"
@@ -22,7 +23,8 @@
           "@src": "./src",
           "@variables": "./src/variables",
           "@consts": "./src/consts",
-          "@HOC": "./src/HOC"
+          "@HOC": "./src/HOC",
+          "@API": "./src/API"
         },
         "extensions": [".js", ".json", ""]
       }

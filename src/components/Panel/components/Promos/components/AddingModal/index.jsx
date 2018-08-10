@@ -16,6 +16,7 @@ const AddingModal = ({
 	handleTemporaryAdding,
 	handleAdding,
 	open,
+	error,
 	temporaryPromo,
 	isHydrating,
 	getAddingError,
@@ -24,13 +25,13 @@ const AddingModal = ({
 	<Modal size="tiny" open={open} onClose={() => handleAdding(false)}>
 		<Modal.Header>Создание нового промо-кода</Modal.Header>
 		<Modal.Content>
-			{/* {variationError &&
-				variationError.message && (
+			{error &&
+				error.message && (
 				<Message negative>
 					<Message.Header>Что-то пошло не так</Message.Header>
-					<p>{variationError.message}</p>
+					<p>{error.message}</p>
 				</Message>
-			)} */}
+			)}
 			<p>
 				Введите сам промо-код и скидку, которая будет активирована после
 				применения данного кода. Скидка измеряется в процентах
@@ -86,11 +87,15 @@ AddingModal.propTypes = {
 	isHydrating: PropTypes.bool,
 	open: PropTypes.bool,
 	getAddingError: PropTypes.func.isRequired,
-	addItemStart: PropTypes.func.isRequired
+	addItemStart: PropTypes.func.isRequired,
+	error: PropTypes.shape({
+		message: PropTypes.string,
+	})
 };
 
 AddingModal.defaultProps = {
 	open: false,
+	error: null,
 	isHydrating: false
 };
 
@@ -109,6 +114,7 @@ const EnhancedAddingModal = () => (
 				handleAdding={handleAdding}
 				isHydrating={adding.isHydrating}
 				temporaryPromo={adding.temporary}
+				error={adding.error}
 				getAddingError={getAddingError}
 				addItemStart={addItemStart}
 			/>

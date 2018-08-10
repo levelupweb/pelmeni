@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import cookies from "js-cookie";
 import { TOKEN } from "@src/consts";
 import config from "@utils/config";
-import parseError from "../../../../utils/parseError";
+import parseError from "@utils/parseError";
 
 export const PromosContext = React.createContext();
 
-class PromosProviderClass extends React.Component {
+export class PromosProvider extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleAdding = this.handleAdding.bind(this);
@@ -351,8 +351,6 @@ class PromosProviderClass extends React.Component {
 	}
 }
 
-PromosProviderClass.propTypes = {
+PromosProvider.propTypes = {
 	children: PropTypes.element.isRequired
 };
-
-export const PromosProvider = PromosProviderClass;

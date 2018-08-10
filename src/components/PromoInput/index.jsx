@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Input, Form, Message, Button, Icon } from "semantic-ui-react";
 import { ShopContext } from "../Shop/context";
 import axios from "axios";
 import config from "@utils/config";
+import parseError from "@utils/parseError";
 
-import { Input, Form, Message, Button, Icon } from "semantic-ui-react";
 
 class PromoInput extends React.Component {
 	constructor(props) {
@@ -13,7 +14,6 @@ class PromoInput extends React.Component {
 		this.checkCodeProcess = this.checkCodeProcess.bind(this);
 		this.checkCodeSuccess = this.checkCodeSuccess.bind(this);
 		this.checkCodeFail = this.checkCodeFail.bind(this);
-		this.handleError = this.handleError.bind(this);
 		this.handleTemporaryCode = this.handleTemporaryCode.bind(this);
 		this.state = {
 			isChecking: false,
@@ -52,6 +52,8 @@ class PromoInput extends React.Component {
 			this.setState({ isChecking: false, isValid: true }, () => {
 				handlePromo(data);
 			});
+
+			return;
 		}
 
 		this.setState({
@@ -60,26 +62,12 @@ class PromoInput extends React.Component {
 		});
 	}
 
-	checkCodeFail(error) {
-		const { response } = error;
+	checkCodeFail(reason) {
+		const error = parseError(reason);
 
-		if (response) {
-			if (response.status) {
-				return this.handleError(response.data);
-			}
-			return this.handleError({
-				message: "Неизвестная ошибка сервера"
-			});
-		}
-		this.handleError({
-			message: "Неизвестная ошибка клиента"
-		});
-	}
-
-	handleError(error) {
 		this.setState({
+			error,
 			isChecking: false,
-			error
 		});
 	}
 

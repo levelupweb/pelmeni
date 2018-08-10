@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { ShopContext } from "@components/Shop/context";
 import AmountChanger from "@components/AmountChanger";
 import PromoInput from "@components/PromoInput";
-import "./styles.css";
-
 import { Button, Header, Icon } from "semantic-ui-react";
+import { PURCHASE_ITEMS_AMOUNT } from "@consts/purchase";
+import { ITEM_ID, ITEM_PRICE } from "@consts/item";
+import "./styles.css";
 
 class CartWidget extends React.Component {
 	constructor(props) {
@@ -45,16 +46,16 @@ class CartWidget extends React.Component {
 							{item.title}
 							<Header.Subheader>{item.weight} гр.</Header.Subheader>
 						</Header>
-						<Button onClick={() => removeFromCart(item.id)} size="tiny" icon>
+						<Button onClick={() => removeFromCart(item[ITEM_ID])} size="tiny" icon>
 							<Icon name="close" />
 						</Button>
 					</div>
 					<div className="bar">
 						<AmountChanger
 							amount={item.amount}
-							onChange={amount => updateAmount(item.id, amount)}
+							onChange={amount => updateAmount(item[ITEM_ID], amount)}
 						/>
-						<div className="total">{item.price * item.amount} Руб.</div>
+						<div className="total">{item[ITEM_PRICE] * item[PURCHASE_ITEMS_AMOUNT]} Руб.</div>
 					</div>
 				</div>
 			));
