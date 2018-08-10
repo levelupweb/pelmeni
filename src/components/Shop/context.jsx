@@ -1,224 +1,201 @@
-import React from "react";
+import React, { Component, createContext } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
-import config from "../../utils/config";
 import { LOCAL_STORAGE_CART } from "@src/consts";
+import { ITEM_ID } from "@consts/item";
+import { PURCHASE_ITEMS_AMOUNT } from "@consts/purchase";
+import { ITEM_PRICE } from "@consts/item";
+import calculateSumm from "@utils/calculateSumm";
+import { PROMO_DISCOUNT } from "@consts/promo";
+import { getCategories } from "@API/category";
+import parseError from "@utils/parseError";
+import withAsyncSetState from "@HOC/withAsyncSetState";
+import { getCart } from "./utils";
 
 import {
 	setItemToLocalStorage,
-	getFromLocalStorage,
 	removeFromLocalStorage
 } from "@utils/localStorage";
 
-export const ShopContext = React.createContext();
+export const ShopContext = createContext();
 
-class ShopProviderClass extends React.Component {
-	constructor(props) {
-		super(props);
-		this.fetchItemsStart = this.fetchItemsStart.bind(this);
-		this.fetchItemsProcess = this.fetchItemsProcess.bind(this);
-		this.fetchItemsSuccess = this.fetchItemsSuccess.bind(this);
-		this.fetchItemsFail = this.fetchItemsFail.bind(this);
-		this.updateAmount = this.updateAmount.bind(this);
-		this.getTotalSumm = this.getTotalSumm.bind(this);
-		this.getTotalSummWithDiscount = this.getTotalSummWithDiscount.bind(this);
-		this.addToCart = this.addToCart.bind(this);
-		this.removeFromCart = this.removeFromCart.bind(this);
-		this.refreshCart = this.refreshCart.bind(this);
-		this.handlePromo = this.handlePromo.bind(this);
-		this.state = {
-			isFetching: false,
-			items: null,
-			error: null,
-			cart: JSON.parse(getFromLocalStorage(LOCAL_STORAGE_CART)) || [],
-			promo: null,
-			addSpy: 0
-		};
+class ShopProviderClass extends Component {
+
+	state = {
+		isFetching: false,
+		items: null,
+		error: null,
+		cart: getCart(),
+		promo: null,
+		addSpy: 0
 	}
 
 	componentDidMount() {
 		this.fetchItemsStart();
-	}
+	} 
 
-	addToCart(item) {
-		return new Promise(resolve => {
-			this.setState(
-				state => {
-					const existedItem = state.cart.filter(i => i.id === item.id)[0];
+	addToCart = (item, callback) => {
+		const { cart, addSpy } = this.state;
 
-					if (existedItem) {
-						return {
-							addSpy: state.addSpy + 1,
-							cart: state.cart.map(
-								i =>
-									i._id === item.id
-										? {
-											...i,
-											amount: existedItem.amount + item.amount
-										  }
-										: i
-							)
-						};
-					}
+		const existedItem = cart.filter(
+			cartItem => cartItem[ITEM_ID] === item[ITEM_ID]
+		)[0];
 
-					return {
-						addSpy: state.addSpy + 1,
-						cart: [...state.cart, item]
-					};
-				},
-				() => {
-					const { cart } = this.state;
-
-					setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
-					return resolve(cart);
-				}
-			);
-		});
-	}
-
-	removeFromCart(itemId) {
-		this.setState(
-			state => ({
-				cart: state.cart.filter(item => item._id !== itemId)
-			}),
-			() => {
-				const { cart } = this.state;
-
-				setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
+		const filterAndUpdate = cartItem => {
+			if (cartItem[ITEM_ID] !== item[ITEM_ID]) {
+				return cartItem;
 			}
-		);
+
+			return {
+				...cartItem,
+				[PURCHASE_ITEMS_AMOUNT]:
+					existedItem[PURCHASE_ITEMS_AMOUNT] + item[PURCHASE_ITEMS_AMOUNT]
+			};
+		};
+
+		const createNextState = () => {
+			if (existedItem) {
+				return {
+					addSpy: addSpy + 1,
+					cart: cart.map(filterAndUpdate)
+				};
+			}
+			return {
+				addSpy: addSpy + 1,
+				cart: [...cart, item]
+			};
+		};
+
+		const updateStorage = () => {
+			setItemToLocalStorage(
+				LOCAL_STORAGE_CART,
+				JSON.stringify(this.state.cart)
+			);
+		};
+
+		this.asyncSetState(createNextState())
+			.then(updateStorage)
+			.then(callback);
 	}
 
-	refreshCart() {
+	removeFromCart = (itemId) => {
+		const { cart } = this.state;
+
+		const nextState = {
+			cart: cart.filter(item => 
+				item[ITEM_ID] !== itemId
+			)
+		};
+
+		const updateStorage = () => {
+			setItemToLocalStorage(
+				LOCAL_STORAGE_CART, 
+				JSON.stringify(this.state.cart)
+			);
+		};
+
+		this.setState(nextState, updateStorage);
+	}
+
+	refreshCart = () => {
 		this.setState({ cart: [] }, () =>
 			removeFromLocalStorage(LOCAL_STORAGE_CART)
 		);
 	}
 
-	updateAmount(itemId, amount) {
-		this.setState(
-			state => ({
-				cart: state.cart.map(
-					item =>
-						item._id === itemId
-							? {
-								...item,
-								amount
-							  }
-							: item
-				)
-			}),
-			() => {
-				const { cart } = this.state;
+	updateAmount = (itemId, amount) => {
+		const { cart } = this.state;
 
-				setItemToLocalStorage(LOCAL_STORAGE_CART, JSON.stringify(cart));
+		const filterAndUpdate = cartItem => {
+			if (cartItem[ITEM_ID] !== itemId) {
+				return cartItem;
 			}
-		);
+
+			return {
+				...cartItem,
+				[PURCHASE_ITEMS_AMOUNT]: amount
+			}; 
+		};
+
+		const nextState = {
+			cart: cart.map(filterAndUpdate)
+		}; 
+
+		const updateStorage = () => {
+			setItemToLocalStorage(
+				LOCAL_STORAGE_CART, 
+				JSON.stringify(this.state.cart)
+			);
+		};
+
+		this.setState(nextState, updateStorage);
 	}
 
-	fetchItemsStart() {
-		const { isFetching } = this.state;
+	fetchItemsStart = () => {
+		const { isFetching, items } = this.state;
 
-		if (!isFetching) {
-			this.setState({ isFetching: true }, () => {
-				this.fetchItemsProcess();
-			});
-		}
+		if (isFetching || items) return;
+
+		this.asyncSetState({ isFetching: true, error: null })
+			.then(this.fetchItemsProcess);
 	}
 
-	fetchItemsProcess() {
-		axios
-			.get(config.url + "/category/all")
+	fetchItemsProcess = () => {
+		getCategories()
 			.then(this.fetchItemsSuccess)
 			.catch(this.fetchItemsFail);
 	}
 
-	fetchItemsSuccess({ data }) {
+	fetchItemsSuccess = ({ data }) => {
 		this.setState({
 			isFetching: false,
 			items: data
 		});
 	}
 
-	fetchItemsFail(error) {
-		if (error) {
-			const { response } = error;
-			if (response) {
-				if (response.status) {
-					return this.handleError(response.data);
-				}
-				return this.handleError({
-					message:
-						"Неизвестная ошибка сервера. Попробуйте отправить свой заказ чуть позже"
-				});
-			}
-		}
-		return this.handleError({
-			message:
-				"Неизвестная ошибка клиента. Попробуйте обновить страницу и отправить форму ещё раз"
-		});
-	}
+	fetchItemsFail = reason => {
+		const error = parseError(reason);
 
-	handleError(error) {
 		this.setState({
 			isFetching: false,
-			error
+			error,
 		});
 	}
 
-	handlePromo(promo) {
-		this.setState({
-			promo
-		});
+	handlePromo = promo => {
+		this.setState({ promo });
 	}
 
-	getTotalSumm() {
+	getTotalSumm = () => {
 		const { cart } = this.state;
 
-		return cart.reduce((prev, curr) => prev + curr.price * curr.amount, 0);
+		const calculateNextSumm = (prev, curr) => 
+			prev + calculateSumm(curr[ITEM_PRICE], curr[PURCHASE_ITEMS_AMOUNT]);
+
+		return cart.reduce(calculateNextSumm, 0);
 	}
 
-	getTotalSummWithDiscount() {
-		const { promo } = this.state;
+	getTotalSummWithDiscount = () => {
+		const { promo, cart } = this.state;
 
-		if (promo && promo.discount) {
-			return Math.ceil((this.getTotalSumm() / 100) * (100 - promo.discount));
+		if (promo && promo[PROMO_DISCOUNT]) {
+			const calculateNextSumm = (prev, curr) =>
+				prev + calculateSumm(curr[ITEM_PRICE], curr[PURCHASE_ITEMS_AMOUNT], promo[PROMO_DISCOUNT]);
+		
+			return cart.reduce(calculateNextSumm, 0);
 		}
 
 		return null;
 	}
 
 	render() {
-		const {
-			props: { children },
-			state: { isFetching, error, items, cart, promo, addSpy },
-			fetchItemsStart,
-			addToCart,
-			removeFromCart,
-			updateAmount,
-			refreshCart,
-			getTotalSumm,
-			handlePromo,
-			getTotalSummWithDiscount
-		} = this;
+		const { children } = this.props;
 
 		return (
 			<ShopContext.Provider
 				value={{
-					addSpy,
-					isFetching,
-					error,
-					items,
-					fetchItemsStart,
-					refreshCart,
-					addToCart,
-					removeFromCart,
-					updateAmount,
-					getTotalSumm,
-					getTotalSummWithDiscount,
-					cart,
-					handlePromo,
-					promo
+					...this,
+					...this.state,
+					...this.props,
 				}}
 			>
 				{children}
@@ -231,4 +208,4 @@ ShopProviderClass.propTypes = {
 	children: PropTypes.element.isRequired
 };
 
-export const ShopProvider = ShopProviderClass;
+export const ShopProvider = withAsyncSetState(ShopProviderClass);

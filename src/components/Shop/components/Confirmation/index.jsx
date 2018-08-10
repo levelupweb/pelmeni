@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ShopContext } from "../../context";
-import styles from "./styles.less";
 import { Link } from "react-router-dom";
 import PromoInput from "@components/PromoInput";
 import AmountChanger from "@components/AmountChanger";
+import { ITEM_ID, ITEM_PRICE, ITEM_WEIGHT } from "@consts/item";
+import { PURCHASE_ITEMS_AMOUNT } from "@consts/purchase";
+import styles from "./styles.less";
 
 import {
 	Table,
@@ -17,16 +19,12 @@ import {
 	Segment
 } from "semantic-ui-react";
 
-class Confirmation extends React.Component {
-	constructor(props) {
-		super(props);
-		this.handleIndex = this.handleIndex.bind(this);
-		this.state = {
-			activeIndex: 0
-		};
+class Confirmation extends Component {
+	state = {
+		activeIndex: 0
 	}
 
-	handleIndex(_, { index }) {
+	handleIndex = (_, { index }) => {
 		const { activeIndex } = this.state;
 		const newIndex = activeIndex === index ? -1 : index;
 
@@ -62,30 +60,44 @@ class Confirmation extends React.Component {
 						</Table.Header>
 						<Table.Body>
 							{cart &&
-								cart.map((item, i) => (
+								cart.map((item, i) =>
 									<Table.Row key={i}>
 										<Table.Cell>
-											<b>{item.title}</b>
+											<b>
+												{item.title}
+											</b>
 										</Table.Cell>
 										<Table.Cell>
 											<AmountChanger
-												amount={item.amount}
-												onChange={amount => updateAmount(item.id, amount)}
+												amount={item[PURCHASE_ITEMS_AMOUNT]}
+												onChange={amount => updateAmount(item[ITEM_ID], amount)}
 											/>
 										</Table.Cell>
-										<Table.Cell>{item.price} руб.</Table.Cell>
-										<Table.Cell>{item.weight} гр.</Table.Cell>
-										<Table.Cell>{item.weight * item.amount} гр.</Table.Cell>
 										<Table.Cell>
-											<b>{item.price * item.amount}</b> руб.
+											{item[ITEM_PRICE]} руб.
 										</Table.Cell>
 										<Table.Cell>
-											<Button icon onClick={() => removeFromCart(item.id)}>
+											{item[ITEM_WEIGHT]} гр.
+										</Table.Cell>
+										<Table.Cell>
+											{item[ITEM_WEIGHT] * item[PURCHASE_ITEMS_AMOUNT]} гр.
+										</Table.Cell>
+										<Table.Cell>
+											<b>
+												{item[ITEM_PRICE] * item[PURCHASE_ITEMS_AMOUNT]}
+											</b>{" "}
+											руб.
+										</Table.Cell>
+										<Table.Cell>
+											<Button
+												icon
+												onClick={() => removeFromCart(item[ITEM_ID])}
+											>
 												<Icon name="close" />
 											</Button>
 										</Table.Cell>
 									</Table.Row>
-								))}
+								)}
 						</Table.Body>
 					</Table>
 				</Segment>
@@ -188,50 +200,48 @@ class Confirmation extends React.Component {
 						</Grid.Column>
 						<Grid.Column width={6} className={styles.total}>
 							<Segment inverted>
-								{promo ? (
-									<React.Fragment>
+								{promo
+									? <React.Fragment>
 										<Header inverted as="h2">
-											Итого:{" "}
-											<span className={styles.througth}>{getTotalSumm()}</span>{" "}
+												Итого:{" "}
+											<span className={styles.througth}>
+												{getTotalSumm()}
+											</span>{" "}
 											{getTotalSummWithDiscount()} руб.
 											<Header.Subheader>
-												Ваша скидка составила {promo.discount} %
+													Ваша скидка составила {promo.discount} %
 											</Header.Subheader>
 										</Header>
-										{getTotalSumm() > 1000 ? (
-											<p>
-												Доставка в пределах г. Кострома - бесплатно (заказ на
-												сумму более 1000 руб.)
+										{getTotalSumm() > 1000
+											? <p>
+														Доставка в пределах г. Кострома - бесплатно (заказ
+														на сумму более 1000 руб.)
 											</p>
-										) : (
-											<p>
-												Доставка в пределах г. Кострома - 100 руб. При заказе на
-												сумму от 1000 руб., доставка - бесплатно
-											</p>
-										)}
+											: <p>
+														Доставка в пределах г. Кострома - 100 руб. При
+														заказе на сумму от 1000 руб., доставка - бесплатно
+											</p>}
 									</React.Fragment>
-								) : (
-									<React.Fragment>
-										<Header as="h2">Итого: {getTotalSumm()} руб.</Header>
-										{getTotalSumm() > 1000 ? (
-											<p>
-												Доставка в пределах г. Кострома - бесплатно (заказ на
-												сумму более 1000 руб.)
+									: <React.Fragment>
+										<Header as="h2">
+												Итого: {getTotalSumm()} руб.
+										</Header>
+										{getTotalSumm() > 1000
+											? <p>
+														Доставка в пределах г. Кострома - бесплатно (заказ
+														на сумму более 1000 руб.)
 											</p>
-										) : (
-											<p>
-												Доставка в пределах г. Кострома - 100 руб. При заказе на
-												сумму от 1000 руб., доставка - бесплатно
-											</p>
-										)}
-									</React.Fragment>
-								)}
+											: <p>
+														Доставка в пределах г. Кострома - 100 руб. При
+														заказе на сумму от 1000 руб., доставка - бесплатно
+											</p>}
+									</React.Fragment>}
 								<Link to="/shop/form">
 									<Button fluid primary size="large">
 										Оформить заказ
 									</Button>
 								</Link>
-								{(!promo || !promo.code) && (
+								{(!promo || !promo.code) &&
 									<React.Fragment>
 										<Header inverted as="h2">
 											Промо-код
@@ -241,8 +251,7 @@ class Confirmation extends React.Component {
 											</Header.Subheader>
 										</Header>
 										<PromoInput />
-									</React.Fragment>
-								)}
+									</React.Fragment>}
 							</Segment>
 						</Grid.Column>
 					</Grid.Row>
@@ -278,7 +287,7 @@ Confirmation.defaultProps = {
 	promo: null
 };
 
-const EnhancedConfirmation = () => (
+const EnhancedConfirmation = () =>
 	<ShopContext.Consumer>
 		{({
 			cart,
@@ -287,7 +296,7 @@ const EnhancedConfirmation = () => (
 			getTotalSumm,
 			promo,
 			getTotalSummWithDiscount
-		}) => (
+		}) =>
 			<Confirmation
 				cart={cart}
 				removeFromCart={removeFromCart}
@@ -295,9 +304,7 @@ const EnhancedConfirmation = () => (
 				getTotalSumm={getTotalSumm}
 				getTotalSummWithDiscount={getTotalSummWithDiscount}
 				promo={promo}
-			/>
-		)}
-	</ShopContext.Consumer>
-);
+			/>}
+	</ShopContext.Consumer>;
 
 export default EnhancedConfirmation;
