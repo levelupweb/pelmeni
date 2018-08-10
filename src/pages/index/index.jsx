@@ -8,7 +8,7 @@ import Fade from "react-reveal/Fade";
 import Page from "@components/Page";
 import styles from "./styles.less";
 
-import { Segment, Container, Header, Grid, Button } from "semantic-ui-react";
+import { Segment, Container, Header, Grid, Button, Responsive } from "semantic-ui-react";
 
 const IndexSegment = ({ visuals, content, className, withContainer, text }) => (
 	<Segment inverted className={`${className} ${styles.segment}`}>
@@ -435,29 +435,31 @@ const IndexPage = () => (
 			Sixth slide
 		*/}
 
-			<IndexSegment
-				className={styles.six}
-				withContainer={false}
-				content={
-					<React.Fragment>
-						<div className={styles.video}>
-							<Video />
-						</div>
-						<div className={styles.description}>
-							<Header as="h1" inverted>
+			<Responsive minWidth={1000}>
+				<IndexSegment
+					className={styles.six}
+					withContainer={false}
+					content={
+						<React.Fragment>
+							<div className={styles.video}>
+								<Video />
+							</div>
+							<div className={styles.description}>
+								<Header as="h1" inverted>
 								Попробуйте сами
-							</Header>
-							<p className="lead small">
+								</Header>
+								<p className="lead small">
 								Закажите нашу продукцию онлайн, оформив заказ прямо на нашем
 								сайте!
-							</p>
-							<Link to="/shop">
-								<Button size="big">Купить продукцию</Button>
-							</Link>
-						</div>
-					</React.Fragment>
-				}
-			/>
+								</p>
+								<Link to="/shop">
+									<Button size="big">Купить продукцию</Button>
+								</Link>
+							</div>
+						</React.Fragment>
+					}
+				/>
+			</Responsive>
 
 			<IndexSegment
 				text
