@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Image from "@components/Image";
+import { Button, Icon } from "semantic-ui-react";
 import Carousel from "nuka-carousel";
 import { CardContext } from "@components/Card/context";
 import styles from "./styles.less";
-
-import { Button, Icon } from "semantic-ui-react";
 
 class Slider extends React.Component {
 	constructor(props) {
@@ -54,14 +53,13 @@ class Slider extends React.Component {
 	renderImages({ items }) {
 		return items.map(
 			({ image }) =>
-				image && (
-					<Image
-						src={image.src}
-						srcThumbnail={image.srcThumbnail}
-						onThumbnailLoaded={this.handleDimensions}
-						fluid
-					/>
-				)
+				image &&
+				<Image
+					src={image.src}
+					srcThumbnail={image.srcThumbnail}
+					onThumbnailLoaded={this.handleDimensions}
+					fluid
+				/>
 		);
 	}
 
@@ -86,17 +84,14 @@ class Slider extends React.Component {
 								.indexOf(selectedItem)}
 							initialSlideHeight={initialSlideHeight}
 							afterSlide={nextSlide =>
-								handleItem(category.items[nextSlide]._id)
-							}
+								handleItem(category.items[nextSlide]._id)}
 							initialSlideWidth={initialSlideWidth}
 							renderCenterLeftControls={data =>
-								data.currentSlide !== 0 ? this.renderLeft(data) : null
-							}
+								data.currentSlide !== 0 ? this.renderLeft(data) : null}
 							renderCenterRightControls={data =>
 								data.currentSlide !== category.items.length - 1
 									? this.renderRight(data)
-									: null
-							}
+									: null}
 						>
 							{this.renderImages(category)}
 						</Carousel>

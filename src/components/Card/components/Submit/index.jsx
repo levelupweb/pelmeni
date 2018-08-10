@@ -1,57 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { CardContext } from "@components/Card/context";
+import { createOnClickAction } from "./utils";
 import { ShopContext } from "@components/Shop/context";
 import { Button } from "semantic-ui-react";
 
-const Submit = ({ currentItem, amount, handleAmount, category, addToCart }) => (
-	<Button
-		primary
-		fluid
-		onClick={() =>
-			addToCart({
-				...currentItem,
-				id: currentItem._id,
-				title: category.title,
-				description: category.description,
-				amount
-			}).then(() => handleAmount(1))
-		}
-	>
+const Submit = ({ onClick }) =>
+	<Button onClick={onClick} primary fluid>
 		В корзину
-	</Button>
-);
+	</Button>;
 
 Submit.propTypes = {
-	currentItem: PropTypes.shape({
-		weight: PropTypes.number,
-		price: PropTypes.number,
-		category: PropTypes.string
-	}),
-	amount: PropTypes.number,
-	handleAmount: PropTypes.func.isRequired,
-	category: PropTypes.shape({
-		title: PropTypes.string
-	}),
+	onClick: PropTypes.func.isRequired,
+	text: PropTypes.string
+};
+
+Submit.defaultProps = {
+	text: "В корзину"
+};
+
+const SubmitWithCardContext = ({ addToCart }) =>
+	<CardContext.Consumer>
+		{context => <Submit onClick={createOnClickAction(addToCart)(context)} />}
+	</CardContext.Consumer>;
+
+SubmitWithCardContext.propTypes = {
 	addToCart: PropTypes.func.isRequired
 };
 
-const EnhancedSubmit = () => (
+const SubmitWithShopContext = () =>
 	<ShopContext.Consumer>
-		{({ addToCart }) => (
-			<CardContext.Consumer>
-				{({ currentItem, amount, category, handleAmount }) => (
-					<Submit
-						currentItem={currentItem}
-						amount={amount}
-						category={category}
-						handleAmount={handleAmount}
-						addToCart={addToCart}
-					/>
-				)}
-			</CardContext.Consumer>
-		)}
-	</ShopContext.Consumer>
-);
+		{({ addToCart }) => <SubmitWithCardContext addToCart={addToCart} />}
+	</ShopContext.Consumer>;
 
-export default EnhancedSubmit;
+export default SubmitWithShopContext;
