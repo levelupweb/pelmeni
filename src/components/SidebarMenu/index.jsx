@@ -35,7 +35,7 @@ const SidebarMenu = ({ activeItem, isExpanded, handleExpand }) => (
 				Связаться с нами
 			</Menu.Item>
 		</Link>
-		<Link to="/" onClick={() => handleExpand(false)}>
+		<Link to="/dostavka" onClick={() => handleExpand(false)}>
 			<Menu.Item as="a" active={activeItem === "/dostavka"}>
 				Условия доставки
 			</Menu.Item>
