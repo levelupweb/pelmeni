@@ -19,13 +19,13 @@ export default {
 	},
 	"5b64a5311c9351234c4e4aa8": {
 		"5b64a54e1c9351234c4e4aa9": {
-			src: require("./img/premium-400.jpg"),
-			srcThumbnail: require("./img/thumbnail/thumbnail_premium-400.jpg")
+			src: require("./img/boyarskie-400.jpg"),
+			srcThumbnail: require("./img/thumbnail/thumbnail_boyarskie-400.jpg")
 		},
 		"5b64a55d1c9351234c4e4aaa": {
-			src: require("./img/premium-1000.jpg"),
-			srcThumbnail: require("./img/thumbnail/thumbnail_premium-1000.jpg")
-		}
+			src: require("./img/boyarskie-1000.jpg"),
+			srcThumbnail: require("./img/thumbnail/thumbnail_boyarskie-1000.jpg")
+		},
 	},
 	"5b64a56a1c9351234c4e4aab": {
 		"5b64a5821c9351234c4e4aad": {
