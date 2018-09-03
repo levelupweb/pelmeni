@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Fade from "react-reveal/Fade";
 import Confirmation from "./components/Confirmation";
 import Items from "./components/Items";
 import Form from "./components/Form";
@@ -37,27 +36,21 @@ const Shop = ({ items, isFetching, error }) => {
 							exact
 							path="/shop"
 							render={() => (
-								<Fade>
-									<Items />
-								</Fade>
+								<Items />
 							)}
 						/>
 						<Route
 							exact
 							path="/shop/cart"
 							render={() => (
-								<Fade>
-									<Confirmation />
-								</Fade>
+								<Confirmation />
 							)}
 						/>
 						<Route
 							exact
 							path="/shop/form"
 							render={() => (
-								<Fade>
-									<Form />
-								</Fade>
+								<Form />
 							)}
 						/>
 						<div className={styles.center}>
