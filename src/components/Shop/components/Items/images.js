@@ -91,8 +91,8 @@ export default {
 	},
 	"5b64a64c1c9351234c4e4abe": {
 		"5b64a65b1c9351234c4e4abf": {
-			src: require("./img/vareniki-kartofel-gribi-1000.jpg"),
-			srcThumbnail: require("./img/thumbnail/thumbnail_vareniki-kartofel-gribi-1000.jpg")
+			src: require("./img/vareniki-kartofel-gribi-400.jpg"),
+			srcThumbnail: require("./img/thumbnail/thumbnail_vareniki-kartofel-gribi-400.jpg")
 		},
 		"5b64a6631c9351234c4e4ac0": {
 			src: require("./img/vareniki-kartofel-gribi-1000.jpg"),
