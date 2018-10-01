@@ -1,32 +1,37 @@
 @import "~@variables/responsive.less";
 
 .wrapper {
-  
-	.footer {
-		display: flex;
-		justify-content: space-between;
-		margin-top: 15px;
-		.total {
-			.througth {
-				text-decoration: line-through;
-				color: rgb(182, 182, 182);
-			}
-		}
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    .total {
+      .througth {
+        text-decoration: line-through;
+        color: rgb(182, 182, 182);
+      }
+    }
 
-		.disclaimer {
-
-			color: #000000;
-			.partners {
-				text-align: center;
-			}
-		}
-	}
-	
+    .disclaimer {
+      color: #000000;
+      .partners {
+        text-align: center;
+      }
+    }
+  }
 }
 
 @media @mobile {
-	.footer {
-		margin-left: -1rem !important;
-		margin-right: -1rem !important;
-	}
+  .footer {
+    margin-left: -1rem !important;
+    margin-right: -1rem !important;
+  }
+}
+
+.underline {
+  text-decoration: line-through;
+}
+
+.price {
+  float: right;
 }

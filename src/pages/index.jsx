@@ -6,6 +6,7 @@ import Contact from "./contact";
 import Auth from "./auth";
 import Layout from "../components/Layout";
 import Admin from "./admin";
+import Promo from "../components/Promo";
 import NotFound from "./404";
 import loadImageAsync from "@utils/loadImageAsync";
 import "../common/styles.css";
@@ -49,17 +50,20 @@ class App extends React.Component {
 		const { isLoaded } = this.state;
 
 		return (
-			<Layout isLoaded={isLoaded}>
-				<Switch>
-					<Route exact path="/" component={Index} />
-					<Route path="/dostavka" component={Dostavka} />
-					<Route path="/shop" component={Shop} />
-					<Route path="/contact" component={Contact} />
-					<Route path="/admin" component={Admin} />
-					<Route path="/auth" component={Auth} />
-					<Route component={NotFound} />
-				</Switch>
-			</Layout>
+			<div>
+				<Promo />
+				<Layout isLoaded={isLoaded}>
+					<Switch>
+						<Route exact path="/" component={Index} />
+						<Route path="/dostavka" component={Dostavka} />
+						<Route path="/shop" component={Shop} />
+						<Route path="/contact" component={Contact} />
+						<Route path="/admin" component={Admin} />
+						<Route path="/auth" component={Auth} />
+						<Route component={NotFound} />
+					</Switch>
+				</Layout>
+			</div>
 		);
 	}
 }

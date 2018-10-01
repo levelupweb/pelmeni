@@ -106,18 +106,24 @@ class Confirmation extends React.Component {
 									<Segment inverted>
 										<List inverted bulleted size="large">
 											<List.Item>
-												Доставка заказа в пределах г. Кострома{" "}
-												<strong>100р</strong>
+												Доставка заказа в пределах Костромы{" "}
+												{/* <strong>100р</strong> */}
+												<div className={styles.price}>
+													<span className={styles.underline}>100р</span>{" "}
+													<strong>Бесплатно!</strong>
+												</div>
 											</List.Item>
 											<List.Item>
-												Заказ от 1000р доставка по г. Кострома{" "}
-												<strong>Бесплатно</strong>
-											</List.Item>
-											<List.Item>
-												Доставка заказа за пределы г. Кострома – обсуждается
-												индивидуально по телефону
+												Заказ от 1000р доставка по Костроме{" "}
+												<div className={styles.price}>
+													<strong>Бесплатно!</strong>
+												</div>
 											</List.Item>
 										</List>
+										<p>
+											Доставка заказа за пределы г. Кострома – обсуждается
+											индивидуально по телефону
+										</p>
 									</Segment>
 								</Accordion.Content>
 								<Accordion.Title
@@ -198,7 +204,7 @@ class Confirmation extends React.Component {
 												Ваша скидка составила {promo.discount} %
 											</Header.Subheader>
 										</Header>
-										{getTotalSumm() > 1000 ? (
+										{/* {getTotalSumm() > 1000 ? (
 											<p>
 												Доставка в пределах г. Кострома - бесплатно (заказ на
 												сумму более 1000 руб.)
@@ -208,12 +214,15 @@ class Confirmation extends React.Component {
 												Доставка в пределах г. Кострома - 100 руб. При заказе на
 												сумму от 1000 руб., доставка - бесплатно
 											</p>
-										)}
+										)} */}
+										<p>
+											<strong>Доставка бесплатно!</strong>
+										</p>
 									</React.Fragment>
 								) : (
 									<React.Fragment>
 										<Header as="h2">Итого: {getTotalSumm()} руб.</Header>
-										{getTotalSumm() > 1000 ? (
+										{/* {getTotalSumm() > 1000 ? (
 											<p>
 												Доставка в пределах г. Кострома - бесплатно (заказ на
 												сумму более 1000 руб.)
@@ -223,7 +232,10 @@ class Confirmation extends React.Component {
 												Доставка в пределах г. Кострома - 100 руб. При заказе на
 												сумму от 1000 руб., доставка - бесплатно
 											</p>
-										)}
+										)} */}
+										<p>
+											<strong>Доставка бесплатно!</strong>
+										</p>
 									</React.Fragment>
 								)}
 								<Link to="/shop/form">
