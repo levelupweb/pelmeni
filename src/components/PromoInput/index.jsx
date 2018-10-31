@@ -4,7 +4,7 @@ import { ShopContext } from "../Shop/context";
 import axios from "axios";
 import config from "@utils/config";
 
-import { Input, Form, Message, Button, Icon } from "semantic-ui-react";
+import { Input, Form, Message, Button } from "semantic-ui-react";
 
 class PromoInput extends React.Component {
 	constructor(props) {
@@ -106,8 +106,8 @@ class PromoInput extends React.Component {
 						onChange={this.handleTemporaryCode}
 						loading={isChecking}
 						action={
-							<Button icon onClick={this.checkCodeStart} loading={isChecking}>
-								<Icon name="angle right" />
+							<Button onClick={this.checkCodeStart} loading={isChecking}>
+								Применить
 							</Button>
 						}
 					/>
