@@ -7,18 +7,19 @@ import { Header, Container, Segment } from "semantic-ui-react";
 const Page = ({ title, description, children, className, text, fluid }) => (
 	<Container fluid={fluid} text={text}>
 		<Segment inverted className={`${className} ${styles.page}`}>
-			{title &&
-				description && (
+			{title && (
 				<Fade bottom>
 					<div className={styles.title}>
 						<Header inverted as="h1">
 							{title}
 						</Header>
-						<p className={styles.description}>{description}</p>
+						{description && <p className={styles.description}>{description}</p>}
 					</div>
 				</Fade>
 			)}
-			<Fade><div className={styles.children}>{children}</div></Fade>
+			<Fade>
+				<div className={styles.children}>{children}</div>
+			</Fade>
 		</Segment>
 	</Container>
 );
@@ -29,7 +30,7 @@ Page.propTypes = {
 	children: PropTypes.element.isRequired,
 	className: PropTypes.string,
 	text: PropTypes.bool,
-	fluid: PropTypes.bool,
+	fluid: PropTypes.bool
 };
 
 Page.defaultProps = {
@@ -37,7 +38,7 @@ Page.defaultProps = {
 	title: null,
 	description: null,
 	className: null,
-	fluid: false,
+	fluid: false
 };
 
 export default Page;

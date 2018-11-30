@@ -53,25 +53,24 @@ class Slider extends React.Component {
 
 	renderImages({ items }) {
 		return items.map(
-			({ image }) =>
-				image && (
-					<Image
-						src={image.src}
-						srcThumbnail={image.srcThumbnail}
-						onThumbnailLoaded={this.handleDimensions}
-						fluid
-					/>
+			(item, index) =>
+				item &&
+				item.image && (
+					<div key={index} className={styles.item}>
+						<Image
+							src={item.image.src}
+							srcThumbnail={item.image.srcThumbnail}
+							onThumbnailLoaded={this.handleDimensions}
+							fluid
+						/>
+						<div className={styles.label}>{item.weight} гр.</div>
+					</div>
 				)
 		);
 	}
 
 	render() {
-		const {
-			width,
-			heightMode,
-			initialSlideHeight,
-			initialSlideWidth
-		} = this.props;
+		const { width, heightMode, initialSlideWidth } = this.props;
 
 		return (
 			<CardContext.Consumer>
@@ -84,7 +83,6 @@ class Slider extends React.Component {
 							slideIndex={category.items
 								.map(item => item._id)
 								.indexOf(selectedItem)}
-							initialSlideHeight={initialSlideHeight}
 							afterSlide={nextSlide =>
 								handleItem(category.items[nextSlide]._id)
 							}
@@ -110,14 +108,12 @@ class Slider extends React.Component {
 Slider.propTypes = {
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	heightMode: PropTypes.string,
-	initialSlideHeight: PropTypes.number,
 	initialSlideWidth: PropTypes.string
 };
 
 Slider.defaultProps = {
 	heightMode: "first",
 	width: "100%",
-	initialSlideHeight: 350,
 	initialSlideWidth: "100%"
 };
 

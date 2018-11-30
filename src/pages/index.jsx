@@ -46,12 +46,19 @@ class App extends React.Component {
 		);
 	}
 
+	displayPromo() {
+		const currentDate = new Date();
+		const last = new Date(1543611600 * 1000); // 1 december 2018
+
+		return currentDate < last;
+	}
+
 	render() {
 		const { isLoaded } = this.state;
 
 		return (
 			<div>
-				<Promo />
+				{this.displayPromo() && <Promo />}
 				<Layout isLoaded={isLoaded}>
 					<Switch>
 						<Route exact path="/" component={Index} />

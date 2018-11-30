@@ -1,3 +1,5 @@
+@import "~@variables/responsive.less";
+
 .title {
   font-size: 35px !important;
   font-family: "Playfair Display", serif !important;
@@ -6,4 +8,15 @@
 
 .description {
   font-size: 19px !important;
+}
+
+@media @mobile {
+  .title {
+    font-size: 26px !important;
+    margin-bottom: 5px !important;
+  }
+
+  .description {
+    font-size: 16px !important;
+  }
 }

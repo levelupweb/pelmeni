@@ -8,7 +8,14 @@ import Fade from "react-reveal/Fade";
 import Page from "@components/Page";
 import styles from "./styles.less";
 
-import { Segment, Container, Header, Grid, Button, Responsive } from "semantic-ui-react";
+import {
+	Segment,
+	Container,
+	Header,
+	Grid,
+	Button,
+	Responsive
+} from "semantic-ui-react";
 
 const IndexSegment = ({ visuals, content, className, withContainer, text }) => (
 	<Segment inverted className={`${className} ${styles.segment}`}>
@@ -124,20 +131,20 @@ const IndexPage = () => (
 							<div className={styles.logo}>
 								<img
 									src={require("./img/logo-1.png")}
-									alt="Замороженные полуфабрикаты с доставкой на дом"
+									alt="Замороженные полуфабрикаты от производителя с доставкой на дом"
 									className={styles.back}
 								/>
 								<img
 									className={styles.chief}
 									src={require("./img/logo-2.png")}
-									alt="Замороженные полуфабрикаты с доставкой на дом"
+									alt="Замороженные полуфабрикаты от производителя с доставкой на дом"
 								/>
 							</div>
 						</Fade>
 						<Fade bottom>
 							<div className={styles.titleWrapper}>
 								<Header inverted as="h1" className={styles.primary}>
-									Замороженные полуфабрикаты с доставкой на дом
+									Замороженные полуфабрикаты от производителя с доставкой на дом
 								</Header>
 							</div>
 						</Fade>
@@ -446,12 +453,8 @@ const IndexPage = () => (
 							</div>
 							<div className={styles.description}>
 								<Header as="h1" inverted>
-								Попробуйте сами
+									Попробуйте сами
 								</Header>
-								<p className="lead small">
-								Закажите нашу продукцию онлайн, оформив заказ прямо на нашем
-								сайте!
-								</p>
 								<Link to="/shop">
 									<Button size="big">Купить продукцию</Button>
 								</Link>

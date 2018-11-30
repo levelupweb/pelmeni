@@ -1,3 +1,5 @@
+@import "~@variables/responsive.less";
+
 .wrapper {
   border: 0 !important;
   height: 100%;
@@ -32,5 +34,18 @@
       flex-flow: row wrap;
       margin-bottom: 15px;
     }
+  }
+}
+
+@media @mobile {
+  .price {
+    margin-bottom: 5px !important;
+  }
+  .wrapper {
+    background: transparent !important;
+  }
+  .content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
