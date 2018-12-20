@@ -48,7 +48,7 @@ class App extends React.Component {
 
 	displayPromo() {
 		const currentDate = new Date();
-		const last = new Date(1543611600 * 1000); // 1 december 2018
+		const last = new Date(1546290000 * 1000); // 1 jan 2019
 
 		return currentDate < last;
 	}
