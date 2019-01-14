@@ -12,18 +12,22 @@ import { ShopContext } from "./context";
 const Shop = ({ items, isFetching, error }) => {
 	if (error && error.message) {
 		return (
-			<Header textAlign="center" inverted as="h3">
-				Непредвиденная ошибка
-				<Header.Subheader>{error.message}</Header.Subheader>
-			</Header>
+			<div className={styles.centered}>
+				<Header textAlign="center" inverted as="h3">
+					Непредвиденная ошибка
+					<Header.Subheader>{error.message}</Header.Subheader>
+				</Header>
+			</div>
 		);
 	}
 
 	if (!items || isFetching) {
 		return (
-			<Loader active inline centered>
-				Подождите, идёт загрузка
-			</Loader>
+			<div className={styles.centered}>
+				<Loader active inline centered>
+					Подождите, идёт загрузка
+				</Loader>
+			</div>
 		);
 	}
 
@@ -32,27 +36,9 @@ const Shop = ({ items, isFetching, error }) => {
 			<div className={styles.wrapper}>
 				<div className={styles.content}>
 					<Switch>
-						<Route
-							exact
-							path="/shop"
-							render={() => (
-								<Items />
-							)}
-						/>
-						<Route
-							exact
-							path="/shop/cart"
-							render={() => (
-								<Confirmation />
-							)}
-						/>
-						<Route
-							exact
-							path="/shop/form"
-							render={() => (
-								<Form />
-							)}
-						/>
+						<Route exact path="/shop" render={() => <Items />} />
+						<Route exact path="/shop/cart" render={() => <Confirmation />} />
+						<Route exact path="/shop/form" render={() => <Form />} />
 						<div className={styles.center}>
 							<Route
 								exact
