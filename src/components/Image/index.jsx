@@ -114,6 +114,7 @@ Image.propTypes = {
 	fluid: PropTypes.bool,
 	alt: PropTypes.string,
 	fallback: PropTypes.element,
+	style: PropTypes.object,
 	src: PropTypes.string,
 	srcThumbnail: PropTypes.string,
 	onThumbnailLoaded: PropTypes.func,
@@ -123,6 +124,7 @@ Image.propTypes = {
 
 Image.defaultProps = {
 	onThumbnailLoaded: null,
+	style: {},
 	onClick: null,
 	className: "",
 	fluid: false,
