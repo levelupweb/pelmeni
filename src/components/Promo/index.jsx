@@ -8,7 +8,7 @@ class Promo extends React.Component {
 			<div className={styles.wrapper}>
 				<Container>
 					<span className={styles.bold}>Акция:</span>
-					{"Новогодняя акция скидка 15% по промокоду \"new15klass\""}
+					{"скидка 15% по промокоду \"15klassnye\""}
 				</Container>
 			</div>
 		);

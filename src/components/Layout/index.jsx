@@ -4,6 +4,7 @@ import Phone from "../Phone";
 import Footer from "../Footer";
 import Menu from "../Menu";
 import SidebarMenu from "../SidebarMenu";
+import Promo from "../Promo";
 import { ShopProvider } from "../Shop/context";
 import { AuthFormProvider } from "../AuthForm/context";
 import styles from "./styles.less";
@@ -21,11 +22,9 @@ class Layout extends React.Component {
 	}
 
 	componentDidCatch(error) {
-		this.setState({ hasError: true }, () =>
-			console.error(error)
-		);
+		this.setState({ hasError: true }, () => console.error(error));
 	}
-	
+
 	render() {
 		const { hasError } = this.state;
 		const { children, isLoaded } = this.props;
@@ -36,9 +35,7 @@ class Layout extends React.Component {
 					<Container text>
 						<div className={styles.inner}>
 							<Segment>
-								<Header as="h3">
-									Непредвиденная ошибка
-								</Header>
+								<Header as="h3">Непредвиденная ошибка</Header>
 								<p>
 									Если вы видите данное сообщение, обратитесь к администратору.
 									Данный случай будет зафиксирован
@@ -56,6 +53,7 @@ class Layout extends React.Component {
 					<Loader>Идет загрузка..</Loader>
 				</Dimmer>
 				<Phone />
+				<Promo />
 				<LayoutContext.Consumer>
 					{({ isExpanded }) => (
 						<div className={styles.layout}>
@@ -65,7 +63,7 @@ class Layout extends React.Component {
 								<div
 									style={{
 										background: `url('${require("@src/common/background.jpg")}')`,
-										backgroundSize: "100%",
+										backgroundSize: "100%"
 									}}
 									className={styles.inner}
 								>
@@ -81,7 +79,6 @@ class Layout extends React.Component {
 		);
 	}
 }
-
 
 Layout.propTypes = {
 	isLoaded: PropTypes.bool,
