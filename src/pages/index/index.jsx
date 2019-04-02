@@ -98,6 +98,11 @@ const IndexPage = () => (
 				content={
 					<div className={styles.jumbotron}>
 						<Fade bottom>
+							<div style={{ color: 'white', background: '#ED0202', padding: 20 }}>
+								<h3>Скидка 15% с 1 по 30 апреля - промокод 15klassnye</h3>
+							</div>
+						</Fade>
+						<Fade bottom>
 							<div className={styles.logo}>
 								<img
 									src={require("./img/logo-1.png")}
